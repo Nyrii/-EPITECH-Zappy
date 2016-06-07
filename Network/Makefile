@@ -5,12 +5,26 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 15:11:53 2016 nekfeu
+## Last update Tue Jun  7 15:52:39 2016 Nyrandone Noboud-Inpeng
 ##
 
-SRCSER	= get_opt.c	\
-	  free.c	\
-	  main.c
+SRCSER	= avance_ia.c		\
+	  broadcast_ia.c	\
+	  connect_nbr_ia.c	\
+	  droite_ia.c		\
+	  expulse_ia.c		\
+	  fork_ia.c		\
+	  free.c		\
+	  function_ptr.c	\
+	  gauche_ia.c		\
+	  get_opt.c		\
+	  incantation_ia.c	\
+	  init.c		\
+	  inventaire_ia.c	\
+	  main.c		\
+	  pose_ia.c		\
+	  prend_ia.c		\
+	  voir_ia.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
