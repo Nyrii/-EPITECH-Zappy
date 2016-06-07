@@ -5,10 +5,11 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 11:39:10 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun  7 11:48:17 2016 Nyrandone Noboud-Inpeng
 ##
 
-SRCSER	= main.c
+SRCSER	= get_opt.c	\
+	  main.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
@@ -20,7 +21,7 @@ NAMESER	= server
 
 OBJSER	= obj/
 SRCSERD	= src/
-INCS	= -I inc/
+INCS	= -I includes/
 
 CFLAGS	= -W -Wall -Wextra -Werror
 

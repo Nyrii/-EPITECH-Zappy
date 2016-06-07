@@ -5,10 +5,13 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 11:36:22 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 11:48:59 2016 Nyrandone Noboud-Inpeng
 */
 
-int		main()
+#include "server.h"
+
+int		main(int argc, char **argv)
 {
+  get_opt(argc, argv);
   return (0);
 }

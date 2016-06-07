@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 11:30:02 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 11:47:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -13,8 +13,9 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <string.h>
+#include "errors.h"
 
-int	main(int argc, char **argv)
+int	get_opt(int argc, char **argv)
 {
   int	port = -1;
   int	x = -1;
@@ -47,7 +48,7 @@ int	main(int argc, char **argv)
 	  n = strdup(optarg);
 	  break ;
 	  default:
-	  fprintf(stderr, "./test_serv -p port -x world_x -y world_y -c max_clients -t speed -n team_name_1 team_name_2\n");
+	  fprintf(stderr, ERR_USAGE);
 	  exit(EXIT_FAILURE);
 	}
     }
