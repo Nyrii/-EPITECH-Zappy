@@ -5,10 +5,11 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 13:21:13 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun  7 14:52:00 2016 Nyrandone Noboud-Inpeng
 ##
 
-SRCSER	= get_opt.c	\
+SRCSER	= free.c	\
+	  get_opt.c	\
 	  main.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
