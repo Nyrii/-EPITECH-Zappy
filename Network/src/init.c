@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:08:53 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 15:24:00 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 15:31:26 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -28,8 +28,7 @@ void		init_code(char **code)
   code[12] = NULL;
 }
 
-void		init_ptrfunc(int (**func)(const int, char *,
-					  t_list **, t_list **))
+void		init_ptrfunc(int (**func)(t_data *))
 {
   code[0] = &avance_ia;
   code[1] = &droite_ia;

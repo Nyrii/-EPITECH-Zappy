@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 13:21:35 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 15:31:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -22,8 +22,19 @@ typedef struct		s_data
 }			t_data;
 
 /*
+** free.c
+*/
+int		free_tab(char **, int);
+
+/*
 ** get_opt.c
 */
-int	get_opt(int, char **, t_data *);
+int		get_opt(int, char **, t_data *);
+
+/*
+** init.c
+*/
+void		init_code(char **);
+void		init_ptrfunc(int (**)(t_data *));
 
 #endif /* !SERVER_H_ */
