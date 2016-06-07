@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 18:18:32 2016 nekfeu
+** Last update Tue Jun  7 19:41:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -39,8 +39,10 @@ static t_team	*create_new_team(char *name_team)
 
 static int	store_team(t_data *data, char **argv, int *optind)
 {
+  int		i;
+
+  i = 0;
   --(*optind);
-  data->teams = NULL;
   while (argv[*optind] != NULL
 	 && strcmp(argv[*optind], "-p") != 0
 	 && strcmp(argv[*optind], "-x") != 0
@@ -50,9 +52,13 @@ static int	store_team(t_data *data, char **argv, int *optind)
     {
       if (strcmp(argv[*optind], "-n") != 0 &&
 	  list_add_elem_at_back(&data->teams, create_new_team(argv[*optind])) == FALSE)
-	return (-1);
+	return (fprintf(stderr, ERR_PUSHBACK), -1);
+      if (strcmp(argv[*optind], "-n") != 0)
+	++i;
       ++(*optind);
     }
+  if (i == 0)
+    return (fprintf(stderr, ERR_NBTEAMS), -1);
   return (0);
 }
 
@@ -99,7 +105,7 @@ int		get_opt(int argc, char **argv, t_data *data)
   if (optind != argc && (data->teams == NULL || list_get_size(data->teams) <= 0))
     return (fprintf(stderr, USAGE), -1);
   if (data->port < 0 || data->world_x <= 0 || data->world_y <= 0
-      || data->max_clients <= 0 || data->delay <= 0)
+      || data->max_clients <= 0 || data->delay <= 0 || data->teams == NULL)
     return (fprintf(stderr, USAGE), -1);
   return (0);
 }
