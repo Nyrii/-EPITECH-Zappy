@@ -5,16 +5,23 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 14:48:35 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:25:36 2016 nekfeu
 */
 
 #include "server.h"
 
+void		run_zappy(t_server *srv)
+{
+  init_code(srv->cmd_tab);
+  init_ptrfunc(srv->cmd_ptr);
+}
+
 int		main(int argc, char **argv)
 {
-  t_data	data;
+  t_server	server;
 
-  get_opt(argc, argv, &data);
-  free_tab(data.teams, 0);
+  if (get_opt(argc, argv, &server.data) != -1)
+    run_zappy(&server);
+  //free_tab(server.data.teams, 0);
   return (0);
 }
