@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 12:40:40 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun  7 13:21:13 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= get_opt.c	\
@@ -17,7 +17,7 @@ RM	= rm -f
 
 CC	= cc -g
 
-NAMESER	= server
+NAMESER	= zappy_server
 
 OBJSER	= obj/
 SRCSERD	= src/

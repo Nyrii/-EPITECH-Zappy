@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 12:00:39 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 13:21:35 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -17,7 +17,7 @@ typedef struct		s_data
   int			world_x;
   int			world_y;
   int			max_clients;
-  int			speed;
+  int			delay;
   char			**teams;
 }			t_data;
 
