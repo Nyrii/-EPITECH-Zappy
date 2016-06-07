@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 16:24:23 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:27:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -19,7 +19,7 @@ int		manage_commands(t_server *server, const char *command)
   while (server->cmd_tab[i] != NULL)
     {
       if (strcmp(server->cmd_tab[i], command) == 0)
-	return (server->cmd_func[i](server));
+	return (server->cmd_ptr[i](server));
       ++i;
     }
   return (0);

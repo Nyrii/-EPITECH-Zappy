@@ -5,11 +5,34 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 16:24:35 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:31:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
 # define SERVER_H_
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+typedef struct s_list
+{
+
+}		t_list;
+
+typedef struct		s_player
+{
+  int			x;
+  int			y;
+  int			level;
+  int			stones[6];
+  double		timer;
+}			t_player;
+
+typedef struct		s_team
+{
+  t_list		players;
+}			t_team;
 
 typedef struct		s_data
 {
@@ -19,7 +42,25 @@ typedef struct		s_data
   int			max_clients;
   int			delay;
   char			**teams;
+  t_list	       	teamss;
 }			t_data;
+
+typedef struct		s_server
+{
+  /* DATA WORLD */
+  t_data		data;
+
+  /* CMDS */
+  char			*cmd_tab[13];
+  int			(*cmd_ptr[13])();
+
+  /* SOCKET */
+  struct timeval	timeout;
+  struct hostent	*hostinfo;
+  int			max;
+  int			sock;
+  fd_set		rdfs;
+}			t_server;
 
 /*
 ** avance_ia.c
@@ -81,6 +122,9 @@ void		init_ptrfunc(int (**)(t_server *));
 ** inventaire_ia.c
 */
 int		inventaire_ia(t_server *);
+
+/* main */
+void		run_zappy(t_server *);
 
 /*
 ** pose_ia.c
