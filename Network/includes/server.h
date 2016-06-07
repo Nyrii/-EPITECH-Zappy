@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 21:19:28 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 22:06:28 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -127,7 +127,7 @@ void		init_ptrfunc(int (**)(t_server *));
 int		inventaire_ia(t_server *);
 
 /* main */
-void		run_zappy(t_server *);
+int		run_zappy(t_server *);
 
 /*
 ** pose_ia.c

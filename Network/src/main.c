@@ -5,17 +5,19 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 21:40:54 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 22:06:36 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
 #include "server.h"
 
-void		run_zappy(t_server *srv)
+int		run_zappy(t_server *srv)
 {
   init_code(srv->cmd_tab);
   init_ptrfunc(srv->cmd_ptr);
-  generate_map(&srv->data, srv->data.map);
+  if (generate_map(&srv->data, srv->data.map) == -1)
+    return (-1);
+  return (0);
 }
 
 int		main(int argc, char **argv)
@@ -24,7 +26,10 @@ int		main(int argc, char **argv)
 
   srand(time(NULL));
   if (get_opt(argc, argv, &server.data) != -1)
-    run_zappy(&server);
+    {
+      if (run_zappy(&server) == -1)
+	return (-1);
+    }
   //free_tab(server.data.teams, 0);
   return (0);
 }
