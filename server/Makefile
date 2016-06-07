@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 11:48:17 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun  7 12:40:40 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= get_opt.c	\
@@ -15,7 +15,7 @@ OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
 RM	= rm -f
 
-CC	= cc
+CC	= cc -g
 
 NAMESER	= server
 

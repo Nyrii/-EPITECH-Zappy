@@ -5,15 +5,25 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 11:49:48 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 12:00:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
 # define SERVER_H_
 
+typedef struct		s_data
+{
+  int			port;
+  int			world_x;
+  int			world_y;
+  int			max_clients;
+  int			speed;
+  char			**teams;
+}			t_data;
+
 /*
 ** get_opt.c
 */
-int	get_opt(int argc, char **argv);
+int	get_opt(int, char **, t_data *);
 
 #endif /* !SERVER_H_ */
