@@ -5,12 +5,12 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:39:39 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 15:39:50 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:14:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-int		inventaire_ia(t_data *data)
+int		inventaire_ia(t_server *data)
 {
   (void)data;
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 14:24:20 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:19:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -120,7 +120,7 @@ int		get_opt(int argc, char **argv, t_data *data)
       return (-1);
     }
   if (data->port < 0 || data->world_x <= 0 || data->world_y <= 0
-      || data->max_clients <= 0 || data->delay < 0)
+      || data->max_clients <= 0 || data->delay <= 0)
     {
       fprintf(stderr, USAGE);
       return (-1);

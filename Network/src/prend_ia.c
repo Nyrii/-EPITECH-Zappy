@@ -5,12 +5,12 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:40:06 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 15:41:14 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:15:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-int		prend_ia(t_data *data)
+int		prend_ia(t_server *data)
 {
   (void)data;
   return (0);

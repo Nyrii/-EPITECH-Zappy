@@ -5,12 +5,12 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:33:40 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 15:38:46 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:13:47 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-int		avance_ia(t_data *data)
+int		avance_ia(t_server *data)
 {
   (void)data;
   return (0);

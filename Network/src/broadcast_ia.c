@@ -5,12 +5,12 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 15:43:02 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 16:13:51 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-int		broadcast_ia(t_data *data)
+int		broadcast_ia(t_server *data)
 {
   (void)data;
   return (0);
