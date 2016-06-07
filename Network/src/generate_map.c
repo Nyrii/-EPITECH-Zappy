@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 21:59:58 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 23:15:17 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
@@ -39,22 +39,28 @@ static void		generate_tile(int *tile)
   tile[i] = -1;
 }
 
-int			generate_map(t_data *data, int **map)
+int			generate_map(t_data *data, int ***map, int x, int y)
 {
-  int			x;
-  int			*tmp;
+  int			i;
 
-  if (!(map = malloc((data->world_x * data->world_y + 1) * sizeof(int *))))
+  i = 0;
+  if ((map = malloc((data->world_y + 1) * sizeof(int **))) == NULL
+      || (map[y] = malloc((data->world_x + 1) * sizeof(int *))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
-  x = 0;
   while (x < data->world_x * data->world_y)
     {
-      if ((tmp = malloc(7 * sizeof(int))) == NULL)
+      if ((map[y][i] = malloc(7 * sizeof(int))) == NULL)
 	return (fprintf(stderr, ERR_MALLOC), -1);
-      generate_tile(tmp);
-      map[x] = tmp;
+      generate_tile(map[y][i]);
+      ++i;
       ++x;
+      x % data->world_x == 0 ? (map[y][i] = NULL) : 0;
+      x % data->world_x == 0 ? (i = 0) : (int)i;
+      x % data->world_x == 0 ? (y += 1) : (int)y;
+      if (x % data->world_x == 0 && x + 1 < data->world_x * data->world_y
+	  && (!(map[y] = malloc((data->world_x + 1) * sizeof(int *)))))
+	return (fprintf(stderr, ERR_MALLOC), -1);
     }
-  map[x] = NULL;
+  map[y] = NULL;
   return (0);
 }

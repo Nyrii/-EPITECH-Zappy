@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 22:06:28 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 23:14:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -103,7 +103,7 @@ int		gauche_ia(t_server *);
 /*
 ** generate_map.c
 */
-int		generate_map(t_data *, int **);
+int		generate_map(t_data *, int ***, int, int);
 
 /*
 ** get_opt.c

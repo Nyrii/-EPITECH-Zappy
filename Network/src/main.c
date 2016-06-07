@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 22:06:36 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 23:14:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -15,7 +15,7 @@ int		run_zappy(t_server *srv)
 {
   init_code(srv->cmd_tab);
   init_ptrfunc(srv->cmd_ptr);
-  if (generate_map(&srv->data, srv->data.map) == -1)
+  if (generate_map(&srv->data, &srv->data.map, 0, 0) == -1)
     return (-1);
   return (0);
 }
