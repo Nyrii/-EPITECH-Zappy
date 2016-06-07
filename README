@@ -1,0 +1,13 @@
+Welcome !
+
+#### GAME ####
+We must create a new world, a world where inhabitants just chill, move, eat and pick up some stones.
+##################
+
+#### TEAM ####
+wilmot_g - Client Graphique SDL (connecté C)
+arino_a - Client Graphique Web (connecté language libre)
+octeau_j - Client IA (connecté language libre)
+noboud_n & empoci_k (serveur TCP)
+##############
+
