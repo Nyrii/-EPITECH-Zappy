@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 16:31:00 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun  7 18:05:33 2016 nekfeu
 */
 
 #ifndef SERVER_H_
@@ -14,11 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-
-typedef struct s_list
-{
-
-}		t_list;
+#include "generic_list.h"
 
 typedef struct		s_player
 {
@@ -31,6 +27,8 @@ typedef struct		s_player
 
 typedef struct		s_team
 {
+  int			nb_players;
+  char			*name;
   t_list		players;
 }			t_team;
 
@@ -41,8 +39,7 @@ typedef struct		s_data
   int			world_y;
   int			max_clients;
   int			delay;
-  char			**teams;
-  t_list	       	teamss;
+  t_list	       	teams;
 }			t_data;
 
 typedef struct		s_server
