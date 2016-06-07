@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 18:05:33 2016 nekfeu
+** Last update Tue Jun  7 21:19:28 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -40,6 +40,7 @@ typedef struct		s_data
   int			max_clients;
   int			delay;
   t_list	       	teams;
+  int			**map;
 }			t_data;
 
 typedef struct		s_server
@@ -98,6 +99,11 @@ int		free_tab(char **, int);
 ** gauche_ia.c
 */
 int		gauche_ia(t_server *);
+
+/*
+** generate_map.c
+*/
+int		generate_map(t_data *, int **);
 
 /*
 ** get_opt.c

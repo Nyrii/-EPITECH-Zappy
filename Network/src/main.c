@@ -5,21 +5,24 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 18:25:24 2016 nekfeu
+** Last update Tue Jun  7 21:40:54 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <time.h>
 #include "server.h"
 
 void		run_zappy(t_server *srv)
 {
   init_code(srv->cmd_tab);
   init_ptrfunc(srv->cmd_ptr);
+  generate_map(&srv->data, srv->data.map);
 }
 
 int		main(int argc, char **argv)
 {
   t_server	server;
 
+  srand(time(NULL));
   if (get_opt(argc, argv, &server.data) != -1)
     run_zappy(&server);
   //free_tab(server.data.teams, 0);
