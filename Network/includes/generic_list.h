@@ -5,21 +5,17 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Mon May 16 18:28:12 2016 Kévin Empociello
-** Last update Tue Jun  7 18:22:41 2016 nekfeu
+** Last update Wed Jun  8 16:12:59 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef GENERIC_LIST_H_
 # define GENERIC_LIST_H_
 
+# include "enum.h"
+
 /*
 ** Types
 */
-
-typedef enum	e_bool
-{
-  FALSE,
-  TRUE
-}		t_bool;
 
 typedef struct		s_node
 {

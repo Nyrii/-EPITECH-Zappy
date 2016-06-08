@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Tue Jun  7 18:21:45 2016 nekfeu
+** Last update Wed Jun  8 21:05:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -13,17 +13,16 @@
 #include <unistd.h>
 #include "generic_list.h"
 
-void   *list_get_elem_at_front(t_list list)
+void		*list_get_elem_at_front(t_list list)
 {
   if (list_get_size(list) == 0)
-    return 0;
-  else
-    return list->value;
+    return (0);
+  return (list->value);
 }
 
-t_bool          list_add_elem_at_front(t_list *front_ptr, void *elem)
+t_bool		list_add_elem_at_front(t_list *front_ptr, void *elem)
 {
-  t_list        new_elem;
+  t_list	new_elem;
 
   if ((new_elem = malloc(sizeof(t_node))) == NULL)
     return (FALSE);
@@ -42,7 +41,7 @@ t_bool          list_add_elem_at_front(t_list *front_ptr, void *elem)
   return (TRUE);
 }
 
-void   *list_get_elem_at_position(t_list list, unsigned int position)
+void		*list_get_elem_at_position(t_list list, unsigned int position)
 {
   t_list	tmp;
   unsigned int	i;
@@ -50,13 +49,13 @@ void   *list_get_elem_at_position(t_list list, unsigned int position)
   i = 0;
   tmp = list;
   if (list == NULL)
-    return 0;
+    return (NULL);
   if (position == 0)
     {
       return (list_get_elem_at_front(list));
     }
   if (position > list_get_size(list))
-    return 0;
+    return (NULL);
   while (tmp->next && i < position)
     {
       tmp = tmp->next;
@@ -93,7 +92,7 @@ t_bool		list_add_elem_at_back(t_list *front_ptr, void *elem)
 }
 
 t_bool		list_add_elem_at_position(t_list *front_ptr, void *elem,
-				 unsigned int position)
+					  unsigned int position)
 {
   t_list	new_elem;
   t_list	tmp;

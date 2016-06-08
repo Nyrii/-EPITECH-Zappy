@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun  4 15:47:24 2016 nekfeu
-** Last update Sat Jun  4 16:35:38 2016 nekfeu
+** Last update Wed Jun  8 21:06:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -21,16 +21,16 @@ unsigned int	list_get_size(t_list list)
   i = 0;
   tmp = list;
   if (list == NULL)
-    return 0;
+    return (0);
   while (tmp != NULL)
     {
       tmp = tmp->next;
       i++;
     }
-  return i;
+  return (i);
 }
 
-t_bool list_del_elem_at_front(t_list *front_ptr)
+t_bool		list_del_elem_at_front(t_list *front_ptr)
 {
   if (front_ptr == NULL)
     return (FALSE);

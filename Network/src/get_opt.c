@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 21:48:23 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun  8 21:07:09 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -24,6 +24,14 @@ static void	init_data(t_data *data)
   data->max_clients = -1;
   data->teams = NULL;
   data->map = NULL;
+  data->resources = NULL;
+  data->percentages[FOOD] = 50.0;
+  data->percentages[LINEMATE] = 23.0;
+  data->percentages[DERAUMERE] = 20.5;
+  data->percentages[SIBUR] = 25.6;
+  data->percentages[MENDIANE] = 12.8;
+  data->percentages[PHIRAS] = 15.0;
+  data->percentages[THYSTAME] = 2.5;
 }
 
 static t_team	*create_new_team(char *name_team)
@@ -52,7 +60,8 @@ static int	store_team(t_data *data, char **argv, int *optind)
 	 && strcmp(argv[*optind], "-t") != 0)
     {
       if (strcmp(argv[*optind], "-n") != 0 &&
-	  list_add_elem_at_back(&data->teams, create_new_team(argv[*optind])) == FALSE)
+	  list_add_elem_at_back(&data->teams,
+				create_new_team(argv[*optind])) == FALSE)
 	return (fprintf(stderr, ERR_PUSHBACK), -1);
       if (strcmp(argv[*optind], "-n") != 0)
 	++i;
@@ -103,11 +112,14 @@ int		get_opt(int argc, char **argv, t_data *data)
       if (manage_options(data, argv, opt, &optind) == -1)
 	return (-1);
     }
-  if (optind != argc && (data->teams == NULL || list_get_size(data->teams) <= 1))
+  if (optind != argc && (data->teams == NULL
+			 || list_get_size(data->teams) <= 1))
     return (fprintf(stderr, USAGE), -1);
   if (data->port < 0 || data->world_x <= 0 || data->world_y <= 0
       || data->max_clients <= 0 || data->delay <= 0 || data->teams == NULL
       || list_get_size(data->teams) <= 1)
     return (fprintf(stderr, USAGE), -1);
+  if (init_resources(&data->resources) == -1)
+    return (-1);
   return (0);
 }

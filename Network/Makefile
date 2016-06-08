@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun  7 21:17:58 2016 Nyrandone Noboud-Inpeng
+## Last update Wed Jun  8 19:54:42 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= avance_ia.c		\
@@ -17,6 +17,7 @@ SRCSER	= avance_ia.c		\
 	free.c			\
 	gauche_ia.c		\
 	generate_map.c		\
+	generate_resources.c	\
 	generic_list.c		\
 	generic_list_del.c	\
 	get_opt.c		\
