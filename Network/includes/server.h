@@ -62,6 +62,10 @@ typedef struct		s_server
   fd_set		rdfs;
 }			t_server;
 
+
+/* Socket */
+int		init_server(int, int);
+
 /*
 ** avance_ia.c
 */

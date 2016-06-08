@@ -17,6 +17,7 @@ int		run_zappy(t_server *srv)
   init_ptrfunc(srv->cmd_ptr);
   if (generate_map(&srv->data, 0, 0) == -1)
     return (-1);
+  srv->sock = init_server(1000, srv->data.port);
   return (0);
 }
 
