@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun  8 21:07:09 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 23:04:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -32,6 +32,7 @@ static void	init_data(t_data *data)
   data->percentages[MENDIANE] = 12.8;
   data->percentages[PHIRAS] = 15.0;
   data->percentages[THYSTAME] = 2.5;
+  data->required_players = NULL;
 }
 
 static t_team	*create_new_team(char *name_team)
@@ -119,7 +120,8 @@ int		get_opt(int argc, char **argv, t_data *data)
       || data->max_clients <= 0 || data->delay <= 0 || data->teams == NULL
       || list_get_size(data->teams) <= 1)
     return (fprintf(stderr, USAGE), -1);
-  if (init_resources(&data->resources) == -1)
+  if (init_resources(&data->resources) == -1
+      || init_nb_players(&data->required_players) == -1)
     return (-1);
   return (0);
 }

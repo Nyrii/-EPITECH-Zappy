@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:27:15 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 21:27:20 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 23:01:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@
 int		init_resources_by_final_elevation(int ***resources,
 						   int *template)
 {
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 1;
@@ -27,7 +27,7 @@ int		init_resources_by_final_elevation(int ***resources,
   template[THYSTAME] = 0;
   template[NONE] = -1;
   (*resources)[6] = template;
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 2;
@@ -46,7 +46,7 @@ int		init_resources_by_higher_elevation(int ***resources)
 {
   int		*template;
 
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 1;
@@ -57,7 +57,7 @@ int		init_resources_by_higher_elevation(int ***resources)
   template[THYSTAME] = 0;
   template[NONE] = -1;
   (*resources)[4] = template;
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 1;
@@ -75,7 +75,7 @@ int		init_resources_by_middle_elevation(int ***resources)
 {
   int		*template;
 
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 1;
@@ -86,7 +86,7 @@ int		init_resources_by_middle_elevation(int ***resources)
   template[THYSTAME] = 0;
   template[NONE] = -1;
   (*resources)[2] = template;
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 2;
@@ -114,7 +114,7 @@ int		init_resources(int ***resources, int *template)
   template[THYSTAME] = 1;
   template[NONE] = -1;
   (*resources)[0] = template;
-  if ((template = malloc(8 * sizeof(int))) == NULL)
+  if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   template[FOOD] = 0;
   template[LINEMATE] = 1;

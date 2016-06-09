@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 21:53:49 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 23:04:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -44,6 +44,7 @@ typedef struct		s_data
   int			***map;
   int			**resources;
   float			percentages[7];
+  int			*required_players;
 }			t_data;
 
 typedef struct		s_server
@@ -140,6 +141,11 @@ int		incantation_ia(t_server *);
 */
 void		init_code(char **);
 void		init_ptrfunc(int (**)(t_server *));
+
+/*
+** init_nb_players.c
+*/
+int		init_nb_players(int **);
 
 /*
 ** inventory_ia.c

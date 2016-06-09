@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Thu Jun  9 22:05:57 2016 Nyrandone Noboud-Inpeng
+## Last update Thu Jun  9 23:03:35 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= broadcast_ia.c	\
@@ -22,6 +22,7 @@ SRCSER	= broadcast_ia.c	\
 	get_opt.c		\
 	incantation_ia.c	\
 	init.c			\
+	init_nb_players.c	\
 	init_resources.c	\
 	inventory_ia.c		\
 	left_ia.c		\
