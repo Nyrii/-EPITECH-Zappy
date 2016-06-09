@@ -5,35 +5,21 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun  8 21:00:24 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 21:32:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
 #include "server.h"
 
-int			get_resource(int *template)
+void			generate_resources(int resource,
+					   int quantity, int ***map)
 {
-  int			i;
+  int			x;
+  int			y;
 
-  i = 0;
-  if (template == NULL)
-    return (-1);
-  while (template[i] != -1)
-    {
-      if (template[i] > 0)
-	return (i);
-      ++i;
-    }
-  return (-1);
-}
-
-void			generate_base(int *template, int ***map, int x, int y)
-{
-  int			*tmp;
-  int			resource;
-
-  tmp = template;
-  while ((resource = get_resource(tmp)) != -1)
+  x = 0;
+  y = 0;
+  while (quantity > 0)
     {
       y = 0;
       while (map[y] != NULL)
@@ -44,8 +30,8 @@ void			generate_base(int *template, int ***map, int x, int y)
 	      if (rand() % 3 == 0)
 		{
 		  map[y][x][resource] += 1;
-		  tmp[resource] -= 1;
-                  if ((resource = get_resource(tmp)) == -1)
+		  quantity -= 1;
+                  if (quantity <= 0)
 		    return ;
 		}
 	      ++x;
@@ -73,15 +59,12 @@ static void		generate_tile(t_data *data, int y, int x)
     }
 }
 
-int			generate_map(t_data *data, int x, int y)
+int			generate_map(t_data *data, int x, int y, int i)
 {
-  int			i;
-
-  i = 0;
   if ((data->map = malloc((data->world_y + 1) * sizeof(int **))) == NULL
       || (data->map[y] = malloc((data->world_x + 1) * sizeof(int *))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
-  while (x < data->world_x * data->world_y)
+  while (++x < data->world_x * data->world_y)
     {
       if ((data->map[y][i] = malloc(9 * sizeof(int))) == NULL)
 	return (fprintf(stderr, ERR_MALLOC), -1);
@@ -96,6 +79,8 @@ int			generate_map(t_data *data, int x, int y)
 	return (fprintf(stderr, ERR_MALLOC), -1);
     }
   data->map[y] = NULL;
-  generate_base(data->resources[0], data->map, 0, 0);
+  i = -1;
+  while (++i < NONE)
+    generate_resources(i, data->resources[0][i], data->map);
   return (0);
 }

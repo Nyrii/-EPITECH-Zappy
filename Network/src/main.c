@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 01:05:32 2016 Kevin Empociello
+** Last update Thu Jun  9 21:32:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -20,7 +20,7 @@ int		run_zappy(t_server *srv)
     return (-1);
   srv->max = srv->sock;
   srv->players = NULL;
-  if (generate_map(&srv->data, 0, 0) == -1)
+  if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
   loop_server(srv);
   return (0);

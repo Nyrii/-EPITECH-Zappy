@@ -1,11 +1,11 @@
 /*
-** generate_resources.c for generate_resources in /Users/noboud_n/Documents/Share/PSU_2015_zappy/Network/src/
+** init_resources.c for init_resources in /Users/noboud_n/Documents/Share/PSU_2015_zappy/Network/src/
 **
 ** Made by Nyrandone Noboud-Inpeng
 ** Login   <noboud_n@epitech.eu>
 **
-** Started on  Wed Jun  8 15:53:40 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun  8 20:15:17 2016 Nyrandone Noboud-Inpeng
+** Started on  Thu Jun  9 21:27:15 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 21:27:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
