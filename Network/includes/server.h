@@ -18,6 +18,7 @@
 
 typedef struct		s_player
 {
+  int     		sock;
   int			x;
   int			y;
   int			level;
@@ -50,6 +51,9 @@ typedef struct		s_server
   /* DATA WORLD */
   t_data		data;
 
+  /* Clients */
+  t_list  players;
+
   /* CMDS */
   char			*cmd_tab[13];
   int			(*cmd_ptr[13])();
@@ -64,7 +68,12 @@ typedef struct		s_server
 
 
 /* Socket */
-int		init_server(int, int);
+int   		init_server(int, int);
+int   		error(char *);
+int   		loop_server(t_server *);
+void  		set_all_clients(t_server *);
+void  		check_sockets_loop(t_server *);
+t_player	*new_player(t_server *);
 
 /*
 ** avance_ia.c

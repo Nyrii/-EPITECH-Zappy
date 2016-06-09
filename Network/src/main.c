@@ -5,19 +5,24 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun  8 20:56:14 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 01:05:32 2016 Kevin Empociello
 */
 
 #include <time.h>
+#include <sys/socket.h>
 #include "server.h"
 
 int		run_zappy(t_server *srv)
 {
   init_code(srv->cmd_tab);
   init_ptrfunc(srv->cmd_ptr);
+  if ((srv->sock = init_server(SOMAXCONN, srv->data.port)) == -1)
+    return (-1);
+  srv->max = srv->sock;
+  srv->players = NULL;
   if (generate_map(&srv->data, 0, 0) == -1)
     return (-1);
-  srv->sock = init_server(1000, srv->data.port);
+  loop_server(srv);
   return (0);
 }
 

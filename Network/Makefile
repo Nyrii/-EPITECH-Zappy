@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Wed Jun  8 19:54:42 2016 Nyrandone Noboud-Inpeng
+## Last update Thu Jun  9 01:12:34 2016 Kevin Empociello
 ##
 
 SRCSER	= avance_ia.c		\
@@ -29,6 +29,9 @@ SRCSER	= avance_ia.c		\
 	prend_ia.c		\
 	process.c		\
 	server_lib.c		\
+	loop.c			\
+	socket.c		\
+	new_player.c		\
 	voir_ia.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
