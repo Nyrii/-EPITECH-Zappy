@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 23:04:50 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 00:15:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -130,6 +130,11 @@ int		init_resources(int ***);
 ** get_opt.c
 */
 int		get_opt(int, char **, t_data *);
+
+/*
+** get_player.c
+*/
+t_list		*get_players_at_pos(t_data *, int, int);
 
 /*
 ** incantation_ia.c
