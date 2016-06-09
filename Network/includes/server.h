@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 21:33:11 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun  9 21:53:49 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -76,11 +76,6 @@ void  		check_sockets_loop(t_server *);
 t_player	*new_player(t_server *);
 
 /*
-** avance_ia.c
-*/
-int		avance_ia(t_server *);
-
-/*
 ** broadcast_ia.c
 */
 int		broadcast_ia(t_server *);
@@ -91,9 +86,9 @@ int		broadcast_ia(t_server *);
 int		connect_nbr_ia(t_server *);
 
 /*
-** droite_ia.c
+** drop_ia.c
 */
-int		droite_ia(t_server *);
+int		drop_ia(t_server *);
 
 /*
 ** expulse_ia.c
@@ -106,14 +101,19 @@ int		expulse_ia(t_server *);
 int		fork_ia(t_server *);
 
 /*
+** forward_ia.c
+*/
+int		forward_ia(t_server *);
+
+/*
 ** free.c
 */
 int		free_tab(char **, int);
 
 /*
-** gauche_ia.c
+** left_ia.c
 */
-int		gauche_ia(t_server *);
+int		left_ia(t_server *);
 
 /*
 ** generate_map.c
@@ -142,26 +142,26 @@ void		init_code(char **);
 void		init_ptrfunc(int (**)(t_server *));
 
 /*
-** inventaire_ia.c
+** inventory_ia.c
 */
-int		inventaire_ia(t_server *);
+int		inventory_ia(t_server *);
 
 /* main */
 int		run_zappy(t_server *);
 
 /*
-** pose_ia.c
+** take_ia.c
 */
-int		pose_ia(t_server *);
+int		take_ia(t_server *);
 
 /*
-** prend_ia.c
+** right_ia.c
 */
-int		prend_ia(t_server *);
+int		right_ia(t_server *);
 
 /*
-** voir_ia.c
+** see_ia.c
 */
-int		voir_ia(t_server *);
+int		see_ia(t_server *);
 
 #endif /* !SERVER_H_ */

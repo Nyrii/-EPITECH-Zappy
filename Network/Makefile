@@ -5,17 +5,16 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Thu Jun  9 21:28:39 2016 Nyrandone Noboud-Inpeng
+## Last update Thu Jun  9 21:54:17 2016 Nyrandone Noboud-Inpeng
 ##
 
-SRCSER	= avance_ia.c		\
-	broadcast_ia.c		\
+SRCSER	= broadcast_ia.c	\
 	connect_nbr_ia.c	\
-	droite_ia.c		\
+	drop_ia.c		\
 	expulse_ia.c		\
 	fork_ia.c		\
+	forward_ia.c		\
 	free.c			\
-	gauche_ia.c		\
 	generate_map.c		\
 	generic_list.c		\
 	generic_list_del.c	\
@@ -23,16 +22,17 @@ SRCSER	= avance_ia.c		\
 	incantation_ia.c	\
 	init.c			\
 	init_resources.c	\
-	inventaire_ia.c		\
-	main.c			\
-	pose_ia.c		\
-	prend_ia.c		\
-	process.c		\
-	server_lib.c		\
+	inventory_ia.c		\
+	left_ia.c		\
 	loop.c			\
-	socket.c		\
+	main.c			\
 	new_player.c		\
-	voir_ia.c
+	process.c		\
+	right_ia.c		\
+	see_ia.c		\
+	server_lib.c		\
+	socket.c		\
+	take_ia.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
