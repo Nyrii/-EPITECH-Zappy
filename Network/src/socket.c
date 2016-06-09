@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun  9 02:54:27 2016 Kevin Empociello
+** Last update Thu Jun  9 11:08:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -19,7 +19,7 @@ static void read_client(t_server *srv, t_player *cl)
   char		buffer[512];
   int		n;
 
-  srv = srv;
+  (void)srv;
   n = 0;
   memset(buffer, 0, 512);
   if (cl && (n = recv(cl->sock, buffer, 512, 0)) > 0)
