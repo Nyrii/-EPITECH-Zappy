@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 13:40:56 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 16:59:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -21,6 +21,7 @@ typedef struct		s_player
   int     		sock;
   int			x;
   int			y;
+  int			orientation;
   int			level;
   int			stones[6];
   double		timer;

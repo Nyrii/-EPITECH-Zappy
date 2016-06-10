@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 14:14:53 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 14:24:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -37,6 +37,7 @@ static char 	*fill_bct(char *answer, int ***map,
       while (buffer[inc])
 	answer[i++] = buffer[inc++];
     }
+  answer[i++] = '\n';
   answer[i] = '\0';
   return (answer);
 }
@@ -50,10 +51,7 @@ char		*bct(int ***map, int const y, int const x)
 
   i = 0;
   if ((answer = malloc(150 * sizeof(char))) == NULL)
-    {
-      fprintf(stderr, ERR_MALLOC);
-      return (NULL);
-    }
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   function = "bct";
   while (function[i])
     {
@@ -66,6 +64,7 @@ char		*bct(int ***map, int const y, int const x)
       pos[1] = x;
       return (fill_bct(answer, map, pos, i));
     }
+  answer[i++] = '\n';
   answer[i] = '\0';
   return (answer);
 }
