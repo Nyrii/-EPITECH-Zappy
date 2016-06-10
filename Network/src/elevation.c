@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 00:24:28 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 13:16:13 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -24,7 +24,8 @@ int		is_elevation_legit(t_data *data, int elevation,
     return (-1);
   while (data->map[pos[0]][pos[1]][i] != -1)
     {
-      if (data->resources[elevation][i] > data->map[pos[0]][pos[1]][i])
+      if (i != FOOD
+	  && data->resources[elevation][i] != data->map[pos[0]][pos[1]][i])
 	return (-1);
       ++i;
     }
