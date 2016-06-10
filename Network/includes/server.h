@@ -5,16 +5,16 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 18:06:00 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 23:23:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
 # define SERVER_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "generic_list.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "generic_list.h"
 
 typedef struct		s_client
 {
@@ -29,7 +29,7 @@ typedef struct		s_player
   int			y;
   int			orientation;
   int			level;
-  int			stones[6];
+  int			stones[7];
   double		timer;
 }			t_player;
 
@@ -217,6 +217,14 @@ int		right_ia(t_server *, t_player *);
 ** see_ia.c
 */
 int		see_ia(t_server *, t_player *);
+
+/*
+** see_ia_calculs.c
+*/
+void		determine_minus_x(t_server *, t_player *, int *, int);
+void		determine_minus_y(t_server *, t_player *, int *, int);
+void		determine_plus_x(t_server *, t_player *, int *, int);
+void		determine_plus_y(t_server *, t_player *, int *, int);
 
 /*
 ** sgt.c

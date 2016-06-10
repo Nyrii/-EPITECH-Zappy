@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 19:36:04 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 18:29:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -16,5 +16,6 @@
 # define ERR_MALLOC "Error: malloc failed.\n"
 # define ERR_NBTEAMS "Error: Teams have not been specified.\n"
 # define ERR_PUSHBACK "Error: Push back of a node failed.\n"
+# define ERR_POS_MAP "Error: could not find position in the map. Aborted.\n"
 
 #endif /* ERRORS_H_ */

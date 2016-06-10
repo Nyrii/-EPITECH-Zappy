@@ -5,14 +5,39 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 17:39:57 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 19:00:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+#include "errors.h"
 
-int		forward_ia(t_server *data, t_player *player)
+int		forward_ia(t_server *server, t_player *player)
 {
-  (void)data;
-  (void)player;
+  int		x;
+  int		y;
+
+  (void)server;
+  x = player->x;
+  y = player->y;
+  if (!server->data.map
+      || !server->data.map[y] || !server->data.map[y][x])
+    return (fprintf(stderr, ERR_POS_MAP), -1);
+  if (player->orientation == 0 || player->orientation == 180)
+    {
+      if (player->orientation == 0)
+	y = y - 1 >= 0 ? (y - 1) : (server->data.world_y - 1);
+      else
+	y = y + 1 >= server->data.world_y ? 0 : (y + 1);
+      player->y = y;
+    }
+  else
+    {
+      if (player->orientation == 90)
+	x = x + 1 >= server->data.world_x ? 0 : (x + 1);
+      else
+	x = x - 1 >= 0 ? (x - 1) : (server->data.world_x - 1);
+      player->x = x;
+    }
+  // send message to ALL GRAPHIC CLIENTS and "ok" to the player
   return (0);
 }
