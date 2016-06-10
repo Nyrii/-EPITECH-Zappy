@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 21:32:39 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 13:58:27 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
@@ -18,7 +18,6 @@ void			generate_resources(int resource,
   int			y;
 
   x = 0;
-  y = 0;
   while (quantity > 0)
     {
       y = 0;
@@ -27,7 +26,7 @@ void			generate_resources(int resource,
 	  x = 0;
 	  while (map[y][x] != NULL)
 	    {
-	      if (rand() % 3 == 0)
+	      if (resource < NONE && rand() % 3 == 0)
 		{
 		  map[y][x][resource] += 1;
 		  quantity -= 1;
@@ -64,7 +63,7 @@ int			generate_map(t_data *data, int x, int y, int i)
   if ((data->map = malloc((data->world_y + 1) * sizeof(int **))) == NULL
       || (data->map[y] = malloc((data->world_x + 1) * sizeof(int *))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
-  while (++x < data->world_x * data->world_y)
+  while (x < data->world_x * data->world_y)
     {
       if ((data->map[y][i] = malloc(9 * sizeof(int))) == NULL)
 	return (fprintf(stderr, ERR_MALLOC), -1);

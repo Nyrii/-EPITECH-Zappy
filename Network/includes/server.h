@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 23:04:50 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 13:40:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -84,6 +84,11 @@ void  		check_sockets_loop(t_server *);
 t_player	*new_player(t_server *);
 
 /*
+** bct.c
+*/
+char		*bct(int ***map, int const, int const);
+
+/*
 ** broadcast_ia.c
 */
 int		broadcast_ia(t_server *);
@@ -137,6 +142,11 @@ int		init_resources(int ***);
 ** get_opt.c
 */
 int		get_opt(int, char **, t_data *);
+
+/*
+** get_player.c
+*/
+t_list		*get_players_at_pos(t_data *, int, int);
 
 /*
 ** incantation_ia.c
