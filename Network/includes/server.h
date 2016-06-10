@@ -16,6 +16,12 @@
 #include <unistd.h>
 #include "generic_list.h"
 
+typedef struct		s_client
+{
+  int			sock;
+  int			timer;
+}			t_client;
+
 typedef struct		s_player
 {
   int     		sock;
@@ -54,7 +60,8 @@ typedef struct		s_server
   t_data		data;
 
   /* Clients */
-  t_list  players;
+  t_list  		queue_clients;
+  t_list		graphic_clients;
 
   /* CMDS */
   char			*cmd_tab[13];
