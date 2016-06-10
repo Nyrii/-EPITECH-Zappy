@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Fri Jun 10 00:08:53 2016 Kevin Empociello
+## Last update Fri Jun 10 17:14:18 2016 Kevin Empociello
 ##
 
 SRCSER	= broadcast_ia.c	\
@@ -34,6 +34,7 @@ SRCSER	= broadcast_ia.c	\
 	see_ia.c		\
 	server_lib.c		\
 	socket.c		\
+	get_player.c		\
 	take_ia.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))

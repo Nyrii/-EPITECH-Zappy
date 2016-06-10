@@ -41,11 +41,11 @@ static int		check_socket(int sock, t_server *srv)
 	  printf("New player\n");
 	  p = new_player(srv);
 	  FD_SET(p->sock, &srv->rdfs);
-	  list_add_elem_at_back(&srv->players, p);
+	  list_add_elem_at_back(&srv->queue_clients, p);
 	}
       else
-	while (++i < list_get_size(srv->players))
-	  if ((p = list_get_elem_at_position(srv->players, i)) != NULL)
+	while (++i < list_get_size(srv->queue_clients))
+	  if ((p = list_get_elem_at_position(srv->queue_clients, i)) != NULL)
 	    if (p->sock == sock)
 	      {
 		read_client(srv, p);
@@ -76,9 +76,9 @@ void		set_all_clients(t_server *srv)
   unsigned int	i;
 
   i = 0;
-  while (i < list_get_size(srv->players))
+  while (i < list_get_size(srv->queue_clients))
     {
-      if ((p = list_get_elem_at_position(srv->players, i)) != NULL)
+      if ((p = list_get_elem_at_position(srv->queue_clients, i)) != NULL)
 	       FD_SET(p->sock, &srv->rdfs);
       i++;
     }

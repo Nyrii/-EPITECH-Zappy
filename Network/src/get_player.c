@@ -26,10 +26,10 @@ t_list		*get_players_at_pos(t_data *data, int x, int y)
       if ((t = list_get_elem_at_position(data->teams, i)) != NULL)
 	{
 	  j = 0;
-	  while (j < list_get_size(t))
+	  while (j < list_get_size(t->players))
 	    {
-	      if ((p = list_get_elem_at_position(t, j)) != NULL && p->x == x
-		  p->y == y)
+	      if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
+		  p->x == x && p->y == y)
 		list_add_elem_at_back(tmp, p);
 	      j++;
 	    }

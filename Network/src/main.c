@@ -19,7 +19,8 @@ int		run_zappy(t_server *srv)
   if ((srv->sock = init_server(SOMAXCONN, srv->data.port)) == -1)
     return (-1);
   srv->max = srv->sock;
-  srv->players = NULL;
+  srv->queue_clients = NULL;
+  srv->graphic_clients = NULL;
   if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
   loop_server(srv);
