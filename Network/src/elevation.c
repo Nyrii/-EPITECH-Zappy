@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 13:16:13 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 18:11:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -17,21 +17,16 @@ int		is_elevation_legit(t_data *data, int elevation,
   t_list	temp;
   int		count;
 
-  i = 0;
+  i = -1;
   count = 0;
   if (!data->map || !data->map[pos[0]]
       || !data->map[pos[0]][pos[1]] || !data->resources)
     return (-1);
-  while (data->map[pos[0]][pos[1]][i] != -1)
-    {
-      if (i != FOOD
-	  && data->resources[elevation][i] != data->map[pos[0]][pos[1]][i])
-	return (-1);
-      ++i;
-    }
-  (void)tmp;
-  (void)temp;
-  /* if ((*tmp = get_players_at_pos(data, pos[0], pos[1])) == NULL)
+  while (data->map[pos[0]][pos[1]][++i] != -1)
+    if (i != FOOD
+	&& data->resources[elevation][i] != data->map[pos[0]][pos[1]][i])
+      return (-1);
+  if ((*tmp = get_players_at_pos(data, pos[0], pos[1])) == NULL)
     return (-1);
   temp = **tmp;
   while (temp != NULL)
@@ -41,6 +36,6 @@ int		is_elevation_legit(t_data *data, int elevation,
       temp = temp->next;
     }
   if (count < data->required_players[elevation])
-    return (*tmp = NULL, -1); */
+    return (*tmp = NULL, -1);
   return (0);
 }

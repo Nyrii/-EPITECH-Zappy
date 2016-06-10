@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 14:19:00 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 17:37:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -14,8 +14,8 @@
 
 int		run_zappy(t_server *srv)
 {
-  init_code(srv->cmd_tab);
-  init_ptrfunc(srv->cmd_ptr);
+  init_code(srv->cmd_tab_ia, srv->cmd_tab_graphic);
+  init_ptrfunc(srv->cmd_ptr_ia, srv->cmd_ptr_graphic);
   if ((srv->sock = init_server(SOMAXCONN, srv->data.port)) == -1)
     return (-1);
   srv->max = srv->sock;

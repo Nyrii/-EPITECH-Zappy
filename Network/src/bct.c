@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 14:24:38 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 17:54:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -67,4 +67,18 @@ char		*bct(int ***map, int const y, int const x)
   answer[i++] = '\n';
   answer[i] = '\0';
   return (answer);
+}
+
+int		bct_on_map(t_server *server, t_client *graphic)
+{
+  (void)server;
+  (void)graphic;
+  return (0);
+}
+
+int		bct_on_tile(t_server *server, t_client *graphic)
+{
+  (void)server;
+  (void)graphic;
+  return (0);
 }

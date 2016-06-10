@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 16:59:07 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 18:06:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -64,8 +64,10 @@ typedef struct		s_server
   t_list		graphic_clients;
 
   /* CMDS */
-  char			*cmd_tab[13];
-  int			(*cmd_ptr[13])();
+  char			*cmd_tab_ia[13];
+  int			(*cmd_ptr_ia[13])();
+  char			*cmd_tab_graphic[8];
+  int			(*cmd_ptr_graphic[8])();
 
   /* SOCKET */
   struct timeval	timeout;
@@ -88,36 +90,38 @@ t_player	*new_player(t_server *);
 ** bct.c
 */
 char		*bct(int ***map, int const, int const);
+int		bct_on_map(t_server *, t_client *);
+int		bct_on_tile(t_server *, t_client *);
 
 /*
 ** broadcast_ia.c
 */
-int		broadcast_ia(t_server *);
+int		broadcast_ia(t_server *, t_player *);
 
 /*
 ** connect_ia.c
 */
-int		connect_nbr_ia(t_server *);
+int		connect_nbr_ia(t_server *, t_player *);
 
 /*
 ** drop_ia.c
 */
-int		drop_ia(t_server *);
+int		drop_ia(t_server *, t_player *);
 
 /*
 ** expulse_ia.c
 */
-int		expulse_ia(t_server *);
+int		expulse_ia(t_server *, t_player *);
 
 /*
 ** fork_ia.c
 */
-int		fork_ia(t_server *);
+int		fork_ia(t_server *, t_player *);
 
 /*
 ** forward_ia.c
 */
-int		forward_ia(t_server *);
+int		forward_ia(t_server *, t_player *);
 
 /*
 ** free.c
@@ -127,7 +131,7 @@ int		free_tab(char **, int);
 /*
 ** left_ia.c
 */
-int		left_ia(t_server *);
+int		left_ia(t_server *, t_player *);
 
 /*
 ** generate_map.c
@@ -152,13 +156,14 @@ t_list		*get_players_at_pos(t_data *, int, int);
 /*
 ** incantation_ia.c
 */
-int		incantation_ia(t_server *);
+int		incantation_ia(t_server *, t_player *);
 
 /*
 ** init.c
 */
-void		init_code(char **);
-void		init_ptrfunc(int (**)(t_server *));
+void		init_code(char **, char **);
+void		init_ptrfunc(int (**)(t_server *, t_player *),
+			     int (**)(t_server *, t_client *));
 
 /*
 ** init_nb_players.c
@@ -168,24 +173,59 @@ int		init_nb_players(int **);
 /*
 ** inventory_ia.c
 */
-int		inventory_ia(t_server *);
+int		inventory_ia(t_server *, t_player *);
 
 /* main */
 int		run_zappy(t_server *);
 
 /*
+** msz.c
+*/
+int		msz(t_server *, t_client *);
+
+/*
 ** take_ia.c
 */
-int		take_ia(t_server *);
+int		take_ia(t_server *, t_player *);
+
+/*
+** tna.c
+*/
+int		tna(t_server *, t_client *);
+
+/*
+** plv.c
+*/
+int		plv(t_server *, t_client *);
+
+/*
+** pin.c
+*/
+int		pin(t_server *, t_client *);
+
+/*
+** ppo.c
+*/
+int		ppo(t_server *, t_client *);
 
 /*
 ** right_ia.c
 */
-int		right_ia(t_server *);
+int		right_ia(t_server *, t_player *);
 
 /*
 ** see_ia.c
 */
-int		see_ia(t_server *);
+int		see_ia(t_server *, t_player *);
+
+/*
+** sgt.c
+*/
+int		sgt(t_server *, t_client *);
+
+/*
+** sst.c
+*/
+int		sst(t_server *, t_client *);
 
 #endif /* !SERVER_H_ */

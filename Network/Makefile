@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Fri Jun 10 17:17:14 2016 Nyrandone Noboud-Inpeng
+## Last update Fri Jun 10 18:07:44 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
@@ -30,13 +30,18 @@ SRCSER	= bct.c			\
 	left_ia.c		\
 	loop.c			\
 	main.c			\
+	msz.c			\
 	new_player.c		\
+	pin.c			\
+	plv.c			\
+	ppo.c			\
 	process.c		\
 	right_ia.c		\
 	see_ia.c		\
 	server_lib.c		\
 	socket.c		\
-	take_ia.c
+	take_ia.c		\
+	tna.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 

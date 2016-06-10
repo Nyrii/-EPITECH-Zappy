@@ -5,13 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:44 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun  7 16:13:54 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 10 17:39:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-int		connect_nbr_ia(t_server *data)
+int		connect_nbr_ia(t_server *data, t_player *player)
 {
   (void)data;
+  (void)player;
   return (0);
 }
