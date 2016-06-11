@@ -25,6 +25,7 @@ typedef struct		s_client
 typedef struct		s_player
 {
   int     		sock;
+  int			id;
   int			x;
   int			y;
   int			orientation;

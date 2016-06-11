@@ -43,12 +43,18 @@ int		manage_commands_graphic(t_server *server,
 
 int		manage_auth(t_server *srv, t_client *cl, const char *command)
 {
+  t_player	*p;
   t_team	*t;
 
   if (strcmp(command, "GRAPHIC") == 0)
     list_add_elem_at_back(&srv->graphic_clients, cl);
   else if ((t = get_team_by_name(srv, command)) != NULL)
-    list_add_elem_at_back(&t->players, new_player(srv->data, cl));
+    {
+      if ((p = new_player(srv->data, cl)) == NULL ||
+	  list_add_elem_at_back(&t->players, p) == FALSE ||
+	  list_add_elem_at_back(&srv->all_players, p) == FALSE)
+	return (-1);
+    }
   else
     {
       dprintf(cl->sock, "ko\r\n");
