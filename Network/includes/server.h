@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 23:23:57 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 19:12:19 2016 Kevin Empociello
 */
 
 #ifndef SERVER_H_
@@ -62,6 +62,7 @@ typedef struct		s_server
   /* Clients */
   t_list  		queue_clients;
   t_list		graphic_clients;
+  t_list		all_players;
 
   /* CMDS */
   char			*cmd_tab_ia[13];
@@ -84,7 +85,8 @@ int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
-t_player	*new_player(t_server *);
+t_client	*new_client(t_server *);
+void		handle_new_client(t_server *);
 
 /*
 ** bct.c

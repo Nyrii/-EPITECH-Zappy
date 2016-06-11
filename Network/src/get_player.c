@@ -10,6 +10,33 @@
 
 #include "server.h"
 
+t_player	*get_player_by_sock(t_data *data, int sock)
+{
+  t_team	*t;
+  t_player	*p;
+  unsigned int	i;
+  unsigned int	j;
+
+  i = 0;
+  j = 0;
+  while (i < list_get_size(data->teams))
+    {
+      if ((t = list_get_elem_at_position(data->teams, i)) != NULL)
+	{
+	  j = 0;
+	  while (j < list_get_size(t->players))
+	    {
+	      if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
+		 p->sock == sock)
+		return (p);
+	      j++;
+	    }
+	}
+      i++;
+    }
+  return (NULL);
+}
+
 t_list		*get_players_at_pos(t_data *data, int x, int y)
 {
   t_team	*t;

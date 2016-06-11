@@ -5,30 +5,29 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun  9 01:43:49 2016 Kevin Empociello
+** Last update Sat Jun 11 17:29:13 2016 Kevin Empociello
 */
 
 #include <netinet/in.h>
 #include <sys/types.h>
 #include "server.h"
 
-t_player        	*new_player(t_server *srv)
+t_client        	*new_client(t_server *srv)
 {
-  t_player		*p;
+  t_client		*cl;
   unsigned int		ss;
   struct sockaddr_in	sin;
 
-  if ((p = malloc(sizeof(t_player))) == NULL)
+  if ((cl = malloc(sizeof(t_client))) == NULL)
       return (NULL);
   ss = sizeof(sin);
-  p->x = 0;
-  p->y = 0;
-  if ((p->sock = accept(srv->sock, (struct sockaddr *) &sin, &ss)) == -1)
+  cl->timer = 0;
+  if ((cl->sock = accept(srv->sock, (struct sockaddr *) &sin, &ss)) == -1)
     {
       error("Error socket can't accept connexion");
       return (NULL);
     }
-  if (p->sock > srv->max)
-    srv->max = p->sock;
-  return (p);
+  if (cl->sock > srv->max)
+    srv->max = cl->sock;
+  return (cl);
 }
