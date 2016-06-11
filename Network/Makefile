@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Fri Jun 10 23:22:05 2016 Nyrandone Noboud-Inpeng
+## Last update Sat Jun 11 16:16:37 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
@@ -30,6 +30,7 @@ SRCSER	= bct.c			\
 	left_ia.c		\
 	loop.c			\
 	main.c			\
+	mct.c			\
 	msz.c			\
 	new_player.c		\
 	pin.c			\
@@ -39,6 +40,7 @@ SRCSER	= bct.c			\
 	right_ia.c		\
 	see_ia.c		\
 	see_ia_calculs.c	\
+	see_ia_resources.c	\
 	server_lib.c		\
 	socket.c		\
 	take_ia.c		\

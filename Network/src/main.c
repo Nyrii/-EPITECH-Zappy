@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 23:39:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 17:49:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -30,8 +30,9 @@ int		run_zappy(t_server *srv)
   t_player player;
   player.x = rand() % srv->data.world_x;
   player.y = rand() % srv->data.world_y;
-  player.orientation = 270;
-  player.level = 2;
+  printf("player_x = %d, player_y = %d\n", player.x, player.y);
+  player.orientation = TOP;
+  player.level = 1;
   see_ia(srv, &player);
   /***/
   return (0);

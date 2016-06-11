@@ -5,17 +5,18 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:42 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 19:10:49 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 16:25:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+#include "enum.h"
 
 int		right_ia(t_server *data, t_player *player)
 {
   (void)data;
   (void)player;
-  if (player->orientation + 90 > 270)
-    player->orientation = 0;
+  if (player->orientation + 90 > LEFT)
+    player->orientation = TOP;
   else
     player->orientation += 90;
   // send message to ALL GRAPHIC CLIENTS and player

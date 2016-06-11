@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 23:23:57 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 17:10:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -52,6 +52,7 @@ typedef struct		s_data
   int			**resources;
   float			percentages[7];
   int			*required_players;
+  char			*strings_resources[7];
 }			t_data;
 
 typedef struct		s_server
@@ -90,7 +91,6 @@ t_player	*new_player(t_server *);
 ** bct.c
 */
 char		*bct(int ***map, int const, int const);
-int		bct_on_map(t_server *, t_client *);
 int		bct_on_tile(t_server *, t_client *);
 
 /*
@@ -179,6 +179,11 @@ int		inventory_ia(t_server *, t_player *);
 int		run_zappy(t_server *);
 
 /*
+** mct.c
+*/
+int		mct(t_server *, t_client *);
+
+/*
 ** msz.c
 */
 int		msz(t_server *, t_client *);
@@ -225,6 +230,12 @@ void		determine_minus_x(t_server *, t_player *, int *, int);
 void		determine_minus_y(t_server *, t_player *, int *, int);
 void		determine_plus_x(t_server *, t_player *, int *, int);
 void		determine_plus_y(t_server *, t_player *, int *, int);
+
+/*
+** see_ia_resources.c
+*/
+int		see_ia_resources(char **, t_server *,
+				 int *, int *);
 
 /*
 ** sgt.c

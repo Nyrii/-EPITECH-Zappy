@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 18:29:58 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 16:05:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -17,5 +17,6 @@
 # define ERR_NBTEAMS "Error: Teams have not been specified.\n"
 # define ERR_PUSHBACK "Error: Push back of a node failed.\n"
 # define ERR_POS_MAP "Error: could not find position in the map. Aborted.\n"
+# define ERR_GET_RESOURCES "Error: could not get any resources. Aborted.\n"
 
 #endif /* ERRORS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 23:04:23 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 16:47:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -33,6 +33,13 @@ static void	init_data(t_data *data)
   data->percentages[PHIRAS] = 15.0;
   data->percentages[THYSTAME] = 2.5;
   data->required_players = NULL;
+  data->strings_resources[FOOD] = "nourriture";
+  data->strings_resources[LINEMATE] = "linemate";
+  data->strings_resources[DERAUMERE] = "deraumere";
+  data->strings_resources[SIBUR] = "sibur";
+  data->strings_resources[MENDIANE] = "mendiane";
+  data->strings_resources[PHIRAS] = "phiras";
+  data->strings_resources[THYSTAME] = "thystame";
 }
 
 static t_team	*create_new_team(char *name_team)

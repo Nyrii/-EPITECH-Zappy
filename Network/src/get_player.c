@@ -5,12 +5,12 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Wed Jun  8 21:05:07 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 15:56:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
-t_list		*get_players_at_pos(t_data *data, int x, int y)
+t_list		*get_players_at_pos(t_data *data, int y, int x)
 {
   t_team	*t;
   t_player	*p;
