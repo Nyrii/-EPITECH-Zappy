@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 19:33:06 2016 Kevin Empociello
+** Last update Sat Jun 11 20:46:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -29,7 +29,7 @@ typedef struct		s_player
   int			y;
   int			orientation;
   int			level;
-  int			stones[7];
+  int			inventory[7];
   double		timer;
 }			t_player;
 

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 16:47:38 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 21:29:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -22,6 +22,7 @@ static void	init_data(t_data *data)
   data->world_x = -1;
   data->world_y = -1;
   data->max_clients = -1;
+  data->delay = 100;
   data->teams = NULL;
   data->map = NULL;
   data->resources = NULL;

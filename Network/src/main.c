@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 20:11:24 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 21:20:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -33,7 +33,14 @@ int		run_zappy(t_server *srv)
   printf("player_x = %d, player_y = %d\n", player.x, player.y);
   player.orientation = LEFT;
   player.level = 1;
-  see_ia(srv, &player);
+  player.inventory[FOOD] = 0;
+  player.inventory[LINEMATE] = 2;
+  player.inventory[DERAUMERE] = 3;
+  player.inventory[SIBUR] = 4;
+  player.inventory[MENDIANE] = 5;
+  player.inventory[PHIRAS] = 6;
+  player.inventory[THYSTAME] = 7;
+  inventory_ia(srv, &player);
   /***/
   return (0);
 }
