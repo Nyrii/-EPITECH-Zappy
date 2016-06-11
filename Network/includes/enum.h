@@ -5,11 +5,16 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun  8 16:12:29 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun  8 18:03:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 16:22:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ENUM_H_
 # define ENUM_H_
+
+# define TOP 0
+# define RIGHT 90
+# define BOTTOM 180
+# define LEFT 270
 
 typedef enum	e_bool
 {

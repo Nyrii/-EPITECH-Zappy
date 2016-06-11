@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Wed Jun  8 21:05:07 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 11 19:32:36 2016 Kevin Empociello
 */
 
 #include "server.h"
@@ -37,7 +37,7 @@ t_player	*get_player_by_sock(t_data *data, int sock)
   return (NULL);
 }
 
-t_list		*get_players_at_pos(t_data *data, int x, int y)
+t_list		*get_players_at_pos(t_data *data, int y, int x)
 {
   t_team	*t;
   t_player	*p;

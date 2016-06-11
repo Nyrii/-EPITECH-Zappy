@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:08:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 16:21:32 2016 Kevin Empociello
+** Last update Sat Jun 11 19:31:25 2016 Kevin Empociello
 */
 
 #include <stdlib.h>
@@ -52,10 +52,9 @@ void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
   func_ia[10] = &fork_ia;
   func_ia[11] = &connect_nbr_ia;
   func_ia[12] = NULL;
-  (void)func_graphic;
   func_graphic[0] = &msz;
   func_graphic[1] = &bct_on_tile;
-  func_graphic[2] = &bct_on_map;
+  func_graphic[2] = &mct;
   func_graphic[3] = &tna;
   func_graphic[4] = &ppo;
   func_graphic[5] = &plv;
