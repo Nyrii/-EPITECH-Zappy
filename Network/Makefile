@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sat Jun 11 19:31:01 2016 Kevin Empociello
+## Last update Sun Jun 12 01:13:59 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
@@ -26,6 +26,7 @@ SRCSER	= bct.c			\
 	incantation_ia.c	\
 	init.c			\
 	init_nb_players.c	\
+	init_perimeter.c	\
 	init_resources.c	\
 	inventory_ia.c		\
 	left_ia.c		\
@@ -45,9 +46,9 @@ SRCSER	= bct.c			\
 	see_ia_resources.c	\
 	server_lib.c		\
 	socket.c		\
-	welcome.c		\
 	take_ia.c		\
-	tna.c
+	tna.c			\
+	welcome.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
@@ -71,7 +72,7 @@ all:
 	@make --no-print-directory $(NAMESER)
 
 $(NAMESER): $(OBJS)
-	$(CC) -o $(NAMESER) $(OBJS)
+	$(CC) -o $(NAMESER) $(OBJS) -lm
 
 clean:
 	$(RM) $(OBJS)
