@@ -26,7 +26,7 @@ int		manage_commands_ia(t_server *server,
   return (0);
 }
 
-/* int		manage_commands_ia(t_server *server,
+int		manage_commands_graphic(t_server *server,
 				   t_client *graphic, const char *command)
 {
   int		i;
@@ -39,4 +39,4 @@ int		manage_commands_ia(t_server *server,
       ++i;
     }
   return (0);
-} */
+}

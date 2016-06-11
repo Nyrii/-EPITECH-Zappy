@@ -21,9 +21,10 @@ int		run_zappy(t_server *srv)
   srv->max = srv->sock;
   srv->queue_clients = NULL;
   srv->graphic_clients = NULL;
+  srv->all_players = NULL;
   if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
-  // loop_server(srv);
+  loop_server(srv);
 
   /***/
   #include <string.h>
