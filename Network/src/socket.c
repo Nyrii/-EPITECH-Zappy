@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 19:27:53 2016 Kevin Empociello
+** Last update Sat Jun 11 20:44:59 2016 Kevin Empociello
 */
 
 #include <sys/types.h>
@@ -13,24 +13,27 @@
 #include <string.h>
 #include "server.h"
 
-// function temporaire
 static int handle_client(t_server *srv, void *tmp, int type)
 {
-  t_client	*c;
-  t_player	*p;
+  int		tmp_sock;
   char		buffer[512];
   int		n;
 
   (void) srv;
   n = 0;
+  if (tmp == NULL)
+    return (-1);
   if (type == 0 || type == 1)
-    c = (t_client *) tmp;
+    tmp_sock = ((t_client *)tmp)->sock;
   else if (type == 2)
-    p = (t_player *) tmp;
-  p = p;
+    tmp_sock = ((t_player *)tmp)->sock;
   memset(buffer, 0, 512);
-  if (c && (n = recv(c->sock, buffer, 512, 0)) > 0)
+  if ((n = recv(tmp_sock, buffer, 512, 0)) > 0)
     {
+      if (type == 1)
+	manage_commands_graphic(srv, (t_client *)tmp, buffer);
+      else if (type == 2)
+	manage_commands_ia(srv, (t_player *)tmp, buffer);
       printf("[%s]\n", buffer);
     }
   return (0);

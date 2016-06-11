@@ -216,6 +216,12 @@ int		pin(t_server *, t_client *);
 int		ppo(t_server *, t_client *);
 
 /*
+** process.c
+*/
+int		manage_commands_graphic(t_server *, t_client *, const char *);
+int		manage_commands_ia(t_server *, t_player *, const char *);
+
+/*
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
