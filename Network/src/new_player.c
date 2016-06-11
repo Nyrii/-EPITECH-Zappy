@@ -12,6 +12,22 @@
 #include <sys/types.h>
 #include "server.h"
 
+t_player		*new_player(t_data data, t_client *cl)
+{
+  t_player		*new;
+
+  if ((new = malloc(sizeof(t_player))) == NULL)
+    return (NULL);
+  new->sock = cl->sock;
+  new->x = rand() % data.world_x;
+  new->y = rand() % data.world_y;
+  new->level = 1;
+  new->orientation = rand() % 4 * 90;
+  new->timer = 0.0;
+  // new->stones ?
+  return (new);
+}
+
 t_client        	*new_client(t_server *srv)
 {
   t_client		*cl;
@@ -19,7 +35,7 @@ t_client        	*new_client(t_server *srv)
   struct sockaddr_in	sin;
 
   if ((cl = malloc(sizeof(t_client))) == NULL)
-      return (NULL);
+    return (NULL);
   ss = sizeof(sin);
   cl->timer = 0;
   if ((cl->sock = accept(srv->sock, (struct sockaddr *) &sin, &ss)) == -1)

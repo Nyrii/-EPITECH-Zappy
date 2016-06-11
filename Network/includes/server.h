@@ -35,7 +35,7 @@ typedef struct		s_player
 
 typedef struct		s_team
 {
-  int			nb_players;
+  int			max_players;
   char			*name;
   t_list		players;
 }			t_team;
@@ -86,6 +86,7 @@ int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
+t_player	*new_player(t_data, t_client *);
 t_client	*new_client(t_server *);
 void		handle_new_client(t_server *);
 
@@ -156,6 +157,11 @@ int		get_opt(int, char **, t_data *);
 t_list		*get_players_at_pos(t_data *, int, int);
 
 /*
+** get_team.c
+*/
+t_team		*get_team_by_name(t_server *, const char *);
+
+/*
 ** incantation_ia.c
 */
 int		incantation_ia(t_server *, t_player *);
@@ -220,6 +226,12 @@ int		ppo(t_server *, t_client *);
 */
 int		manage_commands_graphic(t_server *, t_client *, const char *);
 int		manage_commands_ia(t_server *, t_player *, const char *);
+int		manage_auth(t_server *, t_client *, const char *);
+
+/*
+** remove.c
+*/
+int		remove_client_from_queue(t_server *, t_client *);
 
 /*
 ** right_ia.c

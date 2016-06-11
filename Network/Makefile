@@ -22,6 +22,7 @@ SRCSER	= bct.c			\
 	generic_list_del.c	\
 	get_opt.c		\
 	get_player.c		\
+	get_team.c		\
 	incantation_ia.c	\
 	init.c			\
 	init_nb_players.c	\
@@ -37,6 +38,7 @@ SRCSER	= bct.c			\
 	plv.c			\
 	ppo.c			\
 	process.c		\
+	remove.c		\
 	right_ia.c		\
 	see_ia.c		\
 	see_ia_calculs.c	\

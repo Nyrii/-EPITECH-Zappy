@@ -42,13 +42,13 @@ static void	init_data(t_data *data)
   data->strings_resources[THYSTAME] = "thystame";
 }
 
-static t_team	*create_new_team(char *name_team)
+static t_team	*create_new_team(char *name_team, int max)
 {
   t_team	*tmp;
 
   if ((tmp = malloc(sizeof(t_team))) == NULL)
     return (NULL);
-  tmp->nb_players = 0;
+  tmp->max_players = max;
   tmp->name = name_team;
   tmp->players = NULL;
   return (tmp);
@@ -69,7 +69,8 @@ static int	store_team(t_data *data, char **argv, int *optind)
     {
       if (strcmp(argv[*optind], "-n") != 0 &&
 	  list_add_elem_at_back(&data->teams,
-				create_new_team(argv[*optind])) == FALSE)
+				create_new_team(argv[*optind],
+						data->max_clients)) == FALSE)
 	return (fprintf(stderr, ERR_PUSHBACK), -1);
       if (strcmp(argv[*optind], "-n") != 0)
 	++i;

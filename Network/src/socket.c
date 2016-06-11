@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 20:44:59 2016 Kevin Empociello
+** Last update Sat Jun 11 21:12:23 2016 Kevin Empociello
 */
 
 #include <sys/types.h>
@@ -34,6 +34,8 @@ static int handle_client(t_server *srv, void *tmp, int type)
 	manage_commands_graphic(srv, (t_client *)tmp, buffer);
       else if (type == 2)
 	manage_commands_ia(srv, (t_player *)tmp, buffer);
+      else
+	manage_auth(srv, (t_client *)tmp, buffer);
       printf("[%s]\n", buffer);
     }
   return (0);
