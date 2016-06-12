@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:48:41 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 18:54:16 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -22,7 +22,7 @@ static char 	*fill_bct(char *answer, int ***map,
   inc = 0;
   k = 0;
   if (memset(buffer, 0, 24) == NULL
-      || snprintf(buffer, 24, " %d %d", pos[0], pos[1]) == -1)
+      || snprintf(buffer, 24, " %d %d", pos[1], pos[0]) == -1)
     return (fprintf(stderr, ERR_MEMSET), NULL);
   while (buffer[inc])
     answer[i++] = buffer[inc++];
@@ -30,8 +30,8 @@ static char 	*fill_bct(char *answer, int ***map,
     {
       answer[i++] = ' ';
       inc = 0;
-      if (memset(buffer, 0, 24) == NULL
-	  || snprintf(buffer, 24, "%d", map[pos[0]][pos[1]][k]) == -1)
+      if (memset(buffer, 0, 12) == NULL
+	  || snprintf(buffer, 12, "%d", map[pos[0]][pos[1]][k]) == -1)
 	return (NULL);
       ++k;
       while (buffer[inc])

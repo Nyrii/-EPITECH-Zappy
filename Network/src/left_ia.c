@@ -5,11 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:47:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 15:03:34 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 17:13:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 #include "enum.h"
+#include "errors.h"
+#include "replies.h"
 
 int		left_ia(t_server *server, t_player *player)
 {
@@ -17,7 +19,7 @@ int		left_ia(t_server *server, t_player *player)
     player->orientation = LEFT;
   else
     player->orientation -= 90;
-  ppo_ia(server, player);
-  // send message to ALL GRAPHIC CLIENTS and player
-  return (0);
+  if (dprintf(player->sock, OK) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
+  return (ppo_ia(server, player));
 }

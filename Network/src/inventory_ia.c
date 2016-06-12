@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:51:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 17:23:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -26,7 +26,7 @@ static int	get_answer(t_server *server, t_player *player,
     {
       n = 0;
       if (i == 0)
-        (*answer)[i++] = '{'; // }
+        (*answer)[i++] = '{';
       while (server->data.strings_resources[tmp][n])
 	(*answer)[i++] = server->data.strings_resources[tmp][n++];
       if (memset(buffer, 0, 12) == NULL
@@ -53,6 +53,7 @@ int		inventory_ia(t_server *server, t_player *player)
     return (-1);
   answer[i++] = '}';
   answer[i++] = '\0';
-  // Répondre au client;
+  if (dprintf(player->sock, "%s\r\n", answer) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }
