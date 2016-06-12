@@ -67,6 +67,8 @@ typedef struct		s_server
   t_list		all_players;
 
   /* CMDS */
+  char			*params;
+  char			*cmd;
   char			*cmd_tab_ia[13];
   int			(*cmd_ptr_ia[13])();
   char			*cmd_tab_graphic[8];
@@ -116,6 +118,11 @@ int		drop_ia(t_server *, t_player *);
 ** expulse_ia.c
 */
 int		expulse_ia(t_server *, t_player *);
+
+/*
+** epur.c
+*/
+char		*epur_bf(char *str);
 
 /*
 ** fork_ia.c
@@ -214,6 +221,11 @@ int		take_ia(t_server *, t_player *);
 ** tna.c
 */
 int		tna(t_server *, t_client *);
+
+/*
+** parse.c
+*/
+char		*parse_cmd(t_server *, char *);
 
 /*
 ** plv.c

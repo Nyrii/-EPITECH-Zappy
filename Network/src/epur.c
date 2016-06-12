@@ -1,0 +1,61 @@
+/*
+** epur.c for  in /home/nekfeu/Share/PSU_2015_zappy/Network/src
+**
+** Made by Kevin Empociello
+** Login   <nekfeu@epitech.net>
+**
+** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
+** Last update Sat Jun 11 21:12:23 2016 Kevin Empociello
+*/
+
+#include <string.h>
+#include "server.h"
+
+static char	*delete_end(char *str)
+{
+  int		i;
+  int		j;
+  char		*new;
+
+  i = 0;
+  j = 0;
+  (new = malloc(4096 * sizeof(char))) == NULL ? NULL : 0;
+  while (str && str[i])
+    {
+      if (str[i] != '\r' && str[i] != '\n')
+	new[j++] = str[i];
+      i++;
+    }
+  new[j] = '\0';
+  // free str ?
+  return (new);
+}
+
+char		*epur_bf(char *str)
+{
+  char		*new;
+  int		i;
+  int		j;
+
+  i = 0;
+  j = 0;
+  (new = malloc(4096 * sizeof(char))) == NULL ? NULL : 0;
+  while (str && str[i] != '\0' && (str[i] == ' ' || str[i] == '\t'))
+    i++;
+  str = &str[i];
+  i = 0;
+  while (str && str[i] != '\0')
+    {
+      new[j++] = str[i];
+      if (str[i] == ' ' || str[i] == '\t')
+	while (str[i] != '\0' && (str[i] == ' ' || str[i] == '\t'))
+	  i++;
+      else
+	i++;
+    }
+  if (j > 0 && (new[j - 1] == ' ' || new[j - 1] == '\t'))
+    new[j - 1] = '\0';
+  else
+    new[j] = '\0';
+  return (delete_end(new));
+}

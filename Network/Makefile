@@ -14,6 +14,7 @@ SRCSER	= bct.c			\
 	drop_ia.c		\
 	elevation.c		\
 	expulse_ia.c		\
+	epur.c		\
 	fork_ia.c		\
 	forward_ia.c		\
 	free.c			\
@@ -35,6 +36,7 @@ SRCSER	= bct.c			\
 	mct.c			\
 	msz.c			\
 	new_player.c		\
+	parse.c \
 	pin.c			\
 	plv.c			\
 	ppo.c			\
