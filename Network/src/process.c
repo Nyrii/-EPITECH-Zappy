@@ -48,9 +48,11 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
 
   if (strcmp(command, "GRAPHIC") == 0)
     list_add_elem_at_back(&srv->graphic_clients, cl);
-  else if ((t = get_team_by_name(srv, command)) != NULL)
+  else if ((t = get_team_by_name(srv, command)) != NULL &&
+	   list_get_size(t->players) < (unsigned int) t->max_players)
     {
-      if ((p = new_player(srv->data, cl)) == NULL ||
+      // check si y a encore de la place
+      if ((p = new_player(srv, cl)) == NULL ||
 	  list_add_elem_at_back(&t->players, p) == FALSE ||
 	  list_add_elem_at_back(&srv->all_players, p) == FALSE)
 	return (-1);
