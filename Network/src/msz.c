@@ -8,11 +8,13 @@
 ** Last update Fri Jun 10 18:08:18 2016 Nyrandone Noboud-Inpeng
 */
 
+#include "errors.h"
 #include "server.h"
 
-int		msz(t_server *server, t_client *graphic)
+int		msz(t_server *srv, t_client *cl)
 {
-  (void)server;
-  (void)graphic;
+  if (dprintf(cl->sock, "msz %d %d\r\n", srv->data.world_x,
+      srv->data.world_y) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

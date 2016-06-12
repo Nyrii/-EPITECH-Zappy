@@ -47,7 +47,11 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
   t_team	*t;
 
   if (strcmp(command, "GRAPHIC") == 0)
-    list_add_elem_at_back(&srv->graphic_clients, cl);
+    {
+      if (list_add_elem_at_back(&srv->graphic_clients, cl) == FALSE ||
+	  handle_new_graphic(srv, cl) == -1)
+	return (-1);
+    }
   else if ((t = get_team_by_name(srv, command)) != NULL &&
 	   list_get_size(t->players) < (unsigned int) t->max_players)
     {
