@@ -18,8 +18,8 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
 {
   int		i;
   int		resources;
-  int		nb_players;
-  t_list	*players;
+  unsigned int	nb_players;
+  t_list	players;
 
   i = 0;
   resources = 0;
@@ -30,11 +30,7 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
       ++i;
     }
   players = get_players_at_pos(&data, y, x);
-  while (players != NULL)
-    {
-      ++nb_players;
-      *players = (*players)->next;
-    }
+  nb_players = list_get_size(players);
   if (resources == 0 && nb_players == 0)
     return (5);
   return (resources * 9 + nb_players * 9 + 5);
@@ -42,20 +38,16 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
 
 static void	store_players(char **see, t_data data, int *pos, int *i)
 {
-  t_list	*tmp;
+  t_list	tmp;
   char		*string;
-  int		count;
+  unsigned int	count;
   int		n;
 
   string = " joueur";
   count = 0;
   if ((tmp = get_players_at_pos(&data, pos[0], pos[1])) == NULL)
     return ;
-  while (tmp != NULL)
-    {
-      ++count;
-      *tmp = (*tmp)->next;
-    }
+  count = list_get_size(tmp);
   while (count > 0)
     {
       n = 0;

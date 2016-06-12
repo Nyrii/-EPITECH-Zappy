@@ -168,7 +168,7 @@ int		get_opt(int, char **, t_data *);
 /*
 ** get_player.c
 */
-t_list		*get_players_at_pos(t_data *, int, int);
+t_list		get_players_at_pos(t_data *, int, int);
 
 /*
 ** get_team.c

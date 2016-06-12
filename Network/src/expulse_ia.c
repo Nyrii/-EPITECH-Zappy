@@ -38,19 +38,34 @@ static void	get_future_position(t_server *server, t_player *player,
 
 int		expulse_ia(t_server *server, t_player *player)
 {
-  t_list	*tmp;
+  t_list	tmp;
+  t_player	*p;
+  unsigned int	i;
   int		x;
   int		y;
-  int		number;
+  unsigned int	number;
 
+  i = -1;
   tmp = get_players_at_pos(&server->data, player->y, player->x);
-  number = count_elements(tmp);
+  number = list_get_size(tmp);
   if (number <= 1)
     return (dprintf(player->sock, KO));
   else if (dprintf(player->sock, OK) == -1 || pex(server, player) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   get_future_position(server, player, &y, &x);
-  while (tmp != NULL)
+  while (i++ < list_get_size(tmp))
+    {
+      if ((p = list_get_elem_at_position(tmp, i)) != NULL &&
+	  ppo_ia(server, p) != -1)
+	{
+	  if (p != player)
+	    {
+	      p->x = x;
+	      p->y = y;
+	    }
+	}
+    }
+  /*while (tmp != NULL)
     {
       if (ppo_ia(server, (t_player *)((*tmp)->value)) == -1)
 	return (-1);
@@ -60,6 +75,7 @@ int		expulse_ia(t_server *server, t_player *player)
   	  ((t_player *)((*tmp)->value))->y = y;
 	}
       *tmp = (*tmp)->next;
-    }
+    }*/
+
   return (0);
 }

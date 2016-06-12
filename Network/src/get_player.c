@@ -37,11 +37,11 @@ t_player	*get_player_by_sock(t_data *data, int sock)
   return (NULL);
 }
 
-t_list		*get_players_at_pos(t_data *data, int y, int x)
+t_list		get_players_at_pos(t_data *data, int y, int x)
 {
   t_team	*t;
   t_player	*p;
-  t_list	*tmp;
+  t_list	tmp;
   unsigned int	i;
   unsigned int	j;
 
@@ -57,7 +57,7 @@ t_list		*get_players_at_pos(t_data *data, int y, int x)
 	    {
 	      if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
 		  p->x == x && p->y == y)
-		list_add_elem_at_back(tmp, p);
+		list_add_elem_at_back(&tmp, p);
 	      j++;
 	    }
 	}

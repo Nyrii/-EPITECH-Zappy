@@ -11,10 +11,9 @@
 #include "server.h"
 
 int		is_elevation_legit(t_data *data, int elevation,
-				   int *pos, t_list **tmp)
+				   int *pos, t_list tmp)
 {
   int		i;
-  t_list	temp;
   int		count;
 
   i = -1;
@@ -26,16 +25,10 @@ int		is_elevation_legit(t_data *data, int elevation,
     if (i != FOOD
 	&& data->resources[elevation][i] != data->map[pos[0]][pos[1]][i])
       return (-1);
-  if ((*tmp = get_players_at_pos(data, pos[0], pos[1])) == NULL)
+  if ((tmp = get_players_at_pos(data, pos[0], pos[1])) == NULL)
     return (-1);
-  temp = **tmp;
-  while (temp != NULL)
-    {
-      if (((t_player *)(temp->value))->level == elevation)
-	++count;
-      temp = temp->next;
-    }
+      count = list_get_size(tmp);
   if (count < data->required_players[elevation])
-    return (*tmp = NULL, -1);
+    return (tmp = NULL, -1);
   return (0);
 }
