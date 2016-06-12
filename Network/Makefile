@@ -46,6 +46,7 @@ SRCSER	= bct.c			\
 	see_ia.c		\
 	see_ia_calculs.c	\
 	see_ia_resources.c	\
+	send.c		\
 	server_lib.c		\
 	socket.c		\
 	take_ia.c		\

@@ -280,6 +280,12 @@ int		see_ia_resources(char **, t_server *,
 				 int *, int *);
 
 /*
+** send.c
+*/
+int		send_all_players(t_server *, t_player *, const char *);
+int		send_all_graphics(t_server *, const char *);
+
+/*
 ** sgt.c
 */
 int		sgt(t_server *, t_client *);
