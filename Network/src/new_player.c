@@ -12,18 +12,19 @@
 #include <sys/types.h>
 #include "server.h"
 
-t_player		*new_player(t_data data, t_client *cl)
+t_player		*new_player(t_server *srv, t_client *cl)
 {
   t_player		*new;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (NULL);
   new->sock = cl->sock;
-  new->x = rand() % data.world_x;
-  new->y = rand() % data.world_y;
+  new->x = rand() % srv->data.world_x;
+  new->y = rand() % srv->data.world_y;
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->timer = 0.0;
+  new->id = list_get_size(srv->all_players) + 1;
   // new->stones ?
   return (new);
 }

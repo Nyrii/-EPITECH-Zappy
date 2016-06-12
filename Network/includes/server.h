@@ -87,7 +87,7 @@ int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
-t_player	*new_player(t_data, t_client *);
+t_player	*new_player(t_server *, t_client *);
 t_client	*new_client(t_server *);
 void		handle_new_client(t_server *);
 
