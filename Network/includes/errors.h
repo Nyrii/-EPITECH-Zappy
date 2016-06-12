@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 21:19:03 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 15:58:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -15,6 +15,7 @@
 # define USAGE_REST " max_clients -t speed -n team_name_1 team_name_2...\n"
 # define ERR_MALLOC "Error: malloc failed.\n"
 # define ERR_MEMSET "Error: memset failed.\n"
+# define ERR_PRINTF "Error: *printf failed.\n"
 # define ERR_NBTEAMS "Error: Teams have not been specified.\n"
 # define ERR_PUSHBACK "Error: Push back of a node failed.\n"
 # define ERR_POS_MAP "Error: could not find position in the map. Aborted.\n"

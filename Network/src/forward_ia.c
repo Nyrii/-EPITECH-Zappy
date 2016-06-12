@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 16:24:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:59:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -17,7 +17,6 @@ int		forward_ia(t_server *server, t_player *player)
   int		x;
   int		y;
 
-  (void)server;
   x = player->x;
   y = player->y;
   if (!server->data.map
@@ -39,6 +38,7 @@ int		forward_ia(t_server *server, t_player *player)
 	x = x - 1 >= 0 ? (x - 1) : (server->data.world_x - 1);
       player->x = x;
     }
+  ppo_ia(server, player);
   // send message to ALL GRAPHIC CLIENTS and "ok" to the player
   return (0);
 }
