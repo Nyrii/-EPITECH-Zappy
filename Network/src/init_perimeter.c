@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 00:53:40 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 01:35:22 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:12:09 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -92,4 +92,32 @@ void	init_perimeter_left(t_data data, t_player *player, int *pos)
   pos[14] = player->y - 1 < 0 ? data.world_y - 1 : player->y - 1;
   pos[15] = player->x - 1 < 0 ? data.world_x - 1 : player->x - 1;
   pos[16] = -1;
+}
+
+void		call_init_parameter(t_data data, t_player *player,
+				    int *perimeter)
+{
+  int		i;
+  int		code[5];
+  void		(*func[5])(t_data, t_player *, int *);
+
+  code[0] = TOP;
+  code[1] = RIGHT;
+  code[2] = BOTTOM;
+  code[3] = LEFT;
+  code[4] = -1;
+  func[0] = &init_perimeter_top;
+  func[1] = &init_perimeter_right;
+  func[2] = &init_perimeter_bottom;
+  func[3] = &init_perimeter_left;
+  func[4] = NULL;
+  i = -1;
+  while (code[++i] != -1)
+    {
+      if (player->orientation == code[i])
+	{
+	  func[i](data, player, perimeter);
+	  return ;
+	}
+    }
 }

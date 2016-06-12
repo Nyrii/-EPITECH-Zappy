@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 01:38:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:11:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -60,24 +60,11 @@ int		broadcast_ia(t_server *server, t_player *player)
   int		direction;
 
   tmp = server->all_players;
-  if (player->orientation == TOP)
-    init_perimeter_top(server->data, player, perimeter_src);
-  else if (player->orientation == RIGHT)
-    init_perimeter_right(server->data, player, perimeter_src);
-  else if (player->orientation == BOTTOM)
-    init_perimeter_bottom(server->data, player, perimeter_src);
-  else
-    init_perimeter_left(server->data, player, perimeter_src);
+  call_init_parameter(server->data, player, perimeter_src);
   while (tmp != NULL)
     {
-      if (((t_player *)(tmp->value))->orientation == TOP)
-	init_perimeter_top(server->data, player, perimeter_src);
-      else if (((t_player *)(tmp->value))->orientation == RIGHT)
-	init_perimeter_right(server->data, player, perimeter_src);
-      else if (((t_player *)(tmp->value))->orientation == BOTTOM)
-	init_perimeter_bottom(server->data, player, perimeter_src);
-      else
-	init_perimeter_left(server->data, player, perimeter_src);
+      call_init_parameter(server->data, (t_player *)(tmp->value),
+			  perimeter_dest);
       determine_best_way(perimeter_src, perimeter_dest, pos);
       direction = determine_direction(perimeter_dest, pos);
       (void)direction;

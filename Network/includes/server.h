@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 01:36:08 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:07:47 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -180,12 +180,13 @@ void		init_ptrfunc(int (**)(t_server *, t_player *),
 int		init_nb_players(int **);
 
 /*
-** init_parimeter.c
+** init_perimeter.c
 */
 void	init_perimeter_top(t_data, t_player *, int *);
 void	init_perimeter_right(t_data, t_player *, int *);
 void	init_perimeter_bottom(t_data, t_player *, int *);
 void	init_perimeter_left(t_data, t_player *, int *);
+void	call_init_parameter(t_data, t_player *, int *);
 
 /*
 ** inventory_ia.c
