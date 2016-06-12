@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:54:14 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:26:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -53,29 +53,14 @@ int		expulse_ia(t_server *server, t_player *player)
   else if (dprintf(player->sock, OK) == -1 || pex(server, player) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   get_future_position(server, player, &y, &x);
-  while (i++ < list_get_size(tmp))
+  while (++i < list_get_size(tmp))
     {
       if ((p = list_get_elem_at_position(tmp, i)) != NULL &&
 	  ppo_ia(server, p) != -1)
 	{
-	  if (p != player)
-	    {
-	      p->x = x;
-	      p->y = y;
-	    }
+	  p->sock != player->sock ? (p->x = x) : 0;
+  	  p->sock != player->sock ? (p->y = y) : 0;
 	}
     }
-  /*while (tmp != NULL)
-    {
-      if (ppo_ia(server, (t_player *)((*tmp)->value)) == -1)
-	return (-1);
-      if (((t_player *)((*tmp)->value))->sock != player->sock)
-	{
-	  ((t_player *)((*tmp)->value))->x = x;
-  	  ((t_player *)((*tmp)->value))->y = y;
-	}
-      *tmp = (*tmp)->next;
-    }*/
-
   return (0);
 }

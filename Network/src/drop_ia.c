@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:24 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 19:14:56 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:38:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -34,8 +34,7 @@ static int	drop_item(t_server *server, t_player *player, int index)
   y = player->y;
   bct_answer = NULL;
   if (server->data.map[y] && server->data.map[y][x]
-      && server->data.map[y][x][index]
-      && player->inventory[index] && player->inventory[index] > 0)
+      && player->inventory[index] > 0)
     {
       server->data.map[y][x][index] += 1;
       player->inventory[index] -= 1;

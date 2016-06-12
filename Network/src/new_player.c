@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 17:29:13 2016 Kevin Empociello
+** Last update Sun Jun 12 21:31:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -25,7 +25,14 @@ t_player		*new_player(t_server *srv, t_client *cl)
   new->orientation = rand() % 4 * 90;
   new->timer = 0.0;
   new->id = list_get_size(srv->all_players) + 1;
-  // new->stones ?
+  new->inventory[FOOD] = 0;
+  new->inventory[LINEMATE] = 0;
+  new->inventory[DERAUMERE] = 0;
+  new->inventory[SIBUR] = 0;
+  new->inventory[MENDIANE] = 0;
+  new->inventory[PHIRAS] = 0;
+  new->inventory[THYSTAME] = 0;
+  new->inventory[NONE] = -1;
   return (new);
 }
 

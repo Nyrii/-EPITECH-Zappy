@@ -5,13 +5,12 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 12 16:30:21 2016 Nyrandone Noboud-Inpeng
+## Last update Sun Jun 12 21:24:26 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
 	broadcast_ia.c		\
 	connect_nbr_ia.c	\
-	count.c			\
 	drop_ia.c		\
 	elevation.c		\
 	expulse_ia.c		\

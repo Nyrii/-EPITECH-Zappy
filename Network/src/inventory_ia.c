@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 17:23:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:57:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -18,7 +18,7 @@ static int	get_answer(t_server *server, t_player *player,
 {
   int		tmp;
   int		n;
-  char		buffer[12];
+  char		buffer[13];
 
   tmp = 0;
   (*answer)[i] = '\0';
@@ -29,8 +29,8 @@ static int	get_answer(t_server *server, t_player *player,
         (*answer)[i++] = '{';
       while (server->data.strings_resources[tmp][n])
 	(*answer)[i++] = server->data.strings_resources[tmp][n++];
-      if (memset(buffer, 0, 12) == NULL
-	  || snprintf(buffer, 12, " %d", player->inventory[tmp]) == -1)
+      if (memset(buffer, 0, 13) == NULL
+	  || snprintf(buffer, 13, " %d", player->inventory[tmp]) == -1)
 	return (fprintf(stderr, ERR_MEMSET), -1);
       n = 0;
       while (buffer[n])

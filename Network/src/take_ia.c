@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 19:00:37 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:46:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -33,7 +33,7 @@ static int	take_food(t_server *server, t_player *player)
   y = player->y;
   bct_answer = NULL;
   if (server->data.map[y] && server->data.map[y][x]
-      && server->data.map[y][x][0] && server->data.map[y][x][0] > 0)
+      && server->data.map[y][x][0] > 0)
     {
       server->data.map[y][x][0] -= 1;
       player->inventory[0] += 1;
@@ -58,7 +58,7 @@ static int	take_stone(t_server *server, t_player *player, int index)
   y = player->y;
   bct_answer = NULL;
   if (server->data.map[y] && server->data.map[y][x]
-      && server->data.map[y][x][index] && server->data.map[y][x][index] > 0)
+      && server->data.map[y][x][index] > 0)
     {
       server->data.map[y][x][index] -= 1;
       player->inventory[index] += 1;

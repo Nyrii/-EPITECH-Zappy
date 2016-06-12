@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:08:33 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 18:57:28 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:55:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,7 +17,7 @@ static char 	*fill_pin(char *answer, t_player *player, int i)
 {
   int		inc;
   int		k;
-  char		buffer[24];
+  char		buffer[36];
 
   inc = 0;
   k = 0;
@@ -31,8 +31,8 @@ static char 	*fill_pin(char *answer, t_player *player, int i)
     {
       answer[i++] = ' ';
       inc = 0;
-      if (memset(buffer, 0, 12) == NULL
-	  || snprintf(buffer, 12, "%d", player->inventory[k]) == -1)
+      if (memset(buffer, 0, 36) == NULL
+	  || snprintf(buffer, 36, "%d", player->inventory[k]) == -1)
 	return (NULL);
       ++k;
       while (buffer[inc])

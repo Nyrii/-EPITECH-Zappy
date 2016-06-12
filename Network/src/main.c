@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 19:02:09 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 21:32:05 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -25,26 +25,6 @@ int		run_zappy(t_server *srv)
   if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
   loop_server(srv);
-
-  /*
-  #include <string.h>
-  t_player player;
-  player.x = rand() % srv->data.world_x;
-  player.y = rand() % srv->data.world_y;
-  player.orientation = LEFT;
-  printf("player_x = %d, player_y = %d, orientation = %d\n", player.x, player.y, player.orientation);
-  player.id = 5;
-  player.level = 1;
-  player.inventory[FOOD] = 0;
-  player.inventory[LINEMATE] = 2;
-  player.inventory[DERAUMERE] = 3;
-  player.inventory[SIBUR] = 4;
-  player.inventory[MENDIANE] = 5;
-  player.inventory[PHIRAS] = 6;
-  player.inventory[THYSTAME] = 7;
-  player.inventory[NONE] = -1;
-  right_ia(srv, &player);
-  */
   return (0);
 }
 
