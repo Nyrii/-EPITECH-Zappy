@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:11:58 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:58:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -19,6 +19,7 @@ static void	determine_best_way(int *src, int *dest,
   int		distance;
 
   distance = -1;
+  i = 0;
   while (src[i] != -1)
     {
       n = 0;
@@ -42,6 +43,7 @@ static int	determine_direction(int *dest, int *pos)
 {
   int		i;
 
+  i = 0;
   while (dest[i] != -1)
     {
       if (dest[i] == pos[0])
