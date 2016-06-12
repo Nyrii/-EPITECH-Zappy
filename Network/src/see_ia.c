@@ -5,9 +5,10 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:54 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 20:25:50 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 14:21:19 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "enum.h"
 
@@ -130,6 +131,7 @@ static char	*see_left(t_server *server, t_player *player,
 int		see_ia(t_server *server, t_player *player)
 {
   char		*answer;
+  int		len;
 
   if (player->orientation == TOP)
     answer = see_top(server, player, -1, 0);
@@ -141,5 +143,9 @@ int		see_ia(t_server *server, t_player *player)
     answer = see_left(server, player, -1, 0);
   if (answer == NULL)
     return (-1);
+  len = strlen(answer);
+  answer[len++] = '\r';
+  answer[len++] = '\n';
+  answer[len] = '\0';
   return (0);
 }
