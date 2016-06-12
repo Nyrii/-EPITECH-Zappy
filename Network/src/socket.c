@@ -13,6 +13,24 @@
 #include <string.h>
 #include "server.h"
 
+// temporary
+static void	dump_lists(t_server *srv)
+{
+  t_team	*t;
+  unsigned int	i;
+
+  i = 0;
+  printf("Clients in queue : %d\n", list_get_size(srv->queue_clients));
+  printf("Graphic clients : %d\n", list_get_size(srv->graphic_clients));
+  printf("Total players : %d\n", list_get_size(srv->all_players));
+  while (i < list_get_size(srv->data.teams))
+    {
+      if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
+	printf("Players team n°%d : %d\n", i, list_get_size(t->players));
+      i++;
+    }
+}
+
 static int handle_client(t_server *srv, void *tmp, int type)
 {
   int		tmp_sock;
@@ -30,13 +48,15 @@ static int handle_client(t_server *srv, void *tmp, int type)
   memset(buffer, 0, 512);
   if ((n = recv(tmp_sock, buffer, 512, 0)) > 0)
     {
+      if ((srv->cmd = parse_cmd(srv, epur_bf(buffer))) == NULL)
+	return (-1);
       if (type == 1)
-	manage_commands_graphic(srv, (t_client *)tmp, buffer);
+	manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
       else if (type == 2)
-	manage_commands_ia(srv, (t_player *)tmp, buffer);
+	manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
       else
-	manage_auth(srv, (t_client *)tmp, buffer);
-      printf("[%s]\n", buffer);
+	manage_auth(srv, (t_client *)tmp, srv->cmd);
+      printf("[%s]\n", srv->cmd);
     }
   return (0);
 }
@@ -78,6 +98,7 @@ static int		check_socket(int sock, t_server *srv)
 	}
       else
 	check_lists(sock, srv);
+      dump_lists(srv);
       return (1);
     }
   return (0);
