@@ -14,6 +14,7 @@
 int		handle_new_graphic(t_server *srv, t_client *cl)
 {
   msz(srv, cl);
+  sgt(srv, cl);
   return (0);
 }
 

@@ -26,3 +26,26 @@ t_team		*get_team_by_name(t_server *srv, const char *name)
     }
   return (NULL);
 }
+
+t_team		*get_team_by_player(t_server *srv, t_player *pl)
+{
+  unsigned int	i;
+  unsigned int	j;
+  t_team	*t;
+  t_player	*p;
+
+  i = 0;
+  while (i < list_get_size(srv->data.teams))
+    {
+      if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
+	{
+	  j = 0;
+	  while (j < list_get_size(t->players))
+	    if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
+		p == pl)
+		return (t);
+	}
+      i++;
+    }
+  return (NULL);
+}

@@ -10,9 +10,22 @@
 
 #include "server.h"
 
-int		mct(t_server *server, t_client *graphic)
+int		mct(t_server *srv, t_client *graphic)
 {
-  (void)server;
-  (void)graphic;
+  int		x;
+  int		y;
+
+  (void) graphic;
+  x = 0;
+  y = 0;
+  while (x < srv->data.world_x)
+    {
+      y = 0;
+      while (y < srv->data.world_y)
+	{
+	  y++;
+	}
+      x++;
+    }
   return (0);
 }

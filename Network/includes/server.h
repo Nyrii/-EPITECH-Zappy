@@ -174,6 +174,7 @@ t_list		*get_players_at_pos(t_data *, int, int);
 ** get_team.c
 */
 t_team		*get_team_by_name(t_server *, const char *);
+t_team		*get_team_by_player(t_server *, t_player *);
 
 /*
 ** incantation_ia.c
