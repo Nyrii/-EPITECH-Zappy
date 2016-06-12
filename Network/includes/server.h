@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:25:08 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 19:01:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -30,7 +30,7 @@ typedef struct		s_player
   int			y;
   int			orientation;
   int			level;
-  int			inventory[7];
+  int			inventory[8];
   double		timer;
 }			t_player;
 
@@ -51,9 +51,9 @@ typedef struct		s_data
   t_list	       	teams;
   int			***map;
   int			**resources;
-  float			percentages[7];
+  float			percentages[8];
   int			*required_players;
-  char			*strings_resources[7];
+  char			*strings_resources[8];
 }			t_data;
 
 typedef struct		s_server
@@ -241,6 +241,7 @@ int		plv(t_server *, t_client *);
 /*
 ** pin.c
 */
+int		pin_ia(t_server *, t_player *);
 int		pin(t_server *, t_client *);
 
 /*

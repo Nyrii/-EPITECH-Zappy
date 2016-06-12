@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 15:09:31 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 19:02:09 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -42,6 +42,7 @@ int		run_zappy(t_server *srv)
   player.inventory[MENDIANE] = 5;
   player.inventory[PHIRAS] = 6;
   player.inventory[THYSTAME] = 7;
+  player.inventory[NONE] = -1;
   right_ia(srv, &player);
   /***/
   return (0);

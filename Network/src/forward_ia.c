@@ -5,12 +5,23 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:59:14 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 17:03:31 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 #include "errors.h"
 #include "enum.h"
+#include "replies.h"
+
+static int	send_answer(t_server *server, t_player *player)
+{
+  if (dprintf(player->sock, OK) == -1)
+    {
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  return (ppo_ia(server, player));
+}
 
 int		forward_ia(t_server *server, t_player *player)
 {
@@ -38,7 +49,5 @@ int		forward_ia(t_server *server, t_player *player)
 	x = x - 1 >= 0 ? (x - 1) : (server->data.world_x - 1);
       player->x = x;
     }
-  ppo_ia(server, player);
-  // send message to ALL GRAPHIC CLIENTS and "ok" to the player
-  return (0);
+  return (send_answer(server, player));
 }

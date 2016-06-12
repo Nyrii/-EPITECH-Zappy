@@ -5,11 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:58:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 17:50:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
+#include <string.h>
 #include "server.h"
+#include "errors.h"
+#include "replies.h"
 
 static void	determine_best_way(int *src, int *dest,
 				   int *pos)
@@ -53,6 +56,17 @@ static int	determine_direction(int *dest, int *pos)
   return (0);
 }
 
+static int	pbc(t_server *server, t_player *player)
+{
+  char		buffer[20 + strlen(server->params)];
+
+  if (memset(buffer, 0, 20 + strlen(server->params)) == NULL
+	      || snprintf(buffer, 20 + strlen(server->params),
+			  "pbc %d %s", player->id, server->params) == -1)
+    return (fprintf(stderr, ERR_MEMSET), -1);
+  return (send_all_graphics(server, buffer));
+}
+
 int		broadcast_ia(t_server *server, t_player *player)
 {
   int		perimeter_src[17];
@@ -61,6 +75,10 @@ int		broadcast_ia(t_server *server, t_player *player)
   t_list	tmp;
   int		direction;
 
+  if (server->params == NULL)
+    return (dprintf(player->sock, KO));
+  else if (dprintf(player->sock, OK) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
   tmp = server->all_players;
   call_init_parameter(server->data, player, perimeter_src);
   while (tmp != NULL)
@@ -69,9 +87,11 @@ int		broadcast_ia(t_server *server, t_player *player)
 			  perimeter_dest);
       determine_best_way(perimeter_src, perimeter_dest, pos);
       direction = determine_direction(perimeter_dest, pos);
-      (void)direction;
-      // répondre au client
+      if (((t_player *)(tmp->value))->sock != player->sock
+	  && dprintf(((t_player *)(tmp->value))->sock,
+		     "message %d,%s\r\n", direction, server->params) == -1)
+	return (-1);
       tmp = tmp->next;
     }
-  return (0);
+  return (pbc(server, player));
 }
