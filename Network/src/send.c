@@ -5,12 +5,12 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 21:12:23 2016 Kevin Empociello
+** Last update Sun Jun 12 16:54:35 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+#include "errors.h"
 
-// ternaire for dprintf ?
 int		send_all_players(t_server *srv, t_player *p, const char *msg)
 {
   t_player	*tmp;
@@ -23,10 +23,10 @@ int		send_all_players(t_server *srv, t_player *p, const char *msg)
     {
       if ((tmp = list_get_elem_at_position(srv->all_players, i)) != NULL)
 	{
-	  if (p == NULL)
-	    dprintf(tmp->sock, "%s\r\n", msg);
-	  else if (tmp != p)
-	    dprintf(tmp->sock, "%s\r\n", msg);
+	  if (p == NULL && dprintf(tmp->sock, "%s\r\n", msg) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
+	  else if (tmp != p && dprintf(tmp->sock, "%s\r\n", msg))
+	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;
     }
@@ -45,7 +45,8 @@ int		send_all_graphics(t_server *srv, const char *msg)
     {
       if ((tmp = list_get_elem_at_position(srv->graphic_clients, i)) != NULL)
 	{
-	  dprintf(tmp->sock, "%s\r\n", msg);
+	  if (dprintf(tmp->sock, "%s\r\n", msg) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;
     }

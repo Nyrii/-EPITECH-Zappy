@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 21:17:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 16:48:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -37,7 +37,6 @@ static char 	*fill_bct(char *answer, int ***map,
       while (buffer[inc])
 	answer[i++] = buffer[inc++];
     }
-  answer[i++] = '\n';
   answer[i] = '\0';
   return (answer);
 }
@@ -64,7 +63,6 @@ char		*bct(int ***map, int const y, int const x)
       pos[1] = x;
       return (fill_bct(answer, map, pos, i));
     }
-  answer[i++] = '\n';
   answer[i] = '\0';
   return (answer);
 }

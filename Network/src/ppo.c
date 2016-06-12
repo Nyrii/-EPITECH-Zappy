@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:02:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 15:10:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 16:54:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,23 +15,16 @@
 
 int		ppo_ia(t_server *server, t_player *player)
 {
-  t_list	tmp;
   char		buffer[80];
   int		orientation;
 
   orientation = player->orientation == TOP ? 1 :
       player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
   if (memset(buffer, 0, 60) == NULL
-      || snprintf(buffer, 60, "ppo %d %d %d %d\r\n",
+      || snprintf(buffer, 60, "ppo %d %d %d %d",
 		  player->id, player->x, player->y, orientation) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  tmp = server->graphic_clients;
-  while (tmp != NULL)
-    {
-      // envoyer la réponse à tous les clients graphiques
-      tmp = tmp->next;
-    }
-  return (0);
+  return (send_all_graphics(server, buffer));
 }
 
 int		ppo(t_server *server, t_client *graphic)

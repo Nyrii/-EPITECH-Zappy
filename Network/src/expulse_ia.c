@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:29:28 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 16:54:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,19 +15,12 @@
 
 static int	pex(t_server *server, t_player *player)
 {
-  t_list	tmp;
   char		buffer[20];
 
   if (memset(buffer, 0, 20) == NULL
-      || snprintf(buffer, 20, "pex %d\r\n", player->id) == -1)
+      || snprintf(buffer, 20, "pex %d", player->id) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  tmp = server->graphic_clients;
-  while (tmp != NULL)
-    {
-      // envoyer la réponse à tous les clients graphiques
-      tmp = tmp->next;
-    }
-  return (0);
+  return (send_all_graphics(server, buffer));
 }
 
 static void	get_future_position(t_server *server, t_player *player,

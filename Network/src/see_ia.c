@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:54 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:21:19 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 16:51:17 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -144,8 +144,6 @@ int		see_ia(t_server *server, t_player *player)
   if (answer == NULL)
     return (-1);
   len = strlen(answer);
-  answer[len++] = '\r';
-  answer[len++] = '\n';
   answer[len] = '\0';
   return (0);
 }

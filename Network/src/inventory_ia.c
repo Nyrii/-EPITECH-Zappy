@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 21:27:00 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 12 16:51:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -52,7 +52,6 @@ int		inventory_ia(t_server *server, t_player *player)
   if ((i = get_answer(server, player, &answer, 0)) == -1)
     return (-1);
   answer[i++] = '}';
-  answer[i++] = '\n';
   answer[i++] = '\0';
   // Répondre au client;
   return (0);
