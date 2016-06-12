@@ -13,8 +13,9 @@
 
 int		handle_new_graphic(t_server *srv, t_client *cl)
 {
-  msz(srv, cl);
-  sgt(srv, cl);
+  if (msz(srv, cl) == -1 || sgt(srv, cl) == -1 || mct(srv, cl) == -1 ||
+      tna(srv, cl) == -1)
+    return (-1);
   return (0);
 }
 

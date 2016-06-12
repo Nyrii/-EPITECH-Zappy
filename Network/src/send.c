@@ -25,7 +25,7 @@ int		send_all_players(t_server *srv, t_player *p, const char *msg)
 	{
 	  if (p == NULL && dprintf(tmp->sock, "%s\r\n", msg) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
-	  else if (tmp != p && dprintf(tmp->sock, "%s\r\n", msg))
+	  else if (tmp != p && dprintf(tmp->sock, "%s\r\n", msg) != -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;

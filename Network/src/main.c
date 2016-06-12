@@ -24,9 +24,9 @@ int		run_zappy(t_server *srv)
   srv->all_players = NULL;
   if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
-  // loop_server(srv);
+  loop_server(srv);
 
-  /***/
+  /*
   #include <string.h>
   t_player player;
   player.x = rand() % srv->data.world_x;
@@ -44,7 +44,7 @@ int		run_zappy(t_server *srv)
   player.inventory[THYSTAME] = 7;
   player.inventory[NONE] = -1;
   right_ia(srv, &player);
-  /***/
+  */
   return (0);
 }
 

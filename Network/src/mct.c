@@ -10,12 +10,12 @@
 
 #include "server.h"
 
-int		mct(t_server *srv, t_client *graphic)
+int		mct(t_server *srv, t_client *cl)
 {
+  char		*tmp;
   int		x;
   int		y;
 
-  (void) graphic;
   x = 0;
   y = 0;
   while (x < srv->data.world_x)
@@ -23,6 +23,10 @@ int		mct(t_server *srv, t_client *graphic)
       y = 0;
       while (y < srv->data.world_y)
 	{
+	  if ((tmp = bct(srv->data.map, x, y)) == NULL)
+	    return (-1);
+	  dprintf(cl->sock, "%s\r\n", tmp);
+	  free(tmp);
 	  y++;
 	}
       x++;

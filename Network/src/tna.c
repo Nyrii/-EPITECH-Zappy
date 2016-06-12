@@ -8,11 +8,23 @@
 ** Last update Fri Jun 10 18:08:55 2016 Nyrandone Noboud-Inpeng
 */
 
+#include "errors.h"
 #include "server.h"
 
-int		tna(t_server *server, t_client *graphic)
+int		tna(t_server *srv, t_client *cl)
 {
-  (void)server;
-  (void)graphic;
+  unsigned int	i;
+  t_team	*t;
+
+  i = 0;
+  while (i < list_get_size(srv->data.teams))
+    {
+      if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
+	{
+	  if ((dprintf(cl->sock, "tna %s\r\n", t->name)) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
+	}
+      i++;
+    }
   return (0);
 }
