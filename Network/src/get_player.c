@@ -10,6 +10,24 @@
 
 #include "server.h"
 
+int		get_max_player_id(t_server *srv)
+{
+  unsigned int		i;
+  t_player		*p;
+  int			max;
+
+  i = 0;
+  max = 0;
+  while (i < list_get_size(srv->all_players))
+    {
+      if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL &&
+	  p->id > max)
+	max = p->id;
+      i++;
+    }
+  return (max);
+}
+
 t_player	*get_player_by_sock(t_data *data, int sock)
 {
   t_team	*t;

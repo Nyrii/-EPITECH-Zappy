@@ -60,6 +60,9 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
 	  list_add_elem_at_back(&t->players, p) == FALSE ||
 	  list_add_elem_at_back(&srv->all_players, p) == FALSE)
 	return (-1);
+      else
+	if (handle_new_player(srv, t, p) == -1)
+	    return (-1);
     }
   else
     {

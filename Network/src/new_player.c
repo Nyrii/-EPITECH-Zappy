@@ -24,7 +24,7 @@ t_player		*new_player(t_server *srv, t_client *cl)
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->timer = 0.0;
-  new->id = list_get_size(srv->all_players) + 1;
+  new->id = get_max_player_id(srv);
   new->inventory[FOOD] = 0;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;
