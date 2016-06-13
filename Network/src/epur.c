@@ -5,11 +5,12 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 21:12:23 2016 Kevin Empociello
+** Last update Mon Jun 13 11:19:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
+#include "errors.h"
 
 static char	*delete_end(char *str)
 {
@@ -19,7 +20,8 @@ static char	*delete_end(char *str)
 
   i = 0;
   j = 0;
-  (new = malloc(4096 * sizeof(char))) == NULL ? NULL : 0;
+  if ((new = malloc(4096 * sizeof(char))) == NULL)
+    return (fprintf(stderr, ERR_PRINTF), NULL);
   while (str && str[i])
     {
       if (str[i] != '\r' && str[i] != '\n')
@@ -39,7 +41,8 @@ char		*epur_bf(char *str)
 
   i = 0;
   j = 0;
-  (new = malloc(4096 * sizeof(char))) == NULL ? NULL : 0;
+  if ((new = malloc(4096 * sizeof(char))) == NULL)
+    return (fprintf(stderr, ERR_PRINTF), NULL);
   while (str && str[i] != '\0' && (str[i] == ' ' || str[i] == '\t'))
     i++;
   str = &str[i];
@@ -53,9 +56,7 @@ char		*epur_bf(char *str)
       else
 	i++;
     }
-  if (j > 0 && (new[j - 1] == ' ' || new[j - 1] == '\t'))
-    new[j - 1] = '\0';
-  else
-    new[j] = '\0';
+  j > 0 && (new[j - 1] == ' ' || new[j - 1] == '\t') ? (new[j - 1] = '\0') :
+	(new[j] = '\0');
   return (delete_end(new));
 }

@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 11 21:12:23 2016 Kevin Empociello
+** Last update Mon Jun 13 12:17:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -31,13 +31,12 @@ static void	dump_lists(t_server *srv)
     }
 }
 
-static int handle_client(t_server *srv, void *tmp, int type)
+static int	handle_client(t_server *srv, void *tmp, int type)
 {
   int		tmp_sock;
   char		buffer[512];
   int		n;
 
-  (void) srv;
   n = 0;
   if (tmp == NULL)
     return (-1);

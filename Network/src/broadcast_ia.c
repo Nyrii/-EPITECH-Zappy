@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 17:50:33 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 13 12:10:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -13,6 +13,17 @@
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
+
+static int	pbc(t_server *server, t_player *player)
+{
+  char		buffer[20 + strlen(server->params)];
+
+  if (memset(buffer, 0, 20 + strlen(server->params)) == NULL
+	      || snprintf(buffer, 20 + strlen(server->params),
+			  "pbc %d %s", player->id, server->params) == -1)
+    return (fprintf(stderr, ERR_MEMSET), -1);
+  return (send_all_graphics(server, buffer));
+}
 
 static void	determine_best_way(int *src, int *dest,
 				   int *pos)
@@ -56,24 +67,36 @@ static int	determine_direction(int *dest, int *pos)
   return (0);
 }
 
-static int	pbc(t_server *server, t_player *player)
+static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
+			       int *perimeter_src)
 {
-  char		buffer[20 + strlen(server->params)];
+  int		perimeter_dest[17];
+  t_player	*tmp_player;
+  int		direction;
+  unsigned int	i;
+  int		pos[2];
 
-  if (memset(buffer, 0, 20 + strlen(server->params)) == NULL
-	      || snprintf(buffer, 20 + strlen(server->params),
-			  "pbc %d %s", player->id, server->params) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
+  i = -1;
+  while (++i < list_get_size(tmp))
+    {
+      if ((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
+	  && tmp_player->sock != player->sock)
+	{
+	  call_init_parameter(server->data, tmp_player, perimeter_dest);
+	  determine_best_way(perimeter_src, perimeter_dest, pos);
+	  direction = determine_direction(perimeter_dest, pos);
+	  if (dprintf(tmp_player->sock, "message %d,%s\r\n",
+		      direction, server->params) == -1)
+	    return (-1);
+	}
+    }
+  return (pbc(server, player));
 }
 
 int		broadcast_ia(t_server *server, t_player *player)
 {
   int		perimeter_src[17];
-  int		perimeter_dest[17];
-  int		pos[2];
   t_list	tmp;
-  int		direction;
 
   if (server->params == NULL)
     return (dprintf(player->sock, KO));
@@ -81,17 +104,5 @@ int		broadcast_ia(t_server *server, t_player *player)
     return (fprintf(stderr, ERR_PRINTF), -1);
   tmp = server->all_players;
   call_init_parameter(server->data, player, perimeter_src);
-  while (tmp != NULL)
-    {
-      call_init_parameter(server->data, (t_player *)(tmp->value),
-			  perimeter_dest);
-      determine_best_way(perimeter_src, perimeter_dest, pos);
-      direction = determine_direction(perimeter_dest, pos);
-      if (((t_player *)(tmp->value))->sock != player->sock
-	  && dprintf(((t_player *)(tmp->value))->sock,
-		     "message %d,%s\r\n", direction, server->params) == -1)
-	return (-1);
-      tmp = tmp->next;
-    }
-  return (pbc(server, player));
+  return (send_broadcast(server, player, tmp, perimeter_src));
 }
