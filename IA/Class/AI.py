@@ -3,7 +3,7 @@ import select
 import Macro
 import sys
 import time
-from zappy_ai import eprint
+from Error import eprint
 
 class AI():
     numClient = 0
