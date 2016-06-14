@@ -41,6 +41,14 @@ typedef struct		s_team
   t_list		players;
 }			t_team;
 
+typedef struct		s_egg
+{
+  int			x;
+  int			y;
+  int			timer;
+  t_team		*father;
+}			t_egg;
+
 typedef struct		s_data
 {
   int			port;
@@ -49,6 +57,7 @@ typedef struct		s_data
   int			max_clients;
   int			delay;
   t_list	       	teams;
+  t_list		eggs;
   int			***map;
   int			**resources;
   float			percentages[8];
