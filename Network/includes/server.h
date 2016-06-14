@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 21:40:47 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 14 20:55:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -106,6 +106,12 @@ int		bct_on_tile(t_server *, t_client *);
 int		broadcast_ia(t_server *, t_player *);
 
 /*
+** broadcast_init.c
+*/
+void		init_calculs(t_data, int *, t_player *);
+int		get_best_tile(int *, t_player *);
+
+/*
 ** connect_ia.c
 */
 int		connect_nbr_ia(t_server *, t_player *);
@@ -200,7 +206,7 @@ void	init_perimeter_top(t_data, t_player *, int *);
 void	init_perimeter_right(t_data, t_player *, int *);
 void	init_perimeter_bottom(t_data, t_player *, int *);
 void	init_perimeter_left(t_data, t_player *, int *);
-void	call_init_parameter(t_data, t_player *, int *);
+void	call_init_perimeter(t_data, t_player *, int *);
 
 /*
 ** inventory_ia.c
@@ -268,6 +274,11 @@ int		remove_client_from_queue(t_server *, t_client *);
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
+
+/*
+** save_perimeter.c
+*/
+void		save_perimeter(t_player *, int *, int const, int const);
 
 /*
 ** see_ia.c

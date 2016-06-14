@@ -5,11 +5,12 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 12 21:24:26 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun 14 20:55:40 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
 	broadcast_ia.c		\
+	broadcast_init.c	\
 	connect_nbr_ia.c	\
 	drop_ia.c		\
 	elevation.c		\
@@ -27,7 +28,6 @@ SRCSER	= bct.c			\
 	incantation_ia.c	\
 	init.c			\
 	init_nb_players.c	\
-	init_perimeter.c	\
 	init_resources.c	\
 	inventory_ia.c		\
 	left_ia.c		\
@@ -43,6 +43,7 @@ SRCSER	= bct.c			\
 	process.c		\
 	remove.c		\
 	right_ia.c		\
+	save_perimeter.c	\
 	see_ia.c		\
 	see_ia_calculs.c	\
 	see_ia_resources.c	\

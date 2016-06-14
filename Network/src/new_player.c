@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 12 21:31:40 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 14 18:25:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -33,6 +33,19 @@ t_player		*new_player(t_server *srv, t_client *cl)
   new->inventory[PHIRAS] = 0;
   new->inventory[THYSTAME] = 0;
   new->inventory[NONE] = -1;
+  if (new->id == 1)
+    {
+      new->x = 0;
+      new->y = 1;
+      new->orientation = TOP;
+    }
+  else
+    {
+      new->x = 1;
+      new->y = 4;
+      new->orientation = LEFT;
+    }
+  printf("Position x : %d, position y : %d, orientation = %d\n", new->x, new->y, new->orientation);
   return (new);
 }
 
