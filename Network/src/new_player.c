@@ -12,19 +12,62 @@
 #include <sys/types.h>
 #include "server.h"
 
-t_player		*new_player(t_server *srv, t_client *cl)
+static int		assign_egg_pos(t_server *srv, t_team *t, t_player *pl)
+{
+  t_egg			*e;
+  unsigned int		i;
+
+  i = 0;
+  if (list_get_size(srv->data.eggs) > 0)
+    return (0);
+  else
+    {
+      while (i < list_get_size(srv->data.eggs))
+	{
+	  if ((e = list_get_elem_at_position(srv->data.eggs, i)) != NULL &&
+	      e->father == t && e->is_born == 1)
+	    {
+	      pl->x = e->x;
+	      pl->y = e->y;
+	      list_del_elem_at_position(&srv->data.eggs, i);
+	      return (1);
+	    }
+	  i++;
+	}
+    }
+  return (0);
+}
+
+t_egg			*new_egg(t_server *srv, t_player *p)
+{
+  t_egg			*new;
+
+  if ((new = malloc(sizeof(t_player))) == NULL)
+    return (NULL);
+  new->timer = 0.0;
+  new->x = p->x;
+  new->y = p->y;
+  new->is_born = 0;
+  new->father = get_team_by_player(srv, p);
+  return (new);
+}
+
+t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
 {
   t_player		*new;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (NULL);
   new->sock = cl->sock;
-  new->x = rand() % srv->data.world_x;
-  new->y = rand() % srv->data.world_y;
+  if (assign_egg_pos(srv, t, new) == 0)
+    {
+      new->x = rand() % srv->data.world_x;
+      new->y = rand() % srv->data.world_y;
+    }
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->timer = 0.0;
-  new->id = list_get_size(srv->all_players) + 1;
+  new->id = get_max_player_id(srv);
   new->inventory[FOOD] = 0;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;

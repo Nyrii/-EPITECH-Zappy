@@ -24,6 +24,7 @@ static void	init_data(t_data *data)
   data->max_clients = -1;
   data->delay = 100;
   data->teams = NULL;
+  data->eggs = NULL;
   data->map = NULL;
   data->resources = NULL;
   data->percentages[FOOD] = 50.0;

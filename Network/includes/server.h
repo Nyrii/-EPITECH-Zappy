@@ -41,6 +41,15 @@ typedef struct		s_team
   t_list		players;
 }			t_team;
 
+typedef struct		s_egg
+{
+  int			x;
+  int			y;
+  int			timer;
+  int			is_born;
+  t_team		*father;
+}			t_egg;
+
 typedef struct		s_data
 {
   int			port;
@@ -49,6 +58,7 @@ typedef struct		s_data
   int			max_clients;
   int			delay;
   t_list	       	teams;
+  t_list		eggs;
   int			***map;
   int			**resources;
   float			percentages[8];
@@ -89,8 +99,9 @@ int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
-t_player	*new_player(t_server *, t_client *);
+t_player	*new_player(t_server *, t_team *, t_client *);
 t_client	*new_client(t_server *);
+int		handle_new_player(t_server *, t_team *, t_player *);
 int		handle_new_client(t_server *);
 int		handle_new_graphic(t_server *, t_client *);
 
@@ -175,6 +186,7 @@ int		get_opt(int, char **, t_data *);
 ** get_player.c
 */
 t_list		get_players_at_pos(t_data *, int, int);
+int		get_max_player_id(t_server *);
 
 /*
 ** get_team.c

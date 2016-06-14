@@ -11,6 +11,17 @@
 #include "errors.h"
 #include "server.h"
 
+int		handle_new_player(t_server *srv, t_team *t, t_player *p)
+{
+  if (srv == NULL || p == NULL)
+    return (-1);
+  if (dprintf(p->sock, "%d\r\n",
+	      t->max_players - list_get_size(t->players)) == -1 ||
+      dprintf(p->sock, "%d %d\r\n", srv->data.world_x, srv->data.world_y) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
+  return (0);
+}
+
 int		handle_new_graphic(t_server *srv, t_client *cl)
 {
   if (msz(srv, cl) == -1 || sgt(srv, cl) == -1 || mct(srv, cl) == -1 ||
