@@ -29,6 +29,7 @@ static int		assign_egg_pos(t_server *srv, t_team *t, t_player *pl)
 	    {
 	      pl->x = e->x;
 	      pl->y = e->y;
+	      list_del_elem_at_position(&srv->data.eggs, i);
 	      return (1);
 	    }
 	  i++;
