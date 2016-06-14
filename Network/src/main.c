@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 21:32:05 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 14 22:38:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
   t_server	server;
 
   srand(time(NULL));
-  if (get_opt(argc, argv, &server.data) != -1)
+  if (get_opt(argc, argv, &server) != -1)
     {
       if (run_zappy(&server) == -1)
 	return (-1);

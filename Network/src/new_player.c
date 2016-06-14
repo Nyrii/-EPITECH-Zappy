@@ -5,12 +5,14 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Tue Jun 14 18:25:06 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 14 22:47:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
 #include <sys/types.h>
+#include <string.h>
 #include "server.h"
+#include "errors.h"
 
 static int		assign_egg_pos(t_server *srv, t_team *t, t_player *pl)
 {
@@ -18,14 +20,14 @@ static int		assign_egg_pos(t_server *srv, t_team *t, t_player *pl)
   unsigned int		i;
 
   i = 0;
-  if (list_get_size(srv->data.eggs) > 0)
+  if (list_get_size(srv->data.eggs) <= 0)
     return (0);
   else
     {
       while (i < list_get_size(srv->data.eggs))
 	{
 	  if ((e = list_get_elem_at_position(srv->data.eggs, i)) != NULL &&
-	      e->father == t && e->is_born == 1)
+	      strcmp(e->team_name, t->name) == 0 && e->is_born == 1)
 	    {
 	      pl->x = e->x;
 	      pl->y = e->y;
@@ -43,12 +45,12 @@ t_egg			*new_egg(t_server *srv, t_player *p)
   t_egg			*new;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
-    return (NULL);
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   new->timer = 0.0;
   new->x = p->x;
   new->y = p->y;
   new->is_born = 0;
-  new->father = get_team_by_player(srv, p);
+  new->team_name = get_team_by_player(srv, p)->name;
   return (new);
 }
 
@@ -57,7 +59,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   t_player		*new;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
-    return (NULL);
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   new->sock = cl->sock;
   if (assign_egg_pos(srv, t, new) == 0)
     {
@@ -76,18 +78,6 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   new->inventory[PHIRAS] = 0;
   new->inventory[THYSTAME] = 0;
   new->inventory[NONE] = -1;
-  if (new->id == 1)
-    {
-      new->x = 0;
-      new->y = 1;
-      new->orientation = TOP;
-    }
-  else
-    {
-      new->x = 1;
-      new->y = 4;
-      new->orientation = LEFT;
-    }
   printf("Position x : %d, position y : %d, orientation = %d\n", new->x, new->y, new->orientation);
   return (new);
 }
@@ -99,7 +89,7 @@ t_client        	*new_client(t_server *srv)
   struct sockaddr_in	sin;
 
   if ((cl = malloc(sizeof(t_client))) == NULL)
-    return (NULL);
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
   cl->timer = 0;
   if ((cl->sock = accept(srv->sock, (struct sockaddr *) &sin, &ss)) == -1)

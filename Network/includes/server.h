@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 14 20:55:22 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 14 22:46:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -47,7 +47,7 @@ typedef struct		s_egg
   int			y;
   int			timer;
   int			is_born;
-  t_team		*father;
+  char			*team_name;
 }			t_egg;
 
 typedef struct		s_data
@@ -100,6 +100,7 @@ int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
 t_player	*new_player(t_server *, t_team *, t_client *);
+t_egg		*new_egg(t_server *, t_player *);
 t_client	*new_client(t_server *);
 int		handle_new_player(t_server *, t_team *, t_player *);
 int		handle_new_client(t_server *);
@@ -180,7 +181,7 @@ int		init_resources(int ***);
 /*
 ** get_opt.c
 */
-int		get_opt(int, char **, t_data *);
+int		get_opt(int, char **, t_server *);
 
 /*
 ** get_player.c
