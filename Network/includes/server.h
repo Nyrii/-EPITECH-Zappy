@@ -46,6 +46,7 @@ typedef struct		s_egg
   int			x;
   int			y;
   int			timer;
+  int			is_born;
   t_team		*father;
 }			t_egg;
 
@@ -98,7 +99,7 @@ int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
 void  		check_sockets_loop(t_server *);
-t_player	*new_player(t_server *, t_client *);
+t_player	*new_player(t_server *, t_team *, t_client *);
 t_client	*new_client(t_server *);
 int		handle_new_player(t_server *, t_team *, t_player *);
 int		handle_new_client(t_server *);
