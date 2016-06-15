@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Tue Jun 14 22:47:07 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 15 23:29:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -69,7 +69,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->timer = 0.0;
-  new->id = get_max_player_id(srv);
+  new->id = get_max_player_id(srv) + 1;
   new->inventory[FOOD] = 0;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;
