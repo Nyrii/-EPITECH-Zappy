@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 14 22:46:24 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 14:00:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -164,6 +164,12 @@ int		forward_ia(t_server *, t_player *);
 int		free_tab(char **, int);
 
 /*
+** get_angle.c
+*/
+double		get_angle(t_player *, int const, int const);
+int		get_best_tile_by_angle(double const, t_player *);
+
+/*
 ** left_ia.c
 */
 int		left_ia(t_server *, t_player *);
@@ -215,11 +221,11 @@ int		init_nb_players(int **);
 /*
 ** init_perimeter.c
 */
-void	init_perimeter_top(t_data, t_player *, int *);
-void	init_perimeter_right(t_data, t_player *, int *);
-void	init_perimeter_bottom(t_data, t_player *, int *);
-void	init_perimeter_left(t_data, t_player *, int *);
-void	call_init_perimeter(t_data, t_player *, int *);
+void		init_perimeter_top(t_data, t_player *, int *);
+void		init_perimeter_right(t_data, t_player *, int *);
+void		init_perimeter_bottom(t_data, t_player *, int *);
+void		init_perimeter_left(t_data, t_player *, int *);
+void		call_init_perimeter(t_data, t_player *, int *);
 
 /*
 ** inventory_ia.c
@@ -287,11 +293,6 @@ int		remove_client_from_queue(t_server *, t_client *);
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
-
-/*
-** save_perimeter.c
-*/
-void		save_perimeter(t_player *, int *, int const, int const);
 
 /*
 ** see_ia.c

@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun 14 20:55:40 2016 Nyrandone Noboud-Inpeng
+## Last update Thu Jun 16 14:00:51 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c			\
@@ -22,6 +22,7 @@ SRCSER	= bct.c			\
 	generate_map.c		\
 	generic_list.c		\
 	generic_list_del.c	\
+	get_angle.c		\
 	get_opt.c		\
 	get_player.c		\
 	get_team.c		\
@@ -43,11 +44,10 @@ SRCSER	= bct.c			\
 	process.c		\
 	remove.c		\
 	right_ia.c		\
-	save_perimeter.c	\
 	see_ia.c		\
 	see_ia_calculs.c	\
 	see_ia_resources.c	\
-	send.c		\
+	send.c			\
 	server_lib.c		\
 	sgt.c			\
 	socket.c		\

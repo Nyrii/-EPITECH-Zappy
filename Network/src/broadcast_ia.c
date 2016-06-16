@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 14 20:53:13 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 13:58:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -30,8 +30,7 @@ static int	get_best_distance_from_tile(t_player *target, t_player *player,
 {
   float		distance;
   int		x;
-  int		save;
-  int		perimeter_dest[19];
+  double	angle;
 
   distance = -1;
   x = 0;
@@ -41,14 +40,13 @@ static int	get_best_distance_from_tile(t_player *target, t_player *player,
 	  || distance > sqrt(pow(calculs[x] - player->y, 2)
 			     + pow(calculs[x + 1] - player->x, 2)))
 	{
-	  distance = sqrt(pow(player->y - calculs[x], 2)
-			  + pow(player->x - calculs[x + 1], 2));
-	  save_perimeter(target, perimeter_dest, calculs[x], calculs[x + 1]);
+	  distance = sqrt(pow(calculs[x] - player->y, 2)
+			  + pow(calculs[x + 1] - player->x, 2));
+	  angle = get_angle(player, calculs[x], calculs[x + 1]);
 	}
       x += 2;
     }
-  save = get_best_tile(perimeter_dest, player);
-  return (save);
+  return (get_best_tile_by_angle(angle, target));
 }
 
 static int	determine_best_way(t_server *server, t_player *player,
@@ -59,6 +57,8 @@ static int	determine_best_way(t_server *server, t_player *player,
 
   init_calculs(server->data, calculs, target);
   tile = get_best_distance_from_tile(target, player, calculs);
+  if (tile == -1)
+    return (0);
   return (tile);
 }
 
