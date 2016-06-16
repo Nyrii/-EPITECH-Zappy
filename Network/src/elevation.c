@@ -5,16 +5,17 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 15:57:05 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 15:42:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
 int		is_elevation_legit(t_data *data, int elevation,
-				   int *pos, t_list tmp)
+				   int *pos)
 {
   int		i;
   int		count;
+  t_list	tmp;
 
   i = -1;
   count = 0;

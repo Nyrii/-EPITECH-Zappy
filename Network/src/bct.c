@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 18:54:16 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 18:41:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -69,7 +69,26 @@ char		*bct(int ***map, int const y, int const x)
 
 int		bct_on_tile(t_server *server, t_client *graphic)
 {
-  (void)server;
+  char		*parameters[2];
+  int		pos[2];
+  char		*answer;
+
   (void)graphic;
-  return (0);
+  if (!server->params
+      || !(parameters[0] = strtok(server->params, " \t"))
+      || !(parameters[1] = strtok(NULL, " \t")))
+    return (fprintf(stderr, ERR_WRONG_ARGS), 0); // KO to graphical client;
+  pos[0] = atoi(parameters[0]);
+  pos[1] = atoi(parameters[1]);
+  if (pos[0] >= 0 && pos[0] < server->data.world_y
+      && pos[1] >= 0 && pos[1] < server->data.world_y)
+    {
+      if ((answer = bct(server->data.map, pos[0], pos[1])) == NULL)
+	return (-1);
+      printf("%s\n", answer);
+      // Answer to graphical client;
+      return (0);
+    }
+  fprintf(stderr, ERR_WRONG_ARGS); // KO to graphical client;
+  return (-1);
 }

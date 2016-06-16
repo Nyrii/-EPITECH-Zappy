@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 14:00:25 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 18:49:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -139,6 +139,11 @@ int		count_elements(t_list *);
 int		drop_ia(t_server *, t_player *);
 
 /*
+** elevation.c
+*/
+int		is_elevation_legit(t_data *, int, int *);
+
+/*
 ** expulse_ia.c
 */
 int		expulse_ia(t_server *, t_player *);
@@ -163,16 +168,6 @@ int		forward_ia(t_server *, t_player *);
 */
 int		free_tab(char **, int);
 
-/*
-** get_angle.c
-*/
-double		get_angle(t_player *, int const, int const);
-int		get_best_tile_by_angle(double const, t_player *);
-
-/*
-** left_ia.c
-*/
-int		left_ia(t_server *, t_player *);
 
 /*
 ** generate_map.c
@@ -185,6 +180,12 @@ int		generate_map(t_data *, int, int, int);
 int		init_resources(int ***);
 
 /*
+** get_angle.c
+*/
+double		get_angle(t_player *, int const, int const, double *);
+int		get_best_tile_by_angle(double const, double const, t_player *);
+
+/*
 ** get_opt.c
 */
 int		get_opt(int, char **, t_server *);
@@ -194,12 +195,18 @@ int		get_opt(int, char **, t_server *);
 */
 t_list		get_players_at_pos(t_data *, int, int);
 int		get_max_player_id(t_server *);
+t_player	*get_player_by_id(t_server *, int const);
 
 /*
 ** get_team.c
 */
 t_team		*get_team_by_name(t_server *, const char *);
 t_team		*get_team_by_player(t_server *, t_player *);
+
+/*
+** left_ia.c
+*/
+int		left_ia(t_server *, t_player *);
 
 /*
 ** incantation_ia.c
@@ -226,6 +233,11 @@ void		init_perimeter_right(t_data, t_player *, int *);
 void		init_perimeter_bottom(t_data, t_player *, int *);
 void		init_perimeter_left(t_data, t_player *, int *);
 void		call_init_perimeter(t_data, t_player *, int *);
+
+/*
+** init_teams_max_players.c
+*/
+int		init_teams_max_players(t_list, int const);
 
 /*
 ** inventory_ia.c

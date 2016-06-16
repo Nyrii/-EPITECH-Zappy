@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 14 22:39:20 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 14:37:01 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -135,7 +135,9 @@ int		get_opt(int argc, char **argv, t_server *server)
       || list_get_size(server->data.teams) <= 1)
     return (fprintf(stderr, USAGE), -1);
   if (init_resources(&server->data.resources) == -1
-      || init_nb_players(&server->data.required_players) == -1)
+      || init_nb_players(&server->data.required_players) == -1
+      || init_teams_max_players(server->data.teams,
+				server->data.max_clients) == -1)
     return (-1);
   return (0);
 }

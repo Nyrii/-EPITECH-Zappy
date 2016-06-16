@@ -5,10 +5,26 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Sat Jun 11 19:32:36 2016 Kevin Empociello
+** Last update Thu Jun 16 18:48:49 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+
+t_player		*get_player_by_id(t_server *srv, int const id)
+{
+  unsigned int		i;
+  t_player		*p;
+
+  i = 0;
+  while (i < list_get_size(srv->all_players))
+    {
+      if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL &&
+	  p->id == id)
+	return (p);
+      i++;
+    }
+  return (NULL);
+}
 
 int		get_max_player_id(t_server *srv)
 {

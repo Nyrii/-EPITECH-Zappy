@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Sat Jun 11 19:24:12 2016 Kevin Empociello
+** Last update Thu Jun 16 14:24:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"

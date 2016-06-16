@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 13:58:20 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 16:48:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -31,6 +31,7 @@ static int	get_best_distance_from_tile(t_player *target, t_player *player,
   float		distance;
   int		x;
   double	angle;
+  double	rad;
 
   distance = -1;
   x = 0;
@@ -42,11 +43,11 @@ static int	get_best_distance_from_tile(t_player *target, t_player *player,
 	{
 	  distance = sqrt(pow(calculs[x] - player->y, 2)
 			  + pow(calculs[x + 1] - player->x, 2));
-	  angle = get_angle(player, calculs[x], calculs[x + 1]);
+	  angle = get_angle(player, calculs[x], calculs[x + 1], &rad);
 	}
       x += 2;
     }
-  return (get_best_tile_by_angle(angle, target));
+  return (get_best_tile_by_angle(angle, rad, target));
 }
 
 static int	determine_best_way(t_server *server, t_player *player,
