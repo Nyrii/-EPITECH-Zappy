@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 13:58:27 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 14:11:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
@@ -17,7 +17,8 @@ void			generate_resources(int resource,
   int			x;
   int			y;
 
-  x = 0;
+  if (resource >= NONE)
+    return ;
   while (quantity > 0)
     {
       y = 0;
