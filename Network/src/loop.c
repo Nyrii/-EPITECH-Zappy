@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Fri Jun 17 18:18:06 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:39:47 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -16,7 +16,7 @@ int	loop_server(t_server *srv)
 
   while (1)
     {
-      save_server(srv);
+      save_server(srv, 1);
       printf("Loop server\n");
       FD_ZERO(&srv->rdfs);
       FD_SET(srv->sock, &srv->rdfs);

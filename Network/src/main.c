@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 17:26:47 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:39:36 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -18,7 +18,7 @@ void		free_before_leaving()
 {
   t_server	*server;
 
-  server = save_server(NULL);
+  server = save_server(NULL, 0);
   if (server)
     {
       if (close_all_clients(server) == -1)
@@ -48,6 +48,7 @@ int		run_zappy(t_server *srv)
   if (close_all_clients(srv) == -1)
     return (-1);
   free_all(srv, 0);
+  save_server(NULL, 1);
   return (run_zappy(NULL));
 }
 

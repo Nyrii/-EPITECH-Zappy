@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 15:48:06 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:34:54 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -25,7 +25,8 @@ int		incantation_ia(t_server *server, t_player *player)
       player->level += 1;
       while (server->data.map[pos[0]][pos[1]][++i] != -1)
 	server->data.map[pos[0]][pos[1]][i] -= server->data.resources[level][i];
-      // check victory;
+      if (player->level == 8)
+	return (2);
       return (0);
     }
   return (0);

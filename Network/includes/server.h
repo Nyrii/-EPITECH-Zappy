@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 18:18:50 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:51:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -185,6 +185,7 @@ int		free_all(t_server *, int const);
 /*
 ** generate_map.c
 */
+void		generate_food(t_data *);
 int		generate_map(t_data *, int, int, int);
 
 /*
@@ -328,7 +329,7 @@ int		right_ia(t_server *, t_player *);
 /*
 ** save_server.c
 */
-t_server	*save_server(t_server *);
+t_server	*save_server(t_server *, int const);
 
 /*
 ** see_ia.c
