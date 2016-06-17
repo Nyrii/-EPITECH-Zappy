@@ -4,8 +4,8 @@
 ** Made by Nyrandone Noboud-Inpeng
 ** Login   <noboud_n@epitech.eu>
 **
-** Started on  Sun Jun 12 00:53:40 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:12:09 2016 Nyrandone Noboud-Inpeng
+** Started on  Fri Jun 17 14:29:09 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 14:44:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -94,7 +94,7 @@ void	init_perimeter_left(t_data data, t_player *player, int *pos)
   pos[16] = -1;
 }
 
-void		call_init_parameter(t_data data, t_player *player,
+void		call_init_perimeter(t_data data, t_player *player,
 				    int *perimeter)
 {
   int		i;

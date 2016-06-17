@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 15:58:57 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 16:52:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -20,5 +20,9 @@
 # define ERR_PUSHBACK "Error: Push back of a node failed.\n"
 # define ERR_POS_MAP "Error: could not find position in the map. Aborted.\n"
 # define ERR_GET_RESOURCES "Error: could not get any resources. Aborted.\n"
+# define ERR_SAME_TEAM "Error: teams cannot have the same name.\n"
+# define ERR_WRONG_ARGS "Error: invalid argument(s).\n"
+# define ERR_PLAYER "Error: could not find any player with this id\n"
+# define ERR_CLOSE "Error: could not close a client\n"
 
 #endif /* ERRORS_H_ */

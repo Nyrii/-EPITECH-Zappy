@@ -5,13 +5,14 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Mon Jun 13 12:17:46 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:18:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <string.h>
 #include "server.h"
+#include "errors.h"
 
 // temporary
 static void	dump_lists(t_server *srv)
@@ -36,6 +37,7 @@ static int	handle_client(t_server *srv, void *tmp, int type)
   int		tmp_sock;
   char		buffer[512];
   int		n;
+  int		ret;
 
   n = 0;
   if (tmp == NULL)
@@ -44,17 +46,20 @@ static int	handle_client(t_server *srv, void *tmp, int type)
     tmp_sock = ((t_client *)tmp)->sock;
   else if (type == 2)
     tmp_sock = ((t_player *)tmp)->sock;
-  memset(buffer, 0, 512);
+  if (memset(buffer, 0, 512) == NULL)
+    return (fprintf(stderr, ERR_MEMSET), -1);
   if ((n = recv(tmp_sock, buffer, 512, 0)) > 0)
     {
       if ((srv->cmd = parse_cmd(srv, epur_bf(buffer))) == NULL)
 	return (-1);
       if (type == 1)
-	manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
+	ret = manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
       else if (type == 2)
-	manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
+	ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
       else
-	manage_auth(srv, (t_client *)tmp, srv->cmd);
+	ret = manage_auth(srv, (t_client *)tmp, srv->cmd);
+      if (ret == -1 || ret == 2)
+	return (ret);
       printf("[%s]\n", srv->cmd);
     }
   return (0);
@@ -88,6 +93,8 @@ static int		check_lists(int sock, t_server *srv)
 
 static int		check_socket(int sock, t_server *srv)
 {
+  int			ret_value;
+
   if (FD_ISSET(sock, &srv->rdfs))
     {
       if (sock == srv->sock)
@@ -96,24 +103,27 @@ static int		check_socket(int sock, t_server *srv)
 	  handle_new_client(srv);
 	}
       else
-	check_lists(sock, srv);
+	if ((ret_value = check_lists(sock, srv)) == -1 || ret_value == 2)
+	  return (ret_value);
       dump_lists(srv);
       return (1);
     }
   return (0);
 }
 
-void		check_sockets_loop(t_server *srv)
+int		check_sockets_loop(t_server *srv)
 {
   int		i;
+  int		ret_value;
 
   i = 0;
   while (i <= srv->max)
     {
-      if (check_socket(i, srv) == 1)
-	return ;
+      if ((ret_value = check_socket(i, srv)) == -1 || ret_value == 2)
+	return (ret_value);
       i++;
     }
+  return (0);
 }
 
 void			set_all_clients(t_server *srv)

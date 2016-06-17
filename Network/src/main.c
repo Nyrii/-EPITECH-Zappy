@@ -5,12 +5,28 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 21:32:05 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:39:36 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
 #include <sys/socket.h>
+#include <signal.h>
+#include <stdlib.h>
 #include "server.h"
+
+void		free_before_leaving()
+{
+  t_server	*server;
+
+  server = save_server(NULL, 0);
+  if (server)
+    {
+      if (close_all_clients(server) == -1)
+	exit(-1);
+      free_all(server, 0);
+    }
+  exit(0);
+}
 
 int		run_zappy(t_server *srv)
 {
@@ -24,8 +40,16 @@ int		run_zappy(t_server *srv)
   srv->all_players = NULL;
   if (generate_map(&srv->data, 0, 0, 0) == -1)
     return (-1);
-  loop_server(srv);
-  return (0);
+  if (loop_server(srv) == -1)
+    {
+      close_all_clients(srv);
+      return (free_all(srv, -1));
+    }
+  if (close_all_clients(srv) == -1)
+    return (-1);
+  free_all(srv, 0);
+  save_server(NULL, 1);
+  return (run_zappy(NULL));
 }
 
 int		main(int argc, char **argv)
@@ -33,11 +57,11 @@ int		main(int argc, char **argv)
   t_server	server;
 
   srand(time(NULL));
-  if (get_opt(argc, argv, &server.data) != -1)
+  signal(SIGINT, free_before_leaving);
+  if (get_opt(argc, argv, &server) != -1)
     {
       if (run_zappy(&server) == -1)
 	return (-1);
     }
-  //free_tab(server.data.teams, 0);
   return (0);
 }

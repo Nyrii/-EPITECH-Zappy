@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 13 12:10:24 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 16 16:48:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -25,56 +25,49 @@ static int	pbc(t_server *server, t_player *player)
   return (send_all_graphics(server, buffer));
 }
 
-static void	determine_best_way(int *src, int *dest,
-				   int *pos)
+static int	get_best_distance_from_tile(t_player *target, t_player *player,
+					    int *calculs)
 {
-  int		i;
-  int		n;
-  int		distance;
+  float		distance;
+  int		x;
+  double	angle;
+  double	rad;
 
   distance = -1;
-  i = 0;
-  while (src[i] != -1)
+  x = 0;
+  while (calculs[x] != -1)
     {
-      n = 0;
-      while (dest[n] != -1)
+      if (distance == -1
+	  || distance > sqrt(pow(calculs[x] - player->y, 2)
+			     + pow(calculs[x + 1] - player->x, 2)))
 	{
-	  if (distance == -1 || distance > sqrt(pow(src[i + 1] - dest[n + 1], 2)
-						+ pow(src[i] - dest[n], 2)))
-	    {
-	      distance = sqrt(pow(src[i + 1] - dest[n + 1], 2)
-			      + pow(src[i] - dest[n], 2));
-	      pos[0] = dest[n];
-	      pos[1] = dest[n + 1];
-	    }
-	  n += 2;
+	  distance = sqrt(pow(calculs[x] - player->y, 2)
+			  + pow(calculs[x + 1] - player->x, 2));
+	  angle = get_angle(player, calculs[x], calculs[x + 1], &rad);
 	}
-      i += 2;
+      x += 2;
     }
+  return (get_best_tile_by_angle(angle, rad, target));
 }
 
-static int	determine_direction(int *dest, int *pos)
+static int	determine_best_way(t_server *server, t_player *player,
+				   t_player *target)
 {
-  int		i;
+  int		calculs[19];
+  int		tile;
 
-  i = 0;
-  while (dest[i] != -1)
-    {
-      if (dest[i] == pos[0])
-	return (i / 2 + 1);
-      i += 2;
-    }
-  return (0);
+  init_calculs(server->data, calculs, target);
+  tile = get_best_distance_from_tile(target, player, calculs);
+  if (tile == -1)
+    return (0);
+  return (tile);
 }
 
-static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
-			       int *perimeter_src)
+static int	send_broadcast(t_server *server, t_player *player, t_list tmp)
 {
-  int		perimeter_dest[17];
   t_player	*tmp_player;
-  int		direction;
   unsigned int	i;
-  int		pos[2];
+  int		tile;
 
   i = -1;
   while (++i < list_get_size(tmp))
@@ -82,11 +75,9 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
       if ((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
 	  && tmp_player->sock != player->sock)
 	{
-	  call_init_parameter(server->data, tmp_player, perimeter_dest);
-	  determine_best_way(perimeter_src, perimeter_dest, pos);
-	  direction = determine_direction(perimeter_dest, pos);
+	  tile = determine_best_way(server, player, tmp_player);
 	  if (dprintf(tmp_player->sock, "message %d,%s\r\n",
-		      direction, server->params) == -1)
+		      tile, server->params) == -1)
 	    return (-1);
 	}
     }
@@ -95,7 +86,6 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 
 int		broadcast_ia(t_server *server, t_player *player)
 {
-  int		perimeter_src[17];
   t_list	tmp;
 
   if (server->params == NULL)
@@ -103,6 +93,5 @@ int		broadcast_ia(t_server *server, t_player *player)
   else if (dprintf(player->sock, OK) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   tmp = server->all_players;
-  call_init_parameter(server->data, player, perimeter_src);
-  return (send_broadcast(server, player, tmp, perimeter_src));
+  return (send_broadcast(server, player, tmp));
 }

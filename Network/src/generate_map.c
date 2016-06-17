@@ -5,19 +5,39 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 13:58:27 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:51:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
 #include "server.h"
 
-void			generate_resources(int resource,
+void			generate_food(t_data *data)
+{
+  int			y;
+  int			x;
+
+  y = 0;
+  while (data->map && data->map[y] != NULL)
+    {
+      x = 0;
+      while (data->map[y][x] != NULL)
+	{
+	  if ((rand() % 100) < data->percentages[FOOD])
+	    data->map[y][x][FOOD] += 1;
+	  ++x;
+	}
+      ++y;
+    }
+}
+
+static void		generate_resources(int resource,
 					   int quantity, int ***map)
 {
   int			x;
   int			y;
 
-  x = 0;
+  if (resource >= NONE)
+    return ;
   while (quantity > 0)
     {
       y = 0;
@@ -49,7 +69,7 @@ static void		generate_tile(t_data *data, int y, int x)
   while (i < NONE)
     data->map[y][x][i++] = 0;
   data->map[y][x][i] = -1;
-  resource = 0;
+  resource = 1;
   while (resource < NONE)
     {
       if ((rand() % 100) < data->percentages[resource])

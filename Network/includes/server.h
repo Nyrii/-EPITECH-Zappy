@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 21:40:47 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:51:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -63,7 +63,7 @@ typedef struct		s_egg
   int			y;
   int			timer;
   int			is_born;
-  t_team		*father;
+  char			*team_name;
 }			t_egg;
 
 typedef struct		s_data
@@ -114,8 +114,9 @@ int   		init_server(int, int);
 int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
-void  		check_sockets_loop(t_server *);
+int  		check_sockets_loop(t_server *);
 t_player	*new_player(t_server *, t_team *, t_client *);
+t_egg		*new_egg(t_server *, t_player *);
 t_client	*new_client(t_server *);
 int		handle_new_player(t_server *, t_team *, t_player *);
 int		handle_new_client(t_server *);
@@ -133,6 +134,17 @@ int		bct_on_tile(t_server *, t_client *);
 int		broadcast_ia(t_server *, t_player *);
 
 /*
+** broadcast_init.c
+*/
+void		init_calculs(t_data, int *, t_player *);
+int		get_best_tile(int *, t_player *);
+
+/*
+** close_all_clients.c
+*/
+int		close_all_clients(t_server *);
+
+/*
 ** connect_ia.c
 */
 int		connect_nbr_ia(t_server *, t_player *);
@@ -146,6 +158,11 @@ int		count_elements(t_list *);
 ** drop_ia.c
 */
 int		drop_ia(t_server *, t_player *);
+
+/*
+** elevation.c
+*/
+int		is_elevation_legit(t_data *, int, int *);
 
 /*
 ** expulse_ia.c
@@ -170,16 +187,21 @@ int		forward_ia(t_server *, t_player *);
 /*
 ** free.c
 */
-int		free_tab(char **, int);
+int		free_map(int ***, int const);
+int		free_teams(t_list, int const);
+int		free_list(t_list, int const);
+int		free_int_tab(int *, int const);
+int		free_double_int_tab(int **, int const);
 
 /*
-** left_ia.c
+** free_all.c
 */
-int		left_ia(t_server *, t_player *);
+int		free_all(t_server *, int const);
 
 /*
 ** generate_map.c
 */
+void		generate_food(t_data *);
 int		generate_map(t_data *, int, int, int);
 
 /*
@@ -188,21 +210,33 @@ int		generate_map(t_data *, int, int, int);
 int		init_resources(int ***);
 
 /*
+** get_angle.c
+*/
+double		get_angle(t_player *, int const, int const, double *);
+int		get_best_tile_by_angle(double const, double const, t_player *);
+
+/*
 ** get_opt.c
 */
-int		get_opt(int, char **, t_data *);
+int		get_opt(int, char **, t_server *);
 
 /*
 ** get_player.c
 */
 t_list		get_players_at_pos(t_data *, int, int);
 int		get_max_player_id(t_server *);
+t_player	*get_player_by_id(t_server *, int const);
 
 /*
 ** get_team.c
 */
 t_team		*get_team_by_name(t_server *, const char *);
 t_team		*get_team_by_player(t_server *, t_player *);
+
+/*
+** left_ia.c
+*/
+int		left_ia(t_server *, t_player *);
 
 /*
 ** incantation_ia.c
@@ -222,13 +256,24 @@ void		init_ptrfunc(int (**)(t_server *, t_player *),
 int		init_nb_players(int **);
 
 /*
+** init_percentages.c
+*/
+void		init_percentages(t_data *);
+
+/*
 ** init_perimeter.c
 */
-void	init_perimeter_top(t_data, t_player *, int *);
-void	init_perimeter_right(t_data, t_player *, int *);
-void	init_perimeter_bottom(t_data, t_player *, int *);
-void	init_perimeter_left(t_data, t_player *, int *);
-void	call_init_parameter(t_data, t_player *, int *);
+void		call_init_perimeter(t_data, t_player *, int *);
+
+/*
+** init_strings_resources.c
+*/
+void		init_strings_resources(t_data *);
+
+/*
+** init_teams_max_players.c
+*/
+int		init_teams_max_players(t_list, int const);
 
 /*
 ** inventory_ia.c
@@ -296,6 +341,11 @@ int		remove_client_from_queue(t_server *, t_client *);
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
+
+/*
+** save_server.c
+*/
+t_server	*save_server(t_server *, int const);
 
 /*
 ** see_ia.c

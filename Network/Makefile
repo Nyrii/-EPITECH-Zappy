@@ -5,53 +5,61 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 12 21:24:26 2016 Nyrandone Noboud-Inpeng
+## Last update Fri Jun 17 16:53:31 2016 Nyrandone Noboud-Inpeng
 ##
 
-SRCSER	= bct.c			\
-	broadcast_ia.c		\
-	connect_nbr_ia.c	\
-	drop_ia.c		\
-	elevation.c		\
-	expulse_ia.c		\
-	epur.c			\
-	fork_ia.c		\
-	forward_ia.c		\
-	free.c			\
-	generate_map.c		\
-	generic_list.c		\
-	generic_list_del.c	\
-	get_opt.c		\
-	get_player.c		\
-	get_team.c		\
-	incantation_ia.c	\
-	init.c			\
-	init_nb_players.c	\
-	init_perimeter.c	\
-	init_resources.c	\
-	inventory_ia.c		\
-	left_ia.c		\
-	loop.c			\
-	main.c			\
-	mct.c			\
-	msz.c			\
-	new_player.c		\
-	parse.c			\
-	pin.c			\
-	plv.c			\
-	ppo.c			\
-	process.c		\
-	remove.c		\
-	right_ia.c		\
-	see_ia.c		\
-	see_ia_calculs.c	\
-	see_ia_resources.c	\
-	send.c		\
-	server_lib.c		\
-	sgt.c			\
-	socket.c		\
-	take_ia.c		\
-	tna.c			\
+SRCSER	= bct.c				\
+	broadcast_ia.c			\
+	broadcast_init.c		\
+	close_all_clients.c		\
+	connect_nbr_ia.c		\
+	drop_ia.c			\
+	elevation.c			\
+	expulse_ia.c			\
+	epur.c				\
+	fork_ia.c			\
+	forward_ia.c			\
+	free.c				\
+	free_all.c			\
+	generate_map.c			\
+	generic_list.c			\
+	generic_list_del.c		\
+	get_angle.c			\
+	get_opt.c			\
+	get_player.c			\
+	get_team.c			\
+	incantation_ia.c		\
+	init.c				\
+	init_teams_max_players.c	\
+	init_nb_players.c		\
+	init_percentages.c		\
+	init_perimeter.c		\
+	init_resources.c		\
+	init_strings_resources.c	\
+	inventory_ia.c			\
+	left_ia.c			\
+	loop.c				\
+	main.c				\
+	mct.c				\
+	msz.c				\
+	new_player.c			\
+	parse.c				\
+	pin.c				\
+	plv.c				\
+	ppo.c				\
+	process.c			\
+	remove.c			\
+	right_ia.c			\
+	save_server.c			\
+	see_ia.c			\
+	see_ia_calculs.c		\
+	see_ia_resources.c		\
+	send.c				\
+	server_lib.c			\
+	sgt.c				\
+	socket.c			\
+	take_ia.c			\
+	tna.c				\
 	welcome.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
