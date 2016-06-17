@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Mon Jun 13 11:19:00 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:01:04 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,7 +29,6 @@ static char	*delete_end(char *str)
       i++;
     }
   new[j] = '\0';
-  // free str ?
   return (new);
 }
 

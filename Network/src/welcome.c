@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Thu Jun 16 14:24:57 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 17:06:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
@@ -35,9 +35,11 @@ int		handle_new_client(t_server *srv)
 {
   t_client	*c;
 
-  c = new_client(srv);
+  if ((c = new_client(srv)) == NULL)
+    return (-1);
   FD_SET(c->sock, &srv->rdfs);
-  list_add_elem_at_back(&srv->queue_clients, c);
+  if (list_add_elem_at_back(&srv->queue_clients, c) == FALSE)
+    return (-1);
   if (dprintf(c->sock, "BIENVENUE\r\n") == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);

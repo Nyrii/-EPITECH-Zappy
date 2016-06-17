@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 14:42:24 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 18:18:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -98,7 +98,7 @@ int   		init_server(int, int);
 int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
-void  		check_sockets_loop(t_server *);
+int  		check_sockets_loop(t_server *);
 t_player	*new_player(t_server *, t_team *, t_client *);
 t_egg		*new_egg(t_server *, t_player *);
 t_client	*new_client(t_server *);
@@ -122,6 +122,11 @@ int		broadcast_ia(t_server *, t_player *);
 */
 void		init_calculs(t_data, int *, t_player *);
 int		get_best_tile(int *, t_player *);
+
+/*
+** close_all_clients.c
+*/
+int		close_all_clients(t_server *);
 
 /*
 ** connect_ia.c
@@ -166,8 +171,16 @@ int		forward_ia(t_server *, t_player *);
 /*
 ** free.c
 */
-int		free_tab(char **, int);
+int		free_map(int ***, int const);
+int		free_teams(t_list, int const);
+int		free_list(t_list, int const);
+int		free_int_tab(int *, int const);
+int		free_double_int_tab(int **, int const);
 
+/*
+** free_all.c
+*/
+int		free_all(t_server *, int const);
 
 /*
 ** generate_map.c
@@ -226,9 +239,19 @@ void		init_ptrfunc(int (**)(t_server *, t_player *),
 int		init_nb_players(int **);
 
 /*
+** init_percentages.c
+*/
+void		init_percentages(t_data *);
+
+/*
 ** init_perimeter.c
 */
 void		call_init_perimeter(t_data, t_player *, int *);
+
+/*
+** init_strings_resources.c
+*/
+void		init_strings_resources(t_data *);
 
 /*
 ** init_teams_max_players.c
@@ -301,6 +324,11 @@ int		remove_client_from_queue(t_server *, t_client *);
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
+
+/*
+** save_server.c
+*/
+t_server	*save_server(t_server *);
 
 /*
 ** see_ia.c

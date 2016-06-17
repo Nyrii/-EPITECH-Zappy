@@ -5,12 +5,13 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Fri Jun 17 14:30:07 2016 Nyrandone Noboud-Inpeng
+## Last update Fri Jun 17 16:53:31 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
 	broadcast_ia.c			\
 	broadcast_init.c		\
+	close_all_clients.c		\
 	connect_nbr_ia.c		\
 	drop_ia.c			\
 	elevation.c			\
@@ -19,6 +20,7 @@ SRCSER	= bct.c				\
 	fork_ia.c			\
 	forward_ia.c			\
 	free.c				\
+	free_all.c			\
 	generate_map.c			\
 	generic_list.c			\
 	generic_list_del.c		\
@@ -30,8 +32,10 @@ SRCSER	= bct.c				\
 	init.c				\
 	init_teams_max_players.c	\
 	init_nb_players.c		\
+	init_percentages.c		\
 	init_perimeter.c		\
 	init_resources.c		\
+	init_strings_resources.c	\
 	inventory_ia.c			\
 	left_ia.c			\
 	loop.c				\
@@ -46,6 +50,7 @@ SRCSER	= bct.c				\
 	process.c			\
 	remove.c			\
 	right_ia.c			\
+	save_server.c			\
 	see_ia.c			\
 	see_ia_calculs.c		\
 	see_ia_resources.c		\

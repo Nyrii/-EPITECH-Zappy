@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 17 15:29:23 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 17:05:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -92,7 +92,7 @@ t_client        	*new_client(t_server *srv)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
   cl->timer = 0;
-  if ((cl->sock = accept(srv->sock, (struct sockaddr *) &sin, &ss)) == -1)
+  if ((cl->sock = accept(srv->sock, (struct sockaddr *)&sin, &ss)) == -1)
     {
       error("Error socket can't accept connexion");
       return (NULL);

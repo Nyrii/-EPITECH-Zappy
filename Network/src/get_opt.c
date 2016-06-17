@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 14:37:01 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 17 15:53:11 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -27,23 +27,9 @@ static void	init_data(t_data *data)
   data->eggs = NULL;
   data->map = NULL;
   data->resources = NULL;
-  data->percentages[FOOD] = 50.0;
-  data->percentages[LINEMATE] = 23.0;
-  data->percentages[DERAUMERE] = 20.5;
-  data->percentages[SIBUR] = 25.6;
-  data->percentages[MENDIANE] = 12.8;
-  data->percentages[PHIRAS] = 15.0;
-  data->percentages[THYSTAME] = 2.5;
-  data->percentages[NONE] = -1;
   data->required_players = NULL;
-  data->strings_resources[FOOD] = "nourriture";
-  data->strings_resources[LINEMATE] = "linemate";
-  data->strings_resources[DERAUMERE] = "deraumere";
-  data->strings_resources[SIBUR] = "sibur";
-  data->strings_resources[MENDIANE] = "mendiane";
-  data->strings_resources[PHIRAS] = "phiras";
-  data->strings_resources[THYSTAME] = "thystame";
-  data->strings_resources[NONE] = NULL;
+  init_percentages(data);
+  init_strings_resources(data);
 }
 
 static t_team	*create_new_team(char *name_team, int max)
@@ -53,7 +39,8 @@ static t_team	*create_new_team(char *name_team, int max)
   if ((tmp = malloc(sizeof(t_team))) == NULL)
     return (NULL);
   tmp->max_players = max;
-  tmp->name = name_team;
+  if ((tmp->name = strdup(name_team)) == NULL)
+    return (NULL);
   tmp->players = NULL;
   return (tmp);
 }
