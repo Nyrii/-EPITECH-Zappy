@@ -14,7 +14,23 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/timeb.h>
 # include "generic_list.h"
+
+typedef struct		s_timer
+{
+  struct timeb		val;
+  int			is_done;
+  double		end;
+}			t_timer;
+
+typedef struct		s_task
+{
+  char			*cmd;
+  char			*params;
+  char			*real;
+  t_timer		*timer;
+}			t_task;
 
 typedef struct		s_client
 {
@@ -31,7 +47,7 @@ typedef struct		s_player
   int			orientation;
   int			level;
   int			inventory[8];
-  double		timer;
+  t_timer		timer;
 }			t_player;
 
 typedef struct		s_team
