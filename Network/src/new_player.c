@@ -46,7 +46,7 @@ t_egg			*new_egg(t_server *srv, t_player *p)
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
-  new->timer = 0.0;
+  ftime(&new->timer.val);
   new->x = p->x;
   new->y = p->y;
   new->is_born = 0;
@@ -68,7 +68,6 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
     }
   new->level = 1;
   new->orientation = rand() % 4 * 90;
-  new->timer = 0.0;
   new->id = get_max_player_id(srv) + 1;
   new->inventory[FOOD] = 0;
   new->inventory[LINEMATE] = 0;
@@ -91,7 +90,7 @@ t_client        	*new_client(t_server *srv)
   if ((cl = malloc(sizeof(t_client))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
-  cl->timer = 0;
+  ftime(&cl->timer.val);
   if ((cl->sock = accept(srv->sock, (struct sockaddr *)&sin, &ss)) == -1)
     {
       error("Error socket can't accept connexion");

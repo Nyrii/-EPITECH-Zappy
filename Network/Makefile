@@ -59,6 +59,7 @@ SRCSER	= bct.c				\
 	sgt.c				\
 	socket.c			\
 	take_ia.c			\
+	timer.c		\
 	tna.c				\
 	welcome.c
 

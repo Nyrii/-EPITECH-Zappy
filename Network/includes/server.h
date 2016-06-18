@@ -35,7 +35,7 @@ typedef struct		s_task
 typedef struct		s_client
 {
   int			sock;
-  int			timer;
+  t_timer		timer;
 }			t_client;
 
 typedef struct		s_player
@@ -61,7 +61,7 @@ typedef struct		s_egg
 {
   int			x;
   int			y;
-  int			timer;
+  t_timer		timer;
   int			is_born;
   char			*team_name;
 }			t_egg;
@@ -297,6 +297,11 @@ int		msz(t_server *, t_client *);
 ** take_ia.c
 */
 int		take_ia(t_server *, t_player *);
+
+/*
+** take_ia.c
+*/
+int		check_timer(t_server *srv);
 
 /*
 ** tna.c

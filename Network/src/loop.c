@@ -10,21 +10,25 @@
 
 #include "server.h"
 
-int	loop_server(t_server *srv)
+int			loop_server(t_server *srv)
 {
-  int	ret_value;
+  struct timeval 	tv;
+  int			ret_value;
 
+  printf("Loop server\n");
   while (1)
     {
+      tv.tv_sec = 0;
+      tv.tv_usec = 100;
       save_server(srv, 1);
-      printf("Loop server\n");
       FD_ZERO(&srv->rdfs);
       FD_SET(srv->sock, &srv->rdfs);
       set_all_clients(srv);
-      if (select(srv->max + 1, &srv->rdfs, NULL, NULL, NULL) == -1)
+      if (select(srv->max + 1, &srv->rdfs, NULL, NULL, &tv) == -1)
         return (error("Select failed\n"));
       if ((ret_value = check_sockets_loop(srv)) == -1 || ret_value == 2)
 	return (ret_value);
+      check_timer(srv);
     }
   return (0);
 }

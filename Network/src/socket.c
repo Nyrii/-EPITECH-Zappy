@@ -99,7 +99,6 @@ static int		check_socket(int sock, t_server *srv)
     {
       if (sock == srv->sock)
 	{
-	  printf("New client\n");
 	  handle_new_client(srv);
 	}
       else
@@ -119,10 +118,10 @@ int		check_sockets_loop(t_server *srv)
   i = 0;
   while (i <= srv->max)
     {
-      if ((ret_value = check_socket(i, srv)) == -1 || ret_value == 2)
+      if ((ret_value = check_socket(i, srv)) == -1 || ret_value == 1)
 	return (ret_value);
       i++;
-    }
+   }
   return (0);
 }
 
