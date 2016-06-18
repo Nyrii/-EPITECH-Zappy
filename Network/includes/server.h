@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 18:51:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 18 15:01:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -219,6 +219,11 @@ int		get_best_tile_by_angle(double const, double const, t_player *);
 ** get_opt.c
 */
 int		get_opt(int, char **, t_server *);
+
+/*
+** get_opt_set_delay.c
+*/
+void		set_delay(t_server *, char *, int *);
 
 /*
 ** get_player.c

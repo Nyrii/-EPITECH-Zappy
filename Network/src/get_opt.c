@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 15:53:11 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 18 15:21:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -22,7 +22,7 @@ static void	init_data(t_data *data)
   data->world_x = -1;
   data->world_y = -1;
   data->max_clients = -1;
-  data->delay = 100;
+  data->delay = -1;
   data->teams = NULL;
   data->eggs = NULL;
   data->map = NULL;
@@ -91,7 +91,7 @@ static int	manage_options(t_server *server, char **argv,
       server->data.max_clients = atoi(optarg);
       break ;
       case 't':
-      server->data.delay = atoi(optarg);
+      set_delay(server, optarg, optind);
       break ;
       case 'n':
       if (store_team(server, argv, optind) == -1)
@@ -108,7 +108,7 @@ int		get_opt(int argc, char **argv, t_server *server)
   int		opt;
 
   init_data(&server->data);
-  while ((opt = getopt(argc, argv, "p:x:y:c:t:n:")) != -1)
+  while ((opt = getopt(argc, argv, "p:x:y:c:t::n:")) != -1)
     {
       if (manage_options(server, argv, opt, &optind) == -1)
 	return (-1);
