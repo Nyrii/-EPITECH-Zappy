@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 18 15:00:19 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 18 15:01:19 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 18 15:22:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -31,4 +31,6 @@ void		set_delay(t_server *server, char *optarg, int *optind)
       server->data.delay = 100;
       *optind = *optind > 0 ? (*optind) - 1 : *optind;
     }
+  if (optarg == NULL)
+    server->data.delay = 100;
 }

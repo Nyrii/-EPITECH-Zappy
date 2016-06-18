@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 18 15:00:08 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 18 15:21:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -108,7 +108,7 @@ int		get_opt(int argc, char **argv, t_server *server)
   int		opt;
 
   init_data(&server->data);
-  while ((opt = getopt(argc, argv, "p:x:y:c:t:n:")) != -1)
+  while ((opt = getopt(argc, argv, "p:x:y:c:t::n:")) != -1)
     {
       if (manage_options(server, argv, opt, &optind) == -1)
 	return (-1);
