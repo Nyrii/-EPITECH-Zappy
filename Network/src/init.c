@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:08:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 19:31:25 2016 Kevin Empociello
+** Last update Sun Jun 19 18:13:05 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -33,7 +33,9 @@ void		init_code(char **ia, char **graphic)
   graphic[4] = "ppo";
   graphic[5] = "plv";
   graphic[6] = "pin";
-  graphic[7] = NULL;
+  graphic[7] = "sgt";
+  graphic[8] = "sst";
+  graphic[9] = NULL;
 }
 
 void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
@@ -59,5 +61,7 @@ void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
   func_graphic[4] = &ppo;
   func_graphic[5] = &plv;
   func_graphic[6] = &pin;
-  func_graphic[7] = NULL;
+  func_graphic[7] = &sgt;
+  func_graphic[8] = &sst;
+  func_graphic[9] = NULL;
 }

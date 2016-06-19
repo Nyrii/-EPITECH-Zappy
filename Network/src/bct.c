@@ -5,12 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:01:42 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 18:21:34 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "errors.h"
+#include "replies.h"
 
 static char 	*fill_bct(char *answer, int ***map,
 			  int const *pos, int i)
@@ -71,24 +72,25 @@ int		bct_on_tile(t_server *server, t_client *graphic)
 {
   char		*parameters[2];
   int		pos[2];
-  char		*answer;
+  char		*answ;
+  char		buf[4096];
 
-  (void)graphic;
   if (!server->params
       || !(parameters[0] = strtok(server->params, " \t"))
       || !(parameters[1] = strtok(NULL, " \t")))
-    return (fprintf(stderr, ERR_WRONG_ARGS), 0); // KO to graphical client;
+    return (sbp(graphic));
   pos[0] = atoi(parameters[0]);
   pos[1] = atoi(parameters[1]);
   if (pos[0] >= 0 && pos[0] < server->data.world_y
       && pos[1] >= 0 && pos[1] < server->data.world_y)
     {
-      if ((answer = bct(server->data.map, pos[0], pos[1])) == NULL)
+      if ((answ = bct(server->data.map, pos[0], pos[1])) == NULL)
 	return (-1);
-      printf("%s\n", answer);
-      // Answer to graphical client;
+      if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
+        return (fprintf(stderr, ERR_PRINTF), -1);
+      if (dprintf(graphic->sock, "%s", buf) == -1)
+	return (fprintf(stderr, ERR_PRINTF), -1);
       return (0);
     }
-  fprintf(stderr, ERR_WRONG_ARGS); // KO to graphical client;
-  return (-1);
+  return (sbp(graphic));
 }

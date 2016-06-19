@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:34:40 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 17:59:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -38,5 +38,6 @@
 # define PIC "pic %d %d %d %d" // no \r\n : done on purpose
 # define PIE "pie %d %d %d\r\n"
 # define PNW "pnw %d %d %d %d %d %s\r\n"
+# define SBP "sbp\r\n"
 
 #endif /* REPLIES_H_ */

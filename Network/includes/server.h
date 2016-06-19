@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 16:17:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 18:13:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -99,8 +99,8 @@ typedef struct		s_server
   char			*cmd;
   char			*cmd_tab_ia[13];
   int			(*cmd_ptr_ia[13])();
-  char			*cmd_tab_graphic[8];
-  int			(*cmd_ptr_graphic[8])();
+  char			*cmd_tab_graphic[10];
+  int			(*cmd_ptr_graphic[10])();
 
   /* SOCKET */
   struct timeval	timeout;
@@ -338,6 +338,11 @@ int		pin_ia(t_server *, t_player *);
 int		pin(t_server *, t_client *);
 
 /*
+** pnw.c
+*/
+int		pnw(t_server *, t_player *);
+
+/*
 ** ppo.c
 */
 int		ppo_ia(t_server *, t_player *);
@@ -364,6 +369,11 @@ int		right_ia(t_server *, t_player *);
 ** save_server.c
 */
 t_server	*save_server(t_server *, int const);
+
+/*
+** sbp.c
+*/
+int		sbp(t_client *);
 
 /*
 ** see_ia.c
