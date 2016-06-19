@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:13:38 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 18:36:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -220,7 +220,7 @@ int		get_best_tile_by_angle(double const, double const, t_player *);
 /*
 ** get_egg.c
 */
-int			get_max_egg_id(t_server *);
+int		get_max_egg_id(t_server *);
 
 /*
 ** get_opt.c
@@ -230,7 +230,7 @@ int		get_opt(int, char **, t_server *);
 /*
 ** get_opt_set_delay.c
 */
-void		set_delay(t_server *, char *, int *);
+void		set_delay(t_server *, char **, char *, int *);
 
 /*
 ** get_player.c

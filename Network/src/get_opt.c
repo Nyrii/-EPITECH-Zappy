@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 18 15:21:44 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 18:35:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -91,7 +91,7 @@ static int	manage_options(t_server *server, char **argv,
       server->data.max_clients = atoi(optarg);
       break ;
       case 't':
-      set_delay(server, optarg, optind);
+      set_delay(server, argv, optarg, optind);
       break ;
       case 'n':
       if (store_team(server, argv, optind) == -1)
