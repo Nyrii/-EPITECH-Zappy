@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 16:25:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 17:33:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -76,7 +76,7 @@ static int	pic(t_server *server, t_player *player)
 
   if ((tmp = get_players_at_pos(&server->data, player->y,
 				player->x)) == NULL)
-    return (-1);
+    return (fprintf(stderr, ERR_PLAYER), -1);
   if (memset(buffer, 0, 50) == NULL
       || snprintf(buffer, 50, PIC,
 		  player->x, player->y, player->level, player->id) == -1)

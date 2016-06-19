@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 14:00:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 17:07:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -27,21 +27,24 @@ static int	take_food(t_server *server, t_player *player)
 {
   int		x;
   int		y;
-  char		*bct_answer;
+  char		*answ;
+  char		buf[4096];
 
   x = player->x;
   y = player->y;
-  bct_answer = NULL;
+  answ = NULL;
   if (server->data.map[y] && server->data.map[y][x]
       && server->data.map[y][x][0] > 0)
     {
       server->data.map[y][x][0] -= 1;
       player->inventory[0] += 1;
-      if ((bct_answer = bct(server->data.map, y, x)) == NULL)
+      if ((answ = bct(server->data.map, y, x)) == NULL)
 	return (-1);
-      if (send_all_graphics(server, bct_answer) == -1)
+      if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
+	return (fprintf(stderr, ERR_PRINTF), -1);
+      if (send_all_graphics(server, buf) == -1)
 	return (-1);
-      free(bct_answer);
+      free(answ);
     }
   else if (dprintf(player->sock, KO) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
@@ -52,22 +55,25 @@ static int	take_stone(t_server *server, t_player *player, int index)
 {
   int		x;
   int		y;
-  char		*bct_answer;
+  char		*answ;
+  char		buf[4096];
 
   x = player->x;
   y = player->y;
-  bct_answer = NULL;
+  answ = NULL;
   if (server->data.map[y] && server->data.map[y][x]
       && server->data.map[y][x][index] > 0)
     {
       server->data.map[y][x][index] -= 1;
       player->inventory[index] += 1;
-      if ((bct_answer = bct(server->data.map, y, x)) == NULL)
+      if ((answ = bct(server->data.map, y, x)) == NULL)
 	return (-1);
+      if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
+	return (fprintf(stderr, ERR_PRINTF), -1);
       if (pgt(server, player, index) == -1 || pin_ia(server, player) == -1
-	  || send_all_graphics(server, bct_answer) == -1)
+	  || send_all_graphics(server, buf) == -1)
 	return (-1);
-      free(bct_answer);
+      free(answ);
     }
   else if (dprintf(player->sock, KO) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 18:41:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 17:01:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -49,7 +49,7 @@ char		*bct(int ***map, int const y, int const x)
   int		pos[2];
 
   i = 0;
-  if ((answer = malloc(150 * sizeof(char))) == NULL)
+  if ((answer = malloc(160 * sizeof(char))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   function = "bct";
   while (function[i])

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 16:14:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:36:12 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 16:58:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -18,13 +18,12 @@ int		mct(t_server *srv, t_client *cl)
   int		y;
 
   x = 0;
-  y = 0;
   while (x < srv->data.world_x)
     {
       y = 0;
       while (y < srv->data.world_y)
 	{
-	  if ((tmp = bct(srv->data.map, x, y)) == NULL)
+	  if ((tmp = bct(srv->data.map, y, x)) == NULL)
 	    return (-1);
 	  dprintf(cl->sock, MSG, tmp);
 	  free(tmp);
