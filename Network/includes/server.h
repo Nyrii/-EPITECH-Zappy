@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 14:36:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 16:17:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -328,6 +328,7 @@ char		*parse_cmd(t_server *, char *);
 /*
 ** plv.c
 */
+int		plv_ia(t_server *, t_player *);
 int		plv(t_server *, t_client *);
 
 /*

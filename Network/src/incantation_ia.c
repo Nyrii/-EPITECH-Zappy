@@ -5,13 +5,37 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 16:04:46 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 16:25:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "replies.h"
 #include "errors.h"
+
+static int	pie(t_server *server, t_player *player)
+{
+  char		buffer[40];
+  int		pos[2];
+
+  pos[0] = player->y;
+  pos[1] = player->x;
+  if (is_elevation_legit(&server->data, player->level, pos) == 0)
+    {
+      if (memset(buffer, 0, 40) == NULL
+	  || snprintf(buffer, 40, PIE,
+		      player->x, player->y, 1) == -1)
+	return (fprintf(stderr, ERR_MEMSET), -1);
+      return (send_all_graphics(server, buffer));
+    }
+  if (memset(buffer, 0, 40) == NULL
+	  || snprintf(buffer, 40, PIE,
+		      player->x, player->y, 0) == -1)
+    return (fprintf(stderr, ERR_MEMSET), -1);
+  if (send_all_graphics(server, buffer) == -1)
+    return (-1);
+  return (-2);
+}
 
 char		*store_pic_answer(t_player *player, char *buf,
 				  t_list tmp, int *len)
@@ -67,16 +91,23 @@ static int	pic(t_server *server, t_player *player)
   return (0);
 }
 
-void		manage_level_player(t_server *server,
+static int	manage_level_player(t_server *server,
 				    t_player *player, int *pos)
 {
   int		i;
+  int		ret_value;
 
   i = -1;
-  player->level += 1;
-  while (server->data.map[pos[0]][pos[1]][++i] != -1)
-    server->data.map[pos[0]][pos[1]][i]
-  -= server->data.resources[player->level][i];
+  if ((ret_value = pie(server, player)) == 0)
+    {
+      player->level += 1;
+      while (server->data.map[pos[0]][pos[1]][++i] != -1)
+	server->data.map[pos[0]][pos[1]][i]
+      -= server->data.resources[player->level][i];
+    }
+  else if (ret_value == -1)
+    return (-1);
+  return (0);
 }
 
 int		incantation_ia(t_server *server, t_player *player)
@@ -88,16 +119,17 @@ int		incantation_ia(t_server *server, t_player *player)
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     {
       if (dprintf(player->sock, ELEVATION_IN_PROGRESS) == -1
-	  || pic(server, player) == -1)
+	  || pic(server, player) == -1
+	  || manage_level_player(server, player, pos) == -1)
 	return (-1);
-      manage_level_player(server, player, pos);
       if (player->level == 8)
 	{
 	  if (dprintf(player->sock, CURRENT_LEVEL, 8) == -1)
 	    return (-1);
 	  return (2);
 	}
-      if (dprintf(player->sock, CURRENT_LEVEL, player->level) == -1)
+      if (dprintf(player->sock, CURRENT_LEVEL, player->level) == -1
+	  || plv_ia(server, player) == -1)
 	return (-1);
       return (0);
     }

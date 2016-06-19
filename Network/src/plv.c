@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:03:28 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 14:01:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 16:17:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -14,12 +14,23 @@
 #include "errors.h"
 #include "replies.h"
 
+int		plv_ia(t_server *server, t_player *player)
+{
+  char		buffer[40];
+
+  if (memset(buffer, 0, 40) == NULL
+      || snprintf(buffer, 40, PLV,
+		  player->id, player->level) == -1)
+    return (fprintf(stderr, ERR_MEMSET), -1);
+  return (send_all_graphics(server, buffer));
+}
+
 int		plv(t_server *server, t_client *graphic)
 {
   char		*parameter;
   int		id;
   t_player	*player;
-  char		buffer[4096];
+  char		buffer[40];
 
   (void)graphic;
   if (!server->params || !(parameter = strtok(server->params, " \t")))
@@ -27,8 +38,8 @@ int		plv(t_server *server, t_client *graphic)
   id = atoi(parameter);
   if ((player = get_player_by_id(server, id)) == NULL)
     return (fprintf(stderr, ERR_PLAYER), 0); // Réponse client graphique KO;
-  if (memset(buffer, 0, 4096) == NULL
-      || snprintf(buffer, 4096, PLV,
+  if (memset(buffer, 0, 40) == NULL
+      || snprintf(buffer, 40, PLV,
 		  player->id, player->level) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   // Répondre au client graphique avec le buffer
