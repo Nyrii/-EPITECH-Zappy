@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 18 15:01:40 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 14:36:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -59,6 +59,8 @@ typedef struct		s_team
 
 typedef struct		s_egg
 {
+  int			id;
+  int			player_id;
   int			x;
   int			y;
   t_timer		timer;
@@ -214,6 +216,11 @@ int		init_resources(int ***);
 */
 double		get_angle(t_player *, int const, int const, double *);
 int		get_best_tile_by_angle(double const, double const, t_player *);
+
+/*
+** get_egg.c
+*/
+int			get_max_egg_id(t_server *);
 
 /*
 ** get_opt.c

@@ -5,13 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:02:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 16:54:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 14:11:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include <stdio.h>
 #include "server.h"
 #include "errors.h"
+#include "replies.h"
 
 int		ppo_ia(t_server *server, t_player *player)
 {
@@ -20,8 +21,8 @@ int		ppo_ia(t_server *server, t_player *player)
 
   orientation = player->orientation == TOP ? 1 :
       player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
-  if (memset(buffer, 0, 60) == NULL
-      || snprintf(buffer, 60, "ppo %d %d %d %d",
+  if (memset(buffer, 0, 80) == NULL
+      || snprintf(buffer, 80, PPO,
 		  player->id, player->x, player->y, orientation) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   return (send_all_graphics(server, buffer));

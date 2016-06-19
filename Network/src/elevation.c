@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 15:42:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 14:42:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -28,7 +28,7 @@ int		is_elevation_legit(t_data *data, int elevation,
       return (-1);
   if ((tmp = get_players_at_pos(data, pos[0], pos[1])) == NULL)
     return (-1);
-      count = list_get_size(tmp);
+  count = list_get_size(tmp);
   if (count < data->required_players[elevation])
     return (tmp = NULL, -1);
   return (0);

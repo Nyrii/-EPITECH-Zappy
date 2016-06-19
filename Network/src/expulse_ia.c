@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 15:20:57 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:59:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -18,7 +18,7 @@ static int	pex(t_server *server, t_player *player)
   char		buffer[20];
 
   if (memset(buffer, 0, 20) == NULL
-      || snprintf(buffer, 20, "pex %d", player->id) == -1)
+      || snprintf(buffer, 20, PEX, player->id) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   return (send_all_graphics(server, buffer));
 }

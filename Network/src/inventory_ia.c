@@ -5,13 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 21:57:44 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:35:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
 #include <string.h>
 #include "errors.h"
 #include "server.h"
+#include "replies.h"
 
 static int	get_answer(t_server *server, t_player *player,
 			   char **answer, int i)
@@ -53,7 +54,7 @@ int		inventory_ia(t_server *server, t_player *player)
     return (-1);
   answer[i++] = '}';
   answer[i++] = '\0';
-  if (dprintf(player->sock, "%s\r\n", answer) == -1)
+  if (dprintf(player->sock, MSG, answer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

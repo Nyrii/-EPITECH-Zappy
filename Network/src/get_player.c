@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Thu Jun 16 18:48:49 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 14:27:15 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -26,7 +26,7 @@ t_player		*get_player_by_id(t_server *srv, int const id)
   return (NULL);
 }
 
-int		get_max_player_id(t_server *srv)
+int			get_max_player_id(t_server *srv)
 {
   unsigned int		i;
   t_player		*p;

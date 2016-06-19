@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sat Jun 18 15:01:09 2016 Nyrandone Noboud-Inpeng
+## Last update Sun Jun 19 14:28:51 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -25,6 +25,7 @@ SRCSER	= bct.c				\
 	generic_list.c			\
 	generic_list_del.c		\
 	get_angle.c			\
+	get_egg.c			\
 	get_opt.c			\
 	get_opt_set_delay.c		\
 	get_player.c			\

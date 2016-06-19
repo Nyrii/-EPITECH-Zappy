@@ -5,11 +5,12 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 21:13:45 2016 Kevin Empociello
+** Last update Sun Jun 19 13:24:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
+#include "replies.h"
 
 int		manage_commands_ia(t_server *server,
 				   t_player *player, const char *command)
@@ -66,7 +67,7 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
     }
   else
     {
-      dprintf(cl->sock, "ko\r\n");
+      dprintf(cl->sock, KO);
       close(cl->sock);
     }
   remove_client_from_queue(srv, cl);

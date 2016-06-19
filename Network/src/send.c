@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 12 16:54:35 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:39:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -23,9 +23,9 @@ int		send_all_players(t_server *srv, t_player *p, const char *msg)
     {
       if ((tmp = list_get_elem_at_position(srv->all_players, i)) != NULL)
 	{
-	  if (p == NULL && dprintf(tmp->sock, "%s\r\n", msg) == -1)
+	  if (p == NULL && dprintf(tmp->sock, "%s", msg) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
-	  else if (tmp != p && dprintf(tmp->sock, "%s\r\n", msg) != -1)
+	  else if (tmp != p && dprintf(tmp->sock, "%s", msg) != -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;
@@ -45,7 +45,7 @@ int		send_all_graphics(t_server *srv, const char *msg)
     {
       if ((tmp = list_get_elem_at_position(srv->graphic_clients, i)) != NULL)
 	{
-	  if (dprintf(tmp->sock, "%s\r\n", msg) == -1)
+	  if (dprintf(tmp->sock, "%s", msg) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;

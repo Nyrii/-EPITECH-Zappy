@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 16:48:33 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:42:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -20,7 +20,7 @@ static int	pbc(t_server *server, t_player *player)
 
   if (memset(buffer, 0, 20 + strlen(server->params)) == NULL
 	      || snprintf(buffer, 20 + strlen(server->params),
-			  "pbc %d %s", player->id, server->params) == -1)
+			  PBC, player->id, server->params) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   return (send_all_graphics(server, buffer));
 }
@@ -76,7 +76,7 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp)
 	  && tmp_player->sock != player->sock)
 	{
 	  tile = determine_best_way(server, player, tmp_player);
-	  if (dprintf(tmp_player->sock, "message %d,%s\r\n",
+	  if (dprintf(tmp_player->sock, BROADCAST,
 		      tile, server->params) == -1)
 	    return (-1);
 	}

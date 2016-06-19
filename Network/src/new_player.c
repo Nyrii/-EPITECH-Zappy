@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 18 15:24:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 14:26:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -51,6 +51,7 @@ t_egg			*new_egg(t_server *srv, t_player *p)
   new->y = p->y;
   new->is_born = 0;
   new->team_name = get_team_by_player(srv, p)->name;
+  new->id = get_max_egg_id(srv) + 1;
   return (new);
 }
 

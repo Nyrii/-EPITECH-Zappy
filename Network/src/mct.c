@@ -5,10 +5,11 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 16:14:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 11 16:15:20 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:36:12 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+#include "replies.h"
 
 int		mct(t_server *srv, t_client *cl)
 {
@@ -25,7 +26,7 @@ int		mct(t_server *srv, t_client *cl)
 	{
 	  if ((tmp = bct(srv->data.map, x, y)) == NULL)
 	    return (-1);
-	  dprintf(cl->sock, "%s\r\n", tmp);
+	  dprintf(cl->sock, MSG, tmp);
 	  free(tmp);
 	  y++;
 	}

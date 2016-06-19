@@ -5,13 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:44 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 19:57:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:42:55 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include <stdio.h>
 #include "server.h"
 #include "errors.h"
+#include "replies.h"
 
 int		connect_nbr_ia(t_server *server, t_player *player)
 {
@@ -36,7 +37,7 @@ int		connect_nbr_ia(t_server *server, t_player *player)
   if (memset(buffer, 0, 12) == NULL
       || snprintf(buffer, 12, "%d", count) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (dprintf(player->sock, "%s\r\n", buffer) == -1)
+  if (dprintf(player->sock, MSG, buffer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

@@ -5,15 +5,16 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:00:27 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 10 18:08:18 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 19 13:37:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
 #include "server.h"
+#include "replies.h"
 
 int		msz(t_server *srv, t_client *cl)
 {
-  if (dprintf(cl->sock, "msz %d %d\r\n", srv->data.world_x,
+  if (dprintf(cl->sock, MSZ, srv->data.world_x,
       srv->data.world_y) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
