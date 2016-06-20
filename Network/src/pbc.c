@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:34:58 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 18:42:56 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 19:54:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -32,7 +32,6 @@ int		pbc(t_server *server, t_player *player)
   n = 0;
   while (server->params[n])
     answer[i++] = server->params[n++];
-  answer[i++] = '\r';
   answer[i++] = '\n';
   answer[i] = '\0';
   if (send_all_graphics(server, answer) == -1)
