@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:43:04 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 12:51:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -124,7 +124,8 @@ int		incantation_ia(t_server *server, t_player *player)
 	return (-1);
       if (player->level == 8)
 	{
-	  if (dprintf(player->sock, CURRENT_LEVEL, 8) == -1)
+	  if (dprintf(player->sock, CURRENT_LEVEL, 8) == -1
+	      || seg(server, player) == -1)
 	    return (-1);
 	  return (2);
 	}

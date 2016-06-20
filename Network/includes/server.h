@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:36:00 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 13:00:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -162,19 +162,24 @@ int		count_elements(t_list *);
 int		drop_ia(t_server *, t_player *);
 
 /*
+** eht.c
+*/
+int		eht(t_server *, t_egg *);
+
+/*
 ** elevation.c
 */
 int		is_elevation_legit(t_data *, int, int *);
 
 /*
-** expulse_ia.c
-*/
-int		expulse_ia(t_server *, t_player *);
-
-/*
 ** epur.c
 */
 char		*epur_bf(char *str);
+
+/*
+** expulse_ia.c
+*/
+int		expulse_ia(t_server *, t_player *);
 
 /*
 ** fork_ia.c
@@ -393,6 +398,10 @@ void		determine_plus_y(t_server *, t_player *, int *, int);
 */
 int		see_ia_resources(char **, t_server *,
 				 int *, int *);
+/*
+** seg.c
+*/
+int		seg(t_server *, t_player *);
 
 /*
 ** send.c
@@ -409,5 +418,10 @@ int		sgt(t_server *, t_client *);
 ** sst.c
 */
 int		sst(t_server *, t_client *);
+
+/*
+** suc.c
+*/
+int		suc(t_client *);
 
 #endif /* !SERVER_H_ */

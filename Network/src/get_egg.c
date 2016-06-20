@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 14:26:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 14:28:08 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 12:10:11 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -20,7 +20,7 @@ int			get_max_egg_id(t_server *srv)
   max = 0;
   while (i < list_get_size(srv->data.eggs))
     {
-      if ((egg = list_get_elem_at_position(srv->all_players, i)) != NULL &&
+      if ((egg = list_get_elem_at_position(srv->data.eggs, i)) != NULL &&
 	  egg->id > max)
 	max = egg->id;
       i++;

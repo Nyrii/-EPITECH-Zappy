@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 19 18:14:03 2016 Nyrandone Noboud-Inpeng
+## Last update Mon Jun 20 12:57:59 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -14,9 +14,11 @@ SRCSER	= bct.c				\
 	close_all_clients.c		\
 	connect_nbr_ia.c		\
 	drop_ia.c			\
+	ebo.c				\
+	eht.c				\
 	elevation.c			\
-	expulse_ia.c			\
 	epur.c				\
+	expulse_ia.c			\
 	fork_ia.c			\
 	forward_ia.c			\
 	free.c				\
@@ -46,6 +48,7 @@ SRCSER	= bct.c				\
 	msz.c				\
 	new_player.c			\
 	parse.c				\
+	pdi.c				\
 	pin.c				\
 	plv.c				\
 	pnw.c				\
@@ -58,11 +61,13 @@ SRCSER	= bct.c				\
 	see_ia.c			\
 	see_ia_calculs.c		\
 	see_ia_resources.c		\
+	seg.c				\
 	send.c				\
 	server_lib.c			\
 	sgt.c				\
 	socket.c			\
 	sst.c				\
+	suc.c				\
 	take_ia.c			\
 	timer.c				\
 	tna.c				\
