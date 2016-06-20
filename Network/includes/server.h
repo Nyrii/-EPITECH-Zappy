@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:55:32 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 17:12:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -174,7 +174,8 @@ int		eht(t_server *, t_egg *);
 /*
 ** elevation.c
 */
-int		send_message_to_all_players(t_data *, t_player *,
+int		send_update_tile(t_server *, t_player *);
+int		send_message_to_all_players(t_server *, t_player *,
 					    char *, int const);
 int		is_elevation_legit(t_data *, int, int *);
 
@@ -386,7 +387,7 @@ int		pic(t_server *, t_player *);
 /*
 ** pie.c
 */
-int		pie(t_server *, t_player *);
+int		pie(t_server *, t_player *, int const);
 
 /*
 ** pin.c

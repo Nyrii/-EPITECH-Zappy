@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:21:10 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 17:07:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,7 +13,24 @@
 #include "replies.h"
 #include "errors.h"
 
-int		send_message_to_all_players(t_data *data, t_player *player,
+int		send_update_tile(t_server *server, t_player *player)
+{
+  char		buffer[160];
+  char		*bct_answer;
+
+  if ((bct_answer = bct(server->data.map, player->y, player->x)) == NULL)
+    return (-1);
+  if (memset(buffer, 0, 160) == NULL
+      || snprintf(buffer, 160, MSG, bct_answer) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  return (send_all_graphics(server, buffer));
+}
+
+int		send_message_to_all_players(t_server *server, t_player *player,
 					    char *message, int const level)
 {
   t_list	tmp;
@@ -22,7 +39,7 @@ int		send_message_to_all_players(t_data *data, t_player *player,
   char		buffer[50];
 
   i = -1;
-  if ((tmp = get_players_at_pos(data, player->y, player->x)) == NULL)
+  if ((tmp = get_players_at_pos(&server->data, player->y, player->x)) == NULL)
     return (-1);
   if (memset(buffer, 0, 50) == NULL
       || snprintf(buffer, 50, level == -1 ? message :

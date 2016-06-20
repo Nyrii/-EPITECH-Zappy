@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:22:55 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:23:24 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 16:51:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -63,6 +63,7 @@ int		pic(t_server *server, t_player *player)
   answer[len++] = '\r';
   answer[len++] = '\n';
   answer[len] = '\0';
+  send_all_graphics(server, answer);
   free(answer);
   return (0);
 }
