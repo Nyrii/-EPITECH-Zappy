@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:42:40 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 15:34:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -13,17 +13,6 @@
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
-
-static int	pbc(t_server *server, t_player *player)
-{
-  char		buffer[20 + strlen(server->params)];
-
-  if (memset(buffer, 0, 20 + strlen(server->params)) == NULL
-	      || snprintf(buffer, 20 + strlen(server->params),
-			  PBC, player->id, server->params) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
-}
 
 static int	get_best_distance_from_tile(t_player *target, t_player *player,
 					    int *calculs)

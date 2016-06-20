@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:24 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:05:14 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 15:45:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,16 +13,6 @@
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
-
-static int	pdr(t_server *server, t_player *player, int index)
-{
-  char		buffer[40];
-
-  if (memset(buffer, 0, 40) == NULL
-      || snprintf(buffer, 40, PDR, player->id, index) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
-}
 
 static int	drop_item(t_server *server, t_player *player, int index)
 {

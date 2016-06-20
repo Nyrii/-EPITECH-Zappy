@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 12:59:47 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 15:21:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -15,7 +15,7 @@
 # define OK "ok\r\n"
 # define MOVE "deplacement %d\r\n"
 # define ELEVATION_IN_PROGRESS "elevation en cours\r\n"
-# define CURRENT_LEVEL "niveau actuel %d\r\n"
+# define CURRENT_LEVEL "niveau actuel : %d\r\n"
 # define TNA "tna %s\r\n"
 # define BROADCAST "message %d,%s\r\n"
 # define MSG "%s\r\n"

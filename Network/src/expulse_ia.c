@@ -5,23 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:59:30 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 15:50:26 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "replies.h"
 #include "errors.h"
 #include "server.h"
-
-static int	pex(t_server *server, t_player *player)
-{
-  char		buffer[20];
-
-  if (memset(buffer, 0, 20) == NULL
-      || snprintf(buffer, 20, PEX, player->id) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
-}
 
 static void	get_future_position(t_server *server, t_player *player,
 				    int *y, int *x)
