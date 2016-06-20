@@ -11,7 +11,7 @@
 #include "errors.h"
 #include "server.h"
 
-void			generate_food(t_data *data)
+int			generate_food(t_data *data)
 {
   int			y;
   int			x;
@@ -28,6 +28,7 @@ void			generate_food(t_data *data)
 	}
       ++y;
     }
+  return (0);
 }
 
 static void		generate_resources(int resource,

@@ -208,7 +208,7 @@ int		free_all(t_server *, int const);
 /*
 ** generate_map.c
 */
-void		generate_food(t_data *);
+int		generate_food(t_data *);
 int		generate_map(t_data *, int, int, int);
 
 /*

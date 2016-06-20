@@ -20,6 +20,12 @@ static double	calculate_elapse(struct timeb *before, struct timeb *after)
   return (res);
 }
 
+static int	task_list(t_server *srv)
+{
+  (void) srv;
+  return (0);
+}
+
 static int	waiting_list(t_server *srv)
 {
   struct timeb	now;
@@ -47,5 +53,6 @@ static int	waiting_list(t_server *srv)
 int	check_timer(t_server *srv)
 {
   waiting_list(srv);
+  task_list(srv);
   return (0);
 }
