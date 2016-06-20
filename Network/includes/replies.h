@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:21:00 2016 Nyrandone Noboud-Inpeng
+** Last update Mon Jun 20 18:33:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -25,7 +25,7 @@
 # define WELCOME "BIENVENUE\r\n"
 # define WELCOME_NB_PLAYERS "%d\r\n"
 # define WELCOME_SIZE_MAP "%d %d\r\n"
-# define PBC "pbc %d %s\r\n"
+# define PBC "pbc %d "
 # define PFK "pfk %d\r\n"
 # define PPO "ppo %d %d %d %d\r\n"
 # define PGT "pgt %d %d\r\n"
