@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 11:51:22 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 12:10:24 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:09:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		eht(t_server *server, t_egg *egg)
 {
   char		buffer[20];
 
+  if (!server || !egg)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (memset(buffer, 0, 20) == NULL
       || snprintf(buffer, 20, EHT, egg->id) == -1)
     {

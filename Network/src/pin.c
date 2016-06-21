@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:08:33 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:53:41 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:12:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -65,7 +65,8 @@ int		pin(t_server *server, t_client *graphic)
   char		*parameter;
 
   i = 0;
-  if (!server->params || !(parameter = strtok(server->params, " \t"))
+  if (!server || !server->params || !graphic
+      || !(parameter = strtok(server->params, " \t"))
       || (player = get_player_by_id(server, atoi(parameter))) == NULL)
     return (sbp(graphic));
   if ((answer = malloc(190 * sizeof(char))) == NULL)

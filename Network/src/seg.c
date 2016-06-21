@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 12:12:28 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 12:14:43 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:14:35 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,18 +13,22 @@
 #include "errors.h"
 #include "replies.h"
 
-int		seg(t_server *server, t_player *player)
+int		seg(t_server *server, t_team *victorious)
 {
   char		buffer[20];
-  t_team	*player_team;
 
-  if ((player_team = get_team_by_player(server, player)) == NULL)
+  if (!server)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
+  if (victorious == NULL)
     {
       fprintf(stderr, ERR_TEAM);
       return (-1);
     }
   if (memset(buffer, 0, 20) == NULL
-      || snprintf(buffer, 20, SEG, player_team->name) == -1)
+      || snprintf(buffer, 20, SEG, victorious->name) == -1)
     {
       fprintf(stderr, ERR_MEMSET);
       fprintf(stderr, ERR_PRINTF);

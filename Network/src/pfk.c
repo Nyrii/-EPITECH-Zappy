@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:27:13 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:27:47 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:11:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		pfk(t_server *server, t_player *player)
 {
   char		buffer[30];
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (memset(buffer, 0, 30) == NULL
       || snprintf(buffer, 30, PFK, player->id) == -1)
     {

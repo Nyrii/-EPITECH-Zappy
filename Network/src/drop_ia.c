@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:24 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:45:10 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:16:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -48,6 +48,11 @@ int		drop_ia(t_server *server, t_player *player)
   int		i;
 
   i = -1;
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (server->params == NULL)
     {
       if (dprintf(player->sock, KO) == -1)

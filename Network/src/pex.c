@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:51:07 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:52:17 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:11:03 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		pex(t_server *server, t_player *player)
 {
   char		buffer[20];
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (memset(buffer, 0, 20) == NULL
       || snprintf(buffer, 20, PEX, player->id) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);

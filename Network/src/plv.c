@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:03:28 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:08:48 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:13:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -32,7 +32,8 @@ int		plv(t_server *server, t_client *graphic)
   t_player	*player;
   char		buffer[40];
 
-  if (!server->params || !(parameter = strtok(server->params, " \t")))
+  if (!server || !graphic || !server->params
+      || !(parameter = strtok(server->params, " \t")))
     return (sbp(graphic));
   id = atoi(parameter);
   if ((player = get_player_by_id(server, id)) == NULL)

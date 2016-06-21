@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:34:53 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:17:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -77,6 +77,11 @@ int		broadcast_ia(t_server *server, t_player *player)
 {
   t_list	tmp;
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (server->params == NULL)
     return (dprintf(player->sock, KO));
   else if (dprintf(player->sock, OK) == -1)

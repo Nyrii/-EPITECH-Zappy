@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:53:26 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 11:01:08 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -44,5 +44,6 @@
 # define EBO "ebo %d\n"
 # define SEG "seg %s\n"
 # define SUC "suc\n"
+# define VICTORY "Victory from team : %s\n"
 
 #endif /* REPLIES_H_ */

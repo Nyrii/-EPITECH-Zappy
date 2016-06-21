@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:44 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:42:55 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:18:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -21,6 +21,8 @@ int		connect_nbr_ia(t_server *server, t_player *player)
   int		count;
   char		buffer[12];
 
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if ((team = get_team_by_player(server, player)) == NULL)
     {
       if (dprintf(player->sock, "0\r\n") == -1)
@@ -35,9 +37,8 @@ int		connect_nbr_ia(t_server *server, t_player *player)
     }
   count = team->max_players - count;
   if (memset(buffer, 0, 12) == NULL
-      || snprintf(buffer, 12, "%d", count) == -1)
+      || snprintf(buffer, 12, "%d", count) == -1
+      || dprintf(player->sock, MSG, buffer) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (dprintf(player->sock, MSG, buffer) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

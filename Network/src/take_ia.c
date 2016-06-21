@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:54:28 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:25:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -75,6 +75,8 @@ int		take_ia(t_server *server, t_player *player)
   int		i;
 
   i = -1;
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if (server->params == NULL)
     {
       if (dprintf(player->sock, KO) == -1)

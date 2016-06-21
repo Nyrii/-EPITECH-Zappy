@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:00:27 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:37:19 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:10:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "errors.h"
@@ -14,6 +14,11 @@
 
 int		msz(t_server *srv, t_client *cl)
 {
+  if (!srv || !cl)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (dprintf(cl->sock, MSZ, srv->data.world_x,
       srv->data.world_y) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);

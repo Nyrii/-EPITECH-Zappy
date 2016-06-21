@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Mon Jun 20 15:55:53 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun 21 11:08:13 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -79,6 +79,7 @@ SRCSER	= bct.c				\
 	take_ia.c			\
 	timer.c				\
 	tna.c				\
+	victory.c			\
 	welcome.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))

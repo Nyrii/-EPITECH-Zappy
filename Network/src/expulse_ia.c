@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:50:26 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:19:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -78,6 +78,11 @@ int		expulse_ia(t_server *server, t_player *player)
   unsigned int	number;
 
   i = -1;
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   tmp = get_players_at_pos(&server->data, player->y, player->x);
   number = list_get_size(tmp);
   if (!tmp || number <= 1)

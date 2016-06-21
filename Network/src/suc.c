@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 12:52:39 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 13:00:25 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:15:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		suc(t_client *graphic)
 {
   char		buffer[10];
 
+  if (!graphic)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (memset(buffer, 0, 10) == NULL
       || snprintf(buffer, 10, SUC) == -1)
     {

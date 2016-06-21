@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 17:12:20 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:02:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <sys/timeb.h>
 # include "generic_list.h"
+
+# define UNUSED __attribute__((unused))
 
 typedef struct		s_timer
 {
@@ -454,7 +456,7 @@ int		see_ia_resources(char **, t_server *,
 /*
 ** seg.c
 */
-int		seg(t_server *, t_player *);
+int		seg(t_server *, t_team *);
 
 /*
 ** send.c
@@ -476,5 +478,11 @@ int		sst(t_server *, t_client *);
 ** suc.c
 */
 int		suc(t_client *);
+
+/*
+** victory.c
+*/
+int		send_end_to_all_players(t_list, t_team *);
+int		is_game_finished(t_server *, t_team **);
 
 #endif /* !SERVER_H_ */

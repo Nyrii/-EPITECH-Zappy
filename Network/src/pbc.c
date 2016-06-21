@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:34:58 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:54:24 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:10:28 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -22,6 +22,8 @@ int		pbc(t_server *server, t_player *player)
 
   i = 0;
   n = 0;
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if ((answer = malloc(25 + strlen(server->params))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   if (memset(buffer, 0, 25) == NULL

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:54 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:43:26 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:24:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -135,6 +135,8 @@ int		see_ia(t_server *server, t_player *player)
   char		*answer;
   int		len;
 
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if (player->orientation == TOP)
     answer = see_top(server, player, -1, 0);
   else if (player->orientation == RIGHT)

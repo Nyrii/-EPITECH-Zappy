@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:22:55 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:53:52 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:11:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -50,6 +50,11 @@ int		pic(t_server *server, t_player *player)
   int		len;
   char		*answer;
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if ((tmp = get_players_at_pos(&server->data, player->y,
 				player->x)) == NULL)
     return (fprintf(stderr, ERR_PLAYER), -1);

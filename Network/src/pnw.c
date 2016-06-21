@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 17:10:28 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:43:10 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:13:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -19,6 +19,8 @@ int		pnw(t_server *server, t_player *player)
   int		orientation;
   t_team	*player_team;
 
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   orientation = player->orientation == TOP ? 1 :
       player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
   if ((player_team = get_team_by_player(server, player)) == NULL)

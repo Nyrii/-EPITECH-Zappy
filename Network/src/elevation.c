@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 17:07:37 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:19:09 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -85,7 +85,7 @@ int		is_elevation_legit(t_data *data, int const elevation,
   t_list	tmp;
 
   i = -1;
-  if (!data->map || !data->map[pos[0]]
+  if (!data || !data->map || !data->map[pos[0]]
       || !data->map[pos[0]][pos[1]] || !data->resources || elevation < 0
       || elevation >= 8)
     return (-1);

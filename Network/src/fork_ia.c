@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:29 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 17:37:25 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:20:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,8 @@ int		fork_ia(t_server *server, t_player *player)
 {
   t_egg		*egg;
 
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if ((egg = new_egg(server, player)) == NULL)
     return (-1);
   egg->player_id = player->id;

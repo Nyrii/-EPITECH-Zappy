@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 17:13:45 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:22:54 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -15,6 +15,11 @@
 
 int		right_ia(t_server *server, t_player *player)
 {
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (player->orientation + 90 > LEFT)
     player->orientation = TOP;
   else

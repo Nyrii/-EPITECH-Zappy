@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:45:15 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 15:45:37 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:10:55 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		pdr(t_server *server, t_player *player, int index)
 {
   char		buffer[40];
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (memset(buffer, 0, 40) == NULL
       || snprintf(buffer, 40, PDR, player->id, index) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);

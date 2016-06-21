@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:17:34 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:03:03 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -52,25 +52,27 @@ int		incantation_manager(t_server *server,
 				    t_player *player, int *pos)
 {
   int		ret_value;
+  t_team	*victorious;
 
+  victorious = NULL;
   if ((ret_value = manage_level_player(server, player,
 				       pos, player->level)) == -1
       || ret_value == -2)
     return (ret_value);
   if (send_update_tile(server, player) == -1 || pie(server, player, 1) == -1)
     return (-1);
-  if (player->level == 8)
+  if (send_message_to_all_players(server, player, CURRENT_LEVEL,
+				  player->level) == -1)
+    return (-1);
+  if (plv_ia(server, player) == -1)
+    return (-1);
+  if (is_game_finished(server, &victorious) == 1)
     {
-      if (send_message_to_all_players(server, player, CURRENT_LEVEL,
-				      player->level) == -1
-	  || seg(server, player) == -1)
+      if (send_end_to_all_players(server->all_players, victorious) == -1
+	  || seg(server, victorious) == -1)
 	return (-1);
       return (2);
     }
-  if (send_message_to_all_players(server, player,
-				  CURRENT_LEVEL, player->level) == -1
-      || plv_ia(server, player) == -1)
-    return (-1);
   return (0);
 }
 
@@ -87,8 +89,7 @@ int		incantation_ia(t_server *server, t_player *player)
 				      ELEVATION_IN_PROGRESS, -1) == -1
 	  || pic(server, player) == -1)
 	return (-1);
-      if ((ret_value = incantation_manager(server, player, pos)) == -1
-	  || ret_value == 0 || ret_value == 2)
+      if ((ret_value = incantation_manager(server, player, pos)) != -2)
 	return (ret_value);
     }
   if (dprintf(player->sock, KO) == -1)
