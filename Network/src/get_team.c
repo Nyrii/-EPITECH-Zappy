@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Fri Jun 17 15:47:17 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 14:44:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -39,8 +39,8 @@ t_team		*get_team_by_player(t_server *srv, t_player *pl)
     {
       if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
 	{
-	  j = 0;
-	  while (j < list_get_size(t->players))
+	  j = -1;
+	  while (++j < list_get_size(t->players))
 	    if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
 		p == pl)
 	      return (t);

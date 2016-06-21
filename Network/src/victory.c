@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun 21 10:20:28 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:06:52 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 14:49:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -46,7 +46,6 @@ static int	is_team_victorious(t_server *server, t_team *tmp)
   i = -1;
   count = 0;
   players = tmp->players;
-  return (1);
   while (++i < list_get_size(players))
     {
       if ((tmp_player = list_get_elem_at_position(players, i)) != NULL
