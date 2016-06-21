@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 14:58:52 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 16:32:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -16,8 +16,8 @@
 # define ERR_MALLOC "Error: malloc failed.\n"
 # define ERR_MEMSET "Error: memset failed.\n"
 # define ERR_PRINTF "Error: *printf failed.\n"
-# define ERR_NBTEAMS "Error: Teams have not been specified.\n"
-# define ERR_PUSHBACK "Error: Push back of a node failed.\n"
+# define ERR_NBTEAMS "Error: teams have not been specified.\n"
+# define ERR_PUSHBACK "Error: push back of a node failed.\n"
 # define ERR_POS_MAP "Error: could not find position in the map. Aborted.\n"
 # define ERR_GET_RESOURCES "Error: could not get any resources. Aborted.\n"
 # define ERR_SAME_TEAM "Error: teams cannot have the same name.\n"
@@ -27,5 +27,8 @@
 # define ERR_TEAM "Error: could not find the searched team\n"
 # define INTERNAL_ERR "Error: an error occured (could be a NULL pointer).\n"
 # define ERR_TEAM_NAME "Error: please enter a team name with 512 chars max.\n"
+# define ERR_SAME_PORT "Error: ports cannot be similar.\n"
+# define ERR_PORTS "Error: port(s) have not been specified.\n"
+# define ERR_INVALID_PORT "Error: invalid port.\n"
 
 #endif /* ERRORS_H_ */

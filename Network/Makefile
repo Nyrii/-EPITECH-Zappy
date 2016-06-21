@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun 21 11:08:13 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun 21 17:36:55 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -75,6 +75,8 @@ SRCSER	= bct.c				\
 	sgt.c				\
 	socket.c			\
 	sst.c				\
+	store_port.c			\
+	store_socks.c			\
 	suc.c				\
 	take_ia.c			\
 	timer.c				\

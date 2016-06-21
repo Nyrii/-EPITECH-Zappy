@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 19:10:56 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 18:03:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -28,13 +28,34 @@ void		free_before_leaving()
   exit(0);
 }
 
+static int	activate_all_ports(t_server *server)
+{
+  int		i;
+  int		sock;
+
+  i = -1;
+  server->max = -1;
+  server->socks = NULL;
+  while (server->data.ports[++i] != -1)
+    {
+      if ((sock = init_server(SOMAXCONN, server->data.ports[i])) == -1)
+	return (-1);
+      if (store_socks(&server->socks, sock) == -1)
+	return (-1);
+      if (server->max < sock)
+	server->max = sock;
+    }
+  if (server->max == -1)
+    return (-1);
+  return (0);
+}
+
 int		run_zappy(t_server *srv)
 {
   init_code(srv->cmd_tab_ia, srv->cmd_tab_graphic);
   init_ptrfunc(srv->cmd_ptr_ia, srv->cmd_ptr_graphic);
-  if ((srv->sock = init_server(SOMAXCONN, srv->data.port)) == -1)
+  if (activate_all_ports(srv) == -1)
     return (-1);
-  srv->max = srv->sock;
   srv->queue_clients = NULL;
   srv->graphic_clients = NULL;
   srv->all_players = NULL;

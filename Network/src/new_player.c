@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Mon Jun 20 17:45:07 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 17:55:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -87,7 +87,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   return (new);
 }
 
-t_client        	*new_client(t_server *srv)
+t_client        	*new_client(t_server *srv, int const index)
 {
   t_client		*cl;
   unsigned int		ss;
@@ -97,7 +97,8 @@ t_client        	*new_client(t_server *srv)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
   ftime(&cl->timer.val);
-  if ((cl->sock = accept(srv->sock, (struct sockaddr *)&sin, &ss)) == -1)
+  if ((cl->sock = accept(srv->socks[index],
+			 (struct sockaddr *)&sin, &ss)) == -1)
     {
       error("Error socket can't accept connexion");
       return (NULL);

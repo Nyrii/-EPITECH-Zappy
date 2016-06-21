@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Tue Jun 21 14:02:22 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 17:55:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -50,11 +50,11 @@ int		handle_new_graphic(t_server *srv, t_client *cl)
   return (0);
 }
 
-int		handle_new_client(t_server *srv)
+int		handle_new_client(t_server *srv, int const index)
 {
   t_client	*c;
 
-  if ((c = new_client(srv)) == NULL)
+  if ((c = new_client(srv, index)) == NULL)
     return (-1);
   FD_SET(c->sock, &srv->rdfs);
   if (list_add_elem_at_back(&srv->queue_clients, c) == FALSE)
