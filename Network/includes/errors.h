@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:08:41 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 14:58:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -26,5 +26,6 @@
 # define ERR_CLOSE "Error: could not close a client\n"
 # define ERR_TEAM "Error: could not find the searched team\n"
 # define INTERNAL_ERR "Error: an error occured (could be a NULL pointer).\n"
+# define ERR_TEAM_NAME "Error: please enter a team name with 512 chars max.\n"
 
 #endif /* ERRORS_H_ */
