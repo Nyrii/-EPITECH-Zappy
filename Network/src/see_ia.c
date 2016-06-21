@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:54 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:24:30 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:51:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -148,8 +148,9 @@ int		see_ia(t_server *server, t_player *player)
   if (answer == NULL)
     return (-1);
   len = strlen(answer);
+  answer[len++] = '\n';
   answer[len] = '\0';
-  if (dprintf(player->sock, MSG, answer) == -1)
+  if (dprintf(player->sock, "%s", answer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

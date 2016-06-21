@@ -5,9 +5,10 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:01:14 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:16:09 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:55:56 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "errors.h"
 #include "server.h"
 #include "replies.h"
@@ -16,6 +17,7 @@ int		tna(t_server *srv, t_client *cl)
 {
   unsigned int	i;
   t_team	*t;
+  char		buffer[4096];
 
   i = 0;
   if (!srv || !cl)
@@ -27,7 +29,14 @@ int		tna(t_server *srv, t_client *cl)
     {
       if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
 	{
-	  if ((dprintf(cl->sock, TNA, t->name)) == -1)
+	  if (memset(buffer, 0, 4096) == NULL
+	      || snprintf(buffer, 4096, TNA, t->name) == -1)
+	    {
+	      fprintf(stderr, ERR_MEMSET);
+	      fprintf(stderr, ERR_PRINTF);
+	      return (-1);
+	    }
+	  if (dprintf(cl->sock, "%s", buffer) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
       i++;

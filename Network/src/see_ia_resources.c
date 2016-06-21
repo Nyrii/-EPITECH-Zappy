@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 14:49:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 14:17:41 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:50:47 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -32,8 +32,8 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
   players = get_players_at_pos(&data, y, x);
   nb_players = list_get_size(players);
   if (resources == 0 && nb_players == 0)
-    return (5);
-  return (resources * 9 + nb_players * 9 + 5);
+    return (10);
+  return (resources * 9 + nb_players * 9 + 10);
 }
 
 static void	store_players(char **see, t_data data, int *pos, int *i)
@@ -94,7 +94,7 @@ int		see_ia_resources(char **see, t_server *srv,
     return (fprintf(stderr, ERR_MALLOC), -1);
   if (is_null == 1)
     (*see)[(*i)++] = '{';
-  if (size == 5 && (is_null == 0 || is_null == 1))
+  if (size == 10 && (is_null == 0 || is_null == 1))
     {
       (*see)[(*i)] = '\0';
       return (0);

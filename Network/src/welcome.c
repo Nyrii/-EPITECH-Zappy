@@ -5,20 +5,39 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Sun Jun 19 13:41:57 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 14:02:22 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "errors.h"
 #include "server.h"
 #include "replies.h"
 
 int		handle_new_player(t_server *srv, t_team *t, t_player *p)
 {
+  char		buffer[4096];
+
   if (srv == NULL || p == NULL)
     return (-1);
-  if (dprintf(p->sock, WELCOME_NB_PLAYERS,
-	      t->max_players - list_get_size(t->players)) == -1 ||
-      dprintf(p->sock, WELCOME_SIZE_MAP, srv->data.world_x, srv->data.world_y) == -1)
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, WELCOME_NB_PLAYERS,
+		  t->max_players - list_get_size(t->players)) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  if (dprintf(p->sock, "%s", buffer) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
+		  srv->data.world_x, srv->data.world_y) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  if (dprintf(p->sock, "%s", buffer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

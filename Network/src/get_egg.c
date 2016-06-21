@@ -5,10 +5,11 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 14:26:55 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:20:47 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:37:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+#include "errors.h"
 
 int			get_max_egg_id(t_server *srv)
 {

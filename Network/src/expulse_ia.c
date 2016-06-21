@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:19:39 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:21:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -31,6 +31,7 @@ static int	deplacement(t_server *server,
 {
   int		i;
   int		target_perimeter[17];
+  char		buffer[30];
 
   i = 0;
   call_init_perimeter(server->data, victim, target_perimeter);
@@ -39,7 +40,10 @@ static int	deplacement(t_server *server,
       if (target_perimeter[i] == pusher->y
 	  && target_perimeter[i + 1] == pusher->x)
 	{
-	  if (dprintf(victim->sock, MOVE, (i / 2) + 1) == -1)
+	  if (memset(buffer, 0, 30) == NULL
+	      || snprintf(buffer, 30, MOVE, (i / 2) + 1) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
+	  if (dprintf(victim->sock, "%s", buffer) == -1)
 	    {
 	      fprintf(stderr, ERR_PRINTF);
 	      return (-1);
