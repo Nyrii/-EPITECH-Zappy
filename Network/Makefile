@@ -15,6 +15,7 @@ SRCSER	= bct.c				\
 	connect_nbr_ia.c		\
 	drop_ia.c			\
 	ebo.c				\
+	egg.c			\
 	eht.c				\
 	elevation.c			\
 	enw.c				\

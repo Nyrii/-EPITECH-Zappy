@@ -93,6 +93,8 @@ int	check_timer(t_server *srv)
 
   ret = 0;
   waiting_list(srv);
-  ret = task_list(srv);
-  return (ret);
+  if ((ret = task_list(srv)) == -1 || ret == 2)
+    return (ret);
+  egg_list(srv);
+  return (0);
 }

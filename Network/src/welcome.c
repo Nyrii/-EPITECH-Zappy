@@ -39,6 +39,8 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
     }
   if (dprintf(p->sock, "%s", buffer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
+  if (pnw(srv, p) == -1)
+    return (-1);
   return (0);
 }
 

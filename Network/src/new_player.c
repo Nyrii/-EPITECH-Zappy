@@ -54,6 +54,7 @@ t_egg			*new_egg(t_server *srv, t_player *p)
   new->is_born = 0;
   new->team_name = get_team_by_player(srv, p)->name;
   new->id = get_max_egg_id(srv) + 1;
+  ftime(&new->timer.val);
   return (new);
 }
 

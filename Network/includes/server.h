@@ -171,6 +171,11 @@ int		drop_ia(t_server *, t_player *);
 int		ebo(t_server *, t_egg *);
 
 /*
+** egg.c
+*/
+int		egg_list(t_server *);
+
+/*
 ** eht.c
 */
 int		eht(t_server *, t_egg *);
