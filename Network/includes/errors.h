@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:15:34 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 19:10:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -33,5 +33,6 @@
 # define ERR_BUFFER "Error: could not add answer to the buffer\n"
 # define ERR_OVERFLOW "Error: Overflow\n"
 # define ERR_CLOSE "Error: could not close a file descriptor\n"
+# define ERR_COMMAND "Error: could not get the command\n"
 
 #endif /* ERRORS_H_ */

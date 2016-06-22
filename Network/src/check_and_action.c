@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 16:57:02 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 19:10:12 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -30,7 +30,7 @@ int			check_and_read_players(fd_set *readf, t_list list)
 	  if (FD_ISSET(player->sock, readf))
 	    {
 	      if ((ret = get_cmd_buff(player->sock, &player->buffs)) == -1)
-		return (-1);
+		return (fprintf(stderr, ERR_COMMAND), -1);
 	      else if (ret == -2)
 		{
 		  store_answer_p(player, RPL_OVERFLOW, 0);
@@ -59,7 +59,7 @@ int			check_and_read_clients(fd_set *readf, t_list list)
 	  if (FD_ISSET(client->sock, readf))
 	    {
 	      if ((ret = get_cmd_buff(client->sock, &client->buffs)) == -1)
-		return (-1);
+		return (fprintf(stderr, ERR_COMMAND), -1);
 	      else if (ret == -2)
 		{
 		  store_answer_c(client, RPL_OVERFLOW, 0);

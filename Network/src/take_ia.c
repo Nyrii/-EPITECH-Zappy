@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:25:22 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 19:04:20 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -67,7 +67,7 @@ static int	take_stone(t_server *server, t_player *player, int index)
     }
   else if (store_answer_p(player, KO, 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
-  return (0);
+  return (store_answer_p(player, OK, 0));
 }
 
 int		take_ia(t_server *server, t_player *player)

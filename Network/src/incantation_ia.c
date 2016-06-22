@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:11:32 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 19:18:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -89,6 +89,7 @@ int		incantation_ia(t_server *server, t_player *player)
 				      ELEVATION_IN_PROGRESS, -1) == -1
 	  || pic(server, player) == -1)
 	return (-1);
+      // timer
       if ((ret_value = incantation_manager(server, player, pos)) != -2)
 	return (ret_value);
     }
