@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 18:16:05 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 19:21:01 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -21,7 +21,7 @@ int		player_life(t_server *srv, t_player *p)
   ftime(&now);
   if (p->inventory[FOOD] <= 0)
     {
-      if (store_answer_p(p, DEAD, 0) == -1)
+      if (store_answer_p(p, DEAD, 0) == -1 || pdi(srv, p) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
       if (close(p->sock) == -1)
 	return (fprintf(stderr, ERR_CLOSE), -1);
