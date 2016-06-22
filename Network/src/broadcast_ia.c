@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:05:13 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:58:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -52,6 +52,27 @@ static int	determine_best_way(t_server *server, t_player *player,
   return (tile);
 }
 
+static int	concat_answer(t_server *server, char **answer,
+			      int tile, int null)
+{
+  char		buffer[1024];
+  int		i;
+
+  if (null == 0)
+    return (0);
+  if (memset(buffer, 0, 1024) == NULL
+      || snprintf(buffer, 1024, BROADCAST, tile, server->params) == -1)
+    return (-1);
+  i = 0;
+  while (buffer[i])
+    {
+      (*answer)[i] = buffer[i];
+      ++i;
+    }
+  (*answer)[i] = '\0';
+  return (0);
+}
+
 static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 			       unsigned int i)
 {
@@ -67,11 +88,10 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 	  && tmp_player->sock != player->sock)
 	{
 	  tile = determine_best_way(server, player, tmp_player);
-	  if (null == 1 && (answ = malloc(strlen(server->params) + 50)) == NULL)
+	  if (null == 1
+	      && (answ = malloc(strlen(server->params) + 150)) == NULL)
 	    return (fprintf(stderr, ERR_MALLOC), -1);
-	  if (null == 1 && !memset(answ, 0, strlen(server->params) + 50)
-	      && snprintf(answ, strlen(server->params) + 50, BROADCAST, tile,
-			  server->params) == -1)
+	  if (concat_answer(server, &answ, tile, null) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	  if (store_answer_p(tmp_player, answ, 0) == -1)
 	    return (-1);
@@ -90,7 +110,7 @@ int		broadcast_ia(t_server *server, t_player *player)
       fprintf(stderr, INTERNAL_ERR);
       return (-1);
     }
-  if (server->params == NULL)
+  if (server->params == NULL || strlen(server->params) > 512)
     return (store_answer_p(player, KO, 0));
   else if (store_answer_p(player, OK, 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);

@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 18:23:15 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:37:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -24,9 +24,9 @@ int		send_all_players(t_server *srv, t_player *p, const char *msg)
       if ((tmp = list_get_elem_at_position(srv->all_players, i)) != NULL)
 	{
 	  if (p == NULL && store_answer_p(tmp, msg, 0) == -1)
-	    return (fprintf(stderr, ERR_PRINTF), -1);
-	  else if (tmp != p && store_answer_p(tmp, msg, 0) == -1)
-	    return (fprintf(stderr, ERR_PRINTF), -1);
+	    return (fprintf(stderr, ERR_BUFFER), -1);
+	  else if (tmp->sock != p->sock && store_answer_p(tmp, msg, 0) == -1)
+	    return (fprintf(stderr, ERR_BUFFER), -1);
 	}
       i++;
     }
