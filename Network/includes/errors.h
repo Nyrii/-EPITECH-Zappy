@@ -11,7 +11,7 @@
 #ifndef ERRORS_H_
 # define ERRORS_H_
 
-# define USAGE "Usage: ./server -p port -x world_x -y world_y -c" USAGE_REST
+# define USAGE "Usage: ./server -p port(s) -x world_x -y world_y -c" USAGE_REST
 # define USAGE_REST " max_clients -t speed -n team_name_1 team_name_2...\n"
 # define ERR_MALLOC "Error: malloc failed.\n"
 # define ERR_MEMSET "Error: memset failed.\n"
