@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:27:29 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:13:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -68,14 +68,14 @@ int		bct_on_tile(t_server *server, t_client *graphic)
   char		*answ;
   char		buf[4096];
 
-  if (!server->params
+  if (!server || !server->params || !graphic
       || !(parameters[0] = strtok(server->params, " \t"))
       || !(parameters[1] = strtok(NULL, " \t")))
     return (sbp(graphic));
-  pos[0] = atoi(parameters[0]);
-  pos[1] = atoi(parameters[1]);
+  pos[0] = atoi(parameters[1]);
+  pos[1] = atoi(parameters[0]);
   if (pos[0] >= 0 && pos[0] < server->data.world_y
-      && pos[1] >= 0 && pos[1] < server->data.world_y)
+      && pos[1] >= 0 && pos[1] < server->data.world_x)
     {
       if ((answ = bct(server->data.map, pos[0], pos[1])) == NULL)
 	return (-1);

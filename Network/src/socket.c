@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 17 18:18:58 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 17:55:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -91,15 +91,15 @@ static int		check_lists(int sock, t_server *srv)
   return (0);
 }
 
-static int		check_socket(int sock, t_server *srv)
+static int		check_socket(int sock, t_server *srv, int index)
 {
   int			ret_value;
 
   if (FD_ISSET(sock, &srv->rdfs))
     {
-      if (sock == srv->sock)
+      if (sock == srv->socks[index])
 	{
-	  handle_new_client(srv);
+	  handle_new_client(srv, index);
 	}
       else
 	if ((ret_value = check_lists(sock, srv)) == -1 || ret_value == 2)
@@ -110,7 +110,7 @@ static int		check_socket(int sock, t_server *srv)
   return (0);
 }
 
-int		check_sockets_loop(t_server *srv)
+int		check_sockets_loop(t_server *srv, int index)
 {
   int		i;
   int		ret_value;
@@ -118,7 +118,7 @@ int		check_sockets_loop(t_server *srv)
   i = 0;
   while (i <= srv->max)
     {
-      if ((ret_value = check_socket(i, srv)) == -1 || ret_value == 1)
+      if ((ret_value = check_socket(i, srv, index)) == -1 || ret_value == 1)
 	return (ret_value);
       i++;
    }

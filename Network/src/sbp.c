@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 17:50:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:02:35 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:14:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,6 +17,11 @@ int		sbp(t_client *graphic)
 {
   char		buffer[10];
 
+  if (!graphic)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+  }
   if (memset(buffer, 0, 10) == NULL
       || snprintf(buffer, 10, SBP) == -1)
     {

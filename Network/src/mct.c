@@ -5,19 +5,24 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 16:14:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 16:58:30 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:29:24 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "replies.h"
+#include "errors.h"
 
 int		mct(t_server *srv, t_client *cl)
 {
   char		*tmp;
   int		x;
   int		y;
+  char		buffer[4096];
 
   x = 0;
+  if (!srv || !cl)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   while (x < srv->data.world_x)
     {
       y = 0;
@@ -25,7 +30,10 @@ int		mct(t_server *srv, t_client *cl)
 	{
 	  if ((tmp = bct(srv->data.map, y, x)) == NULL)
 	    return (-1);
-	  dprintf(cl->sock, MSG, tmp);
+	  if (memset(buffer, 0, 4096) == NULL
+	      || snprintf(buffer, 4096, MSG, tmp) == -1)
+	    return (fprintf(stderr, ERR_MEMSET), -1);
+	  dprintf(cl->sock, "%s", buffer);
 	  free(tmp);
 	  y++;
 	}

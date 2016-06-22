@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Tue Jun  7 15:49:01 2016 nekfeu
-** Last update Sat Jun 11 16:21:39 2016 Kevin Empociello
+** Last update Tue Jun 21 17:07:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -37,9 +37,8 @@ int			init_server(int nb_connexion, int port)
   sin.sin_port = htons(port);
   if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &t, sizeof(t)) == -1)
     return (-1);
-  if ((bind(sock, (struct sockaddr *) &sin, sizeof(sin))) == -1)
+  if ((bind(sock, (struct sockaddr *)&sin, sizeof(sin))) == -1)
     return (error("Error in binding socket"));
-  printf("Zappy Server launched..\n");
   if ((listen(sock, nb_connexion)) == -1)
     return (error("Error initialisation of listening"));
   return (sock);

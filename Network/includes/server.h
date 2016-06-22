@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Mon Jun 20 13:02:23 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 11:58:48 2016 Kevin Empociello
 */
 
 #ifndef SERVER_H_
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <sys/timeb.h>
 # include "generic_list.h"
+
+# define UNUSED __attribute__((unused))
 
 typedef struct		s_timer
 {
@@ -71,7 +73,7 @@ typedef struct		s_egg
 
 typedef struct		s_data
 {
-  int			port;
+  int			*ports;
   int			world_x;
   int			world_y;
   int			max_clients;
@@ -108,7 +110,7 @@ typedef struct		s_server
   struct timeval	timeout;
   struct hostent	*hostinfo;
   int			max;
-  int			sock;
+  int			*socks;
   fd_set		rdfs;
 }			t_server;
 
@@ -118,12 +120,12 @@ int   		init_server(int, int);
 int   		error(char *);
 int   		loop_server(t_server *);
 void  		set_all_clients(t_server *);
-int  		check_sockets_loop(t_server *);
+int  		check_sockets_loop(t_server *, int);
 t_player	*new_player(t_server *, t_team *, t_client *);
 t_egg		*new_egg(t_server *, t_player *);
-t_client	*new_client(t_server *);
+t_client	*new_client(t_server *, int const);
 int		handle_new_player(t_server *, t_team *, t_player *);
-int		handle_new_client(t_server *);
+int		handle_new_client(t_server *, int const);
 int		handle_new_graphic(t_server *, t_client *);
 
 /*
@@ -176,7 +178,15 @@ int		eht(t_server *, t_egg *);
 /*
 ** elevation.c
 */
+int		send_update_tile(t_server *, t_player *);
+int		send_message_to_all_players(t_server *, t_player *,
+					    char *, int const);
 int		is_elevation_legit(t_data *, int, int *);
+
+/*
+** enw.c
+*/
+int		enw(t_server *, t_egg *);
 
 /*
 ** epur.c
@@ -323,15 +333,50 @@ int		msz(t_server *, t_client *);
 char		*parse_cmd(t_server *, char *);
 
 /*
+** pbc.c
+*/
+int		pbc(t_server *, t_player *);
+
+/*
 ** pdi.c
 */
 int		pdi(t_server *, t_player *);
+
+/*
+** pdr.c
+*/
+int		pdr(t_server *, t_player *, int);
+
+/*
+** pex.c
+*/
+int		pex(t_server *, t_player *);
+
+/*
+** pfk.c
+*/
+int		pfk(t_server *, t_player *);
+
+/*
+** pgt.c
+*/
+int		pgt(t_server *, t_player *, int const);
 
 /*
 ** plv.c
 */
 int		plv_ia(t_server *, t_player *);
 int		plv(t_server *, t_client *);
+
+/*
+** pic.c
+*/
+int		pic(t_server *, t_player *);
+
+/*
+** pie.c
+*/
+int		pie(t_server *, t_player *, int const);
 
 /*
 ** pin.c
@@ -398,7 +443,7 @@ int		see_ia_resources(char **, t_server *,
 /*
 ** seg.c
 */
-int		seg(t_server *, t_player *);
+int		seg(t_server *, t_team *);
 
 /*
 ** send.c
@@ -415,6 +460,16 @@ int		sgt(t_server *, t_client *);
 ** sst.c
 */
 int		sst(t_server *, t_client *);
+
+/*
+** store_port.c
+*/
+void		ports_manager(t_server *, char **, int *);
+
+/*
+** store_socks.c
+*/
+int		store_socks(int **, int const);
 
 /*
 ** suc.c
@@ -444,5 +499,11 @@ int		get_time_by_func(t_server *, char *);
 ** tna.c
 */
 int		tna(t_server *, t_client *);
+
+/*
+** victory.c
+*/
+int		send_end_to_all_players(t_list, t_team *);
+int		is_game_finished(t_server *, t_team **);
 
 #endif /* !SERVER_H_ */

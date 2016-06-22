@@ -5,23 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 17:07:20 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:25:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "replies.h"
 #include "errors.h"
-
-static int	pgt(t_server *server, t_player *player, int index)
-{
-  char		buffer[40];
-
-  if (memset(buffer, 0, 40) == NULL
-      || snprintf(buffer, 40, PGT, player->id, index) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
-}
 
 static int	take_food(t_server *server, t_player *player)
 {
@@ -85,6 +75,8 @@ int		take_ia(t_server *server, t_player *player)
   int		i;
 
   i = -1;
+  if (!server || !player)
+    return (fprintf(stderr, INTERNAL_ERR), -1);
   if (server->params == NULL)
     {
       if (dprintf(player->sock, KO) == -1)

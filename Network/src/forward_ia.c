@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 12 17:03:31 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:20:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -30,7 +30,7 @@ int		forward_ia(t_server *server, t_player *player)
 
   x = player->x;
   y = player->y;
-  if (!server->data.map
+  if (!server || !player || !server->data.map
       || !server->data.map[y] || !server->data.map[y][x])
     return (fprintf(stderr, ERR_POS_MAP), -1);
   if (player->orientation == TOP || player->orientation == BOTTOM)

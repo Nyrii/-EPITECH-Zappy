@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:02:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:10:32 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:14:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -35,7 +35,8 @@ int		ppo(t_server *server, t_client *graphic)
   char		buffer[80];
   int		orientation;
 
-  if (!server->params || !(parameter = strtok(server->params, " \t"))
+  if (!server || !graphic || !server->params
+      || !(parameter = strtok(server->params, " \t"))
       || (player = get_player_by_id(server, atoi(parameter))) == NULL)
     return (sbp(graphic));
   orientation = player->orientation == TOP ? 1 :

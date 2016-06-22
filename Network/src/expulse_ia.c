@@ -5,23 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:59:30 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:21:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "replies.h"
 #include "errors.h"
 #include "server.h"
-
-static int	pex(t_server *server, t_player *player)
-{
-  char		buffer[20];
-
-  if (memset(buffer, 0, 20) == NULL
-      || snprintf(buffer, 20, PEX, player->id) == -1)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
-}
 
 static void	get_future_position(t_server *server, t_player *player,
 				    int *y, int *x)
@@ -41,6 +31,7 @@ static int	deplacement(t_server *server,
 {
   int		i;
   int		target_perimeter[17];
+  char		buffer[30];
 
   i = 0;
   call_init_perimeter(server->data, victim, target_perimeter);
@@ -49,7 +40,10 @@ static int	deplacement(t_server *server,
       if (target_perimeter[i] == pusher->y
 	  && target_perimeter[i + 1] == pusher->x)
 	{
-	  if (dprintf(victim->sock, MOVE, (i / 2) + 1) == -1)
+	  if (memset(buffer, 0, 30) == NULL
+	      || snprintf(buffer, 30, MOVE, (i / 2) + 1) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
+	  if (dprintf(victim->sock, "%s", buffer) == -1)
 	    {
 	      fprintf(stderr, ERR_PRINTF);
 	      return (-1);
@@ -88,6 +82,11 @@ int		expulse_ia(t_server *server, t_player *player)
   unsigned int	number;
 
   i = -1;
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   tmp = get_players_at_pos(&server->data, player->y, player->x);
   number = list_get_size(tmp);
   if (!tmp || number <= 1)

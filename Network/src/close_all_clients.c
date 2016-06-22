@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 16:41:31 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 17:26:02 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:17:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -55,6 +55,11 @@ static int	close_all_players(t_list players)
 
 int		close_all_clients(t_server *server)
 {
+  if (!server)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if (close_all_players(server->all_players) == -1)
     return (-1);
   if (close_all_graphical_clients(server->graphic_clients) == -1)

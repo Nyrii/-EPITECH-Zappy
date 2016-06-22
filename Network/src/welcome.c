@@ -5,20 +5,39 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Sun Jun 19 13:41:57 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 17:55:38 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "errors.h"
 #include "server.h"
 #include "replies.h"
 
 int		handle_new_player(t_server *srv, t_team *t, t_player *p)
 {
+  char		buffer[4096];
+
   if (srv == NULL || p == NULL)
     return (-1);
-  if (dprintf(p->sock, WELCOME_NB_PLAYERS,
-	      t->max_players - list_get_size(t->players)) == -1 ||
-      dprintf(p->sock, WELCOME_SIZE_MAP, srv->data.world_x, srv->data.world_y) == -1)
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, WELCOME_NB_PLAYERS,
+		  t->max_players - list_get_size(t->players)) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  if (dprintf(p->sock, "%s", buffer) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
+		  srv->data.world_x, srv->data.world_y) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  if (dprintf(p->sock, "%s", buffer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }
@@ -31,11 +50,11 @@ int		handle_new_graphic(t_server *srv, t_client *cl)
   return (0);
 }
 
-int		handle_new_client(t_server *srv)
+int		handle_new_client(t_server *srv, int const index)
 {
   t_client	*c;
 
-  if ((c = new_client(srv)) == NULL)
+  if ((c = new_client(srv, index)) == NULL)
     return (-1);
   FD_SET(c->sock, &srv->rdfs);
   if (list_add_elem_at_back(&srv->queue_clients, c) == FALSE)

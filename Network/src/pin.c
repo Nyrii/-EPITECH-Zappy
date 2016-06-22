@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:08:33 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:04:18 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 12:12:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -52,7 +52,6 @@ int		pin_ia(t_server *server, t_player *player)
     return (fprintf(stderr, ERR_MALLOC), -1);
   if ((answer = fill_pin(answer, player, &i)) == NULL)
     return (-1);
-  answer[i++] = '\r';
   answer[i++] = '\n';
   answer[i] = '\0';
   return (send_all_graphics(server, answer));
@@ -66,14 +65,14 @@ int		pin(t_server *server, t_client *graphic)
   char		*parameter;
 
   i = 0;
-  if (!server->params || !(parameter = strtok(server->params, " \t"))
+  if (!server || !server->params || !graphic
+      || !(parameter = strtok(server->params, " \t"))
       || (player = get_player_by_id(server, atoi(parameter))) == NULL)
     return (sbp(graphic));
   if ((answer = malloc(190 * sizeof(char))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   if ((answer = fill_pin(answer, player, &i)) == NULL)
     return (-1);
-  answer[i++] = '\r';
   answer[i++] = '\n';
   answer[i] = '\0';
   if (dprintf(graphic->sock, "%s", answer) == -1)

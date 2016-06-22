@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:35:53 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 13:23:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -47,14 +47,23 @@ int		inventory_ia(t_server *server, t_player *player)
 {
   char		*answer;
   int		i;
+  char		buffer[4096];
 
+  if (!server || !player)
+    {
+      fprintf(stderr, INTERNAL_ERR);
+      return (-1);
+    }
   if ((answer = malloc((21 * 7 + 20) * sizeof(char))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
   if ((i = get_answer(server, player, &answer, 0)) == -1)
     return (-1);
   answer[i++] = '}';
-  answer[i++] = '\0';
-  if (dprintf(player->sock, MSG, answer) == -1)
+  answer[i] = '\0';
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, MSG, answer) == -1)
+    return (fprintf(stderr, ERR_MEMSET), -1);
+  if (dprintf(player->sock, "%s", buffer) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

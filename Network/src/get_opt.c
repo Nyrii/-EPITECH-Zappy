@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:35:53 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 16:44:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -18,7 +18,7 @@
 
 static void	init_data(t_data *data)
 {
-  data->port = -1;
+  data->ports = NULL;
   data->world_x = -1;
   data->world_y = -1;
   data->max_clients = -1;
@@ -79,7 +79,7 @@ static int	manage_options(t_server *server, char **argv,
   switch (opt)
     {
       case 'p':
-      server->data.port = atoi(optarg);
+      ports_manager(server, argv, optind);
       break ;
       case 'x':
       server->data.world_x = atoi(optarg);
@@ -114,9 +114,10 @@ int		get_opt(int argc, char **argv, t_server *server)
 	return (-1);
     }
   if (optind != argc && (server->data.teams == NULL
-			 || list_get_size(server->data.teams) <= 1))
+			 || list_get_size(server->data.teams) <= 1
+			 || server->data.ports == NULL))
     return (fprintf(stderr, USAGE), -1);
-  if (server->data.port < 0 || server->data.world_x <= 0
+  if (server->data.ports == NULL || server->data.world_x <= 0
       || server->data.world_y <= 0 || server->data.max_clients <= 0
       || server->data.delay <= 0 || server->data.teams == NULL
       || list_get_size(server->data.teams) <= 1)

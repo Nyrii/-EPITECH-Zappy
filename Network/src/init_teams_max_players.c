@@ -5,9 +5,10 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun 16 14:27:56 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 16 14:37:09 2016 Nyrandone Noboud-Inpeng
+** Last update Tue Jun 21 14:58:58 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "errors.h"
 
@@ -20,7 +21,14 @@ int		init_teams_max_players(t_list teams, int const max_players)
   while (i < list_get_size(teams))
     {
       if ((tmp_team = list_get_elem_at_position(teams, i)) != NULL)
-	tmp_team->max_players = max_players;
+	{
+	  if (strlen(tmp_team->name) > 512)
+	    {
+	      fprintf(stderr, ERR_TEAM_NAME);
+	      return (-1);
+	    }
+	  tmp_team->max_players = max_players;
+	}
       i++;
     }
   if (i <= 1)

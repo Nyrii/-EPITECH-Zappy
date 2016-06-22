@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Mon Jun 20 12:57:59 2016 Nyrandone Noboud-Inpeng
+## Last update Tue Jun 21 17:36:55 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -17,6 +17,7 @@ SRCSER	= bct.c				\
 	ebo.c				\
 	eht.c				\
 	elevation.c			\
+	enw.c				\
 	epur.c				\
 	expulse_ia.c			\
 	fork_ia.c			\
@@ -48,7 +49,14 @@ SRCSER	= bct.c				\
 	msz.c				\
 	new_player.c			\
 	parse.c				\
+	pbc.c				\
 	pdi.c				\
+	pdr.c				\
+	pex.c				\
+	pfk.c				\
+	pgt.c				\
+	pic.c				\
+	pie.c				\
 	pin.c				\
 	plv.c				\
 	pnw.c				\
@@ -67,11 +75,14 @@ SRCSER	= bct.c				\
 	sgt.c				\
 	socket.c			\
 	sst.c				\
+	store_port.c			\
+	store_socks.c			\
 	suc.c				\
 	take_ia.c			\
 	task.c			\
 	timer.c				\
 	tna.c				\
+	victory.c			\
 	welcome.c
 
 OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))

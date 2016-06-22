@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 19 14:26:30 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 11:57:21 2016 Kevin Empociello
 */
 
 #include <netinet/in.h>
@@ -31,6 +31,8 @@ static int		assign_egg_pos(t_server *srv, t_team *t, t_player *pl)
 	    {
 	      pl->x = e->x;
 	      pl->y = e->y;
+	      if (ebo(srv, e) == -1)
+		return (-1);
 	      list_del_elem_at_position(&srv->data.eggs, i);
 	      return (1);
 	    }
@@ -58,16 +60,19 @@ t_egg			*new_egg(t_server *srv, t_player *p)
 t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
 {
   t_player		*new;
+  int			ret_value;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   new->sock = cl->sock;
   new->queue_tasks = NULL;
-  if (assign_egg_pos(srv, t, new) == 0)
+  if ((ret_value = assign_egg_pos(srv, t, new)) == 0)
     {
       new->x = rand() % srv->data.world_x;
       new->y = rand() % srv->data.world_y;
     }
+  else if (ret_value == -1)
+    return (NULL);
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
@@ -83,7 +88,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   return (new);
 }
 
-t_client        	*new_client(t_server *srv)
+t_client        	*new_client(t_server *srv, int const index)
 {
   t_client		*cl;
   unsigned int		ss;
@@ -93,7 +98,8 @@ t_client        	*new_client(t_server *srv)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
   ftime(&cl->timer.val);
-  if ((cl->sock = accept(srv->sock, (struct sockaddr *)&sin, &ss)) == -1)
+  if ((cl->sock = accept(srv->socks[index],
+			 (struct sockaddr *)&sin, &ss)) == -1)
     {
       error("Error socket can't accept connexion");
       return (NULL);
