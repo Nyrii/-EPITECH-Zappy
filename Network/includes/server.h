@@ -314,6 +314,11 @@ int		init_teams_max_players(t_list, int const);
 */
 int		inventory_ia(t_server *, t_player *);
 
+/*
+** life.c
+*/
+int		player_life(t_server *, t_player *);
+
 /* main */
 int		run_zappy(t_server *);
 
@@ -406,6 +411,7 @@ int		manage_auth(t_server *, t_client *, const char *);
 ** remove.c
 */
 int		remove_client_from_queue(t_server *, t_client *);
+int		remove_player_from_srv(t_server *, t_team *, t_player *);
 
 /*
 ** right_ia.c

@@ -73,10 +73,11 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
     }
   else if (ret_value == -1)
     return (NULL);
+  ftime(&new->timer.val);
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
-  new->inventory[FOOD] = 0;
+  new->inventory[FOOD] = 10;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;
   new->inventory[SIBUR] = 0;

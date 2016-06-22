@@ -92,10 +92,7 @@ int	check_timer(t_server *srv)
   int	ret;
 
   ret = 0;
-  printf("Checking timer\n");
   waiting_list(srv);
-  printf("Cheking in progress\n");
   ret = task_list(srv);
-  printf("Checking done\n");
   return (ret);
 }

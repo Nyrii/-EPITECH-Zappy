@@ -43,6 +43,7 @@ SRCSER	= bct.c				\
 	init_strings_resources.c	\
 	inventory_ia.c			\
 	left_ia.c			\
+	life.c				\
 	loop.c				\
 	main.c				\
 	mct.c				\
