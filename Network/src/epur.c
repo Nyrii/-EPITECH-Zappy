@@ -40,7 +40,7 @@ char		*epur_bf(char *str)
 
   i = 0;
   j = 0;
-  if ((new = malloc(4096 * sizeof(char))) == NULL)
+  if ((new = malloc(strlen(str) * sizeof(char))) == NULL)
     return (fprintf(stderr, ERR_PRINTF), NULL);
   while (str && str[i] != '\0' && (str[i] == ' ' || str[i] == '\t'))
     i++;
