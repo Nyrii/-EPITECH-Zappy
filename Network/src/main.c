@@ -58,7 +58,8 @@ int		main(int argc, char **argv)
 
   srand(time(NULL));
   signal(SIGINT, free_before_leaving);
-  if (get_opt(argc, argv, &server) != -1)
+  if (get_opt(argc, argv, &server) != -1 &&
+      (server.data.timers = init_timer_tasks(&server)) != NULL)
     {
       if (run_zappy(&server) == -1)
 	return (-1);

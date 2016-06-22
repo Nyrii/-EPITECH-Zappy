@@ -15,7 +15,7 @@
 #include "errors.h"
 
 // temporary
-static void	dump_lists(t_server *srv)
+void	dump_lists(t_server *srv)
 {
   t_team	*t;
   unsigned int	i;
@@ -104,7 +104,7 @@ static int		check_socket(int sock, t_server *srv)
       else
 	if ((ret_value = check_lists(sock, srv)) == -1 || ret_value == 2)
 	  return (ret_value);
-      dump_lists(srv);
+      //dump_lists(srv);
       return (1);
     }
   return (0);

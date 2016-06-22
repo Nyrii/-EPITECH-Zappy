@@ -29,7 +29,7 @@ typedef struct		s_task
   char			*cmd;
   char			*params;
   char			*real;
-  t_timer		*timer;
+  t_timer		timer;
 }			t_task;
 
 typedef struct		s_client
@@ -48,6 +48,7 @@ typedef struct		s_player
   int			level;
   int			inventory[8];
   t_timer		timer;
+  t_list		queue_tasks;
 }			t_player;
 
 typedef struct		s_team
@@ -75,6 +76,7 @@ typedef struct		s_data
   int			world_y;
   int			max_clients;
   int			delay;
+  double		*timers;
   t_list	       	teams;
   t_list		eggs;
   int			***map;
@@ -316,21 +318,6 @@ int		mct(t_server *, t_client *);
 int		msz(t_server *, t_client *);
 
 /*
-** take_ia.c
-*/
-int		take_ia(t_server *, t_player *);
-
-/*
-** take_ia.c
-*/
-int		check_timer(t_server *srv);
-
-/*
-** tna.c
-*/
-int		tna(t_server *, t_client *);
-
-/*
 ** parse.c
 */
 char		*parse_cmd(t_server *, char *);
@@ -433,5 +420,29 @@ int		sst(t_server *, t_client *);
 ** suc.c
 */
 int		suc(t_client *);
+
+/*
+** take_ia.c
+*/
+int		take_ia(t_server *, t_player *);
+
+/*
+** task.c
+*/
+t_task		*new_task(t_server *, t_player *);
+int		task_list(t_server *);
+
+/*
+** timer.c
+*/
+int		check_timer(t_server *srv);
+double		calculate_elapse(struct timeb *, struct timeb *);
+double		*init_timer_tasks(t_server *);
+int		get_time_by_func(t_server *, char *);
+
+/*
+** tna.c
+*/
+int		tna(t_server *, t_client *);
 
 #endif /* !SERVER_H_ */

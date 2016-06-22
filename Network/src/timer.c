@@ -8,9 +8,52 @@
 ** Last update Thu Jun  9 01:11:53 2016 Kevin Empociello
 */
 
+#include <string.h>
 #include "server.h"
 
-static double	calculate_elapse(struct timeb *before, struct timeb *after)
+// avance, droite, gauche, voir : 7
+// inventaire : 1
+// prend, pose, expulse, broadcast : 7
+// incantation : 300
+// fork : 42
+// slot : 0
+// free!
+double		*init_timer_tasks(t_server *srv)
+{
+  double	*times;
+
+  if ((times = malloc(12 * sizeof(double))) == NULL)
+    return (NULL);
+  times[0] = 7 / srv->data.delay;
+  times[1] = 7 / srv->data.delay;
+  times[2] = 7 / srv->data.delay;
+  times[3] = 7 / srv->data.delay;
+  times[4] = 1 / srv->data.delay;
+  times[5] = 7 / srv->data.delay;
+  times[6] = 7 / srv->data.delay;
+  times[7] = 7 / srv->data.delay;
+  times[8] = 7 / srv->data.delay;
+  times[9] = 300 / srv->data.delay;
+  times[10] = 42 / srv->data.delay;
+  times[11] = 0;
+  return (times);
+}
+
+int	get_time_by_func(t_server *srv, char *cmd)
+{
+  int		i;
+
+  i = 0;
+  while (srv->cmd_tab_ia[i] != NULL)
+    {
+      if (strcmp(srv->cmd_tab_ia[i], cmd) == 0)
+	return (i);
+      i++;
+    }
+  return (-1);
+}
+
+double	calculate_elapse(struct timeb *before, struct timeb *after)
 {
   double	res;
 
@@ -18,12 +61,6 @@ static double	calculate_elapse(struct timeb *before, struct timeb *after)
       (before->time*1000 + before->millitm);
   res /= 1000;
   return (res);
-}
-
-static int	task_list(t_server *srv)
-{
-  (void) srv;
-  return (0);
 }
 
 static int	waiting_list(t_server *srv)
@@ -52,7 +89,13 @@ static int	waiting_list(t_server *srv)
 
 int	check_timer(t_server *srv)
 {
+  int	ret;
+
+  ret = 0;
+  printf("Checking timer\n");
   waiting_list(srv);
-  task_list(srv);
-  return (0);
+  printf("Cheking in progress\n");
+  ret = task_list(srv);
+  printf("Checking done\n");
+  return (ret);
 }

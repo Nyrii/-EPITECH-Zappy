@@ -69,6 +69,7 @@ SRCSER	= bct.c				\
 	sst.c				\
 	suc.c				\
 	take_ia.c			\
+	task.c			\
 	timer.c				\
 	tna.c				\
 	welcome.c

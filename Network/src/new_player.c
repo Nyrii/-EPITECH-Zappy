@@ -62,6 +62,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   new->sock = cl->sock;
+  new->queue_tasks = NULL;
   if (assign_egg_pos(srv, t, new) == 0)
     {
       new->x = rand() % srv->data.world_x;

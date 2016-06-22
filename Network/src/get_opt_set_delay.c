@@ -11,7 +11,8 @@
 #include <string.h>
 #include "server.h"
 
-void		set_delay(t_server *server, char **argv, char *optarg, int *optind)
+void		set_delay(t_server *server, char **argv, char *optarg,
+			  int *optind)
 {
   if (argv[*optind] != NULL
       && strcmp(argv[*optind], "-p") != 0

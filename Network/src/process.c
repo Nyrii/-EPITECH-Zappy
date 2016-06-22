@@ -21,9 +21,15 @@ int		manage_commands_ia(t_server *server,
   while (server->cmd_tab_ia[i] != NULL)
     {
       if (strcmp(server->cmd_tab_ia[i], command) == 0)
-	return (server->cmd_ptr_ia[i](server, player));
+	{
+	  if (list_add_elem_at_back(&player->queue_tasks,
+				    new_task(server, player)) == FALSE)
+	    return (-1);
+	  return (0);
+	}
       ++i;
     }
+  dprintf(player->sock, "ko\n"); // check
   return (0);
 }
 

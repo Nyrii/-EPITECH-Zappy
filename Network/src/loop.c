@@ -18,8 +18,8 @@ int			loop_server(t_server *srv)
   printf("Loop server\n");
   while (1)
     {
-      tv.tv_sec = 0;
-      tv.tv_usec = 100;
+      tv.tv_sec = 1;
+      tv.tv_usec = 0;
       save_server(srv, 1);
       FD_ZERO(&srv->rdfs);
       FD_SET(srv->sock, &srv->rdfs);
