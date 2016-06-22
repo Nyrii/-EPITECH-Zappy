@@ -28,6 +28,6 @@ class OptionManager():
             elif op == "-h":
                 self.host = val
 
-        if self.nameEquip == "" and self.port == -1:
+        if self.nameEquip == "" or self.port == -1:
             print (Macro.usage)
             sys.exit()
