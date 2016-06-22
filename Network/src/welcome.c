@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Tue Jun 21 17:55:38 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:28:15 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -27,8 +27,8 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (dprintf(p->sock, "%s", buffer) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_p(p, buffer, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   if (memset(buffer, 0, 4096) == NULL
       || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
 		  srv->data.world_x, srv->data.world_y) == -1)
@@ -37,8 +37,10 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (dprintf(p->sock, "%s", buffer) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_p(p, buffer, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
+  if (pnw(srv, p) == -1)
+    return (-1);
   return (0);
 }
 
@@ -59,7 +61,7 @@ int		handle_new_client(t_server *srv, int const index)
   FD_SET(c->sock, &srv->rdfs);
   if (list_add_elem_at_back(&srv->queue_clients, c) == FALSE)
     return (-1);
-  if (dprintf(c->sock, WELCOME) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_c(c, WELCOME, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

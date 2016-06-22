@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:17:14 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:05:13 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -52,22 +52,30 @@ static int	determine_best_way(t_server *server, t_player *player,
   return (tile);
 }
 
-static int	send_broadcast(t_server *server, t_player *player, t_list tmp)
+static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
+			       unsigned int i)
 {
   t_player	*tmp_player;
-  unsigned int	i;
   int		tile;
+  char		*answ;
+  int		null;
 
-  i = -1;
+  null = 1;
   while (++i < list_get_size(tmp))
     {
       if ((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
 	  && tmp_player->sock != player->sock)
 	{
 	  tile = determine_best_way(server, player, tmp_player);
-	  if (dprintf(tmp_player->sock, BROADCAST,
-		      tile, server->params) == -1)
+	  if (null == 1 && (answ = malloc(strlen(server->params) + 50)) == NULL)
+	    return (fprintf(stderr, ERR_MALLOC), -1);
+	  if (null == 1 && !memset(answ, 0, strlen(server->params) + 50)
+	      && snprintf(answ, strlen(server->params) + 50, BROADCAST, tile,
+			  server->params) == -1)
+	    return (fprintf(stderr, ERR_PRINTF), -1);
+	  if (store_answer_p(tmp_player, answ, 0) == -1)
 	    return (-1);
+	  null = 0;
 	}
     }
   return (pbc(server, player));
@@ -83,9 +91,9 @@ int		broadcast_ia(t_server *server, t_player *player)
       return (-1);
     }
   if (server->params == NULL)
-    return (dprintf(player->sock, KO));
-  else if (dprintf(player->sock, OK) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+    return (store_answer_p(player, KO, 0));
+  else if (store_answer_p(player, OK, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   tmp = server->all_players;
-  return (send_broadcast(server, player, tmp));
+  return (send_broadcast(server, player, tmp, -1));
 }

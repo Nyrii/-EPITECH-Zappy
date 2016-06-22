@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:19:09 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:08:36 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -49,7 +49,7 @@ int		send_message_to_all_players(t_server *server, t_player *player,
     {
       if ((((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
 	    && tmp_player->level == level) || level == -1)
-	  && dprintf(tmp_player->sock, "%s", buffer) == -1)
+	  && store_answer_p(player, buffer, 0) == -1)
 	{
 	  fprintf(stderr, ERR_PRINTF);
 	  return (-1);

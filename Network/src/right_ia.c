@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:42 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:22:54 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:21:03 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -24,7 +24,7 @@ int		right_ia(t_server *server, t_player *player)
     player->orientation = TOP;
   else
     player->orientation += 90;
-  if (dprintf(player->sock, OK) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_p(player, OK, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (ppo_ia(server, player));
 }

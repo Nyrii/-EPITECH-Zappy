@@ -5,12 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 13:24:23 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:20:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "replies.h"
+#include "errors.h"
 
 int		manage_commands_ia(t_server *server,
 				   t_player *player, const char *command)
@@ -29,12 +30,13 @@ int		manage_commands_ia(t_server *server,
 	}
       ++i;
     }
-  dprintf(player->sock, "ko\n"); // check
+  if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
 
 int		manage_commands_graphic(t_server *server,
-				   t_client *graphic, const char *command)
+					t_client *graphic, const char *command)
 {
   int		i;
 
@@ -45,7 +47,7 @@ int		manage_commands_graphic(t_server *server,
 	return (server->cmd_ptr_graphic[i](server, graphic));
       ++i;
     }
-  return (0);
+  return (suc(graphic));
 }
 
 int		manage_auth(t_server *srv, t_client *cl, const char *command)
@@ -74,8 +76,10 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
     }
   else
     {
-      dprintf(cl->sock, KO);
-      close(cl->sock);
+      if (store_answer_c(cl, KO, 0) == -1)
+	return (fprintf(stderr, ERR_BUFFER), -1);
+      if (close(cl->sock) == -1)
+	return (fprintf(stderr, ERR_CLOSE), -1);
     }
   remove_client_from_queue(srv, cl);
   return (0);

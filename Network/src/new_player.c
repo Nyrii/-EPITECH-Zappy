@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 17:22:45 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 17:49:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -54,7 +54,20 @@ t_egg			*new_egg(t_server *srv, t_player *p)
   new->is_born = 0;
   new->team_name = get_team_by_player(srv, p)->name;
   new->id = get_max_egg_id(srv) + 1;
+  ftime(&new->timer.val);
   return (new);
+}
+
+static void		fill_inventory(t_player *new)
+{
+  new->inventory[FOOD] = 10;
+  new->inventory[LINEMATE] = 0;
+  new->inventory[DERAUMERE] = 0;
+  new->inventory[SIBUR] = 0;
+  new->inventory[MENDIANE] = 0;
+  new->inventory[PHIRAS] = 0;
+  new->inventory[THYSTAME] = 0;
+  new->inventory[NONE] = -1;
 }
 
 t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
@@ -70,17 +83,11 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
     return (NULL);
   ret_value == 0 ? (new->x = rand() % srv->data.world_x) : 0;
   ret_value == 0 ? (new->y = rand() % srv->data.world_y) : 0;
+  ftime(&new->timer.val);
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
-  new->inventory[FOOD] = 0;
-  new->inventory[LINEMATE] = 0;
-  new->inventory[DERAUMERE] = 0;
-  new->inventory[SIBUR] = 0;
-  new->inventory[MENDIANE] = 0;
-  new->inventory[PHIRAS] = 0;
-  new->inventory[THYSTAME] = 0;
-  new->inventory[NONE] = -1;
+  fill_inventory(new);
   if (create_buffer(&new->buffs) == NULL)
     return (NULL);
   printf("Position x : %d, position y : %d, orientation = %d\n", new->x,

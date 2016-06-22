@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:03:28 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:13:21 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:17:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -42,7 +42,7 @@ int		plv(t_server *server, t_client *graphic)
       || snprintf(buffer, 40, PLV,
 		  player->id, player->level) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (dprintf(graphic->sock, "%s", buffer) == -1)
+  if (store_answer_c(graphic, buffer, 0) == -1)
     {
       fprintf(stderr, ERR_PRINTF);
       return (-1);

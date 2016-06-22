@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:13:06 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 17:56:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -81,8 +81,8 @@ int		bct_on_tile(t_server *server, t_client *graphic)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
         return (fprintf(stderr, ERR_PRINTF), -1);
-      if (dprintf(graphic->sock, "%s", buf) == -1)
-	return (fprintf(stderr, ERR_PRINTF), -1);
+      if (store_answer_c(graphic, buf, 0) == -1)
+	return (fprintf(stderr, ERR_BUFFER), -1);
       return (0);
     }
   return (sbp(graphic));

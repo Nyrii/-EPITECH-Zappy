@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 15:06:42 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:15:34 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -23,7 +23,6 @@
 # define ERR_SAME_TEAM "Error: teams cannot have the same name.\n"
 # define ERR_WRONG_ARGS "Error: invalid argument(s).\n"
 # define ERR_PLAYER "Error: could not find any player\n"
-# define ERR_CLOSE "Error: could not close a client\n"
 # define ERR_TEAM "Error: could not find the searched team\n"
 # define INTERNAL_ERR "Error: an error occured (could be a NULL pointer).\n"
 # define ERR_TEAM_NAME "Error: please enter a team name with 512 chars max.\n"
@@ -33,5 +32,6 @@
 # define ERR_ANSWER "Error: could not write to client(s).\n"
 # define ERR_BUFFER "Error: could not add answer to the buffer\n"
 # define ERR_OVERFLOW "Error: Overflow\n"
+# define ERR_CLOSE "Error: could not close a file descriptor\n"
 
 #endif /* ERRORS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:29 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:20:07 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:10:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -30,9 +30,9 @@ int		fork_ia(t_server *server, t_player *player)
   if (pfk(server, player) == -1)
     return (-1);
   // Timer;
-  if (dprintf(player->sock, OK) == -1)
+  if (store_answer_p(player, OK, 0) == -1)
     {
-      fprintf(stderr, ERR_PRINTF);
+      fprintf(stderr, ERR_BUFFER);
       return (-1);
     }
   return (enw(server, egg));

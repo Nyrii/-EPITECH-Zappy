@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:00:27 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 13:56:14 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:23:47 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,7 +29,7 @@ int		sgt(t_server *server, t_client *graphic)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (dprintf(graphic->sock, "%s", buffer) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_c(graphic, buffer, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

@@ -2,6 +2,9 @@ import Macro
 import sys
 import time
 from Error import eprint
+from Neuron import Neuron
+from NeuronLayer import NeuronLayer
+from NeuralNetwork import NeuralNetwork
 from Socket import Socket
 from Static import StaticVars
 
@@ -12,8 +15,7 @@ class AI():
     freePlace = 0
     inventory = {"linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0}
     cases = [[], [], [], []]
-    lastCommand = []
-    lastBroadcast = ""
+    lastCommand = ""
 
     firstAction = True
     firstReceive = True
@@ -66,6 +68,14 @@ class AI():
                     eprint("Error in put " + elem)
                 ressourceCase[elem] += 1
 
+    def createNeuralNetwork(self, load = False):
+        listHidden1 = [Neuron("1", 6, load), Neuron("2", 6, load), Neuron("3", 6, load)]
+        listHidden2 = [Neuron("4", 3, load), Neuron("5", 3, load)]
+        listHidden3 = [Neuron("6", 2, load)]
+        listNetwork = [NeuronLayer(listHidden1), NeuronLayer(listHidden2), NeuronLayer(listHidden3)]
+
+        self.neuralNetwork = NeuralNetwork(listNetwork)
+
     def getCase(self, message):
         message = message.replace("{", "").replace("}", "")
         listCase = message.split(",")
@@ -103,17 +113,17 @@ class AI():
 
     def funcDroite(self):
         self.cases[1] = self.cases[3]
-        self.cases[2] = []
-        self.cases[3] = []
+        self.cases[2] = ["-1"]
+        self.cases[3] = ["-1"]
         self.socket.sendData("droite")
-        self.lastCommand.append("droite")
+        self.lastCommand = "droite"
 
     def funcGauche(self):
         self.cases[3] = self.cases[1]
         self.cases[2] = ["-1"]
         self.cases[1] = ["-1"]
         self.socket.sendData("gauche")
-        self.lastCommand.append("gauche")
+        self.lastCommand = "gauche"
 
     def funcAvance(self):
         self.cases[0] = self.cases[2]
@@ -121,11 +131,11 @@ class AI():
         self.cases[2] = ["-1"]
         self.cases[3] = ["-1"]
         self.socket.sendData("avance")
-        self.lastCommand.append("avance")
+        self.lastCommand = "avance"
 
     def funcVoir(self):
         self.socket.sendData("voir")
-        self.lastCommand.append("voir")
+        self.lastCommand = "voir"
 
 
     def funcPrend(self):
@@ -135,48 +145,60 @@ class AI():
             case.remove(case[0])
         else:
             eprint("Impossible to execute 'prend' ")
-        self.lastCommand.append("prend")
+        self.lastCommand = "prend"
 
     def funcExpulse(self):
         print ("Expulse ?")
-        self.lastCommand.append("prend")
+        self.lastCommand = "prend"
 
     def funcIncantation(self):
         self.putResOnCase()
         self.socket.sendData("incantation")
-        self.lastCommand.append("incantation")
+        self.lastCommand = "incantation"
 
     def funcFork(self):
         print ("fork")
-        self.lastCommand.append("fork")
+        self.lastCommand = "fork"
 
-    def isRessource(self, ressource):
-        for i in range(0, len(self.cases)):
-            for res in cases[i]:
-                if res == ressource:
-                    return i
-        return -1
-
-    def moveTo(self, idx):
-        walk = []
-        if idx == 1:
-            walk = ["avance", "gauche", "avance"]
-        elif idx == 2:
-            walk = ["avance"]
-        elif idx == 3:
-            walk = ["avance", "gauche", "avance"]
 
     def chooseAnAction(self):
-        pass
+        inputs = []
+        inputs.append(self.life)
+        inputs.append(self.level)
+        inputs.append(self.freePlace)
+
+        inputs.append(self.getCaseLevel(0))
+        inputs.append(self.getCaseLevel(1))
+        inputs.append(self.getCaseLevel(2))
+        inputs.append(self.getCaseLevel(3))
+
+        inputs.append(self.getCaseFood(0))
+        inputs.append(self.getCaseFood(1))
+        inputs.append(self.getCaseFood(2))
+        inputs.append(self.getCaseFood(3))
+
+        inputs.append(self.isLevelComplete())
+        inputs.append(self.canIncant())
+
+        print ("INPUTS:", inputs)
+        actionValue = self.neuralNetwork.update(inputs)[0]
+        actionChoosen = self.getRangeAction(actionValue)
+        if actionChoosen == "":
+            eprint("Error in value of the neuralNetwork:", actionValue)
+        print (actionValue, "--->", actionChoosen)
+        command = input("Command:")
+        if command == "quit":
+            self.neuralNetwork.save()
+            sys.exit()
+        elif command == "learn":
+            pass #learn it
+        Macro.CommandRef[actionChoosen](self)
 
     def updateInfo(self):
         message = ""
         self.socket.sendData("inventaire")
         while message == "":
             message = self.socket.selectData()
-            if message.find("message") != -1:
-                lastBroadcast = message
-                message = ""
         self.life = int(message.replace("{", "").replace("}", "").split(",")[0].split(" ")[1])
 
     def initData(self, message):
@@ -194,12 +216,12 @@ class AI():
         if self.lastCommand != "":
             if self.lastCommand == "voir" and message[0] == "{":
                 self.getCase(message)
-                self.lastCommand.remove("voir")
-            if message == "ok" or message == "ko":
-                self.lastCommand.pop(0)
+            self.lastCommand = ""
         print (time.strftime("%H:%M:%S"), ":", message)
 
     def run(self):
+
+        self.createNeuralNetwork(False)
         while True:
             message = self.socket.selectData()
             if message:
@@ -208,7 +230,7 @@ class AI():
                 self.socket.sendData("voir")
                 self.socket.sendData("connect_nbr")
                 self.firstAction = False
-            if self.lastCommand == [] and  self.firstReceive is False:
+            if self.lastCommand == "" and  self.firstReceive is False:
                 self.updateInfo()
                 self.chooseAnAction()
 

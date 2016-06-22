@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 16:41:15 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:33:11 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -13,11 +13,11 @@
 #include "enum.h"
 #include "replies.h"
 
- int	send_answer(t_server *server, t_player *player)
+int	send_answer(t_server *server, t_player *player)
 {
-  if (dprintf(player->sock, OK) == -1)
+  if (store_answer_p(player, OK, 0) == -1)
     {
-      fprintf(stderr, ERR_PRINTF);
+      fprintf(stderr, ERR_BUFFER);
       return (-1);
     }
   return (ppo_ia(server, player));
@@ -49,6 +49,5 @@ int		forward_ia(t_server *server, t_player *player)
 	x = x - 1 >= 0 ? (x - 1) : (server->data.world_x - 1);
       player->x = x;
     }
-  store_answer_p(player, OK, 0);
-  return (0);
+  return (send_answer(server, player));
 }

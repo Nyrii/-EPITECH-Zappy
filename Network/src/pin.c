@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:08:33 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:12:42 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:17:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -75,9 +75,9 @@ int		pin(t_server *server, t_client *graphic)
     return (-1);
   answer[i++] = '\n';
   answer[i] = '\0';
-  if (dprintf(graphic->sock, "%s", answer) == -1)
+  if (store_answer_c(graphic, answer, 0) == -1)
     {
-      fprintf(stderr, ERR_PRINTF);
+      fprintf(stderr, ERR_BUFFER);
       return (-1);
     }
   return (0);

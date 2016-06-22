@@ -19,6 +19,7 @@ SRCSER	= bct.c				\
 	create_buffer_manager.c		\
 	drop_ia.c			\
 	ebo.c				\
+	egg.c			\
 	eht.c				\
 	elevation.c			\
 	enw.c				\
@@ -47,6 +48,7 @@ SRCSER	= bct.c				\
 	init_strings_resources.c	\
 	inventory_ia.c			\
 	left_ia.c			\
+	life.c				\
 	loop.c				\
 	main.c				\
 	mct.c				\

@@ -47,6 +47,8 @@ int		task_list(t_server *srv)
     {
       if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL)
 	{
+	  if ((ret = player_life(srv, p)) == -1)
+		return (ret);
 	  if ((ret = player_tasks(srv, p)) == -1 || ret == 2)
 	    return (ret);
 	}

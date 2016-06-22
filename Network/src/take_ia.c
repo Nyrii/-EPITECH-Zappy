@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:25:07 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:25:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -36,8 +36,8 @@ static int	take_food(t_server *server, t_player *player)
 	return (-1);
       free(answ);
     }
-  else if (dprintf(player->sock, KO) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  else if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
 
@@ -65,8 +65,8 @@ static int	take_stone(t_server *server, t_player *player, int index)
 	return (-1);
       free(answ);
     }
-  else if (dprintf(player->sock, KO) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  else if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
 
@@ -79,7 +79,7 @@ int		take_ia(t_server *server, t_player *player)
     return (fprintf(stderr, INTERNAL_ERR), -1);
   if (server->params == NULL)
     {
-      if (dprintf(player->sock, KO) == -1)
+      if (store_answer_p(player, KO, 0) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       return (0);
     }
@@ -90,7 +90,7 @@ int		take_ia(t_server *server, t_player *player)
       if (strcmp(server->params, server->data.strings_resources[i]) == 0)
 	return (take_stone(server, player, i));
     }
-  if (dprintf(player->sock, KO) == -1)
+  if (store_answer_p(player, KO, 0) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

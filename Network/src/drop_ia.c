@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:24 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:16:52 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:08:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -38,8 +38,8 @@ static int	drop_item(t_server *server, t_player *player, int index)
 	return (-1);
       free(answ);
     }
-  else if (dprintf(player->sock, KO) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  else if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
 
@@ -55,8 +55,8 @@ int		drop_ia(t_server *server, t_player *player)
     }
   if (server->params == NULL)
     {
-      if (dprintf(player->sock, KO) == -1)
-	return (fprintf(stderr, ERR_PRINTF), -1);
+      if (store_answer_p(player, KO, 0) == -1)
+	return (fprintf(stderr, ERR_BUFFER), -1);
       return (0);
     }
   while (++i < NONE)
@@ -64,7 +64,7 @@ int		drop_ia(t_server *server, t_player *player)
       if (strcmp(server->params, server->data.strings_resources[i]) == 0)
 	return (drop_item(server, player, i));
     }
-  if (dprintf(player->sock, KO) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

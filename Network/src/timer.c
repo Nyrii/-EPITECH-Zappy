@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Wed Jun 22 15:39:35 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 17:51:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -77,7 +77,8 @@ static int	waiting_list(t_server *srv)
 	{
 	  if (calculate_elapse(&cl->timer.val, &now) >= 10.0)
 	    {
-	      close(cl->sock);
+	      if (close(cl->sock) == -1)
+		return (-1);
 	      list_del_elem_at_position(&srv->queue_clients, i);
 	      return (0);
 	    }
@@ -92,7 +93,11 @@ int	check_timer(t_server *srv)
   int	ret;
 
   ret = 0;
-  waiting_list(srv);
-  ret = task_list(srv);
-  return (ret);
+  if (waiting_list(srv) == -1)
+    return (-1);
+  if ((ret = task_list(srv)) == -1 || ret == 2)
+    return (ret);
+  if (egg_list(srv) == -1)
+    return (-1);
+  return (0);
 }

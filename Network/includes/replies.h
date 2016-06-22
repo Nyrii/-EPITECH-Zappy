@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 15:31:49 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:13:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -47,5 +47,6 @@
 # define VICTORY "Victory from team : %s\n"
 # define ZERO_PLAYERS "0\n"
 # define RPL_OVERFLOW "Overflow\n"
+# define DEAD "mort\n"
 
 #endif /* REPLIES_H_ */

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 13:21:14 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:09:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -43,7 +43,7 @@ static int	deplacement(t_server *server,
 	  if (memset(buffer, 0, 30) == NULL
 	      || snprintf(buffer, 30, MOVE, (i / 2) + 1) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
-	  if (dprintf(victim->sock, "%s", buffer) == -1)
+	  if (store_answer_p(victim, buffer, 0) == -1)
 	    {
 	      fprintf(stderr, ERR_PRINTF);
 	      return (-1);
@@ -90,8 +90,8 @@ int		expulse_ia(t_server *server, t_player *player)
   tmp = get_players_at_pos(&server->data, player->y, player->x);
   number = list_get_size(tmp);
   if (!tmp || number <= 1)
-    return (dprintf(player->sock, KO));
-  else if (dprintf(player->sock, OK) == -1 || pex(server, player) == -1)
+    return (store_answer_p(player, KO, 0));
+  else if (store_answer_p(player, OK, 0) == -1 || pex(server, player) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   while (++i < list_get_size(tmp))
     {

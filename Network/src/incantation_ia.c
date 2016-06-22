@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:03:03 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 18:11:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -92,7 +92,7 @@ int		incantation_ia(t_server *server, t_player *player)
       if ((ret_value = incantation_manager(server, player, pos)) != -2)
 	return (ret_value);
     }
-  if (dprintf(player->sock, KO) == -1)
-    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
