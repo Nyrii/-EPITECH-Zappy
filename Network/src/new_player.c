@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 11:57:21 2016 Kevin Empociello
+** Last update Wed Jun 22 17:22:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -66,13 +66,10 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   new->sock = cl->sock;
   new->queue_tasks = NULL;
-  if ((ret_value = assign_egg_pos(srv, t, new)) == 0)
-    {
-      new->x = rand() % srv->data.world_x;
-      new->y = rand() % srv->data.world_y;
-    }
-  else if (ret_value == -1)
+  if ((ret_value = assign_egg_pos(srv, t, new)) == -1)
     return (NULL);
+  ret_value == 0 ? (new->x = rand() % srv->data.world_x) : 0;
+  ret_value == 0 ? (new->y = rand() % srv->data.world_y) : 0;
   new->level = 1;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
@@ -84,7 +81,10 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   new->inventory[PHIRAS] = 0;
   new->inventory[THYSTAME] = 0;
   new->inventory[NONE] = -1;
-  printf("Position x : %d, position y : %d, orientation = %d\n", new->x, new->y, new->orientation);
+  if (create_buffer(&new->buffs) == NULL)
+    return (NULL);
+  printf("Position x : %d, position y : %d, orientation = %d\n", new->x,
+	 new->y, new->orientation);
   return (new);
 }
 
@@ -104,6 +104,8 @@ t_client        	*new_client(t_server *srv, int const index)
       error("Error socket can't accept connexion");
       return (NULL);
     }
+  if (create_buffer(&cl->buffs) == NULL)
+    return (NULL);
   if (cl->sock > srv->max)
     srv->max = cl->sock;
   return (cl);

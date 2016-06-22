@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 11:58:48 2016 Kevin Empociello
+** Last update Wed Jun 22 17:44:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <sys/timeb.h>
 # include "generic_list.h"
+# include "circular_buffer.h"
 
 # define UNUSED __attribute__((unused))
 
@@ -38,6 +39,7 @@ typedef struct		s_client
 {
   int			sock;
   t_timer		timer;
+  t_buffs		buffs;
 }			t_client;
 
 typedef struct		s_player
@@ -51,6 +53,7 @@ typedef struct		s_player
   int			inventory[8];
   t_timer		timer;
   t_list		queue_tasks;
+  t_buffs		buffs;
 }			t_player;
 
 typedef struct		s_team
@@ -112,6 +115,7 @@ typedef struct		s_server
   int			max;
   int			*socks;
   fd_set		rdfs;
+  fd_set		wfd;
 }			t_server;
 
 
@@ -119,7 +123,7 @@ typedef struct		s_server
 int   		init_server(int, int);
 int   		error(char *);
 int   		loop_server(t_server *);
-void  		set_all_clients(t_server *);
+void  		set_all_clients(t_server *, unsigned int);
 int  		check_sockets_loop(t_server *, int);
 t_player	*new_player(t_server *, t_team *, t_client *);
 t_egg		*new_egg(t_server *, t_player *);
@@ -144,6 +148,14 @@ int		broadcast_ia(t_server *, t_player *);
 */
 void		init_calculs(t_data, int *, t_player *);
 int		get_best_tile(int *, t_player *);
+
+/*
+** check_and_action.c
+*/
+int		check_and_read_players(fd_set *, t_list);
+int		check_and_write_players(fd_set *, t_list);
+int		check_and_read_clients(fd_set *, t_list);
+int		check_and_write_clients(fd_set *, t_list);
 
 /*
 ** close_all_clients.c
@@ -408,6 +420,11 @@ int		manage_auth(t_server *, t_client *, const char *);
 int		remove_client_from_queue(t_server *, t_client *);
 
 /*
+** replace_end_of_string.c
+*/
+void		replace_end_of_string(char *);
+
+/*
 ** right_ia.c
 */
 int		right_ia(t_server *, t_player *);
@@ -460,6 +477,12 @@ int		sgt(t_server *, t_client *);
 ** sst.c
 */
 int		sst(t_server *, t_client *);
+
+/*
+** store_answer.c
+*/
+int		store_answer_p(t_player *, const char *, int);
+int		store_answer_c(t_client *, const char *, int);
 
 /*
 ** store_port.c

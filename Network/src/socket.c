@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Tue Jun 21 17:55:10 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 17:44:05 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -34,33 +34,39 @@ void	dump_lists(t_server *srv)
 
 static int	handle_client(t_server *srv, void *tmp, int type)
 {
-  int		tmp_sock;
-  char		buffer[512];
-  int		n;
   int		ret;
+  t_bmanager	*tmp_cmd;
 
-  n = 0;
   if (tmp == NULL)
     return (-1);
   if (type == 0 || type == 1)
-    tmp_sock = ((t_client *)tmp)->sock;
-  else if (type == 2)
-    tmp_sock = ((t_player *)tmp)->sock;
-  if (memset(buffer, 0, 512) == NULL)
-    return (fprintf(stderr, ERR_MEMSET), -1);
-  if ((n = recv(tmp_sock, buffer, 512, 0)) > 0)
     {
-      if ((srv->cmd = parse_cmd(srv, epur_bf(buffer))) == NULL)
-	return (-1);
-      if (type == 1)
-	ret = manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
-      else if (type == 2)
-	ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
-      else
-	ret = manage_auth(srv, (t_client *)tmp, srv->cmd);
-      if (ret == -1 || ret == 2)
-	return (ret);
-      printf("[%s]\n", srv->cmd);
+      tmp_cmd = ((t_client *)tmp)->buffs.cmds;
+      while (tmp_cmd)
+	{
+	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
+	    return (-1);
+	  if (type == 1)
+	    ret = manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
+	  else if (type == 0)
+	    ret = manage_auth(srv, (t_client *)tmp, srv->cmd);
+	  if (ret == -1 || ret == 2)
+            return (ret);
+	  tmp_cmd = tmp_cmd->next;
+	}
+    }
+  else if (type == 2)
+    {
+      tmp_cmd = ((t_player *)tmp)->buffs.cmds;
+      while (tmp_cmd)
+	{
+	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
+	    return (-1);
+	  ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
+	  if (ret == -1 || ret == 2)
+	    return (ret);
+	  tmp_cmd = tmp_cmd->next;
+	}
     }
   return (0);
 }
@@ -121,27 +127,34 @@ int		check_sockets_loop(t_server *srv, int index)
       if ((ret_value = check_socket(i, srv, index)) == -1 || ret_value == 1)
 	return (ret_value);
       i++;
-   }
+    }
   return (0);
 }
 
-void			set_all_clients(t_server *srv)
+void			set_all_clients(t_server *srv, unsigned int i)
 {
   t_player		*p;
   t_client		*c;
-  unsigned int		i;
 
   c = NULL;
-  i = -1;
   while (++i < list_get_size(srv->queue_clients))
     if ((c = list_get_elem_at_position(srv->queue_clients, i)) != NULL)
-      FD_SET(c->sock, &srv->rdfs);
+      {
+	FD_SET(c->sock, &srv->rdfs);
+        c->buffs.out.start != c->buffs.out.end ? FD_SET(c->sock, &srv->wfd) : 0;
+      }
   i = -1;
   while (++i < list_get_size(srv->graphic_clients))
     if ((c = list_get_elem_at_position(srv->graphic_clients, i)) != NULL)
-      FD_SET(c->sock, &srv->rdfs);
+      {
+	FD_SET(c->sock, &srv->rdfs);
+        c->buffs.out.start != c->buffs.out.end ? FD_SET(c->sock, &srv->wfd) : 0;
+      }
   i = -1;
   while (++i < list_get_size(srv->all_players))
     if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL)
-      FD_SET(p->sock, &srv->rdfs);
+      {
+        FD_SET(p->sock, &srv->rdfs);
+        p->buffs.out.start != p->buffs.out.end ? FD_SET(p->sock, &srv->wfd) : 0;
+      }
 }

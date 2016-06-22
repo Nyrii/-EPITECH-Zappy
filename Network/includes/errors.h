@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 16:32:58 2016 Nyrandone Noboud-Inpeng
+** Last update Wed Jun 22 15:06:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -30,5 +30,8 @@
 # define ERR_SAME_PORT "Error: ports cannot be similar.\n"
 # define ERR_PORTS "Error: port(s) have not been specified.\n"
 # define ERR_INVALID_PORT "Error: invalid port.\n"
+# define ERR_ANSWER "Error: could not write to client(s).\n"
+# define ERR_BUFFER "Error: could not add answer to the buffer\n"
+# define ERR_OVERFLOW "Error: Overflow\n"
 
 #endif /* ERRORS_H_ */

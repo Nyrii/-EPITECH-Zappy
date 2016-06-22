@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Thu Jun  9 01:11:53 2016 Kevin Empociello
+** Last update Wed Jun 22 15:39:35 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -92,10 +92,7 @@ int	check_timer(t_server *srv)
   int	ret;
 
   ret = 0;
-  printf("Checking timer\n");
   waiting_list(srv);
-  printf("Cheking in progress\n");
   ret = task_list(srv);
-  printf("Checking done\n");
   return (ret);
 }

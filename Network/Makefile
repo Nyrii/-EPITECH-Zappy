@@ -5,14 +5,18 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Tue Jun 21 17:36:55 2016 Nyrandone Noboud-Inpeng
+## Last update Wed Jun 22 15:37:45 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
 	broadcast_ia.c			\
 	broadcast_init.c		\
+	buffer_manager_push.c		\
+	check_and_action.c		\
+	circular_buffer.c		\
 	close_all_clients.c		\
 	connect_nbr_ia.c		\
+	create_buffer_manager.c		\
 	drop_ia.c			\
 	ebo.c				\
 	eht.c				\
@@ -63,6 +67,7 @@ SRCSER	= bct.c				\
 	ppo.c				\
 	process.c			\
 	remove.c			\
+	replace_eol.c			\
 	right_ia.c			\
 	save_server.c			\
 	sbp.c				\
@@ -75,11 +80,12 @@ SRCSER	= bct.c				\
 	sgt.c				\
 	socket.c			\
 	sst.c				\
+	store_answer.c			\
 	store_port.c			\
 	store_socks.c			\
 	suc.c				\
 	take_ia.c			\
-	task.c			\
+	task.c				\
 	timer.c				\
 	tna.c				\
 	victory.c			\
