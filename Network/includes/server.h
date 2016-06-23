@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 15:40:00 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 17:16:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -150,6 +150,7 @@ int		handle_new_graphic(t_server *, t_client *);
 */
 char		*bct(int ***map, int const, int const);
 int		bct_on_tile(t_server *, t_client *);
+int		bct_ia(t_server *, int const, int const);
 
 /*
 ** broadcast_ia.c
@@ -261,7 +262,8 @@ int		free_before_reset(t_server *);
 /*
 ** generate_map.c
 */
-int		generate_food(t_data *);
+int		generate_new_resources(t_server *);
+int		generate_food(t_server *);
 int		generate_map(t_data *, int, int, int);
 
 /*
