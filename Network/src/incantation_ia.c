@@ -43,6 +43,8 @@ static int	manage_level_player(t_server *server,
 {
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     return (elevation_ok(server, player, level));
+  else if (store_answer_p(player, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
   if (pie(server, player, 0) == -1)
     return (-1);
   return (-2);
@@ -78,21 +80,22 @@ int		incantation_manager(t_server *server,
 
 int		incantation_ia(t_server *server, t_player *player)
 {
-  int		pos[2];
-  int		ret_value;
+  int		*pos;
 
+  if ((pos = malloc(2 * sizeof(int))) == NULL)
+    return (fprintf(stderr, ERR_MALLOC), -1);
   pos[0] = player->y;
   pos[1] = player->x;
-  return (2);
+  player->incant.pos = NULL;
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     {
       if (send_message_to_all_players(server, player,
 				      ELEVATION_IN_PROGRESS, -1) == -1
 	  || pic(server, player) == -1)
 	return (-1);
+      player->incant.pos = pos;
       // timer
-      if ((ret_value = incantation_manager(server, player, pos)) != -2)
-	return (ret_value);
+      return (1);
     }
   if (store_answer_p(player, KO, 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);

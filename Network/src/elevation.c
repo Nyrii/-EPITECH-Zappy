@@ -85,6 +85,7 @@ int		is_elevation_legit(t_data *data, int const elevation,
   t_list	tmp;
 
   i = -1;
+  printf("pos %d\n", pos[0]);
   if (!data || !data->map || !data->map[pos[0]]
       || !data->map[pos[0]][pos[1]] || !data->resources || elevation < 0
       || elevation >= 8)

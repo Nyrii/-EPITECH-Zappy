@@ -10,6 +10,31 @@
 
 #include <string.h>
 #include "server.h"
+#include "replies.h"
+#include "errors.h"
+
+int		player_spe_action(t_server *srv, t_player *p, t_task *t)
+{
+  int		ret_value;
+
+  if (strcmp(t->cmd, "fork") == 0)
+    {
+      if (store_answer_p(p, OK, 0) == -1)
+	{
+	  fprintf(stderr, ERR_BUFFER);
+	  return (-1);
+	}
+      return (enw(srv, p->fork.egg));
+    }
+  else if (strcmp(t->cmd, "incantation") == 0)
+    {
+      if (p->incant.pos == NULL)
+	return (0);
+      if ((ret_value = incantation_manager(srv, p, p->incant.pos)) != -2)
+	return (ret_value);
+    }
+  return (0);
+}
 
 int		player_tasks(t_server *srv, t_player *p)
 {
@@ -26,10 +51,14 @@ int		player_tasks(t_server *srv, t_player *p)
 	  calculate_elapse(&t->timer.val, &now) >= srv->data.timers[index])
 	{
 	  list_del_elem_at_position(&p->queue_tasks, 0);
+          if (strcmp(t->cmd, "fork") == 0 ||
+              strcmp(t->cmd, "incantation") == 0)
+            return (player_spe_action(srv, p, t));
+          else
+            return (srv->cmd_ptr_ia[index](srv, p));
 	  if (list_get_size(p->queue_tasks) > 0)
 	    if ((t = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
 		ftime(&t->timer.val);
-	  return (srv->cmd_ptr_ia[index](srv, p));
 	}
     }
   return (0);

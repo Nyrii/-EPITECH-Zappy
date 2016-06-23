@@ -13,16 +13,35 @@
 #include "replies.h"
 #include "errors.h"
 
+int		manage_commands_spe(t_server *server,
+				    t_player *player, const char *command)
+{
+  if (strcmp(command, "fork") == 0)
+    return (fork_ia(server, player));
+  else if (strcmp(command, "incantation") == 0)
+    {
+      if (incantation_ia(server, player) == 1)
+	return (0);
+      return (1);
+    }
+  return (0);
+}
+
 int		manage_commands_ia(t_server *server,
 				   t_player *player, const char *command)
 {
   int		i;
+      int ret;
 
   i = 0;
+      ret = 0;
   while (server->cmd_tab_ia[i] != NULL)
     {
       if (strcmp(server->cmd_tab_ia[i], command) == 0)
 	{
+	  if ((ret = manage_commands_spe(server, player, command)) != 0)
+	    return (ret);
+	  printf("j'add la task\n");
 	  if (list_add_elem_at_back(&player->queue_tasks,
 				    new_task(server, player)) == FALSE)
 	    return (-1);

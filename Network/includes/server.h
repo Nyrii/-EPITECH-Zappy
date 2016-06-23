@@ -20,6 +20,16 @@
 
 # define UNUSED __attribute__((unused))
 
+typedef struct		s_fork
+{
+  struct s_egg		*egg;
+}			t_fork;
+
+typedef struct		s_levelup
+{
+  int			*pos;
+}			t_levelup;
+
 typedef struct		s_timer
 {
   struct timeb		val;
@@ -53,6 +63,8 @@ typedef struct		s_player
   int			orientation;
   int			level;
   int			inventory[8];
+  t_fork		fork;
+  t_levelup		incant;
   t_timer		timer;
   t_list		queue_tasks;
   t_buffs		buffs;
@@ -119,7 +131,6 @@ typedef struct		s_server
   fd_set		rdfs;
   fd_set		wfd;
 }			t_server;
-
 
 /* Socket */
 int   		init_server(int, int);
@@ -301,6 +312,7 @@ int		left_ia(t_server *, t_player *);
 ** incantation_ia.c
 */
 int		incantation_ia(t_server *, t_player *);
+int		incantation_manager(t_server *, t_player *, int *);
 
 /*
 ** init.c
@@ -526,6 +538,7 @@ int		take_ia(t_server *, t_player *);
 */
 t_task		*new_task(t_server *, t_player *);
 int		task_list(t_server *);
+int		player_spe_action(t_server *, t_player *, t_task *);
 
 /*
 ** timer.c

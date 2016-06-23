@@ -29,11 +29,8 @@ int		fork_ia(t_server *server, t_player *player)
     }
   if (pfk(server, player) == -1)
     return (-1);
+  player->fork.egg = egg;
   // Timer;
-  if (store_answer_p(player, OK, 0) == -1)
-    {
-      fprintf(stderr, ERR_BUFFER);
-      return (-1);
-    }
-  return (enw(server, egg));
+  // wait le timer
+  return (0);
 }
