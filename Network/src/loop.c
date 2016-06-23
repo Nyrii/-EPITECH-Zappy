@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Wed Jun 22 17:47:18 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 13:16:34 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -30,7 +30,7 @@ static int		process(t_server *srv, int const index)
 int			loop_server(t_server *srv)
 {
   struct timeval 	tv;
-  int			ret_value;
+  int			ret;
   int			i;
 
   while (1)
@@ -48,10 +48,9 @@ int			loop_server(t_server *srv)
 	  set_all_clients(srv, -1);
 	  if (select(srv->max + 1, &srv->rdfs, &srv->wfd, NULL, &tv) == -1)
 	    return (error("Select failed\n"));
-	  if ((ret_value = process(srv, i)) != 0)
-	    return (ret_value);
-	  if (check_timer(srv) == -1 || check_disconnect(srv) == -1)
-	    return (-1);
+	  if ((ret = process(srv, i)) != 0 || (ret = check_timer(srv)) == -1
+	      || (ret = check_disconnect(srv)) == -1)
+	    return (ret);
 	}
     }
   return (0);

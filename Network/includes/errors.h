@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 19:10:41 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 13:23:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -34,5 +34,6 @@
 # define ERR_OVERFLOW "Error: Overflow\n"
 # define ERR_CLOSE "Error: could not close a file descriptor\n"
 # define ERR_COMMAND "Error: could not get the command\n"
+# define ERR_WRITE "Error: could not write the entire answer\n"
 
 #endif /* ERRORS_H_ */

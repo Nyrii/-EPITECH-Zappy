@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Wed Jun 22 15:37:45 2016 Nyrandone Noboud-Inpeng
+## Last update Thu Jun 23 12:43:11 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -17,10 +17,10 @@ SRCSER	= bct.c				\
 	close_all_clients.c		\
 	connect_nbr_ia.c		\
 	create_buffer_manager.c		\
-	disconnect.c \
+	disconnect.c			\
 	drop_ia.c			\
 	ebo.c				\
-	egg.c			\
+	egg.c				\
 	eht.c				\
 	elevation.c			\
 	enw.c				\

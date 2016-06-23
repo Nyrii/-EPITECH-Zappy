@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 19:10:12 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 13:24:27 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -86,8 +86,10 @@ int			check_and_write_players(fd_set *writef, t_list players)
 	  if (FD_ISSET(player->sock, writef) &&
 	      (buff = get_buff_content(&player->buffs.out)))
 	    {
-	      if ((ret = write(player->sock, buff, strlen(buff)) == -1))
+	      if ((ret = write(player->sock, buff, strlen(buff))) == -1)
 		return (fprintf(stderr, ERR_ANSWER), ret);
+	      else if ((unsigned int)ret != strlen(buff))
+		fprintf(stderr, ERR_WRITE);
 	      free(buff);
 	    }
 	}
@@ -110,8 +112,10 @@ int			check_and_write_clients(fd_set *writef, t_list clients)
 	  if (FD_ISSET(client->sock, writef) &&
 	      (buff = get_buff_content(&client->buffs.out)))
 	    {
-	      if ((ret = write(client->sock, buff, strlen(buff)) == -1))
+	      if ((ret = write(client->sock, buff, strlen(buff))) == -1)
 		return (fprintf(stderr, ERR_ANSWER), ret);
+	      else if ((unsigned int)ret != strlen(buff))
+		fprintf(stderr, ERR_WRITE);
 	      free(buff);
 	    }
 	}
