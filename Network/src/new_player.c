@@ -89,7 +89,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
   fill_inventory(new);
-  generate_food(&srv->data); // envoyer les cases peut etre
+  generate_food(srv); // envoyer les cases peut etre
   if (create_buffer(&new->buffs) == NULL)
     return (NULL);
   printf("Position x : %d, position y : %d, orientation = %d\n", new->x,
