@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 12:53:48 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 17:15:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -69,7 +69,7 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       if ((p = new_player(srv, t, cl)) == NULL ||
 	  list_add_elem_at_back(&t->players, p) == FALSE ||
 	  list_add_elem_at_back(&srv->all_players, p) == FALSE ||
-	 generate_food(&srv->data) == -1)
+	  generate_food(srv) == -1)
 	return (-1);
       else
 	if (handle_new_player(srv, t, p) == -1)

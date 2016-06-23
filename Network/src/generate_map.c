@@ -5,25 +5,59 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 18:51:50 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 17:15:53 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "errors.h"
 #include "server.h"
+#include "replies.h"
 
-int			generate_food(t_data *data)
+int			generate_new_resources(t_server *server)
+{
+  int			y;
+  int			x;
+  int			resource;
+
+  y = -1;
+  while (server->data.map[++y] != NULL)
+   {
+     x = -1;
+     while (server->data.map[y][++x] != NULL)
+       {
+	  resource = 0;
+	  while (resource < NONE)
+	    {
+	      if ((rand() % 100) < server->data.percentages[resource])
+		{
+		  if (bct_ia(server, y, x) == -1)
+		    return (-1);
+		  server->data.map[y][x][resource] += 1;
+		}
+	      ++resource;
+	    }
+       }
+   }
+  return (0);
+}
+
+int			generate_food(t_server *server)
 {
   int			y;
   int			x;
 
   y = 0;
-  while (data->map && data->map[y] != NULL)
+  while (server->data.map && server->data.map[y] != NULL)
     {
       x = 0;
-      while (data->map[y][x] != NULL)
+      while (server->data.map[y][x] != NULL)
 	{
-	  if ((rand() % 100) < data->percentages[FOOD])
-	    data->map[y][x][FOOD] += 1;
+	  if ((rand() % 100) < server->data.percentages[FOOD])
+	    {
+	      if (bct_ia(server, y, x) == -1)
+		return (-1);
+	      server->data.map[y][x][FOOD] += 1;
+	    }
 	  ++x;
 	}
       ++y;
