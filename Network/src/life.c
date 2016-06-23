@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 19:21:01 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 14:23:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -27,7 +27,7 @@ int		player_life(t_server *srv, t_player *p)
       if (close(p->sock) == -1)
 	return (fprintf(stderr, ERR_CLOSE), -1);
       remove_player_from_srv(srv, get_team_by_player(srv, p), p);
-      return (-1);
+      return (0);
     }
   tmp = calculate_elapse(&p->timer.val, &now);
   if (tmp >= 126.0 * (1.0 / srv->data.delay))

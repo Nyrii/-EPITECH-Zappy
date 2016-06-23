@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 17:44:32 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 15:40:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -245,6 +245,7 @@ int		free_double_int_tab(int **, int const);
 ** free_all.c
 */
 int		free_all(t_server *, int const);
+int		free_before_reset(t_server *);
 
 /*
 ** generate_map.c
@@ -343,9 +344,6 @@ int		inventory_ia(t_server *, t_player *);
 */
 int		player_life(t_server *, t_player *);
 
-/* main */
-int		run_zappy(t_server *);
-
 /*
 ** mct.c
 */
@@ -436,6 +434,7 @@ int		manage_auth(t_server *, t_client *, const char *);
 */
 int		remove_client_from_queue(t_server *, t_client *);
 int		remove_player_from_srv(t_server *, t_team *, t_player *);
+int		remove_players_from_team(t_server *);
 
 /*
 ** replace_end_of_string.c

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 19:18:30 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 13:28:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -83,6 +83,7 @@ int		incantation_ia(t_server *server, t_player *player)
 
   pos[0] = player->y;
   pos[1] = player->x;
+  return (2);
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     {
       if (send_message_to_all_players(server, player,

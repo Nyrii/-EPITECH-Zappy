@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 14:43:13 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 17:20:13 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 13:58:16 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -45,9 +45,12 @@ int		free_teams(t_list list, int const ret_value)
 	{
 	  if (tmp_team->name)
 	    free(tmp_team->name);
+	  tmp_team->name = NULL;
 	  free(tmp_team);
+	  tmp_team = NULL;
 	}
       free(tmp);
+      tmp = NULL;
     }
   list = NULL;
   return (ret_value);
@@ -65,7 +68,9 @@ int		free_list(t_list list, int const ret_value)
       list = list->next;
       if (tmp->value)
 	free(tmp->value);
+      tmp->value = NULL;
       free(tmp);
+      tmp = NULL;
     }
   list = NULL;
   return (ret_value);

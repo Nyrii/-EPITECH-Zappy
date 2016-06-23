@@ -5,7 +5,7 @@
 ** Login   <wilmot_g@epitech.net>
 **
 ** Started on  Thu May 19 00:41:38 2016 guillaume wilmot
-** Last update Wed Jun 22 17:01:54 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 14:52:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -58,16 +58,15 @@ static char	*get_next_cmd(t_buff *buff)
 
   while ((buff->start_bis + buff->idx) % buff->size != buff->end)
     {
-      buff->found = buff->found ? buff->found - 1 : buff->found;
+      buff->found = 0;
       buff->cmd[buff->idx] = buff->buff[buff->start];
       buff->buff[buff->start] = '\0';
-      buff->found = buff->cmd[buff->idx] == '\n' ? 2 : buff->found;
-      if (buff->cmd[buff->idx] == '\n' && buff->found)
-	buff->found = 3;
+      if (buff->cmd[buff->idx] == '\n')
+	buff->found = 1;
       buff->idx = (buff->idx + 1) % buff->size;
       buff->start = (buff->start + 1) % buff->size;
       buff->overflow--;
-     if (buff->found == 3)
+     if (buff->found == 1)
 	{
 	  cmd = strdup(buff->cmd);
 	  buff->idx = 0;

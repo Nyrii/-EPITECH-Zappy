@@ -5,11 +5,40 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Sat Jun 11 19:32:36 2016 Kevin Empociello
+** Last update Thu Jun 23 15:40:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
+#include "errors.h"
+
+int		remove_players_from_team(t_server *server)
+{
+  unsigned int	i;
+  unsigned int	x;
+  t_team	*tmp;
+  t_player	*player;
+
+  i = -1;
+  if (!server)
+    return (0);
+  while (++i < list_get_size(server->data.teams))
+    {
+      x = -1;
+      if ((tmp = list_get_elem_at_position(server->data.teams, i)) != NULL)
+	{
+	  while (++x < list_get_size(tmp->players))
+	    {
+	      if ((player = list_get_elem_at_position(tmp->players, i)) != NULL)
+		{
+		  if (list_del_elem_at_position(&tmp->players, i) == FALSE)
+		    return (fprintf(stderr, ERR_REMOVE), -1);
+		}
+	    }
+	}
+    }
+  return (0);
+}
 
 int		remove_player_from_srv(t_server *srv, t_team *t, t_player *pl)
 {
@@ -22,19 +51,19 @@ int		remove_player_from_srv(t_server *srv, t_team *t, t_player *pl)
       if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL
 	  && p->sock == pl->sock)
 	if (list_del_elem_at_position(&srv->all_players, i) == FALSE)
-	    return (-1);
-	  i++;
+	  return (-1);
+	i++;
     }
-      i = 0;
-    while (i < list_get_size(t->players))
-	{
-	  if ((p = list_get_elem_at_position(t->players, i)) != NULL
-	      && p->sock == pl->sock)
-	    if (list_del_elem_at_position(&t->players, i) == FALSE)
-		return (-1);
-	      i++;
-	}
-      return (0);
+  i = 0;
+  while (i < list_get_size(t->players))
+    {
+      if ((p = list_get_elem_at_position(t->players, i)) != NULL
+	  && p->sock == pl->sock)
+	if (list_del_elem_at_position(&t->players, i) == FALSE)
+	  return (-1);
+	i++;
+    }
+  return (0);
 }
 
 int		remove_client_from_queue(t_server *srv, t_client *cl)

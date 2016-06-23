@@ -5,13 +5,14 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 18:03:02 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 15:15:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
 #include <sys/socket.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <string.h>
 #include "server.h"
 
 void		free_before_leaving()
@@ -50,27 +51,24 @@ static int	activate_all_ports(t_server *server)
   return (0);
 }
 
-int		run_zappy(t_server *srv)
+int		run_zappy(t_server *template)
 {
-  init_code(srv->cmd_tab_ia, srv->cmd_tab_graphic);
-  init_ptrfunc(srv->cmd_ptr_ia, srv->cmd_ptr_graphic);
-  if (activate_all_ports(srv) == -1)
-    return (-1);
-  srv->queue_clients = NULL;
-  srv->graphic_clients = NULL;
-  srv->all_players = NULL;
-  if (generate_map(&srv->data, 0, 0, 0) == -1)
-    return (-1);
-  if (loop_server(srv) == -1)
+  t_server	*server;
+
+  server = template;
+  server->queue_clients = NULL;
+  server->graphic_clients = NULL;
+  server->all_players = NULL;
+  if (loop_server(server) == -1)
     {
-      close_all_clients(srv);
-      return (free_all(srv, -1));
+      close_all_clients(server);
+      return (free_all(server, -1));
     }
-  if (close_all_clients(srv) == -1)
+  if (close_all_clients(server) == -1)
     return (-1);
-  free_all(srv, 0);
-  save_server(NULL, 1);
-  return (run_zappy(NULL));
+  free_before_reset(server);
+  save_server(template, 1);
+  return (run_zappy(template));
 }
 
 int		main(int argc, char **argv)
@@ -82,6 +80,13 @@ int		main(int argc, char **argv)
   if (get_opt(argc, argv, &server) != -1 &&
       (server.data.timers = init_timer_tasks(&server)) != NULL)
     {
+      init_code(server.cmd_tab_ia, server.cmd_tab_graphic);
+      init_ptrfunc(server.cmd_ptr_ia, server.cmd_ptr_graphic);
+      if (activate_all_ports(&server) == -1)
+	return (-1);
+      if (generate_map(&server.data, 0, 0, 0) == -2)
+	return (-1);
+      save_server(&server, 1);
       if (run_zappy(&server) == -1)
 	return (-1);
     }
