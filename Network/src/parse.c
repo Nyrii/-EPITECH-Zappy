@@ -11,6 +11,7 @@
 #include <string.h>
 #include "server.h"
 
+// free
 static char	*get_cmd(char *buffer)
 {
   char	*new;
@@ -19,7 +20,7 @@ static char	*get_cmd(char *buffer)
   i = 0;
   if (buffer == NULL)
     return (NULL);
-  if ((new = malloc(96 * sizeof(char))) == NULL)
+  if ((new = malloc((strlen(buffer) + 2) * sizeof(char))) == NULL)
     return (NULL);
   while (buffer[i] && buffer[i] != ' ' && buffer[i] != '\0')
     {

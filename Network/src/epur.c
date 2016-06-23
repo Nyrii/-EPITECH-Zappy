@@ -12,6 +12,7 @@
 #include "server.h"
 #include "errors.h"
 
+// free
 static char	*delete_end(char *str)
 {
   int		i;
@@ -20,7 +21,7 @@ static char	*delete_end(char *str)
 
   i = 0;
   j = 0;
-  if ((new = malloc(4096 * sizeof(char))) == NULL)
+  if ((new = malloc((strlen(str) + 2) * sizeof(char))) == NULL)
     return (fprintf(stderr, ERR_PRINTF), NULL);
   while (str && str[i])
     {
@@ -32,6 +33,7 @@ static char	*delete_end(char *str)
   return (new);
 }
 
+// free
 char		*epur_bf(char *str)
 {
   char		*new;
