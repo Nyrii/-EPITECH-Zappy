@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Wed Jun 22 18:28:15 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 16:26:10 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -39,7 +39,7 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
     }
   if (store_answer_p(p, buffer, 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
-  if (pnw(srv, p) == -1)
+  if (pnw(srv, p) == -1 || pin_ia(srv, p) == -1)
     return (-1);
   return (0);
 }

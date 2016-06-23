@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Thu Jun 23 13:36:21 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 16:25:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -30,7 +30,7 @@ static int		process(t_server *srv, int const index)
 int			loop_server(t_server *srv)
 {
   struct timeval 	tv;
-  int			ret_value;
+  int			ret;
   int			i;
 
   while (1)
