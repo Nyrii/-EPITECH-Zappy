@@ -78,7 +78,6 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
     }
   else
     {
-	  printf("je store KO\n");
       if (store_answer_c(cl, KO, 0) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
 	  cl->off = 1;

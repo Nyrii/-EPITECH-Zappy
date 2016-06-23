@@ -11,6 +11,23 @@
 #include "server.h"
 #include "errors.h"
 
+static int	disconnect_in_team(t_player *p, t_team *t)
+{
+  t_player	*pl;
+  unsigned int	i;
+
+  i = 0;
+  while (i < list_get_size(t->players))
+    {
+      if ((pl = list_get_elem_at_position(t->players, i)) != NULL &&
+	  pl->sock == p->sock)
+	if (list_del_elem_at_position(&t->players, i) == FALSE)
+	    return (-1);
+      i++;
+    }
+  return (0);
+}
+
 static int	disconnect_players(t_server *srv)
 {
   unsigned int	i;
@@ -20,11 +37,13 @@ static int	disconnect_players(t_server *srv)
   while (i < list_get_size(srv->all_players))
     {
       if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL &&
-	  p->off == 1)
+	  p->off == 1 && FD_ISSET(p->sock, &srv->wfd))
 	{
 	  if (close(p->sock) == -1)
 	    return (fprintf(stderr, ERR_CLOSE), -1);
 	  if (list_del_elem_at_position(&srv->all_players, i) == FALSE)
+	    return (-1);
+	  if (disconnect_in_team(p, get_team_by_player(srv, p)) == -1)
 	    return (-1);
 	  return (0);
 	}
@@ -64,7 +83,7 @@ static int	disconnect_queue_clients(t_server *srv)
   while (i < list_get_size(srv->queue_clients))
     {
       if ((cl = list_get_elem_at_position(srv->queue_clients, i)) != NULL &&
-	  cl->off == 1)
+	  cl->off == 1 && FD_ISSET(cl->sock, &srv->wfd))
 	{
 	  if (close(cl->sock) == -1)
 	    return (fprintf(stderr, ERR_CLOSE), -1);
