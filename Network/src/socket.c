@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 12:56:37 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 15:43:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -36,13 +36,15 @@ static int	handle_client(t_server *srv, void *tmp, int type)
 {
   int		ret;
   t_bmanager	*tmp_cmd;
+  int		i;
 
   if (tmp == NULL)
     return (-1);
+  i = -1;
   if (type == 0 || type == 1)
     {
       tmp_cmd = ((t_client *)tmp)->buffs.cmds;
-      while (tmp_cmd)
+      while (tmp_cmd && ++i < 10)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
@@ -58,7 +60,7 @@ static int	handle_client(t_server *srv, void *tmp, int type)
   else if (type == 2)
     {
       tmp_cmd = ((t_player *)tmp)->buffs.cmds;
-      while (tmp_cmd)
+      while (tmp_cmd && ++i < 10)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
@@ -83,17 +85,17 @@ static int		check_lists(int sock, t_server *srv)
   while (++i < list_get_size(srv->queue_clients))
     if ((c = list_get_elem_at_position(srv->queue_clients, i)) != NULL)
       if (c->sock == sock)
-	return (handle_client(srv, c, 0), 1);
+	return (handle_client(srv, c, 0));
   i = -1;
   while (++i < list_get_size(srv->graphic_clients))
     if ((c = list_get_elem_at_position(srv->graphic_clients, i)) != NULL)
       if (c->sock == sock)
-	return (handle_client(srv, c, 1), 1);
+	return (handle_client(srv, c, 1));
   i = -1;
   while (++i < list_get_size(srv->all_players))
     if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL)
       if (p->sock == sock)
-	return (handle_client(srv, p, 2), 1);
+	return (handle_client(srv, p, 2));
   return (0);
 }
 
@@ -124,7 +126,7 @@ int		check_sockets_loop(t_server *srv, int index)
   i = 0;
   while (i <= srv->max)
     {
-      if ((ret_value = check_socket(i, srv, index)) == -1 || ret_value == 1)
+      if ((ret_value = check_socket(i, srv, index)) != 0)
 	return (ret_value);
       i++;
     }
