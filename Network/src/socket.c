@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 13:37:04 2016 Nyrandone Noboud-Inpeng
+** Last update Thu Jun 23 15:43:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -36,13 +36,15 @@ static int	handle_client(t_server *srv, void *tmp, int type)
 {
   int		ret;
   t_bmanager	*tmp_cmd;
+  int		i;
 
   if (tmp == NULL)
     return (-1);
+  i = -1;
   if (type == 0 || type == 1)
     {
       tmp_cmd = ((t_client *)tmp)->buffs.cmds;
-      while (tmp_cmd)
+      while (tmp_cmd && ++i < 10)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
@@ -58,7 +60,7 @@ static int	handle_client(t_server *srv, void *tmp, int type)
   else if (type == 2)
     {
       tmp_cmd = ((t_player *)tmp)->buffs.cmds;
-      while (tmp_cmd)
+      while (tmp_cmd && ++i < 10)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
