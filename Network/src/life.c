@@ -23,6 +23,7 @@ int		player_life(t_server *srv, t_player *p)
     {
       if (store_answer_p(p, DEAD, 0) == -1 || pdi(srv, p) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
+      p->off = 1;
       if (close(p->sock) == -1)
 	return (fprintf(stderr, ERR_CLOSE), -1);
       remove_player_from_srv(srv, get_team_by_player(srv, p), p);

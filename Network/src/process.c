@@ -60,6 +60,7 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       if (list_add_elem_at_back(&srv->graphic_clients, cl) == FALSE ||
 	  handle_new_graphic(srv, cl) == -1)
 	return (-1);
+      remove_client_from_queue(srv, cl);
     }
   else if ((t = get_team_by_name(srv, command)) != NULL &&
 	   list_get_size(t->players) < (unsigned int) t->max_players)
@@ -73,14 +74,14 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       else
 	if (handle_new_player(srv, t, p) == -1)
 	    return (-1);
+	  remove_client_from_queue(srv, cl);
     }
   else
     {
+	  printf("je store KO\n");
       if (store_answer_c(cl, KO, 0) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
-      if (close(cl->sock) == -1)
-	return (fprintf(stderr, ERR_CLOSE), -1);
+	  cl->off = 1;
     }
-  remove_client_from_queue(srv, cl);
   return (0);
 }

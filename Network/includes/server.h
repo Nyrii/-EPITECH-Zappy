@@ -38,6 +38,7 @@ typedef struct		s_task
 typedef struct		s_client
 {
   int			sock;
+  int			off;
   t_timer		timer;
   t_buffs		buffs;
 }			t_client;
@@ -45,6 +46,7 @@ typedef struct		s_client
 typedef struct		s_player
 {
   int     		sock;
+  int			off;
   int			id;
   int			x;
   int			y;
@@ -171,6 +173,11 @@ int		connect_nbr_ia(t_server *, t_player *);
 ** count.c
 */
 int		count_elements(t_list *);
+
+/*
+** disconnect.c
+*/
+int		check_disconnect(t_server *);
 
 /*
 ** drop_ia.c

@@ -85,6 +85,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   ret_value == 0 ? (new->y = rand() % srv->data.world_y) : 0;
   ftime(&new->timer.val);
   new->level = 1;
+  new->off = 0;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
   fill_inventory(new);
@@ -105,6 +106,7 @@ t_client        	*new_client(t_server *srv, int const index)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   ss = sizeof(sin);
   ftime(&cl->timer.val);
+  cl->off = 0;
   if ((cl->sock = accept(srv->socks[index],
 			 (struct sockaddr *)&sin, &ss)) == -1)
     {

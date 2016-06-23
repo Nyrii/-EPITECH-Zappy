@@ -50,7 +50,8 @@ int			loop_server(t_server *srv)
 	    return (error("Select failed\n"));
 	  if ((ret_value = process(srv, i)) != 0)
 	    return (ret_value);
-	  check_timer(srv);
+	  if (check_timer(srv) == -1 || check_disconnect(srv) == -1)
+	    return (-1);
 	}
     }
   return (0);

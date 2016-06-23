@@ -17,6 +17,7 @@ SRCSER	= bct.c				\
 	close_all_clients.c		\
 	connect_nbr_ia.c		\
 	create_buffer_manager.c		\
+	disconnect.c \
 	drop_ia.c			\
 	ebo.c				\
 	egg.c			\
