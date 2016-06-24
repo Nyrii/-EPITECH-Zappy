@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 17:15:53 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 13:55:26 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -30,9 +30,9 @@ int			generate_new_resources(t_server *server)
 	    {
 	      if ((rand() % 100) < server->data.percentages[resource])
 		{
-		  if (bct_ia(server, y, x) == -1)
-		    return (-1);
 		  server->data.map[y][x][resource] += 1;
+  		  if (bct_ia(server, y, x) == -1)
+  		    return (-1);
 		}
 	      ++resource;
 	    }
@@ -54,9 +54,9 @@ int			generate_food(t_server *server)
 	{
 	  if ((rand() % 100) < server->data.percentages[FOOD])
 	    {
-	      if (bct_ia(server, y, x) == -1)
-		return (-1);
 	      server->data.map[y][x][FOOD] += 1;
+  	      if (bct_ia(server, y, x) == -1)
+  		return (-1);
 	    }
 	  ++x;
 	}
@@ -81,7 +81,7 @@ static void		generate_resources(int resource,
 	  x = 0;
 	  while (map[y][x] != NULL)
 	    {
-	      if (resource < NONE && rand() % 3 == 0)
+	      if (resource < NONE && rand() % 2 == 0)
 		{
 		  map[y][x][resource] += 1;
 		  quantity -= 1;

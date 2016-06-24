@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 23:06:33 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 14:04:06 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,33 +13,7 @@
 #include "replies.h"
 #include "errors.h"
 
-static int	take_food(t_server *server, t_player *p)
-{
-  char		*answ;
-  char		buf[4096];
-
-  answ = NULL;
-  if (server->data.map[p->y] && server->data.map[p->y][p->x]
-      && server->data.map[p->y][p->x][0] > 0)
-    {
-      server->data.map[p->y][p->x][0] -= 1;
-      p->inventory[0] += 1;
-      if ((answ = bct(server->data.map, p->y, p->x)) == NULL)
-	return (-1);
-      if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
-	return (fprintf(stderr, ERR_PRINTF), -1);
-      if (send_all_graphics(server, buf) == -1)
-	return (-1);
-      free(answ);
-      if (store_answer_p(p, OK, 0) == -1)
-	return (-1);
-    }
-  else if (store_answer_p(p, KO, 0) == -1)
-    return (fprintf(stderr, ERR_BUFFER), -1);
-  return (0);
-}
-
-static int	take_stone(t_server *server, t_player *player, int index)
+static int	take_item(t_server *server, t_player *player, int index)
 {
   int		x;
   int		y;
@@ -82,12 +56,10 @@ int		take_ia(t_server *server, t_player *player)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       return (0);
     }
-  if (strcmp(server->params, "nourriture") == 0)
-    return (take_food(server, player));
   while (++i < NONE)
     {
       if (strcmp(server->params, server->data.strings_resources[i]) == 0)
-	return (take_stone(server, player, i));
+	return (take_item(server, player, i));
     }
   if (store_answer_p(player, KO, 0) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
