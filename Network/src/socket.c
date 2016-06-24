@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 15:43:56 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:22:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -124,20 +124,20 @@ void			set_all_clients(t_server *srv, unsigned int i)
     if ((c = list_get_elem_at_position(srv->queue_clients, i)) != NULL)
       {
 	FD_SET(c->sock, &srv->rdfs);
-        c->buffs.out.start != c->buffs.out.end ? FD_SET(c->sock, &srv->wfd) : 0;
+        c->buff != NULL ? FD_SET(c->sock, &srv->wfd) : 0;
       }
   i = -1;
   while (++i < list_get_size(srv->graphic_clients))
     if ((c = list_get_elem_at_position(srv->graphic_clients, i)) != NULL)
       {
 	FD_SET(c->sock, &srv->rdfs);
-        c->buffs.out.start != c->buffs.out.end ? FD_SET(c->sock, &srv->wfd) : 0;
+        c->buff != NULL ? FD_SET(c->sock, &srv->wfd) : 0;
       }
   i = -1;
   while (++i < list_get_size(srv->all_players))
     if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL)
       {
         FD_SET(p->sock, &srv->rdfs);
-        p->buffs.out.start != p->buffs.out.end ? FD_SET(p->sock, &srv->wfd) : 0;
+        p->buff != NULL ? FD_SET(p->sock, &srv->wfd) : 0;
       }
 }

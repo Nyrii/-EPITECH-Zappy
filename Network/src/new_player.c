@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 24 10:59:24 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:24:59 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -92,8 +92,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   generate_food(srv); // envoyer les cases peut etre
   if (create_buffer(&new->buffs) == NULL)
     return (NULL);
-  printf("Position x : %d, position y : %d, orientation = %d\n", new->x,
-	 new->y, new->orientation);
+  new->buff = NULL;
   return (new);
 }
 
@@ -116,6 +115,7 @@ t_client        	*new_client(t_server *srv, int const index)
     }
   if (create_buffer(&cl->buffs) == NULL)
     return (NULL);
+  cl->buff = NULL;
   if (cl->sock > srv->max)
     srv->max = cl->sock;
   return (cl);

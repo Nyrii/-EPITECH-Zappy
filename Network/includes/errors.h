@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 15:39:36 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 14:55:34 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -36,5 +36,6 @@
 # define ERR_COMMAND "Error: could not get the command\n"
 # define ERR_WRITE "Error: could not write the entire answer\n"
 # define ERR_REMOVE "Error: could not remove an entity from a list\n"
+# define ERR_ANSWER_NOT_FOUND "Error: answer canno t be found.\n"
 
 #endif /* ERRORS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 13:24:27 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:15:03 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -83,14 +83,16 @@ int			check_and_write_players(fd_set *writef, t_list players)
     {
       if ((player = list_get_elem_at_position(players, i)) != NULL)
 	{
-	  if (FD_ISSET(player->sock, writef) &&
-	      (buff = get_buff_content(&player->buffs.out)))
+	  if (FD_ISSET(player->sock, writef)
+	      && player->buff != NULL)
 	    {
+	      buff = player->buff;
 	      if ((ret = write(player->sock, buff, strlen(buff))) == -1)
 		return (fprintf(stderr, ERR_ANSWER), ret);
 	      else if ((unsigned int)ret != strlen(buff))
 		fprintf(stderr, ERR_WRITE);
-	      free(buff);
+	      free(player->buff);
+	      player->buff = NULL;
 	    }
 	}
     }
@@ -109,14 +111,16 @@ int			check_and_write_clients(fd_set *writef, t_list clients)
     {
       if ((client = list_get_elem_at_position(clients, i)) != NULL)
 	{
-	  if (FD_ISSET(client->sock, writef) &&
-	      (buff = get_buff_content(&client->buffs.out)))
+	  if (FD_ISSET(client->sock, writef)
+	      && client->buff != NULL)
 	    {
+	      buff = client->buff;
 	      if ((ret = write(client->sock, buff, strlen(buff))) == -1)
 		return (fprintf(stderr, ERR_ANSWER), ret);
 	      else if ((unsigned int)ret != strlen(buff))
 		fprintf(stderr, ERR_WRITE);
-	      free(buff);
+	      free(client->buff);
+              client->buff = NULL;
 	    }
 	}
     }

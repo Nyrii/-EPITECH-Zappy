@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 17:16:33 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:05:17 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -51,6 +51,7 @@ typedef struct		s_client
   int			off;
   t_timer		timer;
   t_buffs		buffs;
+  char			*buff;
 }			t_client;
 
 typedef struct		s_player
@@ -68,6 +69,7 @@ typedef struct		s_player
   t_timer		timer;
   t_list		queue_tasks;
   t_buffs		buffs;
+  char			*buff;
 }			t_player;
 
 typedef struct		s_team
