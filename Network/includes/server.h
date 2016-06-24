@@ -430,6 +430,7 @@ int		pin(t_server *, t_client *);
 /*
 ** pnw.c
 */
+int             all_pnw(t_server *, t_client *);
 int		pnw(t_server *, t_player *);
 
 /*

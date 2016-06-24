@@ -54,7 +54,7 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
 int		handle_new_graphic(t_server *srv, t_client *cl)
 {
   if (msz(srv, cl) == -1 || sgt(srv, cl) == -1 || mct(srv, cl) == -1 ||
-      tna(srv, cl) == -1)
+      tna(srv, cl) == -1 || all_pnw(srv, cl) == -1)
     return (-1);
   return (0);
 }

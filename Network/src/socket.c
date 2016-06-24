@@ -18,15 +18,13 @@ static int	handle_client(t_server *srv, void *tmp, int type)
 {
   int		ret;
   t_bmanager	*tmp_cmd;
-  int		i;
 
   if (tmp == NULL)
     return (-1);
-  i = -1;
   if (type == 0 || type == 1)
     {
       tmp_cmd = ((t_client *)tmp)->buffs.cmds;
-      while (tmp_cmd && ++i < 10)
+      while (tmp_cmd)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
@@ -42,7 +40,7 @@ static int	handle_client(t_server *srv, void *tmp, int type)
   else if (type == 2)
     {
       tmp_cmd = ((t_player *)tmp)->buffs.cmds;
-      while (tmp_cmd && ++i < 10)
+      while (tmp_cmd)
 	{
 	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	    return (-1);
