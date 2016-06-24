@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Wed Jun 22 15:41:16 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 16:20:56 2016 Kevin Empociello
 */
 
 #include <string.h>
@@ -41,6 +41,7 @@ int		player_tasks(t_server *srv, t_player *p)
   struct timeb	now;
   int		index;
   t_task	*t;
+  t_task	*t_nxt;
 
   index = -1;
   ftime(&now);
@@ -51,14 +52,13 @@ int		player_tasks(t_server *srv, t_player *p)
 	  calculate_elapse(&t->timer.val, &now) >= srv->data.timers[index])
 	{
 	  list_del_elem_at_position(&p->queue_tasks, 0);
-          if (strcmp(t->cmd, "fork") == 0 ||
-              strcmp(t->cmd, "incantation") == 0)
+          if (list_get_size(p->queue_tasks) > 0)
+            if ((t_nxt = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
+	      ftime(&t_nxt->timer.val);
+          if (strcmp(t->cmd, "fork") == 0 || strcmp(t->cmd, "incantation") == 0)
             return (player_spe_action(srv, p, t));
           else
             return (srv->cmd_ptr_ia[index](srv, p));
-	  if (list_get_size(p->queue_tasks) > 0)
-	    if ((t = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
-		ftime(&t->timer.val);
 	}
     }
   return (0);
