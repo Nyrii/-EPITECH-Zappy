@@ -14,24 +14,6 @@
 #include "server.h"
 #include "errors.h"
 
-// temporary
-void	dump_lists(t_server *srv)
-{
-  t_team	*t;
-  unsigned int	i;
-
-  i = 0;
-  printf("Clients in queue : %d\n", list_get_size(srv->queue_clients));
-  printf("Graphic clients : %d\n", list_get_size(srv->graphic_clients));
-  printf("Total players : %d\n", list_get_size(srv->all_players));
-  while (i < list_get_size(srv->data.teams))
-    {
-      if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
-	printf("Players team n°%d : %d\n", i, list_get_size(t->players));
-      i++;
-    }
-}
-
 static int	handle_client(t_server *srv, void *tmp, int type)
 {
   int		ret;
@@ -112,7 +94,6 @@ static int		check_socket(int sock, t_server *srv, int index)
       else
 	if ((ret_value = check_lists(sock, srv)) == -1 || ret_value == 2)
 	  return (ret_value);
-      //dump_lists(srv);
       return (1);
     }
   return (0);

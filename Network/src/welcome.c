@@ -13,6 +13,25 @@
 #include "server.h"
 #include "replies.h"
 
+static int	handle_new_player_ext(t_server *srv, t_player *p)
+{
+  char		buffer[4096];
+
+  if (memset(buffer, 0, 4096) == NULL
+      || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
+                srv->data.world_x, srv->data.world_y) == -1)
+    {
+      fprintf(stderr, ERR_MEMSET);
+      fprintf(stderr, ERR_PRINTF);
+      return (-1);
+    }
+  if (store_answer_p(p, buffer, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
+  if (pnw(srv, p) == -1 || pin_ia(srv, p) == -1)
+    return (-1);
+  return (0);
+}
+
 int		handle_new_player(t_server *srv, t_team *t, t_player *p)
 {
   char		buffer[4096];
@@ -29,19 +48,7 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
     }
   if (store_answer_p(p, buffer, 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
-  if (memset(buffer, 0, 4096) == NULL
-      || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
-		  srv->data.world_x, srv->data.world_y) == -1)
-    {
-      fprintf(stderr, ERR_MEMSET);
-      fprintf(stderr, ERR_PRINTF);
-      return (-1);
-    }
-  if (store_answer_p(p, buffer, 0) == -1)
-    return (fprintf(stderr, ERR_BUFFER), -1);
-  if (pnw(srv, p) == -1 || pin_ia(srv, p) == -1)
-    return (-1);
-  return (0);
+  return (handle_new_player_ext(srv, p));
 }
 
 int		handle_new_graphic(t_server *srv, t_client *cl)

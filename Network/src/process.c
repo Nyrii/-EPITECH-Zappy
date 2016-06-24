@@ -13,6 +13,14 @@
 #include "replies.h"
 #include "errors.h"
 
+static int	manage_ko(t_client *cl)
+{
+  if (store_answer_c(cl, KO, 0) == -1)
+    return (fprintf(stderr, ERR_BUFFER), -1);
+  cl->off = 1;
+  return (0);
+}
+
 int		manage_commands_spe(t_server *server,
 				    t_player *player, const char *command)
 {
@@ -31,17 +39,18 @@ int		manage_commands_ia(t_server *server,
 				   t_player *player, const char *command)
 {
   int		i;
-      int ret;
+  int		ret;
 
   i = 0;
-      ret = 0;
+  ret = 0;
+  if (list_get_size(player->queue_tasks) >= 10)
+    return (0);
   while (server->cmd_tab_ia[i] != NULL)
     {
       if (strcmp(server->cmd_tab_ia[i], command) == 0)
 	{
 	  if ((ret = manage_commands_spe(server, player, command)) != 0)
 	    return (ret);
-	  printf("j'add la task\n");
 	  if (list_add_elem_at_back(&player->queue_tasks,
 				    new_task(server, player)) == FALSE)
 	    return (-1);
@@ -79,12 +88,11 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       if (list_add_elem_at_back(&srv->graphic_clients, cl) == FALSE ||
 	  handle_new_graphic(srv, cl) == -1)
 	return (-1);
-      remove_client_from_queue(srv, cl);
+      return (remove_client_from_queue(srv, cl));
     }
   else if ((t = get_team_by_name(srv, command)) != NULL &&
 	   list_get_size(t->players) < (unsigned int) t->max_players)
     {
-      // check si y a encore de la place
       if ((p = new_player(srv, t, cl)) == NULL ||
 	  list_add_elem_at_back(&t->players, p) == FALSE ||
 	  list_add_elem_at_back(&srv->all_players, p) == FALSE ||
@@ -93,13 +101,7 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       else
 	if (handle_new_player(srv, t, p) == -1)
 	    return (-1);
-	  remove_client_from_queue(srv, cl);
+	  return (remove_client_from_queue(srv, cl));
     }
-  else
-    {
-      if (store_answer_c(cl, KO, 0) == -1)
-	return (fprintf(stderr, ERR_BUFFER), -1);
-	  cl->off = 1;
-    }
-  return (0);
+      return (manage_ko(cl));
 }

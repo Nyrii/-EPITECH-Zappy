@@ -19,13 +19,10 @@ int		tna(t_server *srv, t_client *cl)
   t_team	*t;
   char		buffer[4096];
 
-  i = 0;
+  i = -1;
   if (!srv || !cl)
-    {
-      fprintf(stderr, INTERNAL_ERR);
-      return (-1);
-    }
-  while (i < list_get_size(srv->data.teams))
+    return (fprintf(stderr, INTERNAL_ERR), -1);
+  while (++i < list_get_size(srv->data.teams))
     {
       if ((t = list_get_elem_at_position(srv->data.teams, i)) != NULL)
 	{
@@ -39,7 +36,6 @@ int		tna(t_server *srv, t_client *cl)
 	  if (store_answer_c(cl, buffer, 0) == -1)
 	    return (fprintf(stderr, ERR_BUFFER), -1);
 	}
-      i++;
     }
   return (0);
 }
