@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 15:10:34 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:30:55 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -118,7 +118,8 @@ int		get_opt(int argc, char **argv, t_server *server)
 			 || server->data.ports == NULL))
     return (fprintf(stderr, USAGE), -1);
   if (server->data.ports == NULL || server->data.world_x <= 0
-      || server->data.world_y <= 0 || server->data.max_clients <= 0
+      || server->data.world_y <= 0 || server->data.world_x > 1000
+      || server->data.world_y > 1000 || server->data.max_clients <= 0
       || server->data.delay <= 0 || server->data.delay > 100000
       || server->data.teams == NULL || list_get_size(server->data.teams) <= 1)
     return (fprintf(stderr, USAGE), -1);
