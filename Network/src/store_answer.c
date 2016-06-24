@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:59:20 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 17:02:20 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 15:25:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,19 +15,53 @@
 int		store_answer_p(t_player *player, const char *answer,
 			       int ret_value)
 {
+  int		i;
+  int		len;
+
   if (player == NULL)
     return (fprintf(stderr, ERR_PLAYER), -1);
-  if (write_to_buffer(answer, &player->buffs.out, strlen(answer)) == -1)
-    return (fprintf(stderr, ERR_BUFFER), ret_value);
+  else if (!answer)
+    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), -1);
+  if (player->buff == NULL)
+    {
+      if ((player->buff = malloc(strlen(answer) + 2)) == NULL)
+	return (fprintf(stderr, ERR_MALLOC), -1);
+      player->buff[0] = '\0';
+    }
+  else if (!(player->buff = realloc(player->buff,
+				    strlen(player->buff) + strlen(answer) + 2)))
+    return (fprintf(stderr, ERR_MALLOC), -1);
+  i = 0;
+  len = strlen(player->buff);
+  while (answer[i])
+    player->buff[len++] = answer[i++];
+  player->buff[len] = '\0';
   return (ret_value);
 }
 
 int		store_answer_c(t_client *client, const char *answer,
 			       int ret_value)
 {
+  int		i;
+  int		len;
+
   if (client == NULL)
     return (fprintf(stderr, ERR_PLAYER), -1);
-  if (write_to_buffer(answer, &client->buffs.out, strlen(answer)) == -1)
-    return (fprintf(stderr, ERR_BUFFER), ret_value);
+  else if (!answer)
+    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), -1);
+  if (client->buff == NULL)
+    {
+      if ((client->buff = malloc(strlen(answer) + 2)) == NULL)
+	return (fprintf(stderr, ERR_MALLOC), -1);
+      client->buff[0] = '\0';
+    }
+  else if (!(client->buff = realloc(client->buff,
+				    strlen(client->buff) + strlen(answer) + 2)))
+    return (fprintf(stderr, ERR_MALLOC), -1);
+  i = 0;
+  len = strlen(client->buff);
+  while (answer[i])
+    client->buff[len++] = answer[i++];
+  client->buff[len] = '\0';
   return (ret_value);
 }
