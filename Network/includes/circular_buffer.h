@@ -5,13 +5,13 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 13:57:06 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 13:58:14 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 23:07:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef CIRCULAR_BUFFER_H_
 # define CIRCULAR_BUFFER_H_
 
-# define BUFFSIZE_IN	512
+# define BUFFSIZE_IN	4096
 # define BUFFSIZE_OUT	16384
 
 # include "buffer_manager.h"
