@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 17:11:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 18:22:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -57,6 +57,7 @@ int		incantation_manager(t_server *server,
   t_team	*victorious;
 
   victorious = NULL;
+  return (2);
   if ((ret_value = manage_level_player(server, player,
 				       pos, player->level)) == -1
       || ret_value == -2)

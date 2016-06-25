@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 16:26:36 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:06:33 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 18:25:01 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -61,6 +61,6 @@ int		free_before_reset(t_server *server)
   free_list(server->data.eggs, 0);
   free_clients(server->queue_clients, 0, 0);
   free_clients(server->graphic_clients, 0, 0);
-  free_clients(server->all_players, 0, 0);
+  free_clients(server->all_players, 1, 0);
   return (0);
 }
