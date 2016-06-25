@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 00:16:17 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 00:39:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -88,9 +88,13 @@ int			check_and_write_players(fd_set *writef, t_list players)
 	    {
 	      buff = player->buff;
 	      if ((ret = write(player->sock, buff, strlen(buff))) == -1)
-		return (fprintf(stderr, ERR_ANSWER), ret);
+		{
+		  printf("RET = %d\n", ret);
+		  return (fprintf(stderr, ERR_ANSWER), ret);
+		}
 	      else if ((unsigned int)ret != strlen(buff))
 		fprintf(stderr, ERR_WRITE);
+	      printf("RET = %d\n", ret);
 	      free(player->buff);
 	      player->buff = NULL;
 	    }

@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Sat Jun 25 14:59:46 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 00:37:13 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -50,8 +50,8 @@ double		calculate_elapse(struct timeb *before, struct timeb *after)
 {
   double	res;
 
-  res = (after->time*1000 + after->millitm) -
-    (before->time*1000 + before->millitm);
+  res = (after->time * 1000 + after->millitm) -
+    (before->time * 1000 + before->millitm);
   res /= 1000;
   return (res);
 }
