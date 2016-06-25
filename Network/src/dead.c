@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 24 16:06:57 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:34:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 18:11:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
