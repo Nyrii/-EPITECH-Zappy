@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:27:11 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 19:13:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -92,7 +92,7 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 	{
 	  tile = determine_best_way(server, player, tmp_player);
 	  if (null == 1
-	      && (answ = malloc(strlen(server->params) + 150)) == NULL)
+	      && (answ = malloc(4096)) == NULL)
 	    return (fprintf(stderr, ERR_MALLOC), -1);
 	  if (concat_answer(server, &answ, tile, null) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
