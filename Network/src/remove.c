@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Thu Jun 23 15:40:19 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:04:12 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -52,7 +52,7 @@ int		remove_player_from_srv(t_server *srv, t_team *t, t_player *pl)
 	  && p->sock == pl->sock)
 	if (list_del_elem_at_position(&srv->all_players, i) == FALSE)
 	  return (-1);
-	i++;
+      i++;
     }
   i = 0;
   while (i < list_get_size(t->players))
@@ -61,7 +61,7 @@ int		remove_player_from_srv(t_server *srv, t_team *t, t_player *pl)
 	  && p->sock == pl->sock)
 	if (list_del_elem_at_position(&t->players, i) == FALSE)
 	  return (-1);
-	i++;
+      i++;
     }
   return (0);
 }
@@ -77,7 +77,7 @@ int		remove_client_from_queue(t_server *srv, t_client *cl)
       if ((c = list_get_elem_at_position(srv->queue_clients, i)) != NULL
 	  && c->sock == cl->sock)
 	if (list_del_elem_at_position(&srv->queue_clients, i) == FALSE)
-	    return (-1);
+	  return (-1);
       i++;
     }
   return (0);

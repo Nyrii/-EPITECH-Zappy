@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun 21 17:33:11 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 17:37:22 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:00:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -39,7 +39,7 @@ int		store_socks(int **socks, int const new_sock)
   if (((*socks) == NULL && ((*socks) = malloc(3 * sizeof(int))) == NULL)
       || (is_null == 0
 	  && ((*socks) = realloc((*socks),
-	       (len((*socks)) + 2) * sizeof(int))) == NULL))
+				 (len((*socks)) + 2) * sizeof(int))) == NULL))
     return (fprintf(stderr, ERR_MALLOC), -1);
   if (is_null)
     {

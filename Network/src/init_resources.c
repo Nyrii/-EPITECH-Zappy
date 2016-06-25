@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:27:15 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun  9 23:01:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:22:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "errors.h"
 
 int		init_resources_by_final_elevation(int ***resources,
-						   int *template)
+						  int *template)
 {
   if ((template = malloc(9 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);

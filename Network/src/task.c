@@ -5,11 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-<<<<<<< HEAD
-** Last update Fri Jun 24 15:57:39 2016 Nyrandone Noboud-Inpeng
-=======
-** Last update Fri Jun 24 16:20:56 2016 Kevin Empociello
->>>>>>> 98fe3a816ca08f6a4de4eb4d4dc75716870c8d39
+** Last update Sat Jun 25 15:31:03 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -81,7 +77,7 @@ int		task_list(t_server *srv)
       if ((p = list_get_elem_at_position(srv->all_players, i)) != NULL)
 	{
 	  if ((ret = player_life(srv, p)) == -1)
-		return (ret);
+	    return (ret);
 	  if ((ret = player_tasks(srv, p)) == -1 || ret == 2)
 	    return (ret);
 	}

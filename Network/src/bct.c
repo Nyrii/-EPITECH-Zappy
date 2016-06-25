@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 17:16:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:16:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,7 +13,7 @@
 #include "errors.h"
 #include "replies.h"
 
-static char 	*fill_bct(char *answer, int ***map,
+static char	*fill_bct(char *answer, int ***map,
 			  int const *pos, int i)
 {
   int		inc;
@@ -96,7 +96,7 @@ int			bct_ia(t_server *server, int const y, int const x)
   if ((tmp = bct(server->data.map, y, x)) == NULL)
     return (-1);
   if (memset(buffer, 0, 4096) == NULL
-	    || snprintf(buffer, 4096, MSG, tmp) == -1)
+      || snprintf(buffer, 4096, MSG, tmp) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   send_all_graphics(server, buffer);
   free(tmp);

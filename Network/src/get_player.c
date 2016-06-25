@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Thu Jan  7 15:14:51 2016 Kévin Empociello
-** Last update Sun Jun 19 14:27:15 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:21:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -61,7 +61,7 @@ t_player	*get_player_by_sock(t_data *data, int sock)
 	  while (j < list_get_size(t->players))
 	    {
 	      if ((p = list_get_elem_at_position(t->players, j)) != NULL &&
-		 p->sock == sock)
+		  p->sock == sock)
 		return (p);
 	      j++;
 	    }

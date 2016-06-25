@@ -5,19 +5,12 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Wed Jun 22 17:51:30 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:59:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 
-// avance, droite, gauche, voir : 7
-// inventaire : 1
-// prend, pose, expulse, broadcast : 7
-// incantation : 300
-// fork : 42
-// slot : 0
-// free!
 double		*init_timer_tasks(t_server *srv)
 {
   double	*times;
@@ -39,7 +32,7 @@ double		*init_timer_tasks(t_server *srv)
   return (times);
 }
 
-int	get_time_by_func(t_server *srv, char *cmd)
+int		get_time_by_func(t_server *srv, char *cmd)
 {
   int		i;
 
@@ -53,12 +46,12 @@ int	get_time_by_func(t_server *srv, char *cmd)
   return (-1);
 }
 
-double	calculate_elapse(struct timeb *before, struct timeb *after)
+double		calculate_elapse(struct timeb *before, struct timeb *after)
 {
   double	res;
 
   res = (after->time*1000 + after->millitm) -
-      (before->time*1000 + before->millitm);
+    (before->time*1000 + before->millitm);
   res /= 1000;
   return (res);
 }

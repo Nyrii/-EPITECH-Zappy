@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun 16 13:58:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 14:06:01 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:20:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -18,7 +18,7 @@ double		get_angle(t_player *player, int const dest_y, int const dest_x)
   angle = atan2((1.0 * player->y - 1.0 * dest_y),
 		(1.0 * player->x - 1.0 * dest_x));
   if (angle >= -0.000001 && angle <= 0.000001
-	    && player->x < dest_x)
+      && player->x < dest_x)
     angle = angle + M_PI;
   if (angle < 0.0)
     angle += (2 * M_PI);
@@ -33,9 +33,9 @@ int		get_best_tile_by_angle(double const angle, t_player *target)
   int		i;
 
   orientation = target->orientation == RIGHT ? 0
-      : target->orientation == TOP ? 2 : -1;
+    : target->orientation == TOP ? 2 : -1;
   orientation = target->orientation == LEFT ? 4
-      : target->orientation == BOTTOM ? 6 : (int)orientation;
+    : target->orientation == BOTTOM ? 6 : (int)orientation;
   template_angles[0] = 22.5;
   template_angles[1] = 67.5;
   template_angles[2] = 112.5;

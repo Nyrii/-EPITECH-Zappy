@@ -5,17 +5,16 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 16:29:47 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:05:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 
-// free
 static char	*get_cmd(char *buffer)
 {
-  char	*new;
-  int	i;
+  char		*new;
+  int		i;
 
   i = 0;
   if (buffer == NULL)
@@ -33,8 +32,8 @@ static char	*get_cmd(char *buffer)
 
 static char	*get_parameter(char *buffer)
 {
-  char	*new;
-  int	i;
+  char		*new;
+  int		i;
 
   i = 0;
   new = NULL;

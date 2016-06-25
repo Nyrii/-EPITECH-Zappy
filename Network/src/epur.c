@@ -5,14 +5,13 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 17 18:01:04 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:12:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "errors.h"
 
-// free
 static char	*delete_end(char *str)
 {
   int		i;
@@ -33,7 +32,6 @@ static char	*delete_end(char *str)
   return (new);
 }
 
-// free
 char		*epur_bf(char *str)
 {
   char		*new;
@@ -56,8 +54,8 @@ char		*epur_bf(char *str)
 	  i++;
       else
 	i++;
-	}
-      j > 0 && (new[j - 1] == ' ' || new[j - 1] == '\t') ? (new[j - 1] = '\0') :
-	  (new[j] = '\0');
+    }
+  j > 0 && (new[j - 1] == ' ' || new[j - 1] == '\t') ? (new[j - 1] = '\0') :
+    (new[j] = '\0');
   return (delete_end(new));
 }

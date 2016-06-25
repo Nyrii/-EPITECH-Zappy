@@ -5,14 +5,13 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 14:23:33 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:31:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
 
-// 1 unité de vie  = 126 * 1/t
 int		player_life(t_server *srv, t_player *p)
 {
   struct timeb	now;

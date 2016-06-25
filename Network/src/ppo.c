@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:02:42 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:33:26 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:04:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -20,7 +20,7 @@ int		ppo_ia(t_server *server, t_player *player)
   int		orientation;
 
   orientation = player->orientation == TOP ? 1 :
-      player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
+    player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
   if (memset(buffer, 0, 80) == NULL
       || snprintf(buffer, 80, PPO,
 		  player->id, player->x, player->y, orientation) == -1)
@@ -40,10 +40,10 @@ int		ppo(t_server *server, t_client *graphic)
       || (player = get_player_by_id(server, atoi(parameter))) == NULL)
     return (sbp(graphic));
   orientation = player->orientation == TOP ? 1 :
-      player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
+    player->orientation == RIGHT ? 2 : player->orientation == BOTTOM ? 3 : 4;
   if (memset(buffer, 0, 80) == NULL
-	|| snprintf(buffer, 80, PPO,
-		    player->id, player->x, player->y, orientation) == -1)
+      || snprintf(buffer, 80, PPO,
+		  player->id, player->x, player->y, orientation) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   if (store_answer_c(graphic, buffer, 0) == -1)
     {

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:08:36 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:13:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -49,7 +49,7 @@ int		send_message_to_all_players(t_server *server, t_player *player,
     {
       if ((((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
 	    && tmp_player->level == level) || level == -1)
-	  && store_answer_p(player, buffer, 0) == -1)
+	  && store_answer_p(tmp_player, buffer, 0) == -1)
 	{
 	  fprintf(stderr, ERR_PRINTF);
 	  return (-1);
@@ -73,7 +73,7 @@ int		are_players_eligible(t_data *data, t_list tmp,
 	  && player->level == elevation)
 	++count;
     }
-  if (count < data->required_players[elevation])
+  if (count != data->required_players[elevation])
     return (-1);
   return (0);
 }

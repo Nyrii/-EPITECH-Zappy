@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 14:29:09 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 14:44:40 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:08:21 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -120,4 +120,5 @@ void		call_init_perimeter(t_data data, t_player *player,
 	  return ;
 	}
     }
+  perimeter[0] = -1;
 }

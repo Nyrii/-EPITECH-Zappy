@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 12 15:57:25 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:13:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:55:40 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef REPLIES_H_
@@ -33,9 +33,9 @@
 # define PGT "pgt %d %d\n"
 # define PDR "pdr %d %d\n"
 # define PLV "plv %d %d\n"
-# define PIN "pin %d %d %d" // no \n : done on purpose
+# define PIN "pin %d %d %d"
 # define ENW "enw %d %d %d %d\n"
-# define PIC "pic %d %d %d %d" // no \n : done on purpose
+# define PIC "pic %d %d %d %d"
 # define PIE "pie %d %d %d\n"
 # define PNW "pnw %d %d %d %d %d %s\n"
 # define SBP "sbp\n"

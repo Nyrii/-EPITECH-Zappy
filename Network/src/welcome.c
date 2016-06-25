@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Thu Jun 23 16:26:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:56:55 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -19,7 +19,7 @@ static int	handle_new_player_ext(t_server *srv, t_player *p)
 
   if (memset(buffer, 0, 4096) == NULL
       || snprintf(buffer, 4096, WELCOME_SIZE_MAP,
-                srv->data.world_x, srv->data.world_y) == -1)
+		  srv->data.world_x, srv->data.world_y) == -1)
     {
       fprintf(stderr, ERR_MEMSET);
       fprintf(stderr, ERR_PRINTF);

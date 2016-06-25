@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:24:01 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:12:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:04:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -32,8 +32,8 @@ int		pie(t_server *server, t_player *player,
       return (send_all_graphics(server, buffer));
     }
   if (memset(buffer, 0, 40) == NULL
-	  || snprintf(buffer, 40, PIE,
-		      player->x, player->y, 0) == -1)
+      || snprintf(buffer, 40, PIE,
+		  player->x, player->y, 0) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
   if (send_all_graphics(server, buffer) == -1)
     return (-1);

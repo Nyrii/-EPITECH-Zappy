@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Fri Jun 24 16:14:27 2016 Nyrandone Noboud-Inpeng
+## Last update Sat Jun 25 14:41:08 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -40,6 +40,7 @@ SRCSER	= bct.c				\
 	get_opt_set_delay.c		\
 	get_player.c			\
 	get_team.c			\
+	handle_client.c			\
 	incantation_ia.c		\
 	init.c				\
 	init_teams_max_players.c	\

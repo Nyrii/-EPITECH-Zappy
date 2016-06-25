@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 24 16:23:37 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:02:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <sys/types.h>
@@ -16,40 +16,12 @@
 
 static int	handle_client(t_server *srv, void *tmp, int type)
 {
-  int		ret;
-  t_bmanager	*tmp_cmd;
-
   if (tmp == NULL)
     return (-1);
   if (type == 0 || type == 1)
-    {
-      tmp_cmd = ((t_client *)tmp)->buffs.cmds;
-      while (tmp_cmd)
-	{
-	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
-	    return (-1);
-	  if (type == 1)
-	    ret = manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
-	  else if (type == 0)
-	    ret = manage_auth(srv, (t_client *)tmp, srv->cmd);
-	  if (ret == -1 || ret == 2)
-            return (ret);
-	  tmp_cmd = tmp_cmd->next;
-	}
-    }
+    return (process_auth_and_graphics(srv, tmp, type));
   else if (type == 2)
-    {
-      tmp_cmd = ((t_player *)tmp)->buffs.cmds;
-      while (tmp_cmd)
-	{
-	  if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
-	    return (-1);
-	  ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
-	  if (ret == -1 || ret == 2)
-	    return (ret);
-	  tmp_cmd = tmp_cmd->next;
-	}
-    }
+    return (process_ia(srv, tmp));
   return (0);
 }
 
@@ -87,7 +59,8 @@ static int		check_socket(int sock, t_server *srv, int index)
     {
       if (sock == srv->socks[index])
 	{
-	  handle_new_client(srv, index);
+	  if (handle_new_client(srv, index) == -1)
+	    return (-1);
 	}
       else
 	if ((ret_value = check_lists(sock, srv)) == -1 || ret_value == 2)

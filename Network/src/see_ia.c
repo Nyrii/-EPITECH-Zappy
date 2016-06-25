@@ -1,11 +1,11 @@
-/*r
+/*
 ** see_ia.c for see_ia in /Users/noboud_n/Documents/Share/PSU_2015_zappy/Network/src/
 **
 ** Made by Nyrandone Noboud-Inpeng
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:54 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:22:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:31:04 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>

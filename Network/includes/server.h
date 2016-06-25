@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 14:02:24 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:33:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -134,7 +134,10 @@ typedef struct		s_server
   fd_set		wfd;
 }			t_server;
 
-/* Socket */
+/*
+** socket
+*/
+
 int   		init_server(int, int);
 int   		error(char *);
 int   		loop_server(t_server *);
@@ -312,6 +315,12 @@ t_player	*get_player_by_id(t_server *, int const);
 */
 t_team		*get_team_by_name(t_server *, const char *);
 t_team		*get_team_by_player(t_server *, t_player *);
+
+/*
+** handle_client.c
+*/
+int		process_auth_and_graphics(t_server *, void *, int const);
+int		process_ia(t_server *, void *);
 
 /*
 ** left_ia.c

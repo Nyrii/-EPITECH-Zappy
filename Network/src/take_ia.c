@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 14:04:06 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:33:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,20 +15,16 @@
 
 static int	take_item(t_server *server, t_player *player, int index)
 {
-  int		x;
-  int		y;
   char		*answ;
   char		buf[4096];
 
-  x = player->x;
-  y = player->y;
   answ = NULL;
-  if (server->data.map[y] && server->data.map[y][x]
-      && server->data.map[y][x][index] > 0)
+  if (server->data.map[player->y] && server->data.map[player->y][player->x]
+      && server->data.map[player->y][player->x][index] > 0)
     {
-      server->data.map[y][x][index] -= 1;
+      server->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
-      if ((answ = bct(server->data.map, y, x)) == NULL)
+      if ((answ = bct(server->data.map, player->y, player->x)) == NULL)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:09:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:18:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -19,9 +19,9 @@ static void	get_future_position(t_server *server, t_player *player,
   *x = player->x;
   *y = player->y;
   player->orientation == TOP ? (*y -= 1) :
-      player->orientation == BOTTOM ? (*y += 1) : 0;
+    player->orientation == BOTTOM ? (*y += 1) : 0;
   player->orientation == RIGHT ? (*x += 1) :
-      player->orientation == LEFT ? (*x -= 1) : 0;
+    player->orientation == LEFT ? (*x -= 1) : 0;
   *x = *x >= server->data.world_x ? 0 : *x < 0 ? server->data.world_x - 1 : *x;
   *y = *y >= server->data.world_y ? 0 : *y < 0 ? server->data.world_y - 1 : *y;
 }

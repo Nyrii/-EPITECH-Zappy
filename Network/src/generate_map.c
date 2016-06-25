@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 13:55:26 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:12:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -21,10 +21,10 @@ int			generate_new_resources(t_server *server)
 
   y = -1;
   while (server->data.map[++y] != NULL)
-   {
-     x = -1;
-     while (server->data.map[y][++x] != NULL)
-       {
+    {
+      x = -1;
+      while (server->data.map[y][++x] != NULL)
+	{
 	  resource = 0;
 	  while (resource < NONE)
 	    {
@@ -36,8 +36,8 @@ int			generate_new_resources(t_server *server)
 		}
 	      ++resource;
 	    }
-       }
-   }
+	}
+    }
   return (0);
 }
 

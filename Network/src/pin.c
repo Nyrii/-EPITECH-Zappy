@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:08:33 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 14:17:38 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:25:04 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -14,7 +14,7 @@
 #include "errors.h"
 #include "replies.h"
 
-static char 	*fill_pin(char *answer, t_player *player, int *i)
+static char	*fill_pin(char *answer, t_player *player, int *i)
 {
   int		inc;
   int		k;

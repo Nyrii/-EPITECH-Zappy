@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 10:53:46 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 15:30:55 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:21:15 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -78,26 +78,26 @@ static int	manage_options(t_server *server, char **argv,
 {
   switch (opt)
     {
-      case 'p':
+    case 'p':
       ports_manager(server, argv, optind);
       break ;
-      case 'x':
+    case 'x':
       server->data.world_x = atoi(optarg);
       break ;
-      case 'y':
+    case 'y':
       server->data.world_y = atoi(optarg);
       break ;
-      case 'c':
+    case 'c':
       server->data.max_clients = atoi(optarg);
       break ;
-      case 't':
+    case 't':
       set_delay(server, argv, optarg, optind);
       break ;
-      case 'n':
+    case 'n':
       if (store_team(server, argv, optind) == -1)
 	return (-1);
       break ;
-      default:
+    default:
       return (fprintf(stderr, USAGE), -1);
     }
   return (0);

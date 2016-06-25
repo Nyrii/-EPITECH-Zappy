@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Thu Jun 23 13:17:22 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:18:04 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -22,7 +22,7 @@ static int	disconnect_in_team(t_player *p, t_team *t)
       if ((pl = list_get_elem_at_position(t->players, i)) != NULL &&
 	  pl->sock == p->sock)
 	if (list_del_elem_at_position(&t->players, i) == FALSE)
-	    return (-1);
+	  return (-1);
       i++;
     }
   return (0);

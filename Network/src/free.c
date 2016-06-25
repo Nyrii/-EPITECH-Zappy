@@ -5,11 +5,11 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 14:43:13 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 13:58:16 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 15:19:51 2016 Nyrandone Noboud-Inpeng
 */
 
-#include "server.h"
 #include <stdlib.h>
+#include "server.h"
 
 int		free_map(int ***map, int const ret_value)
 {
