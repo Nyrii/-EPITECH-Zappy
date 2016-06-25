@@ -5,9 +5,10 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 25 19:53:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 19:53:56 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
