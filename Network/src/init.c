@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:08:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 19 18:13:05 2016 Nyrandone Noboud-Inpeng
+** Last update Fri Jun 24 16:06:52 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -25,7 +25,8 @@ void		init_code(char **ia, char **graphic)
   ia[9] = "incantation";
   ia[10] = "fork";
   ia[11] = "connect_nbr";
-  ia[12] = NULL;
+  ia[12] = "quit";
+  ia[13] = NULL;
   graphic[0] = "msz";
   graphic[1] = "bct";
   graphic[2] = "mct";
@@ -35,7 +36,8 @@ void		init_code(char **ia, char **graphic)
   graphic[6] = "pin";
   graphic[7] = "sgt";
   graphic[8] = "sst";
-  graphic[9] = NULL;
+  graphic[9] = "quit";
+  graphic[10] = NULL;
 }
 
 void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
@@ -53,7 +55,8 @@ void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
   func_ia[9] = &incantation_ia;
   func_ia[10] = &fork_ia;
   func_ia[11] = &connect_nbr_ia;
-  func_ia[12] = NULL;
+  func_ia[12] = &dead_ia;
+  func_ia[13] = NULL;
   func_graphic[0] = &msz;
   func_graphic[1] = &bct_on_tile;
   func_graphic[2] = &mct;
@@ -63,5 +66,6 @@ void		init_ptrfunc(int (**func_ia)(t_server *, t_player *),
   func_graphic[6] = &pin;
   func_graphic[7] = &sgt;
   func_graphic[8] = &sst;
-  func_graphic[9] = NULL;
+  func_graphic[9] = &dead;
+  func_graphic[10] = NULL;
 }

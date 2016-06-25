@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 15:05:17 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:02:24 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -120,10 +120,10 @@ typedef struct		s_server
   /* CMDS */
   char			*params;
   char			*cmd;
-  char			*cmd_tab_ia[13];
-  int			(*cmd_ptr_ia[13])();
-  char			*cmd_tab_graphic[10];
-  int			(*cmd_ptr_graphic[10])();
+  char			*cmd_tab_ia[14];
+  int			(*cmd_ptr_ia[14])();
+  char			*cmd_tab_graphic[11];
+  int			(*cmd_ptr_graphic[11])();
 
   /* SOCKET */
   struct timeval	timeout;
@@ -187,6 +187,12 @@ int		connect_nbr_ia(t_server *, t_player *);
 ** count.c
 */
 int		count_elements(t_list *);
+
+/*
+** dead.c
+*/
+int		dead_ia(t_server *, t_player *);
+int		dead(t_server *, t_client *);
 
 /*
 ** disconnect.c
@@ -276,8 +282,8 @@ int		init_resources(int ***);
 /*
 ** get_angle.c
 */
-double		get_angle(t_player *, int const, int const, double *);
-int		get_best_tile_by_angle(double const, double const, t_player *);
+double		get_angle(t_player *, int const, int const);
+int		get_best_tile_by_angle(double const, t_player *);
 
 /*
 ** get_egg.c

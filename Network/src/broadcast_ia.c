@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:58:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:02:12 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -20,23 +20,23 @@ static int	get_best_distance_from_tile(t_player *target, t_player *player,
   float		distance;
   int		x;
   double	angle;
-  double	rad;
 
-  distance = -1;
+  distance = -1.0;
   x = 0;
-  while (calculs[x] != -1)
+  angle = 0.0;
+  while (x < 17)
     {
-      if (distance == -1
+      if (distance == -1.0
 	  || distance > sqrt(pow(calculs[x] - player->y, 2)
 			     + pow(calculs[x + 1] - player->x, 2)))
 	{
 	  distance = sqrt(pow(calculs[x] - player->y, 2)
 			  + pow(calculs[x + 1] - player->x, 2));
-	  angle = get_angle(player, calculs[x], calculs[x + 1], &rad);
+	  angle = get_angle(player, calculs[x], calculs[x + 1]);
 	}
       x += 2;
     }
-  return (get_best_tile_by_angle(angle, rad, target));
+  return (get_best_tile_by_angle(angle, target));
 }
 
 static int	determine_best_way(t_server *server, t_player *player,
@@ -46,7 +46,10 @@ static int	determine_best_way(t_server *server, t_player *player,
   int		tile;
 
   init_calculs(server->data, calculs, target);
-  tile = get_best_distance_from_tile(target, player, calculs);
+  if (player->x == target->x && player->y == target->y)
+    return (0);
+  else
+    tile = get_best_distance_from_tile(target, player, calculs);
   if (tile == -1)
     return (0);
   return (tile);

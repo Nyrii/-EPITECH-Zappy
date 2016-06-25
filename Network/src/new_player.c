@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 24 15:24:59 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 13:08:16 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -60,7 +60,7 @@ t_egg			*new_egg(t_server *srv, t_player *p)
 
 static void		fill_inventory(t_player *new)
 {
-  new->inventory[FOOD] = 10;
+  new->inventory[FOOD] = 1000;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;
   new->inventory[SIBUR] = 0;
@@ -93,6 +93,8 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   if (create_buffer(&new->buffs) == NULL)
     return (NULL);
   new->buff = NULL;
+  new->x = 0;
+  new->y = 0;
   return (new);
 }
 

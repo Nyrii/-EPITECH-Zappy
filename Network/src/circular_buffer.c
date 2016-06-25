@@ -1,11 +1,11 @@
 /*
-** circular_buffer.c for myIRC in /home/wilmot_g/Rendu/PSU_2015_myirc/common/src
+** circular_buffer.c for circular in /Users/noboud_n/Documents/Share/PSU_2015_zappy/Network/src/
 **
-** Made by guillaume wilmot
-** Login   <wilmot_g@epitech.net>
+** Made by Nyrandone Noboud-Inpeng
+** Login   <noboud_n@epitech.eu>
 **
-** Started on  Thu May 19 00:41:38 2016 guillaume wilmot
-** Last update Thu Jun 23 14:52:19 2016 Nyrandone Noboud-Inpeng
+** Started on  Sat Jun 25 14:06:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:06:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -105,7 +105,7 @@ int		get_cmd_buff(int fd, t_buffs *buffs)
   int		ret;
 
   if ((ret = read(fd, tmp, buffs->in.size)) <= 0)
-    return (!(buffs->cmds = create_list(strdup("QUIT"), NULL)) ? -1 : -3);
+    return (!(buffs->cmds = create_list(strdup("quit"), NULL)) ? -1 : -3);
   if (write_to_buffer(tmp, &buffs->in, ret) == -1)
     return (!memset(buffs->in.buff, 0, buffs->in.size) ||
 	    !memset(buffs->in.cmd, 0, buffs->in.size) ||
@@ -121,7 +121,7 @@ int		get_cmd_buff(int fd, t_buffs *buffs)
 	}
       else if (!(buffs->cmds = buffs->cmds->push_back(buffs->cmds, cmd)))
 	return (-1);
-      if (!strcmp("QUIT", cmd) || !strncmp(cmd, "QUIT ", 5))
+      if (!strcmp("quit", cmd) || !strncmp(cmd, "quit ", 5))
 	return (0);
     }
   return (0);

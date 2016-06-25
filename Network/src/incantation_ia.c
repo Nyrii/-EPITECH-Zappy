@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Thu Jun 23 13:28:37 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:06:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -94,7 +94,6 @@ int		incantation_ia(t_server *server, t_player *player)
 	  || pic(server, player) == -1)
 	return (-1);
       player->incant.pos = pos;
-      // timer
       return (1);
     }
   if (store_answer_p(player, KO, 0) == -1)

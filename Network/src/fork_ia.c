@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:29 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:10:52 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 14:05:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -30,7 +30,5 @@ int		fork_ia(t_server *server, t_player *player)
   if (pfk(server, player) == -1)
     return (-1);
   player->fork.egg = egg;
-  // Timer;
-  // wait le timer
   return (0);
 }
