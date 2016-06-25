@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun 11 19:03:36 2016 Kevin Empociello
-** Last update Sat Jun 25 14:56:55 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:48:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -25,7 +25,7 @@ static int	handle_new_player_ext(t_server *srv, t_player *p)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (store_answer_p(p, buffer, 0) == -1)
+  if (store_answer_p(p, strdup(buffer), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   if (pnw(srv, p) == -1 || pin_ia(srv, p) == -1)
     return (-1);
@@ -46,7 +46,7 @@ int		handle_new_player(t_server *srv, t_team *t, t_player *p)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (store_answer_p(p, buffer, 0) == -1)
+  if (store_answer_p(p, strdup(buffer), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (handle_new_player_ext(srv, p));
 }
@@ -68,7 +68,7 @@ int		handle_new_client(t_server *srv, int const index)
   FD_SET(c->sock, &srv->rdfs);
   if (list_add_elem_at_back(&srv->queue_clients, c) == FALSE)
     return (-1);
-  if (store_answer_c(c, WELCOME, 0) == -1)
+  if (store_answer_c(c, strdup(WELCOME), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

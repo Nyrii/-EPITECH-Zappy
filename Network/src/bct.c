@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:24:41 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:26:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -81,7 +81,8 @@ int		bct_on_tile(t_server *server, t_client *graphic)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
         return (fprintf(stderr, ERR_PRINTF), -1);
-      if (store_answer_c(graphic, buf, 0) == -1)
+      free(answ);
+      if (store_answer_c(graphic, strdup(buf), 0) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
       return (0);
     }
@@ -98,7 +99,7 @@ int			bct_ia(t_server *server, int const y, int const x)
   if (memset(buffer, 0, 4096) == NULL
       || snprintf(buffer, 4096, MSG, tmp) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  send_all_graphics(server, buffer);
+  send_all_graphics(server, strdup(buffer));
   free(tmp);
   return (0);
 }

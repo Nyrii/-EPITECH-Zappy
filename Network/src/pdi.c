@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 19:02:24 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:10:44 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:50:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,5 +29,5 @@ int		pdi(t_server *server, t_player *player)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  return (send_all_graphics(server, buffer));
+  return (send_all_graphics(server, strdup(buffer)));
 }

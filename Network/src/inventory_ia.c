@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:11:49 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:54:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -63,7 +63,8 @@ int		inventory_ia(t_server *server, t_player *player)
   if (memset(buffer, 0, 4096) == NULL
       || snprintf(buffer, 4096, MSG, answer) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (store_answer_p(player, buffer, 0) == -1)
+  free(answer);
+  if (store_answer_p(player, strdup(buffer), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

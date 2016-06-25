@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sun Jun 19 17:50:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 15:03:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:38:26 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,7 +29,7 @@ int		sbp(t_client *graphic)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (store_answer_c(graphic, buffer, 0) == -1)
+  if (store_answer_c(graphic, strdup(buffer), 0) == -1)
     return (-1);
   return (0);
 }

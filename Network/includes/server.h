@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:21:42 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:39:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -520,8 +520,8 @@ int		seg(t_server *, t_team *);
 /*
 ** send.c
 */
-int		send_all_players(t_server *, t_player *, const char *);
-int		send_all_graphics(t_server *, const char *);
+int		send_all_players(t_server *, t_player *, char *);
+int		send_all_graphics(t_server *, char *);
 
 /*
 ** sgt.c

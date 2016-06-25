@@ -5,9 +5,10 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:46:10 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:33:11 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:34:16 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "errors.h"
 #include "enum.h"
@@ -15,7 +16,7 @@
 
 int	send_answer(t_server *server, t_player *player)
 {
-  if (store_answer_p(player, OK, 0) == -1)
+  if (store_answer_p(player, strdup(OK), 0) == -1)
     {
       fprintf(stderr, ERR_BUFFER);
       return (-1);

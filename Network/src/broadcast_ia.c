@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 14:02:12 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:27:11 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -114,8 +114,8 @@ int		broadcast_ia(t_server *server, t_player *player)
       return (-1);
     }
   if (server->params == NULL || strlen(server->params) > 512)
-    return (store_answer_p(player, KO, 0));
-  else if (store_answer_p(player, OK, 0) == -1)
+    return (store_answer_p(player, strdup(KO), 0));
+  else if (store_answer_p(player, strdup(OK), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   tmp = server->all_players;
   return (send_broadcast(server, player, tmp, -1));

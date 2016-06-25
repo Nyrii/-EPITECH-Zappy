@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:27:13 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:11:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:50:54 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -28,5 +28,5 @@ int		pfk(t_server *server, t_player *player)
       fprintf(stderr, ERR_MEMSET);
       return (-1);
     }
-  return (send_all_graphics(server, buffer));
+  return (send_all_graphics(server, strdup(buffer)));
 }

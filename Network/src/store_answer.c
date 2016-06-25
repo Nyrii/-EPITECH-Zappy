@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:59:20 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:25:02 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:26:00 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -36,6 +36,7 @@ int		store_answer_p(t_player *player, char *answer,
   while (answer[i])
     player->buff[len++] = answer[i++];
   player->buff[len] = '\0';
+  free(answer);
   return (ret_value);
 }
 
@@ -63,5 +64,6 @@ int		store_answer_c(t_client *client, char *answer,
   while (answer[i])
     client->buff[len++] = answer[i++];
   client->buff[len] = '\0';
+  free(answer);
   return (ret_value);
 }

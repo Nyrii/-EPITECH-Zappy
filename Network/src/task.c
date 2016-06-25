@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 25 15:31:03 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:42:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -19,7 +19,7 @@ int		player_spe_action(t_server *srv, t_player *p, t_task *t)
 
   if (strcmp(t->cmd, "fork") == 0)
     {
-      if (store_answer_p(p, OK, 0) == -1)
+      if (store_answer_p(p, strdup(OK), 0) == -1)
 	{
 	  fprintf(stderr, ERR_BUFFER);
 	  return (-1);

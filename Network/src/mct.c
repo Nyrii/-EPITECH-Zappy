@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 16:14:55 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:15:44 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:34:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -33,9 +33,9 @@ int		mct(t_server *srv, t_client *cl)
 	  if (memset(buffer, 0, 4096) == NULL
 	      || snprintf(buffer, 4096, MSG, tmp) == -1)
 	    return (fprintf(stderr, ERR_MEMSET), -1);
-	  if (store_answer_c(cl, buffer, 0) == -1)
-	    return (fprintf(stderr, ERR_BUFFER), -1);
 	  free(tmp);
+	  if (store_answer_c(cl, strdup(buffer), 0) == -1)
+	    return (fprintf(stderr, ERR_BUFFER), -1);
 	}
     }
   return (0);

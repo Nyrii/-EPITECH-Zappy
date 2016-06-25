@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 15:13:25 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 17:11:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -27,7 +27,8 @@ int		send_update_tile(t_server *server, t_player *player)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  return (send_all_graphics(server, buffer));
+  free(bct_answer);
+  return (send_all_graphics(server, strdup(buffer)));
 }
 
 int		send_message_to_all_players(t_server *server, t_player *player,
@@ -48,8 +49,8 @@ int		send_message_to_all_players(t_server *server, t_player *player,
   while (++i < list_get_size(tmp))
     {
       if ((((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
-	    && tmp_player->level == level) || level == -1)
-	  && store_answer_p(tmp_player, buffer, 0) == -1)
+	    && tmp_player->level == level))
+	  && store_answer_p(tmp_player, strdup(buffer), 0) == -1)
 	{
 	  fprintf(stderr, ERR_PRINTF);
 	  return (-1);

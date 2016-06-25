@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:54:36 2016 Nyrandone Noboud-Inpeng
-** Last update Tue Jun 21 12:11:32 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:49:04 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -25,5 +25,5 @@ int		pgt(t_server *server, t_player *player, int const index)
   if (memset(buffer, 0, 40) == NULL
       || snprintf(buffer, 40, PGT, player->id, index) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
+  return (send_all_graphics(server, strdup(buffer)));
 }

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 15:15:03 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:27:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -33,7 +33,7 @@ int			check_and_read_players(fd_set *readf, t_list list)
 		return (fprintf(stderr, ERR_COMMAND), -1);
 	      else if (ret == -2)
 		{
-		  store_answer_p(player, RPL_OVERFLOW, 0);
+		  store_answer_p(player, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
 	    }
@@ -62,7 +62,7 @@ int			check_and_read_clients(fd_set *readf, t_list list)
 		return (fprintf(stderr, ERR_COMMAND), -1);
 	      else if (ret == -2)
 		{
-		  store_answer_c(client, RPL_OVERFLOW, 0);
+		  store_answer_c(client, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
 	    }

@@ -5,13 +5,13 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Fri Jun 24 14:24:28 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 17:00:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 #include "errors.h"
 
-int		send_all_players(t_server *srv, t_player *p, const char *msg)
+int		send_all_players(t_server *srv, t_player *p, char *msg)
 {
   t_player	*tmp;
   unsigned int	i;
@@ -33,7 +33,7 @@ int		send_all_players(t_server *srv, t_player *p, const char *msg)
   return (0);
 }
 
-int		send_all_graphics(t_server *srv, const char *msg)
+int		send_all_graphics(t_server *srv, char *msg)
 {
   t_client	*tmp;
   unsigned int	i;

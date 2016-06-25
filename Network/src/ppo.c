@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:02:42 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 15:04:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:37:31 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -25,7 +25,7 @@ int		ppo_ia(t_server *server, t_player *player)
       || snprintf(buffer, 80, PPO,
 		  player->id, player->x, player->y, orientation) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
+  return (send_all_graphics(server, strdup(buffer)));
 }
 
 int		ppo(t_server *server, t_client *graphic)
@@ -45,7 +45,7 @@ int		ppo(t_server *server, t_client *graphic)
       || snprintf(buffer, 80, PPO,
 		  player->id, player->x, player->y, orientation) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (store_answer_c(graphic, buffer, 0) == -1)
+  if (store_answer_c(graphic, strdup(buffer), 0) == -1)
     {
       fprintf(stderr, ERR_PRINTF);
       return (-1);

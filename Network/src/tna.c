@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:01:14 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:26:11 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:46:54 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -33,7 +33,7 @@ int		tna(t_server *srv, t_client *cl)
 	      fprintf(stderr, ERR_PRINTF);
 	      return (-1);
 	    }
-	  if (store_answer_c(cl, buffer, 0) == -1)
+	  if (store_answer_c(cl, strdup(buffer), 0) == -1)
 	    return (fprintf(stderr, ERR_BUFFER), -1);
 	}
     }

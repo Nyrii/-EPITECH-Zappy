@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 15:31:37 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 17:11:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -43,7 +43,7 @@ static int	manage_level_player(t_server *server,
 {
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     return (elevation_ok(server, player, level));
-  else if (store_answer_p(player, KO, 0) == -1)
+  else if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   if (pie(server, player, 0) == -1)
     return (-1);
@@ -89,14 +89,14 @@ int		incantation_ia(t_server *server, t_player *player)
   player->incant.pos = NULL;
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     {
-      if (send_message_to_all_players(server, player,
-				      ELEVATION_IN_PROGRESS, -1) == -1
+      if (send_message_to_all_players(server, player, ELEVATION_IN_PROGRESS,
+				      player->level) == -1
 	  || pic(server, player) == -1)
 	return (-1);
       player->incant.pos = pos;
       return (1);
     }
-  if (store_answer_p(player, KO, 0) == -1)
+  if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

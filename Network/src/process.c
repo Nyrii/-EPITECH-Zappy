@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 14:26:33 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:40:14 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,7 +15,7 @@
 
 static int	manage_ko(t_client *cl)
 {
-  if (store_answer_c(cl, KO, 0) == -1)
+  if (store_answer_c(cl, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   cl->off = 1;
   return (0);
@@ -58,7 +58,7 @@ int		manage_commands_ia(t_server *server,
 	}
       ++i;
     }
-  if (store_answer_p(player, KO, 0) == -1)
+  if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

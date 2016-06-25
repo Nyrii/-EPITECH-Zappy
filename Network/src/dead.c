@@ -5,16 +5,17 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 24 16:06:57 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 16:23:40 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:34:06 2016 Nyrandone Noboud-Inpeng
 */
 
+#include <string.h>
 #include "server.h"
 #include "errors.h"
 #include "replies.h"
 
 int		dead_ia(t_server *server, t_player *player)
 {
-  if (store_answer_p(player, DEAD, 0) == -1
+  if (store_answer_p(player, strdup(DEAD), 0) == -1
       || pdi(server, player) == -1)
     {
       fprintf(stderr, ERR_BUFFER);
@@ -26,7 +27,7 @@ int		dead_ia(t_server *server, t_player *player)
 
 int		dead(UNUSED t_server *server, t_client *graphic)
 {
-  if (store_answer_c(graphic, DEAD, 0) == -1)
+  if (store_answer_c(graphic, strdup(DEAD), 0) == -1)
     {
       fprintf(stderr, ERR_BUFFER);
       return (-1);

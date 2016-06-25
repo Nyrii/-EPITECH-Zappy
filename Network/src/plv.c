@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:03:28 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:17:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:35:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -22,7 +22,7 @@ int		plv_ia(t_server *server, t_player *player)
       || snprintf(buffer, 40, PLV,
 		  player->id, player->level) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  return (send_all_graphics(server, buffer));
+  return (send_all_graphics(server, strdup(buffer)));
 }
 
 int		plv(t_server *server, t_client *graphic)
@@ -42,7 +42,7 @@ int		plv(t_server *server, t_client *graphic)
       || snprintf(buffer, 40, PLV,
 		  player->id, player->level) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  if (store_answer_c(graphic, buffer, 0) == -1)
+  if (store_answer_c(graphic, strdup(buffer), 0) == -1)
     {
       fprintf(stderr, ERR_PRINTF);
       return (-1);

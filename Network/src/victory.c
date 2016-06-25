@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun 21 10:20:28 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:27:24 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:47:33 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,7 +29,7 @@ int		send_end_to_all_players(t_list all_players, t_team *victorious)
     {
       if ((tmp_player = list_get_elem_at_position(all_players, i)) != NULL)
 	{
-	  if (store_answer_p(tmp_player, buffer, 0) == -1)
+	  if (store_answer_p(tmp_player, strdup(buffer), 0) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	}
     }

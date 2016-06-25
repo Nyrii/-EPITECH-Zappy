@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 14:33:24 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:42:32 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,12 +29,12 @@ static int	take_item(t_server *server, t_player *player, int index)
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       if (pgt(server, player, index) == -1 || pin_ia(server, player) == -1
-	  || send_all_graphics(server, buf) == -1)
+	  || send_all_graphics(server, strdup(buf)) == -1)
 	return (-1);
       free(answ);
-      return (store_answer_p(player, OK, 0));
+      return (store_answer_p(player, strdup(OK), 0));
     }
-  else if (store_answer_p(player, KO, 0) == -1)
+  else if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
@@ -48,7 +48,7 @@ int		take_ia(t_server *server, t_player *player)
     return (fprintf(stderr, INTERNAL_ERR), -1);
   if (server->params == NULL)
     {
-      if (store_answer_p(player, KO, 0) == -1)
+      if (store_answer_p(player, strdup(KO), 0) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       return (0);
     }
@@ -57,7 +57,7 @@ int		take_ia(t_server *server, t_player *player)
       if (strcmp(server->params, server->data.strings_resources[i]) == 0)
 	return (take_item(server, player, i));
     }
-  if (store_answer_p(player, KO, 0) == -1)
+  if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_PRINTF), -1);
   return (0);
 }

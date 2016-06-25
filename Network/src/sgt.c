@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.eu>
 **
 ** Started on  Fri Jun 10 18:00:27 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:23:47 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:39:59 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -29,7 +29,7 @@ int		sgt(t_server *server, t_client *graphic)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (store_answer_c(graphic, buffer, 0) == -1)
+  if (store_answer_c(graphic, strdup(buffer), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }

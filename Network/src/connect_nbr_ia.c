@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:44 2016 Nyrandone Noboud-Inpeng
-** Last update Wed Jun 22 18:06:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:28:36 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -25,7 +25,7 @@ static int	send_numbers(t_player *player, char *number)
       fprintf(stderr, ERR_PRINTF);
       return (-1);
     }
-  if (store_answer_p(player, buffer, 0) == -1)
+  if (store_answer_p(player, strdup(buffer), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
 }
@@ -57,7 +57,7 @@ int		connect_nbr_ia(t_server *server, t_player *player)
     return (fprintf(stderr, INTERNAL_ERR), -1);
   if ((team = get_team_by_player(server, player)) == NULL)
     {
-      if (store_answer_p(player, ZERO_PLAYERS, 0) == -1)
+      if (store_answer_p(player, strdup(ZERO_PLAYERS), 0) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
       return (0);
     }
