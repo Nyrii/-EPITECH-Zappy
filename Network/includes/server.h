@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 15:33:53 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:21:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -271,6 +271,12 @@ int		free_all(t_server *, int const);
 int		free_before_reset(t_server *);
 
 /*
+** free_buffer.c
+*/
+void		free_client_buffers(void *);
+void		free_player_buffers(void *);
+
+/*
 ** generate_map.c
 */
 int		generate_new_resources(t_server *);
@@ -530,8 +536,8 @@ int		sst(t_server *, t_client *);
 /*
 ** store_answer.c
 */
-int		store_answer_p(t_player *, const char *, int);
-int		store_answer_c(t_client *, const char *, int);
+int		store_answer_p(t_player *, char *, int);
+int		store_answer_c(t_client *, char *, int);
 
 /*
 ** store_port.c

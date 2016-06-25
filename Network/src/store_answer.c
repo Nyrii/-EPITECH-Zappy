@@ -5,14 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:59:20 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 15:25:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 16:25:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "errors.h"
 
-int		store_answer_p(t_player *player, const char *answer,
+int		store_answer_p(t_player *player, char *answer,
 			       int ret_value)
 {
   int		i;
@@ -39,7 +39,7 @@ int		store_answer_p(t_player *player, const char *answer,
   return (ret_value);
 }
 
-int		store_answer_c(t_client *client, const char *answer,
+int		store_answer_c(t_client *client, char *answer,
 			       int ret_value)
 {
   int		i;

@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sat Jun 25 14:41:08 2016 Nyrandone Noboud-Inpeng
+## Last update Sat Jun 25 16:04:50 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -31,6 +31,7 @@ SRCSER	= bct.c				\
 	forward_ia.c			\
 	free.c				\
 	free_all.c			\
+	free_buffer.c			\
 	generate_map.c			\
 	generic_list.c			\
 	generic_list_del.c		\
