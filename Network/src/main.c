@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 13:31:23 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 00:14:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -61,6 +61,7 @@ int		run_zappy(t_server *template)
   server->all_players = NULL;
   if (loop_server(server) == -1)
     {
+      printf("-1 !\n");
       close_all_clients(server);
       return (free_all(server, -1));
     }
