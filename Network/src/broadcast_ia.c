@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 19:13:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sat Jun 25 19:17:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -56,13 +56,11 @@ static int	determine_best_way(t_server *server, t_player *player,
 }
 
 static int	concat_answer(t_server *server, char **answer,
-			      int tile, int null)
+			      int tile)
 {
   char		buffer[1024];
   int		i;
 
-  if (null == 0)
-    return (0);
   if (memset(buffer, 0, 1024) == NULL
       || snprintf(buffer, 1024, BROADCAST, tile, server->params) == -1)
     return (-1);
@@ -82,23 +80,19 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
   t_player	*tmp_player;
   int		tile;
   char		*answ;
-  int		null;
 
-  null = 1;
   while (++i < list_get_size(tmp))
     {
       if ((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
 	  && tmp_player->sock != player->sock)
 	{
 	  tile = determine_best_way(server, player, tmp_player);
-	  if (null == 1
-	      && (answ = malloc(4096)) == NULL)
+	  if ((answ = malloc(4096)) == NULL)
 	    return (fprintf(stderr, ERR_MALLOC), -1);
-	  if (concat_answer(server, &answ, tile, null) == -1)
+	  if (concat_answer(server, &answ, tile) == -1)
 	    return (fprintf(stderr, ERR_PRINTF), -1);
 	  if (store_answer_p(tmp_player, answ, 0) == -1)
 	    return (-1);
-	  null = 0;
 	}
     }
   return (pbc(server, player));
