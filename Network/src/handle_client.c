@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 25 14:33:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 21:11:37 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 01:00:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -17,6 +17,8 @@ int		process_auth_and_graphics(t_server *srv, void *tmp,
   int		ret;
 
   tmp_cmd = ((t_client *)tmp)->buffs.cmds;
+  if (((t_client *)tmp)->off == 1)
+    return (0);
   while (tmp_cmd)
     {
       if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
@@ -38,6 +40,8 @@ int		process_ia(t_server *srv, void *tmp)
   int		ret;
 
   tmp_cmd = ((t_player *)tmp)->buffs.cmds;
+  if (((t_player *)tmp)->off == 1)
+    return (0);
   while (tmp_cmd)
     {
       if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
