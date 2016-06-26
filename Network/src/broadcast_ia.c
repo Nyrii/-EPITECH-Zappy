@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 01:35:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 12:18:34 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -56,12 +56,14 @@ static int	determine_best_way(t_server *server, t_player *player,
 }
 
 static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
-			       unsigned int i)
+			       char *params)
 {
   t_player	*tmp_player;
   int		tile;
   char		buffer[4096];
+  unsigned int	i;
 
+  i = -1;
   while (++i < list_get_size(tmp))
     {
       if ((tmp_player = list_get_elem_at_position(tmp, i)) != NULL
@@ -70,7 +72,7 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 	  tile = determine_best_way(server, player, tmp_player);
 	    if (memset(buffer, 0, 1024) == NULL
 		|| snprintf(buffer, 1024, BROADCAST,
-			    tile, server->params) == -1)
+			    tile, params) == -1)
 	    return (-1);
 	  if (store_answer_p(tmp_player, strdup(buffer), 0) == -1)
 	    return (-1);
@@ -82,16 +84,19 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 int		broadcast_ia(t_server *server, t_player *player)
 {
   t_list	tmp;
+  t_task	*current;
 
   if (!server || !player)
     {
       fprintf(stderr, INTERNAL_ERR);
       return (-1);
     }
-  if (server->params == NULL || strlen(server->params) > 512)
+  if ((current = list_get_elem_at_position(player->queue_tasks, 0)) == NULL)
+    return (-1);
+  if (current->params == NULL || strlen(current->params) > 512)
     return (store_answer_p(player, strdup(KO), 0));
   else if (store_answer_p(player, strdup(OK), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   tmp = server->all_players;
-  return (send_broadcast(server, player, tmp, -1));
+  return (send_broadcast(server, player, tmp, current->params));
 }

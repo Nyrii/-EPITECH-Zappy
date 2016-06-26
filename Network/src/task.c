@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 11:03:59 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 11:52:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -36,12 +36,10 @@ int		player_spe_action(t_server *srv, t_player *p, t_task *t)
 	  fprintf(stderr, ERR_BUFFER);
 	  return (-1);
 	}
-      free_tasks(t, 0);
       return (enw(srv, p->fork.egg));
     }
   else if (strcmp(t->cmd, "incantation") == 0)
     {
-      free_tasks(t, 0);
       if (p->incant.pos == NULL)
 	return (0);
       if ((ret_value = incantation_manager(srv, p, p->incant.pos)) != -2)
@@ -65,14 +63,17 @@ int		player_tasks(t_server *srv, t_player *p, int index)
       if (index == 12 || ((index = get_time_by_func(srv, t->cmd)) != -1 &&
 			  calculate_elapse(&t->timer.val, &now) >= srv->data.timers[index]))
 	{
+          if (strcmp(t->cmd, "fork") == 0 || strcmp(t->cmd, "incantation") == 0)
+	    ret = player_spe_action(srv, p, t);
+          else {
+	    ret = srv->cmd_ptr_ia[index](srv, p);
+	  }
 	  list_del_elem_at_position(&p->queue_tasks, 0);
           if (list_get_size(p->queue_tasks) > 0)
             if ((t_nxt = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
 	      ftime(&t_nxt->timer.val);
-          if (strcmp(t->cmd, "fork") == 0 || strcmp(t->cmd, "incantation") == 0)
-	    return (player_spe_action(srv, p, t));
-          else
-	    return ((ret = srv->cmd_ptr_ia[index](srv, p)), free_tasks(t, ret));
+	  free_tasks(t, ret);
+	  return (ret);
 	}
     }
   return (0);

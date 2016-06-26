@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:49:24 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:53:36 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 12:01:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -43,6 +43,7 @@ static int	drop_item(t_server *server, t_player *p, int index)
 
 int		drop_ia(t_server *server, t_player *player)
 {
+  t_task	*current;
   int		i;
 
   i = -1;
@@ -51,7 +52,9 @@ int		drop_ia(t_server *server, t_player *player)
       fprintf(stderr, INTERNAL_ERR);
       return (-1);
     }
-  if (server->params == NULL)
+  if ((current = list_get_elem_at_position(player->queue_tasks, 0)) == NULL)
+    return (-1);
+  if (current->params == NULL)
     {
       if (store_answer_p(player, strdup(KO), 0) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
@@ -59,7 +62,7 @@ int		drop_ia(t_server *server, t_player *player)
     }
   while (++i < NONE)
     {
-      if (strcmp(server->params, server->data.strings_resources[i]) == 0)
+      if (strcmp(current->params, server->data.strings_resources[i]) == 0)
 	return (drop_item(server, player, i));
     }
   if (store_answer_p(player, strdup(KO), 0) == -1)

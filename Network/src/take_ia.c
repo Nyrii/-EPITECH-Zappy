@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 10:56:23 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 12:00:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -41,12 +41,15 @@ static int	take_item(t_server *s, t_player *player, int index)
 
 int		take_ia(t_server *server, t_player *player)
 {
+  t_task	*current;
   int		i;
 
   i = -1;
   if (!server || !player)
     return (fprintf(stderr, INTERNAL_ERR), -1);
-  if (server->params == NULL)
+  if ((current = list_get_elem_at_position(player->queue_tasks, 0)) == NULL)
+    return (-1);
+  if (current->params == NULL)
     {
       if (store_answer_p(player, strdup(KO), 0) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
@@ -54,7 +57,7 @@ int		take_ia(t_server *server, t_player *player)
     }
   while (++i < NONE)
     {
-      if (strcmp(server->params, server->data.strings_resources[i]) == 0)
+      if (strcmp(current->params, server->data.strings_resources[i]) == 0)
 	return (take_item(server, player, i));
     }
   if (store_answer_p(player, strdup(KO), 0) == -1)
