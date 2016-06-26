@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 25 16:02:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:19:31 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 07:29:27 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -28,6 +28,8 @@ void		free_client_buffers(void *value)
   tmp->buffs.cmds ? free_content(tmp->buffs.cmds) : 0;
   tmp->buffs.cmds ? tmp->buffs.cmds->destroy(tmp->buffs.cmds) : 0;
   tmp->buffs.cmds = NULL;
+  tmp->buff ? (free(tmp->buff)) : 0;
+  tmp->buff = NULL;
 }
 
 void		free_player_buffers(void *value)
