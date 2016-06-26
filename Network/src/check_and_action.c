@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 01:57:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 05:48:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,13 +13,12 @@
 #include "server.h"
 #include "replies.h"
 
-int			check_and_read_players(fd_set *readf, t_list list)
+int			check_and_read_players(fd_set *readf, t_list list,
+					       unsigned int i)
 {
   t_player		*player;
   int			ret;
-  unsigned int		i;
 
-  i = -1;
   while (++i < list_get_size(list))
     {
       if ((player = list_get_elem_at_position(list, i)) != NULL)
@@ -36,19 +35,19 @@ int			check_and_read_players(fd_set *readf, t_list list)
 		  store_answer_p(player, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
+	      FD_CLR(player->sock, readf);
 	    }
 	}
     }
   return (0);
 }
 
-int			check_and_read_clients(fd_set *readf, t_list list)
+int			check_and_read_clients(fd_set *readf, t_list list,
+					       unsigned int i)
 {
   t_client		*client;
   int			ret;
-  unsigned int		i;
 
-  i = -1;
   while (++i < list_get_size(list))
     {
       if ((client = list_get_elem_at_position(list, i)) != NULL)
@@ -65,20 +64,20 @@ int			check_and_read_clients(fd_set *readf, t_list list)
 		  store_answer_c(client, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
+  	      FD_CLR(client->sock, readf);
 	    }
 	}
     }
   return (0);
 }
 
-int			check_and_write_players(fd_set *writef, t_list players)
+int			check_and_write_players(fd_set *writef, t_list players,
+						unsigned int i)
 {
   t_player		*player;
   int			ret;
-  unsigned int		i;
   char			*buff;
 
-  i = -1;
   while (++i < list_get_size(players))
     {
       if ((player = list_get_elem_at_position(players, i)) != NULL)
@@ -93,20 +92,20 @@ int			check_and_write_players(fd_set *writef, t_list players)
 		fprintf(stderr, ERR_WRITE);
 	      free(player->buff);
 	      player->buff = NULL;
+	      FD_CLR(player->sock, writef);
 	    }
 	}
     }
   return (0);
 }
 
-int			check_and_write_clients(fd_set *writef, t_list clients)
+int			check_and_write_clients(fd_set *writef, t_list clients,
+						unsigned int i)
 {
   t_client		*client;
   int			ret;
-  unsigned int		i;
   char			*buff;
 
-  i = -1;
   while (++i < list_get_size(clients))
     {
       if ((client = list_get_elem_at_position(clients, i)) != NULL)
@@ -121,6 +120,7 @@ int			check_and_write_clients(fd_set *writef, t_list clients)
 		fprintf(stderr, ERR_WRITE);
 	      free(client->buff);
               client->buff = NULL;
+	      FD_CLR(client->sock, writef);
 	    }
 	}
     }

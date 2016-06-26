@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 03:05:55 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 03:10:01 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -23,6 +23,8 @@ static int	elevation_ok(t_server *server, t_player *player,
   i = -1;
   if ((tmp = get_players_at_pos(&server->data,
 				player->y, player->x)) == NULL)
+    return (-1);
+  if (pie(server, player, 1) == -1)
     return (-1);
   while (++i < list_get_size(tmp))
     {
@@ -65,7 +67,7 @@ int		incantation_manager(t_server *server,
 				       pos, player->level)) == -1
       || ret_value == -2)
     return (ret_value);
-  if (send_update_tile(server, player) == -1 || pie(server, player, 1) == -1)
+  if (send_update_tile(server, player) == -1)
     return (-1);
   if (send_message_to_all_players(server, player, CURRENT_LEVEL,
 				  player->level) == -1)

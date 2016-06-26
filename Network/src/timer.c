@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Sun Jun 26 01:56:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 05:47:43 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -91,13 +91,13 @@ int	check_timer(t_server *srv)
   if ((ret = task_list(srv)) == -1 || ret == 2)
     {
       if (ret == 2
-	  && check_and_write_players(&srv->wfd, srv->all_players) == -1)
+	  && check_and_write_players(&srv->wfd, srv->all_players, -1) == -1)
 	return (-1);
       return (ret);
     }
   if (egg_list(srv) == -1)
     return (-1);
-  if (check_and_write_players(&srv->wfd, srv->all_players) == -1)
+  if (check_and_write_players(&srv->wfd, srv->all_players, -1) == -1)
     return (-1);
   return (0);
 }

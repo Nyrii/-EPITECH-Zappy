@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Sun Jun 26 01:56:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 05:47:31 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -14,12 +14,12 @@ static int		process(t_server *srv, int const index)
 {
   int			ret_value;
 
-  if (check_and_read_clients(&srv->rdfs, srv->queue_clients) == -1 ||
-      check_and_read_clients(&srv->rdfs, srv->graphic_clients) == -1 ||
-      check_and_read_players(&srv->rdfs, srv->all_players) == -1 ||
+  if (check_and_read_clients(&srv->rdfs, srv->queue_clients, -1) == -1 ||
+      check_and_read_clients(&srv->rdfs, srv->graphic_clients, -1) == -1 ||
+      check_and_read_players(&srv->rdfs, srv->all_players, -1) == -1 ||
       ((ret_value = check_sockets_loop(srv, index)) == -1) ||
-      check_and_write_clients(&srv->wfd, srv->queue_clients) == -1 ||
-      check_and_write_clients(&srv->wfd, srv->graphic_clients) == -1)
+      check_and_write_clients(&srv->wfd, srv->queue_clients, -1) == -1 ||
+      check_and_write_clients(&srv->wfd, srv->graphic_clients, -1) == -1)
     return (-1);
   if (ret_value == 2)
     return (ret_value);

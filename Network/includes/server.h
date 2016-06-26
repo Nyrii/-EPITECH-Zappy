@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:39:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 05:48:46 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -171,10 +171,10 @@ int		get_best_tile(int *, t_player *);
 /*
 ** check_and_action.c
 */
-int		check_and_read_players(fd_set *, t_list);
-int		check_and_write_players(fd_set *, t_list);
-int		check_and_read_clients(fd_set *, t_list);
-int		check_and_write_clients(fd_set *, t_list);
+int		check_and_read_players(fd_set *, t_list, unsigned int);
+int		check_and_write_players(fd_set *, t_list, unsigned int);
+int		check_and_read_clients(fd_set *, t_list, unsigned int);
+int		check_and_write_clients(fd_set *, t_list, unsigned int);
 
 /*
 ** close_all_clients.c
