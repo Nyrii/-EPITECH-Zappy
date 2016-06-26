@@ -1,6 +1,6 @@
 from AI import AI
 
-usage = "./zappyai -n nom d'équipe -p port [-h nom de l'host]"
+usage = "./zappy_ai -n nom d'équipe -p port [-h nom de l'host]"
 sizeRead = 4096
 Bias = -1
 ActivationResponse = 1
@@ -31,36 +31,36 @@ ResRef[5] = "phiras"
 ResRef[6] = "thystame"
 ResRef[10] = "nourriture"
 
+LineRef = [(1, 3), (4, 8), (9, 15), (16, 24), (25, 35), (36, 48), (49, 63), (64, 80)]
+
 LevelRef = [
-    {"linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0},
-    {"linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0},
-    {"linemate": 1, "deraumere": 1, "sibur": 1, "mendiane": 0, "phiras": 0, "thystame": 0},
-    {"linemate": 2, "deraumere": 0, "sibur": 1, "mendiane": 0, "phiras": 2, "thystame": 0},
-    {"linemate": 1, "deraumere": 1, "sibur": 2, "mendiane": 0, "phiras": 1, "thystame": 0},
-    {"linemate": 1, "deraumere": 2, "sibur": 1, "mendiane": 3, "phiras": 0, "thystame": 0},
-    {"linemate": 1, "deraumere": 2, "sibur": 1, "mendiane": 3, "phiras": 0, "thystame": 0},
-    {"linemate": 1, "deraumere": 2, "sibur": 3, "mendiane": 0, "phiras": 1, "thystame": 0},
-    {"linemate": 2, "deraumere": 2, "sibur": 2, "mendiane": 2, "phiras": 2, "thystame": 1},
+    {"joueur": 0, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0},
+    {"joueur": 1, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0},
+    {"joueur": 2, "linemate": 1, "deraumere": 1, "sibur": 1, "mendiane": 0, "phiras": 0, "thystame": 0},
+    {"joueur": 2, "linemate": 2, "deraumere": 0, "sibur": 1, "mendiane": 0, "phiras": 2, "thystame": 0},
+    {"joueur": 4, "linemate": 1, "deraumere": 1, "sibur": 2, "mendiane": 0, "phiras": 1, "thystame": 0},
+    {"joueur": 4, "linemate": 1, "deraumere": 2, "sibur": 1, "mendiane": 3, "phiras": 0, "thystame": 0},
+    {"joueur": 6, "linemate": 1, "deraumere": 2, "sibur": 3, "mendiane": 0, "phiras": 1, "thystame": 0},
+    {"joueur": 6, "linemate": 2, "deraumere": 2, "sibur": 2, "mendiane": 2, "phiras": 2, "thystame": 1},
 ]
 
-RangeRef = [.000, .125, .250, .375, .500, .625, .750, .875]
-
-ActionRef = {}
-ActionRef[RangeRef[0]] = "avance"          # 0 <= x < .125
-ActionRef[RangeRef[1]] = "droite"          # .125 <= x < .250
-ActionRef[RangeRef[2]] = "gauche"          # .250 <= x < .375
-ActionRef[RangeRef[3]] = "voir"            # .375 <= x < .500
-ActionRef[RangeRef[4]] = "prend"           # .500 <= x < .625
-ActionRef[RangeRef[5]] = "expulse"         # .625 <= x < .750
-ActionRef[RangeRef[6]] = "incantation"     # .750 <= x < .875
-ActionRef[RangeRef[7]] = "fork"            # .875 <= x < 1.00
-
 CommandRef = {}
-CommandRef[ActionRef[RangeRef[0]]] = AI.funcAvance
-CommandRef[ActionRef[RangeRef[1]]] = AI.funcDroite
-CommandRef[ActionRef[RangeRef[2]]] = AI.funcGauche
-CommandRef[ActionRef[RangeRef[3]]] = AI.funcVoir
-CommandRef[ActionRef[RangeRef[4]]] = AI.funcPrend
-CommandRef[ActionRef[RangeRef[5]]] = AI.funcExpulse
-CommandRef[ActionRef[RangeRef[6]]] = AI.funcIncantation
-CommandRef[ActionRef[RangeRef[7]]] = AI.funcFork
+CommandRef["avance"] = AI.funcAvance
+CommandRef["droite"] = AI.funcDroite
+CommandRef["gauche"] = AI.funcGauche
+CommandRef["voir"] = AI.funcVoir
+CommandRef["prend"] = AI.funcPrend
+CommandRef["expulse"] = AI.funcExpulse
+CommandRef["incantation"] = AI.funcIncantation
+CommandRef["fork" ] = AI.funcFork
+
+BroadcastRef = {}
+BroadcastRef["/r"] = AI.broadcastRequest  # ORI /r MYID
+BroadcastRef["/a"] = AI.broadcastAnswer   # ORI /a IDRECEIVE MYID
+BroadcastRef["/l"] = AI.broadcastLevel
+
+
+BroadcastRespRef = {}
+BroadcastRespRef["/r"] = AI.broadcastAnswer
+BroadcastRespRef["/a"] = AI.broadcastIncrease
+BroadcastRespRef["/l"] = AI.broadcastMoveTo

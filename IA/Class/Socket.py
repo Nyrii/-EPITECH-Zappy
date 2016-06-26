@@ -28,7 +28,7 @@ class Socket():
             sys.exit()
         pos = self.recvall().split(" ")
         print (pos)
-        self.pos = (int(pos[0]) ,int(pos[1]))
+        #self.pos = (int(pos[0]) ,int(pos[1]))
 
     def recvall(self):
         # TODO read all data in socket
@@ -54,4 +54,6 @@ class Socket():
             sys.exit()
         if rlist:
             message = self.recvall()
-        return message
+        if message == "":
+            return []
+        return message.split('\n')
