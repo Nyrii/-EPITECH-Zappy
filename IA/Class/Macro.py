@@ -1,9 +1,7 @@
 from AI import AI
 
 usage = "./zappy_ai -n nom d'équipe -p port [-h nom de l'host]"
-sizeRead = 4096
-Bias = -1
-ActivationResponse = 1
+sizeRead = 1
 
 HEADER = '\033[95m'
 OKBLUE = '\033[94m'
@@ -44,7 +42,7 @@ LevelRef = [
     {"joueur": 6, "linemate": 2, "deraumere": 2, "sibur": 2, "mendiane": 2, "phiras": 2, "thystame": 1},
 ]
 
-MoveRef = ["avance", "droite", "gauche"]
+MoveRef = ["avance", "droite", ""]
 
 CommandRef = {}
 CommandRef["avance"] = AI.funcAvance

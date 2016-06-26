@@ -22,21 +22,27 @@ class Socket():
         print (self.recvall())
         self.sendData(self.optManager.nameEquip)
         try:
-            self.numClient = int(self.recvall())
+            receivedMessage = self.recvall()
+            receivedMessage = self.recvall()
         except:
             eprint("You can't log in with %s team." % self.optManager.nameEquip)
             sys.exit()
-        pos = self.recvall().split(" ")
-        print (pos)
-        #self.pos = (int(pos[0]) ,int(pos[1]))
 
     def recvall(self):
-        # TODO read all data in socket
-        try:
-            return self.socket.recv(Macro.sizeRead).decode("UTF-8")[:-1]
-        except:
-            eprint("Error during reading to %s:%d" % (self.optManager.host, self.optManager.port))
-            sys.exit()
+        data = ""
+        final = ""
+        while True:
+            try:
+                data = self.socket.recv(Macro.sizeRead).decode()
+            except:
+                eprint("Error during reading to %s:%d" % (self.optManager.host, self.optManager.port))
+                sys.exit()
+            if data == '\n':
+                break
+            if data == "":
+                break
+            final += data
+        return final
 
     def sendData(self, data):
         try:
@@ -56,4 +62,4 @@ class Socket():
             message = self.recvall()
         if message == "":
             return []
-        return message.split('\n')
+        return message.split("\n")
