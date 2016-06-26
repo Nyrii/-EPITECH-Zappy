@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 10:52:56 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 11:03:15 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,15 +13,15 @@
 #include "replies.h"
 #include "errors.h"
 
-int		free_tasks(t_task *t, int ret_value)
+int		free_tasks(UNUSED t_task *t, int ret_value)
 {
-  t->cmd ? free(t->cmd) : 0;
-  t->params ? free(t->params) : 0;
-  t->real ? free(t->real) : 0;
-  t->cmd = NULL;
-  t->params = NULL;
-  t->real = NULL;
-  free(t);
+  // t->cmd ? free(t->cmd) : 0;
+  // t->params ? free(t->params) : 0;
+  // t->real ? free(t->real) : 0;
+  // t->cmd = NULL;
+  // t->params = NULL;
+  // t->real = NULL;
+  // free(t);
   return (ret_value);
 }
 
