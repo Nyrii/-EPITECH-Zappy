@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 10:22:28 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:43:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -24,8 +24,6 @@ static int	take_item(t_server *s, t_player *player, int index)
     {
       s->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
-      s->data.map[rand() % s->data.world_y]
-	[rand() % s->data.world_x][index] += 1;
       if ((answ = bct(s->data.map, player->y, player->x)) == NULL)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
