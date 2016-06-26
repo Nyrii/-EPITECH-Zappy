@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Sun Jun 26 16:12:17 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:14:07 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -102,8 +102,6 @@ int	check_timer(t_server *srv)
   if (egg_list(srv) == -1)
     return (-1);
   if (check_and_write_players(&srv->wfd, srv->all_players, -1) == -1)
-    return (-1);
-  if (food_gen(srv) == -1)
     return (-1);
   return (0);
 }
