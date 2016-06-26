@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 11:00:00 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 16:13:59 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -56,6 +56,10 @@ int		manage_commands_ia(t_server *server,
 	  return (0);
 	}
     }
+  server->cmd ? free(server->cmd) : 0;
+  server->params ? free(server->params) : 0;
+  server->cmd = NULL;
+  server->params = NULL;
   if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
