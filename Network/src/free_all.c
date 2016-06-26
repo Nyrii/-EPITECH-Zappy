@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 16:26:36 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 09:44:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:11:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -32,6 +32,8 @@ void		free_player_structure(t_player *player)
   t_task	*task;
 
   i = -1;
+  if (player == NULL)
+    return ;
   while (++i < list_get_size(player->queue_tasks))
     {
       if ((task = list_get_elem_at_position(player->queue_tasks, i)) != NULL)
@@ -74,6 +76,7 @@ int		free_clients(t_list list, int const type, int const ret_value)
       free(tmp);
       tmp = NULL;
     }
+  free(list);
   list = NULL;
   return (ret_value);
 }
