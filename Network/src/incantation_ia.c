@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 17:51:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 18:03:25 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -68,12 +68,6 @@ static int	manage_level_player(t_server *server,
   return (-2);
 }
 
-static void	free_and_set_pos(int *pos)
-{
-  pos ? free(pos) : 0;
-  pos = NULL;
-}
-
 int		incantation_manager(t_server *server,
 				    t_player *player, int *pos)
 {
@@ -84,11 +78,7 @@ int		incantation_manager(t_server *server,
   if ((ret_value = manage_level_player(server, player,
 				       pos, player->level)) == -1
       || ret_value == -2)
-    {
-      free_and_set_pos(pos);
-      return (ret_value);
-    }
-  free_and_set_pos(pos);
+    return (ret_value);
   if (send_update_tile(server, player) == -1)
     return (-1);
   if (send_message_to_all_players(server, player, CURRENT_LEVEL,
