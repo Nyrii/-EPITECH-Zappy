@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:59:20 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 02:21:22 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 16:29:29 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -16,9 +16,9 @@ int		store_answer_p(t_player *player, char *answer,
 			       int ret_value)
 {
   if (player == NULL)
-    return (fprintf(stderr, ERR_PLAYER), -1);
+    return (fprintf(stderr, ERR_PLAYER), 0);
   else if (!answer)
-    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), -1);
+    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), 0);
   if (player->buff == NULL)
     {
       if ((player->buff = malloc(strlen(answer) + 2)) == NULL)
@@ -38,9 +38,9 @@ int		store_answer_c(t_client *client, char *answer,
 			       int ret_value)
 {
   if (client == NULL)
-    return (fprintf(stderr, ERR_PLAYER), -1);
+    return (fprintf(stderr, ERR_PLAYER), 0);
   else if (!answer)
-    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), -1);
+    return (fprintf(stderr, ERR_ANSWER_NOT_FOUND), 0);
   if (client->buff == NULL)
     {
       if ((client->buff = malloc(strlen(answer) + 2)) == NULL)

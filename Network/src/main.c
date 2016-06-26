@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 08:29:50 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 16:20:17 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -76,6 +76,7 @@ int		main(int argc, char **argv)
   t_server	server;
 
   signal(SIGINT, free_before_leaving);
+  signal(SIGPIPE, SIG_IGN);
   save_server(NULL, 1);
   srand(time(NULL));
   server.cmd = NULL;
