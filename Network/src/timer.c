@@ -5,7 +5,7 @@
 ** Login   <empoci_k@epitech.net>
 **
 ** Started on  Tue May 31 03:36:45 2016 Kévin Empociello
-** Last update Sun Jun 26 10:30:17 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:37:53 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,17 +17,17 @@ double		*init_timer_tasks(t_server *srv)
 
   if ((times = malloc(12 * sizeof(double))) == NULL)
     return (NULL);
-  times[0] = 7.0 / srv->data.delay;
-  times[1] = 7.0 / srv->data.delay;
-  times[2] = 7.0 / srv->data.delay;
-  times[3] = 7.0 / srv->data.delay;
-  times[4] = 1.0 / srv->data.delay;
-  times[5] = 7.0 / srv->data.delay;
-  times[6] = 7.0 / srv->data.delay;
-  times[7] = 7.0 / srv->data.delay;
-  times[8] = 7.0 / srv->data.delay;
-  times[9] = 300.0 / srv->data.delay;
-  times[10] = 42.0 / srv->data.delay;
+  times[0] = 7.0 / (srv->data.delay * 1.0);
+  times[1] = 7.0 / (srv->data.delay * 1.0);
+  times[2] = 7.0 / (srv->data.delay * 1.0);
+  times[3] = 7.0 / (srv->data.delay * 1.0);
+  times[4] = 1.0 / (srv->data.delay * 1.0);
+  times[5] = 7.0 / (srv->data.delay * 1.0);
+  times[6] = 7.0 / (srv->data.delay * 1.0);
+  times[7] = 7.0 / (srv->data.delay * 1.0);
+  times[8] = 7.0 / (srv->data.delay * 1.0);
+  times[9] = 300.0 / (srv->data.delay * 1.0);
+  times[10] = 42.0 / (srv->data.delay * 1.0);
   times[11] = 0.0;
   return (times);
 }
