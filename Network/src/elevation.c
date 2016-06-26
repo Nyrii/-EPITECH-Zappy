@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 09:46:13 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 14:18:35 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -43,8 +43,7 @@ int		send_message_to_all_players(t_server *server, t_player *player,
   if ((tmp = get_players_at_pos(&server->data, player->y, player->x)) == NULL)
     return (-1);
   if (memset(buffer, 0, 50) == NULL
-      || snprintf(buffer, 50, level == -1 ? message :
-		  message, level) == -1)
+      || snprintf(buffer, 50, message, level) == -1)
     return (-1);
   while (++i < list_get_size(tmp))
     {

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:22:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 09:47:53 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 14:02:57 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -21,7 +21,7 @@ static char	*store_pic_answer(t_player *player, char *buf,
   char		*answer;
 
   i = -1;
-  if ((answer = malloc(((*len) + list_get_size(tmp) * 14) + 1)) == NULL)
+  if ((answer = malloc((50 + list_get_size(tmp) * 45) + 1)) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
   answer[(*len)] = '\0';
   if ((answer = strcat(answer, buf)) == NULL || (*len = strlen(answer)) == -1)

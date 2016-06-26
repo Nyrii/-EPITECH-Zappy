@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 09:51:17 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 15:01:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -67,10 +67,12 @@ int		incantation_manager(t_server *server,
 				       pos, player->level)) == -1
       || ret_value == -2)
     {
-      free(pos);
+      pos ? free(pos) : 0;
+      pos = NULL;
       return (ret_value);
     }
-  free(pos);
+  pos ? free(pos) : 0;
+  pos = NULL;
   if (send_update_tile(server, player) == -1)
     return (-1);
   if (send_message_to_all_players(server, player, CURRENT_LEVEL,
@@ -89,6 +91,7 @@ int		incantation_manager(t_server *server,
 int		incantation_ia(t_server *server, t_player *player)
 {
   int		*pos;
+  char		buffer[4096];
 
   if ((pos = malloc(2 * sizeof(int))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), -1);
@@ -97,8 +100,9 @@ int		incantation_ia(t_server *server, t_player *player)
   player->incant.pos = NULL;
   if (is_elevation_legit(&server->data, player->level, pos) == 0)
     {
-      if (send_message_to_all_players(server, player, ELEVATION_IN_PROGRESS,
-				      player->level) == -1
+      if (memset(buffer, 0, 4096) == NULL
+	  || snprintf(buffer, 4096, ELEVATION_IN_PROGRESS) == -1
+	  || store_answer_p(player, strdup(buffer), 0) == -1
 	  || pic(server, player) == -1)
 	return (-1);
       player->incant.pos = pos;
