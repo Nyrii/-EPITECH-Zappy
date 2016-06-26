@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:59:20 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:26:00 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 02:21:22 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -15,9 +15,6 @@
 int		store_answer_p(t_player *player, char *answer,
 			       int ret_value)
 {
-  int		i;
-  int		len;
-
   if (player == NULL)
     return (fprintf(stderr, ERR_PLAYER), -1);
   else if (!answer)
@@ -31,11 +28,8 @@ int		store_answer_p(t_player *player, char *answer,
   else if (!(player->buff = realloc(player->buff,
 				    strlen(player->buff) + strlen(answer) + 2)))
     return (fprintf(stderr, ERR_MALLOC), -1);
-  i = 0;
-  len = strlen(player->buff);
-  while (answer[i])
-    player->buff[len++] = answer[i++];
-  player->buff[len] = '\0';
+  if ((player->buff = strcat(player->buff, answer)) == NULL)
+    return (fprintf(stderr, ERR_STRCAT), -1);
   free(answer);
   return (ret_value);
 }
@@ -43,9 +37,6 @@ int		store_answer_p(t_player *player, char *answer,
 int		store_answer_c(t_client *client, char *answer,
 			       int ret_value)
 {
-  int		i;
-  int		len;
-
   if (client == NULL)
     return (fprintf(stderr, ERR_PLAYER), -1);
   else if (!answer)
@@ -59,11 +50,8 @@ int		store_answer_c(t_client *client, char *answer,
   else if (!(client->buff = realloc(client->buff,
 				    strlen(client->buff) + strlen(answer) + 2)))
     return (fprintf(stderr, ERR_MALLOC), -1);
-  i = 0;
-  len = strlen(client->buff);
-  while (answer[i])
-    client->buff[len++] = answer[i++];
-  client->buff[len] = '\0';
+  if ((client->buff = strcat(client->buff, answer)) == NULL)
+    return (fprintf(stderr, ERR_STRCAT), -1);
   free(answer);
   return (ret_value);
 }
