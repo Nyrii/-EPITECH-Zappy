@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 10:47:42 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:56:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -22,7 +22,6 @@ static int	take_item(t_server *s, t_player *player, int index)
   if (s->data.map[player->y] && s->data.map[player->y][player->x]
       && s->data.map[player->y][player->x][index] > 0)
     {
-      printf("index = %d\n", index);
       s->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
       if ((answ = bct(s->data.map, player->y, player->x)) == NULL)

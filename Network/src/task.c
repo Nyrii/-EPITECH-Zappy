@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 10:49:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:52:56 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -65,7 +65,6 @@ int		player_tasks(t_server *srv, t_player *p, int index)
       if (index == 12 || ((index = get_time_by_func(srv, t->cmd)) != -1 &&
 			  calculate_elapse(&t->timer.val, &now) >= srv->data.timers[index]))
 	{
-	  printf("calculate_elapse = %f, timer = %f\n", calculate_elapse(&t->timer.val, &now), srv->data.timers[index]);
 	  list_del_elem_at_position(&p->queue_tasks, 0);
           if (list_get_size(p->queue_tasks) > 0)
             if ((t_nxt = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
