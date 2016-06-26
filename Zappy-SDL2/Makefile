@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ## 
 ## Started on  Thu Jun 16 12:12:58 2016 guillaume wilmot
-## Last update Sun Jun 26 17:45:23 2016 guillaume wilmot
+## Last update Sun Jun 26 21:42:10 2016 Kevin Empociello
 ##
 
 SRC	= Charset.cpp		\
@@ -50,6 +50,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.cpp
 
 $(NAME): $(OBJ)
 	$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
+	@cp zappy-gfx ..
 
 clean:
 	$(RM) $(OBJ)
