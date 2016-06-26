@@ -5,14 +5,14 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 15:50:39 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 17 15:51:27 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 22:11:18 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
 
 void		init_percentages(t_data *data)
 {
-  data->percentages[FOOD] = 50.0;
+  data->percentages[FOOD] = 40.0;
   data->percentages[LINEMATE] = 23.0;
   data->percentages[DERAUMERE] = 20.5;
   data->percentages[SIBUR] = 25.6;
