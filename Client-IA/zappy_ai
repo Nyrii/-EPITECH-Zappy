@@ -2,6 +2,7 @@
 
 import sys
 sys.path.append("Class")
+sys.path.append("Client-IA")
 from OptionManager import OptionManager
 from AI import AI
 import numpy as np
