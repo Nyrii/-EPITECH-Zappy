@@ -5,8 +5,10 @@
 ## Login   <noboud_n@epitech.net>
 ## 
 ## Started on  Sun Jun 26 19:32:40 2016 Nyrandone Noboud-Inpeng
-## Last update Sun Jun 26 19:43:19 2016 Nyrandone Noboud-Inpeng
+## Last update Sun Jun 26 19:50:46 2016 Nyrandone Noboud-Inpeng
 ##
+
+RM	= rm -rf
 
 all: server client
 
@@ -21,8 +23,11 @@ clean:
 	$(MAKE) clean -C Graphical
 
 fclean:
+	$(RM) zappy_server
 	$(MAKE) fclean -C Network
 	$(MAKE) fclean -C Graphical
+
+# $(RM) zappy_ai
 
 re:
 	$(MAKE) re -C Network
