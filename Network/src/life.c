@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 16:46:42 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:30:58 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -17,16 +17,11 @@ int		player_life(t_server *srv, t_player *p)
 {
   struct timeb	now;
   double	tmp;
-  int		resource;
 
   ftime(&now);
   if (p->inventory[FOOD] <= 0)
     {
-      resource = 0;
-      while (srv->data.map && ++resource < NONE)
-	srv->data.map[p->y][p->x][resource] += p->inventory[resource];
-      if (store_answer_p(p, strdup(DEAD), 0) == -1 || pdi(srv, p) == -1
-	  || bct_ia(srv, p->y, p->x) == -1)
+      if (store_answer_p(p, strdup(DEAD), 0) == -1 || pdi(srv, p) == -1)
 	return (fprintf(stderr, ERR_BUFFER), -1);
       p->off = 1;
       return (0);
