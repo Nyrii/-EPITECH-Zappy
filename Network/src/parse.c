@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 25 15:05:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 07:04:31 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -44,7 +44,10 @@ static char	*get_parameter(char *buffer)
   if (buffer[i] == '/')
     i++;
   if (buffer[i] != '\0' && buffer[i + 1] != '\0')
-    new = &buffer[i + 1];
+    {
+      if ((new = strdup(&buffer[i + 1])) == NULL)
+	return (NULL);
+    }
   else
     return (NULL);
   return (new);
@@ -57,5 +60,6 @@ char		*parse_cmd(t_server *srv, char *cmd)
   if ((srv->cmd = get_cmd(cmd)) == NULL)
     return (NULL);
   srv->params = get_parameter(cmd);
+  free(cmd);
   return (srv->cmd);
 }

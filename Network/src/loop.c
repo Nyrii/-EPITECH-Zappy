@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Sun Jun 26 05:47:31 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 06:57:23 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
