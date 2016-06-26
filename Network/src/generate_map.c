@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 20:00:41 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 20:10:02 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -120,5 +120,9 @@ int			generate_map(t_data *data, int x, int y, int i)
 	return (fprintf(stderr, ERR_MALLOC), -1);
     }
   data->map[y] = NULL;
+  i = -1;
+  while (++i < NONE)
+    generate_resources(data, i, data->resources[0][i] +
+		       (data->world_x + data->world_y) / 2);
   return (0);
 }
