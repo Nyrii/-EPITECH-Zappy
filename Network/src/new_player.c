@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 25 14:13:32 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 06:03:07 2016 Kevin Empociello
 */
 
 #include <netinet/in.h>
@@ -77,6 +77,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (fprintf(stderr, ERR_MALLOC), NULL);
+  ftime(&srv->timer.val);
   new->sock = cl->sock;
   new->queue_tasks = NULL;
   if ((ret_value = assign_egg_pos(srv, t, new)) == -1)
