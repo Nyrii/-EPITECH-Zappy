@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 10 13:17:30 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:26:29 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 02:03:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -16,29 +16,29 @@
 static char	*fill_bct(char *answer, int ***map,
 			  int const *pos, int i)
 {
-  int		inc;
   int		k;
   char		buffer[30];
 
-  inc = 0;
   k = 0;
   if (memset(buffer, 0, 30) == NULL
       || snprintf(buffer, 30, "bct %d %d", pos[1], pos[0]) == -1)
     return (fprintf(stderr, ERR_MEMSET), NULL);
-  while (buffer[inc])
-    answer[i++] = buffer[inc++];
+  answer[i] = '\0';
+  if ((answer = strcat(answer, buffer)) == NULL)
+    return (fprintf(stderr, ERR_STRCAT), NULL);
+  i = strlen(answer);
   while (map[pos[0]][pos[1]][k] != -1)
     {
       answer[i++] = ' ';
-      inc = 0;
       if (memset(buffer, 0, 12) == NULL
 	  || snprintf(buffer, 12, "%d", map[pos[0]][pos[1]][k]) == -1)
 	return (NULL);
       ++k;
-      while (buffer[inc])
-	answer[i++] = buffer[inc++];
+      answer[i] = '\0';
+      if ((answer = strcat(answer, buffer)) == NULL)
+	return (fprintf(stderr, ERR_STRCAT), NULL);
+      i = strlen(answer);
     }
-  answer[i] = '\0';
   return (answer);
 }
 

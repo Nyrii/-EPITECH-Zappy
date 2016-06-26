@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 14:49:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 18:28:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 02:04:13 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -36,31 +36,31 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
   return (resources * 12 + nb_players * 10 + 10);
 }
 
-static void	store_players(char **see, t_data data, int *pos, int *i)
+static int	store_players(char **see, t_data data, int *pos, int *i)
 {
   t_list	tmp;
   char		*string;
   unsigned int	count;
-  int		n;
 
   string = " joueur";
   count = 0;
   if ((tmp = get_players_at_pos(&data, pos[0], pos[1])) == NULL)
-    return ;
+    return (0);
   count = list_get_size(tmp);
+  (*see)[(*i)] = '\0';
   while (count > 0)
     {
-      n = 0;
-      while (string[n])
-	(*see)[(*i)++] = string[n++];
+      if ((*see = strcat(*see, string)) == NULL)
+	return (fprintf(stderr, ERR_STRCAT), -1);
       --count;
     }
+  *i = strlen(*see);
+  return (0);
 }
 
-static void	store_resources(char **see, t_data data, int *pos, int *i)
+static int	store_resources(char **see, t_data data, int *pos, int *i)
 {
   int		n;
-  int		x;
   int		tmp;
 
   n = 0;
@@ -70,14 +70,16 @@ static void	store_resources(char **see, t_data data, int *pos, int *i)
       tmp = data.map[pos[0]][pos[1]][n];
       while (tmp > 0)
 	{
-	  x = 0;
 	  (*i) - 1 != 0 ? (*see)[(*i)++] = ' ' : 0;
-	  while (data.strings_resources[n][x])
-	    (*see)[(*i)++] = data.strings_resources[n][x++];
+	  (*see)[*i] = '\0';
+	  if ((*see = strcat(*see, data.strings_resources[n])) == NULL)
+	    return (fprintf(stderr, ERR_STRCAT), -1);
+	  *i = strlen(*see);
 	  --tmp;
 	}
       ++n;
     }
+  return (0);
 }
 
 int		see_ia_resources(char **see, t_server *srv,
@@ -99,8 +101,9 @@ int		see_ia_resources(char **see, t_server *srv,
       (*see)[(*i)] = '\0';
       return (0);
     }
-  store_players(see, srv->data, pos, i);
-  store_resources(see, srv->data, pos, i);
+  if (store_players(see, srv->data, pos, i) == -1
+      || store_resources(see, srv->data, pos, i) == -1)
+    return (-1);
   (*see)[(*i)] = '\0';
   return (0);
 }

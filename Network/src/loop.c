@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:04:41 2016 Kevin Empociello
-** Last update Sun Jun 26 00:28:28 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 01:56:45 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -48,7 +48,6 @@ int			loop_server(t_server *srv)
 	  if (select(srv->max + 1, &srv->rdfs, &srv->wfd, NULL, &tv) == -1)
 	    return (error("Select failed\n"));
 	  if ((ret = process(srv, i)) != 0 || (ret = check_timer(srv)) != 0
-	      || check_and_write_players(&srv->wfd, srv->all_players) == -1
 	      || (ret = check_disconnect(srv)) == -1)
 	    return (ret);
 	}

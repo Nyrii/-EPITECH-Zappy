@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:17 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:54:32 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 02:00:01 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -18,24 +18,23 @@ static int	get_answer(t_server *server, t_player *player,
 			   char **answer, int i)
 {
   int		tmp;
-  int		n;
   char		buffer[13];
 
   tmp = 0;
   (*answer)[i] = '\0';
   while (tmp < NONE)
     {
-      n = 0;
       if (i == 0)
         (*answer)[i++] = '{';
-      while (server->data.strings_resources[tmp][n])
-	(*answer)[i++] = server->data.strings_resources[tmp][n++];
+      (*answer)[i] = '\0';
+      if (!(*answer = strcat(*answer, server->data.strings_resources[tmp])))
+	return (fprintf(stderr, ERR_STRCAT), -1);
       if (memset(buffer, 0, 13) == NULL
 	  || snprintf(buffer, 13, " %d", player->inventory[tmp]) == -1)
 	return (fprintf(stderr, ERR_MEMSET), -1);
-      n = 0;
-      while (buffer[n])
-	(*answer)[i++] = buffer[n++];
+      if ((*answer = strcat(*answer, buffer)) == NULL)
+	return (fprintf(stderr, ERR_STRCAT), -1);
+      i = strlen(*answer);
       tmp + 1 != NONE ? (*answer)[i++] = ',' : 0;
       tmp + 1 != NONE ? (*answer)[i++] = ' ' : 0;
       ++tmp;

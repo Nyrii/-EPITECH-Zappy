@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 19:17:48 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 01:35:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <math.h>
@@ -55,31 +55,12 @@ static int	determine_best_way(t_server *server, t_player *player,
   return (tile);
 }
 
-static int	concat_answer(t_server *server, char **answer,
-			      int tile)
-{
-  char		buffer[1024];
-  int		i;
-
-  if (memset(buffer, 0, 1024) == NULL
-      || snprintf(buffer, 1024, BROADCAST, tile, server->params) == -1)
-    return (-1);
-  i = 0;
-  while (buffer[i])
-    {
-      (*answer)[i] = buffer[i];
-      ++i;
-    }
-  (*answer)[i] = '\0';
-  return (0);
-}
-
 static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 			       unsigned int i)
 {
   t_player	*tmp_player;
   int		tile;
-  char		*answ;
+  char		buffer[4096];
 
   while (++i < list_get_size(tmp))
     {
@@ -87,11 +68,11 @@ static int	send_broadcast(t_server *server, t_player *player, t_list tmp,
 	  && tmp_player->sock != player->sock)
 	{
 	  tile = determine_best_way(server, player, tmp_player);
-	  if ((answ = malloc(4096)) == NULL)
-	    return (fprintf(stderr, ERR_MALLOC), -1);
-	  if (concat_answer(server, &answ, tile) == -1)
-	    return (fprintf(stderr, ERR_PRINTF), -1);
-	  if (store_answer_p(tmp_player, answ, 0) == -1)
+	    if (memset(buffer, 0, 1024) == NULL
+		|| snprintf(buffer, 1024, BROADCAST,
+			    tile, server->params) == -1)
+	    return (-1);
+	  if (store_answer_p(tmp_player, strdup(buffer), 0) == -1)
 	    return (-1);
 	}
     }

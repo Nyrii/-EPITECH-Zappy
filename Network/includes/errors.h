@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:42:10 2016 Nyrandone Noboud-Inpeng
-** Last update Fri Jun 24 14:55:34 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 01:58:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef ERRORS_H_
@@ -37,5 +37,6 @@
 # define ERR_WRITE "Error: could not write the entire answer\n"
 # define ERR_REMOVE "Error: could not remove an entity from a list\n"
 # define ERR_ANSWER_NOT_FOUND "Error: answer canno t be found.\n"
+# define ERR_STRCAT "Error: strcat failed.\n"
 
 #endif /* ERRORS_H_ */

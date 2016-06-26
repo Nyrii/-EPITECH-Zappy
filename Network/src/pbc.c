@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Mon Jun 20 15:34:58 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 19:45:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 02:00:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -18,10 +18,8 @@ int		pbc(t_server *server, t_player *player)
   char		*answer;
   char		buffer[25];
   int		i;
-  int		n;
 
   i = 0;
-  n = 0;
   if (!server || !player)
     return (fprintf(stderr, INTERNAL_ERR), -1);
   if ((answer = malloc(25 + strlen(server->params))) == NULL)
@@ -29,11 +27,11 @@ int		pbc(t_server *server, t_player *player)
   if (memset(buffer, 0, 25) == NULL
       || snprintf(buffer, 25, PBC, player->id) == -1)
     return (fprintf(stderr, ERR_MEMSET), -1);
-  while (buffer[n])
-    answer[i++] = buffer[n++];
-  n = 0;
-  while (server->params[n])
-    answer[i++] = server->params[n++];
+  answer[i] = '\0';
+  if ((answer = strcat(answer, buffer)) == NULL
+      || (answer = strcat(answer, server->params)) == NULL)
+    return (fprintf(stderr, ERR_STRCAT), -1);
+  i = strlen(answer);
   answer[i++] = '\n';
   answer[i] = '\0';
   if (send_all_graphics(server, answer) == -1)
