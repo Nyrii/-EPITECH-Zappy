@@ -5,10 +5,33 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 16:26:36 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 18:25:01 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 07:17:43 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+
+void		free_player_structure(t_player *player)
+{
+  unsigned int	i;
+  t_task	*task;
+
+  i = -1;
+  while (++i < list_get_size(player->queue_tasks))
+    {
+      if ((task = list_get_elem_at_position(player->queue_tasks, i)) != NULL)
+	{
+	  if (task->cmd)
+	    free(task->cmd);
+	  if (task->params)
+	    free(task->params);
+	  if (task->real)
+	    free(task->real);
+	  task->cmd = NULL;
+	  task->params = NULL;
+	  task->real = NULL;
+	}
+    }
+}
 
 int		free_clients(t_list list, int const type, int const ret_value)
 {
@@ -25,7 +48,10 @@ int		free_clients(t_list list, int const type, int const ret_value)
       if (type == 0)
 	free_client_buffers(tmp->value);
       else
-	free_player_buffers(tmp->value);
+	{
+	  free_player_buffers(tmp->value);
+	  free_player_structure(tmp->value);
+	}
       free(tmp->value);
       tmp->value = NULL;
       free(tmp);
