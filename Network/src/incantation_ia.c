@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:43:11 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 17:11:18 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:51:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -23,12 +23,10 @@ static int	remove_and_generate_resources(t_server *server,
     {
       server->data.map[player->y][player->x][i]
       -= server->data.resources[level][i];
-      if (generate_another_resource(server, i,
-				    server->data.resources[level][i]) == -1)
-	return (-1);
     }
   return (0);
 }
+
 static int	elevation_ok(t_server *server, t_player *player,
 			     int const level)
 {
