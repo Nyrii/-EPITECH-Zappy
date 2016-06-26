@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:39:45 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 05:47:15 2016 Kevin Empociello
 */
 
 #ifndef SERVER_H_
@@ -109,6 +109,8 @@ typedef struct		s_data
 
 typedef struct		s_server
 {
+  t_timer		timer;
+
   /* DATA WORLD */
   t_data		data;
 
@@ -244,6 +246,11 @@ char		*epur_bf(char *str);
 ** expulse_ia.c
 */
 int		expulse_ia(t_server *, t_player *);
+
+/*
+** food.c
+*/
+int		food_gen(t_server *);
 
 /*
 ** fork_ia.c

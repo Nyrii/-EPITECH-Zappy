@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sat Jun 25 16:04:50 2016 Nyrandone Noboud-Inpeng
+## Last update Sun Jun 26 05:46:32 2016 Kevin Empociello
 ##
 
 SRCSER	= bct.c				\
@@ -27,6 +27,7 @@ SRCSER	= bct.c				\
 	enw.c				\
 	epur.c				\
 	expulse_ia.c			\
+	food.c				\
 	fork_ia.c			\
 	forward_ia.c			\
 	free.c				\
