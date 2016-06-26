@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 09:45:05 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:06:59 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -565,6 +565,7 @@ int		suc(t_client *);
 /*
 ** take_ia.c
 */
+int		generate_another_resource(t_server *, int const, int const);
 int		take_ia(t_server *, t_player *);
 
 /*

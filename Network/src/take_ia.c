@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 17:04:19 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:06:38 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,7 +13,8 @@
 #include "replies.h"
 #include "errors.h"
 
-static int	generate_another_resource(t_server *server, int const index)
+int		generate_another_resource(t_server *server, int const index,
+					  int const quantity)
 {
   int		random_y;
   int		random_x;
@@ -22,7 +23,7 @@ static int	generate_another_resource(t_server *server, int const index)
 
   random_y = rand() % server->data.world_y;
   random_x = rand() % server->data.world_x;
-  server->data.map[random_y][random_x][index] += 1;
+  server->data.map[random_y][random_x][index] += quantity;
   if ((answ = bct(server->data.map, random_y, random_x)) == NULL)
     return (-1);
   if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
@@ -50,7 +51,7 @@ static int	take_item(t_server *s, t_player *player, int index)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       if (pgt(s, player, index) == -1 || pin_ia(s, player) == -1
 	  || send_all_graphics(s, strdup(buf)) == -1
-	  || generate_another_resource(s, index) == -1)
+	  || generate_another_resource(s, index, 1) == -1)
 	return (-1);
       free(answ);
       return (store_answer_p(player, strdup(OK), 0));
