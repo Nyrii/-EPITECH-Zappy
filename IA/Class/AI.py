@@ -25,6 +25,7 @@ class AI():
     listCommand = []
     broadcastMessage = []
 
+    ignoreMessage = 0
     asking = 0
     firstAction = True
     firstReceive = True
@@ -47,9 +48,10 @@ class AI():
         self.nbPlayer = counterPlayer
 
     def broadcastLevel(self):
-        self.socket.sendData("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
-        self.listCommand.append("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
-        self.funcVoir()
+        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
+        if self.listCommand == []:
+            self.listCommand.append("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
+        #self.funcVoir()
 
     def broadcastMoveTo(self, message):
         orientation = int(message[0])
@@ -76,9 +78,10 @@ class AI():
         elif orientation == 8:
             walk = ["avance", "droite", "avance"]
 
+        #Reverse in order to insert all command
         walk.append("voir")
         for move in walk:
-            Macro.CommandRef[move](self)
+            Macro.CommandRef[move](self, True)
 
     def readBroadcast(self):
         idx = 0
@@ -95,6 +98,7 @@ class AI():
 
         idx = 0
 
+        print ("CAN I READ broadcast LEVEL ?", self.listCommand, "\n", self.broadcastMessage)
         if self.listCommand == []:
             if self.broadcastMessage != []:
                 message = self.broadcastMessage[0]
@@ -110,8 +114,8 @@ class AI():
                     idxLast = i
                 i += 1
 
-            if idxLast != -1:
-                Macro.BroadcastRespRef["/l"](self, self.broadcastMessage[idxLast])
+                if idxLast != -1:
+                    Macro.BroadcastRespRef["/l"](self, self.broadcastMessage[-1])
 
             idx = 0
             while idx < len(self.broadcastMessage):
@@ -131,11 +135,11 @@ class AI():
             print ("Increased PLAYER: ", idAlly)
 
     def broadcastRequest(self, message):
-        self.socket.sendData("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
+        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
         self.listCommand.append("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
 
     def broadcastAnswer(self, message):
-        self.socket.sendData("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
+        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
         self.listCommand.append("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
 
     def isRes(self, elem):
@@ -166,14 +170,14 @@ class AI():
             if elem != "joueur":
                 #print (elem, "-->", ressourceCase[elem], " <> ", Macro.LevelRef[self.level][elem])
                 if ressourceCase[elem] < Macro.LevelRef[self.level][elem]:
-                    self.socket.sendData("pose " + elem)
+                    #self.socket.sendData("pose " + elem)
                     self.listCommand.append("pose " + elem)
 
                     self.inventory[elem] -= 1
                     self.cases[0].append(elem)
                     return -1
                 elif ressourceCase[elem] > Macro.LevelRef[self.level][elem]:
-                    self.socket.sendData("prend " + elem)
+                    #self.socket.sendData("prend " + elem)
                     self.listCommand.append("prend " + elem)
 
                     self.inventory[elem] += 1
@@ -258,7 +262,6 @@ class AI():
         if ret == 1:
             return -1
 
-        #print ("Nb ACTIONS ?")
         action = 0
         for elem in ressourceCase:
             if ressourceCase[elem] > levelRef[elem]:
@@ -269,69 +272,82 @@ class AI():
                 while ressourceCase[elem] < levelRef[elem]:
                     action += 1
                     ressourceCase[elem] += 1
-        if self.level != 1 and self.cases[idx].count("joueur") + 1 > Macro.LevelRef[self.level]["joueur"]:
+        if self.level == 1 and self.cases[idx].count("joueur") > 1:
+            return -1
+        elif self.level != 1 and self.cases[idx].count("joueur") > Macro.LevelRef[self.level]["joueur"]:
             return -1
         return action
 
-    def funcDroite(self):
-        self.socket.sendData("droite")
+    def funcDroite(self, broadcast = False):
+        if broadcast is True:
+            self.socket.sendData("droite")
+            self.listCommand.append("droite")
+            return
         self.listCommand.append("droite")
 
-    def funcGauche(self):
-        self.socket.sendData("gauche")
+    def funcGauche(self, broadcast = False):
+        if broadcast is True:
+            self.socket.sendData("gauche")
+            self.listCommand.append("gauche")
+            return
         self.listCommand.append("gauche")
 
-    def funcAvance(self):
-        self.socket.sendData("avance")
+    def funcAvance(self, broadcast = False):
+        if broadcast is True:
+            self.socket.sendData("avance")
+            self.listCommand.append("avance")
+            return
         self.listCommand.append("avance")
 
-    def funcVoir(self):
-        self.socket.sendData("voir")
+    def funcVoir(self, broadcast = False):
+        if broadcast is True:
+            self.socket.sendData("voir")
+            self.listCommand.append("voir")
+            return
         self.listCommand.append("voir")
 
     def funcPrend(self, idx, food = False):
         case = self.cases[idx]
-        print ("Case[", idx, "]:", case, food)
+        #print ("Case[", idx, "]:", case, food)
 
         if food is True:
-            print (" --| Je prend la NOURRITURE")
-            self.socket.sendData("prend nourriture")
+            #self.socket.sendData("prend nourriture")
             self.listCommand.append("prend nourriture")
             case.remove("nourriture")
-            print (" --| En removant:", self.cases[idx])
             return
 
         for res in case:
             if self.isRes(res):
                 if self.inventory[res] + 1 <= Macro.LevelRef[self.level][res]:
                     self.inventory[res] += 1
-                    self.socket.sendData("prend " + res)
+                    #self.socket.sendData("prend " + res)
                     self.listCommand.append("prend " + res)
                     case.remove(res)
                 else:
                     eprint("Doesn't need 'prend " + res + "'")
 
     def funcExpulse(self):
-        self.socket.sendData("expulse")
+        #self.socket.sendData("expulse")
         self.listCommand.append("expulse")
 
     def funcIncantation(self):
         print ("Func incantation")
         if self.putResOnCase() == -1:
             return
-        self.socket.sendData("incantation")
+        #self.socket.sendData("incantation")
         self.listCommand.append("incantation")
 
     def connectNewPlayer(self):
         pid = os.fork()
         if pid == 0:
             FNULL = open(os.devnull, 'w')
-            self.listChild.append(subprocess.Popen("./zappy_ai " + " -n " + self.optManager.nameEquip + " -p " + str(self.optManager.port) + " -h " + self.optManager.host, stdout=FNULL, shell=True))
+            FTEST = open("test", "w+")
+            self.listChild.append(subprocess.Popen("./zappy_ai " + " -n " + self.optManager.nameEquip + " -p " + str(self.optManager.port) + " -h " + self.optManager.host, stdout=FTEST, shell=True))
             #subprocess.check_call("./zappy_ai " + " -n " + self.optManager.nameEquip + " -p " + str(self.optManager.port) + " -h " + self.optManager.host, shell=True)
             sys.exit()
 
     def funcFork(self):
-        self.socket.sendData("fork")
+        #self.socket.sendData("fork")
         self.listCommand.append("fork")
 
     def isRessource(self, ressource):
@@ -388,7 +404,6 @@ class AI():
         if walk == []:
             return
         #if "droite" in walk or "gauche" in walk:
-        walk.append("voir")
         for move in walk:
             Macro.CommandRef[move](self)
         self.cases[0] = caseTmp
@@ -407,20 +422,21 @@ class AI():
             self.ownTimer = time.time()
         if time.time() - self.ownTimer >= 6.0:
             if self.asking == 1 and len(self.nbPlayer) < 8:
-                if self.life > 4:
+                if self.life > 5:
                     self.funcFork()
                     self.asking = 3
 
-    def checkIncantPlayer(self):
-        case = self.cases[0]
+    def checkIncantPlayer(self, idx = 0):
+        case = self.cases[idx]
 
         print ("NB player", case.count("joueur"))
         if case.count("joueur") == Macro.LevelRef[self.level]["joueur"]:
             return True
 
-        # while self.putResOnCase() != -1:
-        #     continue
+        if self.putResOnCase() == -1:
+            return False
 
+        print ("send broadcast /l")
         if case.count("joueur") < Macro.LevelRef[self.level]["joueur"]:
             Macro.BroadcastRef["/l"](self)
         return False
@@ -438,8 +454,10 @@ class AI():
         self.constructArmy()
         #self.needFork()
 
-        if self.canIncant() != -1 and self.life > 4:
+        if self.canIncant() != -1 and self.life > 5:
+            #print ("Je peux incant en 0, je check")
             if self.checkIncantPlayer():
+                #print ("le check pass")
                 self.funcIncantation()
             return
 
@@ -448,28 +466,30 @@ class AI():
             return
 
         idx = self.getCaseFood()
-        if self.life < 5 and idx != -1:
-            print ("Get food:", idx)
+        if self.life < 6 and idx != -1:
+            #print ("Get food:", idx)
             self.moveTo(idx)
+            if self.checkIncantPlayer(idx):
+                self.funcIncantation()
             self.funcPrend(idx, True)
             return
 
         idx = self.getCaseIncant()
         if idx != -1:
-            print ("Get incant Case:", idx)
+            # print ("Get incant Case:", idx)
             self.moveTo(idx)
             return
 
         idx = self.getCaseLevel()
         if idx != -1:
-            print ("Get Res :", idx)
+            # print ("Get Res :", idx)
             self.moveTo(idx)
             self.funcPrend(idx, False)
             return
 
         idx = self.getCaseFood()
         if idx != -1:
-            print ("Get food to stock:", idx)
+            # print ("Get food to stock:", idx)
             self.moveTo(idx)
             self.funcPrend(idx, True)
             return
@@ -490,12 +510,12 @@ class AI():
             self.broadcastMessage.append(final)
 
     def updateInfo(self):
-        self.socket.sendData("inventaire")
-        self.listCommand.append("inventaire")
-        self.socket.sendData("connect_nbr")
-        self.listCommand.append("connect_nbr")
-        self.socket.sendData("voir")
+        #self.socket.sendData("voir")
         self.listCommand.append("voir")
+        #self.socket.sendData("inventaire")
+        self.listCommand.append("inventaire")
+        #self.socket.sendData("connect_nbr")
+        self.listCommand.append("connect_nbr")
 
     def upStats(self):
         self.level += 1
@@ -512,16 +532,23 @@ class AI():
         if message == "mort":
             sys.exit()
 
+        if message.find("niveau actuel") != -1 and len(self.listCommand) > 0 and self.listCommand[0] != "incantation":
+            self.upStats()
+            message = ""
         if message.find("message") != -1:
             self.parseBroadcast(message)
             message = ""
+
+        # if self.ignoreMessage > 0:
+        #     print ("IGNORE THIS:", self.ignoreMessage)
+        #     self.ignoreMessage -= 1
+        #     return
+
         if message == "ok" or message == "ko":
             if message == "ko":
                 eprint("-----Error ---")
                 eprint(self.listCommand[0])
-                self.socket.sendData("voir")
-                self.listCommand.append("voir")
-            if len(self.listCommand) > 0 and (self.listCommand[0] != "incantation" or message == "ko"):
+            if len(self.listCommand) > 0 and self.listCommand[0] != "voir" and (self.listCommand[0] != "incantation" or message == "ko"):
                 self.listCommand.pop(0)
             message = ""
 
@@ -539,9 +566,11 @@ class AI():
                 if message.find("niveau actuel") != -1:
                     self.upStats()
                     self.listCommand.pop(0)
+        #if self.listCommand == []
 
     def constructArmy(self):
-        while self.freePlace > 1:
+        #while self.freePlace > 1:
+        while self.freePlace > 0:
             self.connectNewPlayer()
             self.freePlace -= 1
 
@@ -568,8 +597,10 @@ class AI():
             if self.broadcastMessage != []:
                 self.readBroadcast()
             if self.listCommand == []:
-                self.updateInfo()
                 self.chooseAnAction()
+                self.updateInfo()
                 print ("Actions:", self.listCommand)
-
+                for command in self.listCommand:
+                    self.socket.sendData(command)
+            #print ("LOOP")
             #message = []

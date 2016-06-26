@@ -40,7 +40,7 @@ class Socket():
 
     def sendData(self, data):
         try:
-            self.socket.send((data + "\r\n").encode())
+            self.socket.send((data + "\n").encode())
         except:
             eprint("Error during sending to %s:%d" % (self.optManager.host, self.optManager.port))
             sys.exit()

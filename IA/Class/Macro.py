@@ -44,6 +44,8 @@ LevelRef = [
     {"joueur": 6, "linemate": 2, "deraumere": 2, "sibur": 2, "mendiane": 2, "phiras": 2, "thystame": 1},
 ]
 
+MoveRef = ["avance", "droite", "gauche"]
+
 CommandRef = {}
 CommandRef["avance"] = AI.funcAvance
 CommandRef["droite"] = AI.funcDroite
