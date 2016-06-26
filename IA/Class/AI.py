@@ -48,10 +48,8 @@ class AI():
         self.nbPlayer = counterPlayer
 
     def broadcastLevel(self):
-        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
         if self.listCommand == []:
             self.listCommand.append("broadcast " + self.optManager.nameEquip + " /l " + str(self.level))
-        #self.funcVoir()
 
     def broadcastMoveTo(self, message):
         orientation = int(message[0])
@@ -78,7 +76,6 @@ class AI():
         elif orientation == 8:
             walk = ["avance", "droite", "avance"]
 
-        #Reverse in order to insert all command
         walk.append("voir")
         for move in walk:
             Macro.CommandRef[move](self, True)
@@ -135,12 +132,12 @@ class AI():
             print ("Increased PLAYER: ", idAlly)
 
     def broadcastRequest(self, message):
-        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
+        self.socket.sendData("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
         self.listCommand.append("broadcast " + self.optManager.nameEquip + " /r " + str(self.id))
 
     def broadcastAnswer(self, message):
-        #self.socket.sendData("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
         self.listCommand.append("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
+        self.socket.sendData("broadcast " + self.optManager.nameEquip + " /a " + message[2] + " " + str(self.id))
 
     def isRes(self, elem):
         if elem != "joueur" and elem != "" and elem != "-1" and elem != "nourriture":
@@ -160,6 +157,8 @@ class AI():
         ressourceCase = dict(Macro.LevelRef[0])
 
         for elem in self.cases[0]:
+            if self.life > 10:
+                break
             if elem == "nourriture":
                 self.funcPrend(idx, True)
 
@@ -168,18 +167,14 @@ class AI():
                 ressourceCase[elem] += 1
         for elem in ressourceCase:
             if elem != "joueur":
-                #print (elem, "-->", ressourceCase[elem], " <> ", Macro.LevelRef[self.level][elem])
                 if ressourceCase[elem] < Macro.LevelRef[self.level][elem]:
-                    #self.socket.sendData("pose " + elem)
                     self.listCommand.append("pose " + elem + " " + str(0))
 
                     self.inventory[elem] -= 1
                     self.cases[0].append(elem)
                     return -1
                 elif ressourceCase[elem] > Macro.LevelRef[self.level][elem]:
-                    #self.socket.sendData("prend " + elem)
                     self.listCommand.append("prend " + elem + " " + str(0))
-
                     self.inventory[elem] += 1
                     self.cases[0].remove(elem)
                     return -1
@@ -189,7 +184,6 @@ class AI():
         message = message.replace("{", "").replace("}", "")
         listCase = message.split(",")
 
-        #print ("----------------LIST CASE:", listCase)
         for idx, case in enumerate(listCase):
             self.cases[idx] = case[1:].split(" ")
         for command in self.listCommand:
@@ -219,19 +213,15 @@ class AI():
         return -1
 
     def getCaseIncant(self):
-        # [0] idx  [1] nbAction
         ret = (-1, -1)
         for idx, elem in enumerate(self.cases):
             nbAction = self.canIncant(idx)
-            #nbAction += self.moveTo(idx, True)
-            #print ("SimulateMove:", self.moveTo(idx, True))
             if nbAction != -1 and (nbAction < ret[1] or ret[1] == -1):
                 ret = (idx, nbAction)
             if getIdxMax(self.vision) < idx:
                 break
         if ret[0] == -1:
             return -1
-        #print ("final decision:", ret)
         return ret[0]
 
     def canIncant(self, idx = 0):
@@ -242,12 +232,10 @@ class AI():
         if len(self.cases[idx]) > 0 and self.cases[idx][0] == "-1":
             return -1
 
-        #getAll Ressources on the case
         for elem in self.cases[idx]:
             if elem != "nourriture" and elem != "":
                 ressourceCase[elem] += 1
 
-        #Check if the case only have the ressources
         ret = 0
         for elem in ressourceCase:
             if ressourceCase[elem] > levelRef[elem] or ressourceCase[elem] < levelRef[elem]:
@@ -255,19 +243,13 @@ class AI():
         if ret == 0:
             return 0
 
-        #print ("Need some ACTIONS ?")
-        #Check nb action i need to do
         ret = 0
         tmpCase = dict(ressourceCase)
         for elem in ressourceCase:
             if elem != "nourriture" and elem != "joueur":
                 tmpCase[elem] += invRef[elem]
-                #print (elem, "-->", tmpCase[elem],  " --- ", levelRef[elem])
                 if tmpCase[elem] < levelRef[elem]:
                     ret = 1
-        # if ressourceCase["joueur"] > levelRef["joueur"]:
-        #     ret = 1
-
         if ret == 1:
             return -1
 
@@ -317,10 +299,8 @@ class AI():
 
     def funcPrend(self, idx, food = False):
         case = self.cases[idx]
-        #print ("Case[", idx, "]:", case, food)
 
         if food is True:
-            #self.socket.sendData("prend nourriture")
             if "nourriture" in case:
                 self.listCommand.append("prend nourriture " + str(idx))
                 case.remove("nourriture")
@@ -330,21 +310,18 @@ class AI():
             if self.isRes(res):
                 if self.inventory[res] + 1 <= Macro.LevelRef[self.level][res]:
                     self.inventory[res] += 1
-                    #self.socket.sendData("prend " + res)
                     self.listCommand.append("prend " + res + " " + str(idx))
                     case.remove(res)
                 else:
                     eprint("Doesn't need 'prend " + res + "'")
 
     def funcExpulse(self):
-        #self.socket.sendData("expulse")
         self.listCommand.append("expulse")
 
     def funcIncantation(self, idx = 0):
         print ("Func incantation")
         if self.putResOnCase(idx) == -1:
             return
-        #self.socket.sendData("incantation")
         self.listCommand.append("incantation")
 
     def connectNewPlayer(self):
@@ -353,11 +330,9 @@ class AI():
             FNULL = open(os.devnull, 'w')
             FTEST = open("test", "w+")
             self.listChild.append(subprocess.Popen("./zappy_ai " + " -n " + self.optManager.nameEquip + " -p " + str(self.optManager.port) + " -h " + self.optManager.host, stdout=FTEST, shell=True))
-            #subprocess.check_call("./zappy_ai " + " -n " + self.optManager.nameEquip + " -p " + str(self.optManager.port) + " -h " + self.optManager.host, shell=True)
             sys.exit()
 
     def funcFork(self):
-        #self.socket.sendData("fork")
         self.listCommand.append("fork")
 
     def isRessource(self, ressource):
@@ -413,7 +388,6 @@ class AI():
 
         if walk == []:
             return
-        #if "droite" in walk or "gauche" in walk:
         for move in walk:
             Macro.CommandRef[move](self)
         self.cases[0] = caseTmp
@@ -435,8 +409,6 @@ class AI():
                 if self.life > 10:
                     self.funcFork()
                     self.asking = 3
-                    return -1
-        return 0
 
     def checkIncantPlayer(self, idx = 0):
         case = self.cases[idx]
@@ -464,13 +436,10 @@ class AI():
 
 
         self.constructArmy()
-        if self.needFork() == -1:
-            return
+        self.needFork()
 
         if self.canIncant() != -1 and self.life > 10:
-            #print ("Je peux incant en 0, je check")
             if self.checkIncantPlayer():
-                #print ("le check pass")
                 self.funcIncantation()
             return
 
@@ -523,11 +492,8 @@ class AI():
             self.broadcastMessage.append(final)
 
     def updateInfo(self):
-        #self.socket.sendData("voir")
         self.listCommand.append("voir")
-        #self.socket.sendData("inventaire")
         self.listCommand.append("inventaire")
-        #self.socket.sendData("connect_nbr")
         self.listCommand.append("connect_nbr")
 
     def upStats(self):
@@ -541,7 +507,6 @@ class AI():
         print ("<|", time.strftime("%H:%M:%S"), ":", message, " |>")
         print ("<|-", self.listCommand, "-|>")
 
-        # if self.firstReceive is True:
         if message == "mort":
             sys.exit()
 
@@ -551,11 +516,6 @@ class AI():
         if message.find("message") != -1:
             self.parseBroadcast(message)
             message = ""
-
-        # if self.ignoreMessage > 0:
-        #     print ("IGNORE THIS:", self.ignoreMessage)
-        #     self.ignoreMessage -= 1
-        #     return
 
         if message == "ok" or message == "ko":
             if message == "ko":
@@ -579,11 +539,9 @@ class AI():
                 if message.find("niveau actuel") != -1:
                     self.upStats()
                     self.listCommand.pop(0)
-        #if self.listCommand == []
 
     def constructArmy(self):
-        #while self.freePlace > 1:
-        while self.freePlace > 0:
+        while self.freePlace > 1:
             self.connectNewPlayer()
             self.freePlace -= 1
 
@@ -597,7 +555,6 @@ class AI():
         self.ownTimer = time.time()
         self.initData()
 
-        #init Catch signal
         signal.signal(signal.SIGINT, self.signalHandler)
         signal.signal(signal.SIGTERM, self.signalHandler)
 
@@ -618,5 +575,3 @@ class AI():
                         self.socket.sendData(command.split(" ")[0] + " " + command.split(" ")[1])
                     else:
                         self.socket.sendData(command)
-            #print ("LOOP")
-            #message = []
