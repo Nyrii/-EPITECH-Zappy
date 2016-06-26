@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 17:01:39 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:04:19 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -44,13 +44,13 @@ static int	take_item(t_server *s, t_player *player, int index)
     {
       s->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
-      if (generate_another_resource(s, index) == -1
-	  || (answ = bct(s->data.map, player->y, player->x)) == NULL)
+      if ((answ = bct(s->data.map, player->y, player->x)) == NULL)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
       if (pgt(s, player, index) == -1 || pin_ia(s, player) == -1
-	  || send_all_graphics(s, strdup(buf)) == -1)
+	  || send_all_graphics(s, strdup(buf)) == -1
+	  || generate_another_resource(s, index) == -1)
 	return (-1);
       free(answ);
       return (store_answer_p(player, strdup(OK), 0));
