@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Wed Jun 22 14:51:53 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 05:48:23 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 06:33:15 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -35,7 +35,6 @@ int			check_and_read_players(fd_set *readf, t_list list,
 		  store_answer_p(player, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
-	      FD_CLR(player->sock, readf);
 	    }
 	}
     }
@@ -64,7 +63,6 @@ int			check_and_read_clients(fd_set *readf, t_list list,
 		  store_answer_c(client, strdup(RPL_OVERFLOW), 0);
 		  fprintf(stderr, ERR_OVERFLOW);
 		}
-  	      FD_CLR(client->sock, readf);
 	    }
 	}
     }
@@ -92,7 +90,6 @@ int			check_and_write_players(fd_set *writef, t_list players,
 		fprintf(stderr, ERR_WRITE);
 	      free(player->buff);
 	      player->buff = NULL;
-	      FD_CLR(player->sock, writef);
 	    }
 	}
     }
@@ -120,7 +117,6 @@ int			check_and_write_clients(fd_set *writef, t_list clients,
 		fprintf(stderr, ERR_WRITE);
 	      free(client->buff);
               client->buff = NULL;
-	      FD_CLR(client->sock, writef);
 	    }
 	}
     }
