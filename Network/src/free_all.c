@@ -5,10 +5,26 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Fri Jun 17 16:26:36 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 07:17:43 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:44:48 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
+
+void		free_nodes_only(t_list list)
+{
+  t_list	tmp;
+  unsigned int	i;
+
+  if (list == NULL)
+    return ;
+  i = -1;
+  while (++i < list_get_size(list))
+    {
+      tmp = list;
+      list = list->next;
+      free(tmp);
+    }
+}
 
 void		free_player_structure(t_player *player)
 {
@@ -29,6 +45,7 @@ void		free_player_structure(t_player *player)
 	  task->cmd = NULL;
 	  task->params = NULL;
 	  task->real = NULL;
+	  free(task);
 	}
     }
 }

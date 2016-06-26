@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sat Jun  4 15:47:24 2016 nekfeu
-** Last update Wed Jun  8 21:06:46 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:58:37 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -32,9 +32,28 @@ unsigned int	list_get_size(t_list list)
 
 t_bool		list_del_elem_at_front(t_list *front_ptr)
 {
+  t_list	tmp;
+
   if (front_ptr == NULL)
     return (FALSE);
+  tmp = *front_ptr;
   *front_ptr = (*front_ptr)->next;
+  free(tmp);
+  return (TRUE);
+}
+
+t_bool		delete_node(t_list tmp)
+{
+  t_list	to_delete;
+
+  if (tmp->next == NULL)
+    return (FALSE);
+  else
+    {
+      to_delete = tmp->next;
+      tmp->next = tmp->next->next;
+      free(to_delete);
+    }
   return (TRUE);
 }
 
@@ -59,9 +78,7 @@ t_bool		list_del_elem_at_position(t_list *front_ptr, unsigned int position)
       tmp = tmp->next;
       i++;
     }
-  if (tmp->next == NULL)
+  if (delete_node(tmp) == FALSE)
     return (FALSE);
-  else
-    tmp->next = tmp->next->next;
   return (TRUE);
 }

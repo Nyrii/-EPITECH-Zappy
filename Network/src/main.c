@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 01:57:33 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 08:29:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -78,6 +78,8 @@ int		main(int argc, char **argv)
   signal(SIGINT, free_before_leaving);
   save_server(NULL, 1);
   srand(time(NULL));
+  server.cmd = NULL;
+  server.params = NULL;
   if (get_opt(argc, argv, &server) != -1 &&
       (server.data.timers = init_timer_tasks(&server)) != NULL)
     {

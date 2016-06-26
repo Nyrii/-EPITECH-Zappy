@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 11:49:04 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 06:19:24 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:45:05 2016 Nyrandone Noboud-Inpeng
 */
 
 #ifndef SERVER_H_
@@ -274,6 +274,7 @@ int		free_double_int_tab(int **, int const);
 /*
 ** free_all.c
 */
+void		free_nodes_only(t_list);
 int		free_all(t_server *, int const);
 int		free_before_reset(t_server *);
 

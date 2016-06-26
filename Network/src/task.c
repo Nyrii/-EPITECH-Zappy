@@ -5,13 +5,25 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 06:34:30 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:34:30 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "replies.h"
 #include "errors.h"
+
+int		free_tasks(t_task *t, int ret_value)
+{
+  t->cmd ? free(t->cmd) : 0;
+  t->params ? free(t->params) : 0;
+  t->real ? free(t->real) : 0;
+  t->cmd = NULL;
+  t->params = NULL;
+  t->real = NULL;
+  free(t);
+  return (ret_value);
+}
 
 int		player_spe_action(t_server *srv, t_player *p, t_task *t)
 {
@@ -24,10 +36,12 @@ int		player_spe_action(t_server *srv, t_player *p, t_task *t)
 	  fprintf(stderr, ERR_BUFFER);
 	  return (-1);
 	}
+      free_tasks(t, 0);
       return (enw(srv, p->fork.egg));
     }
   else if (strcmp(t->cmd, "incantation") == 0)
     {
+      free_tasks(t, 0);
       if (p->incant.pos == NULL)
 	return (0);
       if ((ret_value = incantation_manager(srv, p, p->incant.pos)) != -2)
@@ -36,14 +50,13 @@ int		player_spe_action(t_server *srv, t_player *p, t_task *t)
   return (0);
 }
 
-int		player_tasks(t_server *srv, t_player *p)
+int		player_tasks(t_server *srv, t_player *p, int index)
 {
   struct timeb	now;
-  int		index;
   t_task	*t;
   t_task	*t_nxt;
+  int		ret;
 
-  index = -1;
   ftime(&now);
   if (list_get_size(p->queue_tasks) >= 1 &&
       (t = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
@@ -57,9 +70,9 @@ int		player_tasks(t_server *srv, t_player *p)
             if ((t_nxt = list_get_elem_at_position(p->queue_tasks, 0)) != NULL)
 	      ftime(&t_nxt->timer.val);
           if (strcmp(t->cmd, "fork") == 0 || strcmp(t->cmd, "incantation") == 0)
-            return (player_spe_action(srv, p, t));
+	    return (player_spe_action(srv, p, t));
           else
-            return (srv->cmd_ptr_ia[index](srv, p));
+	    return ((ret = srv->cmd_ptr_ia[index](srv, p)), free_tasks(t, ret));
 	}
     }
   return (0);
@@ -79,7 +92,7 @@ int		task_list(t_server *srv)
 	{
 	  if ((ret = player_life(srv, p)) == -1)
 	    return (ret);
-	  if ((ret = player_tasks(srv, p)) == -1 || ret == 2)
+	  if ((ret = player_tasks(srv, p, -1)) == -1 || ret == 2)
 	    return (ret);
 	}
       i++;
@@ -93,10 +106,11 @@ t_task		*new_task(t_server *srv, t_player *p)
 
   if ((t = malloc(sizeof(t_task))) == NULL)
     return (NULL);
-  t->cmd = strdup(srv->cmd);
+  if ((t->cmd = strdup(srv->cmd)) == NULL)
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   t->params = NULL;
-  if (srv->params != NULL)
-    t->params = strdup(srv->params);
+  if (srv->params != NULL && (t->params = strdup(srv->params)) == NULL)
+    return (fprintf(stderr, ERR_MALLOC), NULL);
   t->real = NULL;
   if (list_get_size(p->queue_tasks) == 0)
     ftime(&t->timer.val);

@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 16:00:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:40:14 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:02:50 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -41,11 +41,10 @@ int		manage_commands_ia(t_server *server,
   int		i;
   int		ret;
 
-  i = 0;
-  ret = 0;
+  i = -1;
   if (list_get_size(player->queue_tasks) >= 10)
     return (0);
-  while (server->cmd_tab_ia[i] != NULL)
+  while (server->cmd_tab_ia[++i] != NULL)
     {
       if (strcmp(server->cmd_tab_ia[i], command) == 0)
 	{
@@ -56,8 +55,11 @@ int		manage_commands_ia(t_server *server,
 	    return (-1);
 	  return (0);
 	}
-      ++i;
     }
+  server->cmd ? free(server->cmd) : 0;
+  server->params ? free(server->params) : 0;
+  server->cmd = NULL;
+  server->params = NULL;
   if (store_answer_p(player, strdup(KO), 0) == -1)
     return (fprintf(stderr, ERR_BUFFER), -1);
   return (0);
@@ -91,7 +93,7 @@ int		manage_auth(t_server *srv, t_client *cl, const char *command)
       return (remove_client_from_queue(srv, cl));
     }
   else if ((t = get_team_by_name(srv, command)) != NULL &&
-	   list_get_size(t->players) < (unsigned int) t->max_players)
+	   list_get_size(t->players) < (unsigned int)t->max_players)
     {
       if ((p = new_player(srv, t, cl)) == NULL ||
 	  list_add_elem_at_back(&t->players, p) == FALSE ||

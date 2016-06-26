@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:55:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 17:11:14 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:46:13 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -56,6 +56,7 @@ int		send_message_to_all_players(t_server *server, t_player *player,
 	  return (-1);
 	}
     }
+  free_nodes_only(tmp);
   return (0);
 }
 
@@ -98,5 +99,6 @@ int		is_elevation_legit(t_data *data, int const elevation,
     return (-1);
   if (are_players_eligible(data, tmp, elevation) == -1)
     return (tmp = NULL, -1);
+  free_nodes_only(tmp);
   return (0);
 }

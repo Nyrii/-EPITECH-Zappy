@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 15:42:31 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 18:19:57 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:46:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -99,5 +99,6 @@ int		expulse_ia(t_server *server, t_player *player)
       if (manage_expulse(server, player, tmp, i) == -1)
 	return (-1);
     }
+  free_nodes_only(tmp);
   return (0);
 }

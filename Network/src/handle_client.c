@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 25 14:33:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 06:57:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 08:37:55 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -27,8 +27,6 @@ int		process_auth_and_graphics(t_server *srv, void *tmp,
 	ret = manage_commands_graphic(srv, (t_client *)tmp, srv->cmd);
       else if (type == 0)
 	ret = manage_auth(srv, (t_client *)tmp, srv->cmd);
-      free(srv->cmd);
-      free(srv->params);
       if (ret == -1 || ret == 2)
 	return (ret);
       tmp_cmd = tmp_cmd->next;
@@ -49,8 +47,6 @@ int		process_ia(t_server *srv, void *tmp)
       if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	return (-1);
       ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
-      free(srv->cmd);
-      free(srv->params);
       if (ret == -1 || ret == 2)
 	return (ret);
       tmp_cmd = tmp_cmd->next;

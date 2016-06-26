@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 11 14:49:46 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 02:04:13 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 09:49:54 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <stdlib.h>
@@ -31,6 +31,7 @@ static int	get_size(t_data data, int ***map, int const y, int const x)
     }
   players = get_players_at_pos(&data, y, x);
   nb_players = list_get_size(players);
+  free_nodes_only(players);
   if (resources == 0 && nb_players == 0)
     return (10);
   return (resources * 12 + nb_players * 10 + 10);
@@ -55,6 +56,7 @@ static int	store_players(char **see, t_data data, int *pos, int *i)
       --count;
     }
   *i = strlen(*see);
+  free_nodes_only(tmp);
   return (0);
 }
 
