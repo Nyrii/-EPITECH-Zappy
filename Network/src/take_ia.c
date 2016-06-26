@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sat Jun 25 16:42:32 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:22:28 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -13,23 +13,25 @@
 #include "replies.h"
 #include "errors.h"
 
-static int	take_item(t_server *server, t_player *player, int index)
+static int	take_item(t_server *s, t_player *player, int index)
 {
   char		*answ;
   char		buf[4096];
 
   answ = NULL;
-  if (server->data.map[player->y] && server->data.map[player->y][player->x]
-      && server->data.map[player->y][player->x][index] > 0)
+  if (s->data.map[player->y] && s->data.map[player->y][player->x]
+      && s->data.map[player->y][player->x][index] > 0)
     {
-      server->data.map[player->y][player->x][index] -= 1;
+      s->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
-      if ((answ = bct(server->data.map, player->y, player->x)) == NULL)
+      s->data.map[rand() % s->data.world_y]
+	[rand() % s->data.world_x][index] += 1;
+      if ((answ = bct(s->data.map, player->y, player->x)) == NULL)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);
-      if (pgt(server, player, index) == -1 || pin_ia(server, player) == -1
-	  || send_all_graphics(server, strdup(buf)) == -1)
+      if (pgt(s, player, index) == -1 || pin_ia(s, player) == -1
+	  || send_all_graphics(s, strdup(buf)) == -1)
 	return (-1);
       free(answ);
       return (store_answer_p(player, strdup(OK), 0));

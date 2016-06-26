@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Sun Jun 26 05:30:49 2016 Kevin Empociello
-** Last update Sun Jun 26 06:15:15 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 10:18:16 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -17,7 +17,7 @@ int		food_gen(t_server *srv)
   if (list_get_size(srv->all_players) == 0)
     return (0);
   ftime(&now);
-  if (calculate_elapse(&srv->timer.val, &now) >= (300 / srv->data.delay) &&
+  if (calculate_elapse(&srv->timer.val, &now) >= (1500 / srv->data.delay) &&
       list_get_size(srv->all_players) > 0)
     {
       if (generate_new_resources(srv) == -1)
