@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 14:26:21 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 18:18:17 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -57,6 +57,7 @@ char		*parse_cmd(t_server *srv, char *cmd)
 {
   if (cmd == NULL)
     return (NULL);
+  printf("CMD [%s]\n", cmd);
   if ((srv->cmd = get_cmd(cmd)) == NULL)
     return (NULL);
   srv->params = get_parameter(cmd);

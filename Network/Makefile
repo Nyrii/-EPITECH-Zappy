@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 26 05:46:32 2016 Kevin Empociello
+## Last update Sun Jun 26 19:32:31 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
