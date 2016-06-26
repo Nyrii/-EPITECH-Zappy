@@ -1,0 +1,57 @@
+@font-face {
+    font-family: minecraft;
+    src: url(../fonts/Minecrafter_Alt.ttf);
+}
+
+@font-face {
+	font-family: blushes;
+	src: url(../fonts/TT Blushes Thin DEMO.otf);
+}
+
+body, html {
+	margin:0;
+	padding:0;
+	background:white;
+	position: fixed;
+}
+
+p {
+	font-family: sans-serif;
+	padding:1em;
+}
+
+#gui {
+  position: fixed;
+  right: 10px;
+}
+
+.visible {
+	opacity: 1 !important;
+}
+
+#console {
+	opacity: 0;
+	position: fixed;
+	left: 83px;
+  top: 3px;
+	background-color: #f3f3f3;
+	-webkit-transition: all 250ms ease-in-out;
+	-moz-transition: all 250ms ease-in-out;
+	-ms-transition: all 250ms ease-in-out;
+	-o-transition: all 250ms ease-in-out;
+	transition: all 250ms ease-in-out;
+}
+
+#btn-console {
+	position: fixed;
+  width: 20px;
+  height: 20px;
+  top: 3px;
+  left: 83px;
+}
+
+#header-img {
+	top: 20%;
+  position: fixed;
+  padding-left: 30%;
+}

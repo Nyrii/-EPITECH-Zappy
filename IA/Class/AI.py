@@ -57,7 +57,7 @@ class AI():
         orientation = int(message[0])
         walk = []
 
-        if self.life < 5:
+        if self.life < 10:
             return
 
         print ("ORIENTATION:", orientation)
@@ -98,7 +98,7 @@ class AI():
 
         idx = 0
 
-        print ("CAN I READ broadcast LEVEL ?", self.listCommand, "\n", self.broadcastMessage)
+        print ("CAN I READ broadcast LEVEL ?", self.listCommand)
         if self.listCommand == []:
             if self.broadcastMessage != []:
                 message = self.broadcastMessage[0]
@@ -114,8 +114,8 @@ class AI():
                     idxLast = i
                 i += 1
 
-                if idxLast != -1:
-                    Macro.BroadcastRespRef["/l"](self, self.broadcastMessage[-1])
+            if idxLast != -1:
+                Macro.BroadcastRespRef["/l"](self, self.broadcastMessage[-1])
 
             idx = 0
             while idx < len(self.broadcastMessage):
@@ -156,12 +156,12 @@ class AI():
                     return False
         return True
 
-    def putResOnCase(self):
+    def putResOnCase(self, idx = 0):
         ressourceCase = dict(Macro.LevelRef[0])
 
         for elem in self.cases[0]:
             if elem == "nourriture":
-                self.funcPrend(0, True)
+                self.funcPrend(idx, True)
 
         for elem in self.cases[0]:
             if self.isRes(elem):
@@ -171,14 +171,14 @@ class AI():
                 #print (elem, "-->", ressourceCase[elem], " <> ", Macro.LevelRef[self.level][elem])
                 if ressourceCase[elem] < Macro.LevelRef[self.level][elem]:
                     #self.socket.sendData("pose " + elem)
-                    self.listCommand.append("pose " + elem)
+                    self.listCommand.append("pose " + elem + " " + str(0))
 
                     self.inventory[elem] -= 1
                     self.cases[0].append(elem)
                     return -1
                 elif ressourceCase[elem] > Macro.LevelRef[self.level][elem]:
                     #self.socket.sendData("prend " + elem)
-                    self.listCommand.append("prend " + elem)
+                    self.listCommand.append("prend " + elem + " " + str(0))
 
                     self.inventory[elem] += 1
                     self.cases[0].remove(elem)
@@ -195,8 +195,17 @@ class AI():
         for command in self.listCommand:
             if command.find("prend") != -1:
                 try:
-                    self.cases[0].remove(command.split(" ")[1])
+                    info = command.split(" ")
+                    self.cases[info[2]].remove(info[1])
                 except:
+                    eprint("ERROR DANS L ANTICIPATION PREND")
+                    continue
+            if command.find("pose") != -1:
+                try:
+                    info = command.split(" ")
+                    self.cases[info[2]].append(info[1])
+                except:
+                    eprint("ERROR DANS L ANTICIPATION POSE")
                     continue
 
     def getCaseLevel(self):
@@ -312,8 +321,9 @@ class AI():
 
         if food is True:
             #self.socket.sendData("prend nourriture")
-            self.listCommand.append("prend nourriture")
-            case.remove("nourriture")
+            if "nourriture" in case:
+                self.listCommand.append("prend nourriture " + str(idx))
+                case.remove("nourriture")
             return
 
         for res in case:
@@ -321,7 +331,7 @@ class AI():
                 if self.inventory[res] + 1 <= Macro.LevelRef[self.level][res]:
                     self.inventory[res] += 1
                     #self.socket.sendData("prend " + res)
-                    self.listCommand.append("prend " + res)
+                    self.listCommand.append("prend " + res + " " + str(idx))
                     case.remove(res)
                 else:
                     eprint("Doesn't need 'prend " + res + "'")
@@ -330,9 +340,9 @@ class AI():
         #self.socket.sendData("expulse")
         self.listCommand.append("expulse")
 
-    def funcIncantation(self):
+    def funcIncantation(self, idx = 0):
         print ("Func incantation")
-        if self.putResOnCase() == -1:
+        if self.putResOnCase(idx) == -1:
             return
         #self.socket.sendData("incantation")
         self.listCommand.append("incantation")
@@ -422,9 +432,11 @@ class AI():
             self.ownTimer = time.time()
         if time.time() - self.ownTimer >= 6.0:
             if self.asking == 1 and len(self.nbPlayer) < 8:
-                if self.life > 5:
+                if self.life > 10:
                     self.funcFork()
                     self.asking = 3
+                    return -1
+        return 0
 
     def checkIncantPlayer(self, idx = 0):
         case = self.cases[idx]
@@ -437,7 +449,7 @@ class AI():
             return False
 
         print ("send broadcast /l")
-        if case.count("joueur") < Macro.LevelRef[self.level]["joueur"]:
+        if case.count("joueur") < Macro.LevelRef[self.level]["joueur"] and self.life > 10:
             Macro.BroadcastRef["/l"](self)
         return False
 
@@ -452,9 +464,10 @@ class AI():
 
 
         self.constructArmy()
-        #self.needFork()
+        if self.needFork() == -1:
+            return
 
-        if self.canIncant() != -1 and self.life > 5:
+        if self.canIncant() != -1 and self.life > 10:
             #print ("Je peux incant en 0, je check")
             if self.checkIncantPlayer():
                 #print ("le check pass")
@@ -466,30 +479,30 @@ class AI():
             return
 
         idx = self.getCaseFood()
-        if self.life < 6 and idx != -1:
-            #print ("Get food:", idx)
+        if self.life < 10 and idx != -1:
+            print ("Get food:", idx)
             self.moveTo(idx)
             if self.checkIncantPlayer(idx):
-                self.funcIncantation()
+                self.funcIncantation(idx)
             self.funcPrend(idx, True)
             return
 
         idx = self.getCaseIncant()
-        if idx != -1:
-            # print ("Get incant Case:", idx)
+        if idx != -1 and self.life < 10:
+            print ("Get incant Case:", idx)
             self.moveTo(idx)
             return
 
         idx = self.getCaseLevel()
-        if idx != -1:
-            # print ("Get Res :", idx)
+        if idx != -1 and self.life < 10:
+            print ("Get Res :", idx)
             self.moveTo(idx)
             self.funcPrend(idx, False)
             return
 
         idx = self.getCaseFood()
         if idx != -1:
-            # print ("Get food to stock:", idx)
+            print ("Get food to stock:", idx)
             self.moveTo(idx)
             self.funcPrend(idx, True)
             return
@@ -601,6 +614,9 @@ class AI():
                 self.updateInfo()
                 print ("Actions:", self.listCommand)
                 for command in self.listCommand:
-                    self.socket.sendData(command)
+                    if command.find("prend") != -1 or command.find("pose") != -1:
+                        self.socket.sendData(command.split(" ")[0] + " " + command.split(" ")[1])
+                    else:
+                        self.socket.sendData(command)
             #print ("LOOP")
             #message = []

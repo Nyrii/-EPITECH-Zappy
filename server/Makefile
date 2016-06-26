@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ##
 ## Started on  Mon May 16 23:28:34 2016 guillaume wilmot
-## Last update Sun Jun 26 19:48:45 2016 Nyrandone Noboud-Inpeng
+## Last update Sun Jun 26 22:13:44 2016 Nyrandone Noboud-Inpeng
 ##
 
 SRCSER	= bct.c				\
@@ -102,7 +102,7 @@ OBJS	=  $(addprefix $(OBJSER), $(SRCSER:.c=.o))
 
 RM	= rm -f
 
-CC	= cc -g
+CC	= cc
 
 NAMESER	= zappy_server
 

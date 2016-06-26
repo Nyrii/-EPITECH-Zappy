@@ -5,7 +5,7 @@
 ## Login   <wilmot_g@epitech.net>
 ## 
 ## Started on  Thu Jun 16 12:12:58 2016 guillaume wilmot
-## Last update Sun Jun 26 23:01:00 2016 guillaume wilmot
+## Last update Sun Jun 26 23:31:24 2016 guillaume wilmot
 ##
 
 SRC	= Charset.cpp		\

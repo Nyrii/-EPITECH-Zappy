@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 25 16:02:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 07:29:27 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 21:53:42 2016 Kevin Empociello
 */
 
 #include "server.h"
@@ -14,7 +14,7 @@ void		free_client_buffers(void *value)
 {
   t_client	*tmp;
 
-  tmp = (t_client *)value;
+  tmp = (t_client *) value;
   if (tmp == NULL)
     return ;
   tmp->buffs.in.buff ? free(tmp->buffs.in.buff) : 0;
@@ -36,7 +36,7 @@ void		free_player_buffers(void *value)
 {
   t_player	*tmp;
 
-  tmp = (t_player *)value;
+  tmp = (t_player *) value;
   if (tmp == NULL)
     return ;
   tmp->buffs.in.buff ? free(tmp->buffs.in.buff) : 0;

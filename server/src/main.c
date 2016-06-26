@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.net>
 **
 ** Started on  Tue Jun  7 11:35:34 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 19:05:56 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 23:02:44 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <time.h>
@@ -64,6 +64,7 @@ int		run_zappy(t_server *template)
       close_all_clients(server);
       return (free_all(server, -1));
     }
+  printf("Game has finally come to an end ! Congrats to the winner !\n");
   if (close_all_clients(server) == -1)
     return (-1);
   free_before_reset(server);
