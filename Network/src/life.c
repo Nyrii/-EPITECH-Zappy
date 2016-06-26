@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sat Jun 25 21:00:54 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 16:46:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>

@@ -5,13 +5,33 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Thu Jun  9 21:48:52 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 12:00:58 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:01:39 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
 #include "server.h"
 #include "replies.h"
 #include "errors.h"
+
+static int	generate_another_resource(t_server *server, int const index)
+{
+  int		random_y;
+  int		random_x;
+  char		*answ;
+  char		buf[4096];
+
+  random_y = rand() % server->data.world_y;
+  random_x = rand() % server->data.world_x;
+  server->data.map[random_y][random_x][index] += 1;
+  if ((answ = bct(server->data.map, random_y, random_x)) == NULL)
+    return (-1);
+  if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
+    return (fprintf(stderr, ERR_PRINTF), -1);
+  if (send_all_graphics(server, strdup(buf)) == -1)
+    return (-1);
+  free(answ);
+  return (0);
+}
 
 static int	take_item(t_server *s, t_player *player, int index)
 {
@@ -24,7 +44,8 @@ static int	take_item(t_server *s, t_player *player, int index)
     {
       s->data.map[player->y][player->x][index] -= 1;
       player->inventory[index] += 1;
-      if ((answ = bct(s->data.map, player->y, player->x)) == NULL)
+      if (generate_another_resource(s, index) == -1
+	  || (answ = bct(s->data.map, player->y, player->x)) == NULL)
 	return (-1);
       if (memset(buf, 0, 4096) == NULL || snprintf(buf, 4096, MSG, answ) == -1)
 	return (fprintf(stderr, ERR_PRINTF), -1);

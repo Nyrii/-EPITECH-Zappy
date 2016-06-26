@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 06:18:01 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 17:02:31 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -28,7 +28,7 @@ int			generate_new_resources(t_server *server)
 	  resource = 0;
 	  while (resource < NONE)
 	    {
-	      if ((rand() % 100) < server->data.percentages[resource] / 2.0)
+	      if ((rand() % 100) < server->data.percentages[resource] / 3.0)
 		{
 		  server->data.map[y][x][resource] += 1;
   		  if (bct_ia(server, y, x) == -1)
