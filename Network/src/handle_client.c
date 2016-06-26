@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Sat Jun 25 14:33:55 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 11:07:10 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 11:08:42 2016 Nyrandone Noboud-Inpeng
 */
 
 #include "server.h"
@@ -46,7 +46,6 @@ int		process_ia(t_server *srv, void *tmp)
     {
       if ((srv->cmd = parse_cmd(srv, epur_bf(tmp_cmd->struc))) == NULL)
 	return (-1);
-      printf("tmp_cmd->struc = %s\n", tmp_cmd->struc);
       ret = manage_commands_ia(srv, (t_player *)tmp, srv->cmd);
       if (ret == -1 || ret == 2)
 	return (ret);
