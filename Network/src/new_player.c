@@ -5,7 +5,7 @@
 ** Login   <nekfeu@epitech.net>
 **
 ** Started on  Thu Jun  9 01:10:25 2016 Kevin Empociello
-** Last update Sun Jun 26 06:03:07 2016 Kevin Empociello
+** Last update Sun Jun 26 19:59:28 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <netinet/in.h>
@@ -58,8 +58,11 @@ t_egg			*new_egg(t_server *srv, t_player *p)
   return (new);
 }
 
-static void		fill_inventory(t_player *new)
+static void		fill_inventory(t_data *data, t_player *new)
 {
+  int			i;
+
+  i = -1;
   new->inventory[FOOD] = 10;
   new->inventory[LINEMATE] = 0;
   new->inventory[DERAUMERE] = 0;
@@ -68,6 +71,8 @@ static void		fill_inventory(t_player *new)
   new->inventory[PHIRAS] = 0;
   new->inventory[THYSTAME] = 0;
   new->inventory[NONE] = -1;
+  while (++i < NONE)
+    generate_resources(data, i, data->resources[0][i]);
 }
 
 t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
@@ -89,7 +94,7 @@ t_player		*new_player(t_server *srv, t_team *t, t_client *cl)
   new->off = 0;
   new->orientation = rand() % 4 * 90;
   new->id = get_max_player_id(srv) + 1;
-  fill_inventory(new);
+  fill_inventory(&srv->data, new);
   generate_food(srv);
   if (create_buffer(&new->buffs) == NULL)
     return (NULL);

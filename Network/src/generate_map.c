@@ -5,7 +5,7 @@
 ** Login   <noboud_n@epitech.eu>
 **
 ** Started on  Tue Jun  7 20:59:48 2016 Nyrandone Noboud-Inpeng
-** Last update Sun Jun 26 17:29:15 2016 Nyrandone Noboud-Inpeng
+** Last update Sun Jun 26 20:00:41 2016 Nyrandone Noboud-Inpeng
 */
 
 #include <string.h>
@@ -65,33 +65,20 @@ int			generate_food(t_server *server)
   return (0);
 }
 
-static void		generate_resources(int resource,
-					   int quantity, int ***map)
+void			generate_resources(t_data *data, int resource,
+					   int quantity)
 {
   int			x;
   int			y;
 
-  if (resource >= NONE)
+  if (resource >= NONE || !data || !data->map)
     return ;
   while (quantity > 0)
     {
-      y = 0;
-      while (map[y] != NULL)
-	{
-	  x = 0;
-	  while (map[y][x] != NULL)
-	    {
-	      if (resource < NONE && rand() % 2 == 0)
-		{
-		  map[y][x][resource] += 1;
-		  quantity -= 1;
-                  if (quantity <= 0)
-		    return ;
-		}
-	      ++x;
-	    }
-	  ++y;
-	}
+      y = rand() % data->world_y;
+      x = rand() % data->world_x;
+      data->map[y][x][resource] += 1;
+      quantity -= 1;
     }
 }
 
@@ -133,8 +120,5 @@ int			generate_map(t_data *data, int x, int y, int i)
 	return (fprintf(stderr, ERR_MALLOC), -1);
     }
   data->map[y] = NULL;
-  i = -1;
-  while (++i < NONE)
-    generate_resources(i, data->resources[0][i], data->map);
   return (0);
 }
