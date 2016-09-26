@@ -13,3 +13,5 @@ arino_a - Web graphical client (JS)
 octeau_j - AI client (Python)
 
 noboud_n & empoci_k - TCP server (C)
+
+![alt tag](https://raw.githubusercontent.com/Nyrii/EPITECH-Zappy/master/images/zappy.png)
